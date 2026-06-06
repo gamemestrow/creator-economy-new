@@ -80,24 +80,24 @@ export function Sidebar() {
           id: 'creators',
           icon: <Users className="w-5 h-5" />,
           label: 'User Management',
-          href: '/users',
+          href: '/dashboard/users',
           submenu: [
-            { label: 'All Users', href: '/users' },
-            { label: 'Active Users', href: '/users?status=active' },
-            { label: 'Roles & Permissions', href: '/users/roles' },
+            { label: 'All Users', href: '/dashboard/users' },
+            { label: 'Active Users', href: '/dashboard/users?status=active' },
+            { label: 'Roles & Permissions', href: '/dashboard/users/roles' },
           ],
         },
         {
           id: 'courses',
           icon: <BookOpen className="w-5 h-5" />,
           label: 'Courses',
-          href: '/courses',
+          href: '/dashboard/courses',
         },
         {
           id: 'community',
           icon: <MessageSquare className="w-5 h-5" />,
           label: 'Communities',
-          href: '/communities',
+          href: '/dashboard/communities',
         },
       ],
     },
@@ -108,13 +108,13 @@ export function Sidebar() {
           id: 'events',
           icon: <Calendar className="w-5 h-5" />,
           label: 'Live Events',
-          href: '/events',
+          href: '/dashboard/events',
         },
         {
           id: 'engagement',
           icon: <Zap className="w-5 h-5" />,
           label: 'CRM',
-          href: '/crm',
+          href: '/dashboard/crm',
         },
       ],
     },
@@ -125,19 +125,19 @@ export function Sidebar() {
           id: 'email',
           icon: <Mail className="w-5 h-5" />,
           label: 'Email & WhatsApp',
-          href: '/campaigns',
+          href: '/dashboard/campaigns',
         },
         {
           id: 'monetization',
           icon: <CreditCard className="w-5 h-5" />,
           label: 'Payments',
-          href: '/payments',
+          href: '/dashboard/payments',
         },
         {
           id: 'analytics',
           icon: <BarChart2 className="w-5 h-5" />,
           label: 'Analytics',
-          href: '/analytics',
+          href: '/dashboard/analytics',
         },
       ],
     },
@@ -148,25 +148,25 @@ export function Sidebar() {
           id: 'gamification',
           icon: <Gamepad2 className="w-5 h-5" />,
           label: 'Gamification',
-          href: '/gamification',
+          href: '/dashboard/gamification',
         },
         {
           id: 'mobile',
           icon: <Smartphone className="w-5 h-5" />,
           label: 'Mobile App',
-          href: '/mobile',
+          href: '/dashboard/mobile',
         },
         {
           id: 'ai',
           icon: <Bot className="w-5 h-5" />,
           label: 'AI Assistant',
-          href: '/ai-assistant',
+          href: '/dashboard/ai-assistant',
         },
         {
           id: 'affiliate',
           icon: <Share2 className="w-5 h-5" />,
           label: 'Affiliate System',
-          href: '/affiliate',
+          href: '/dashboard/affiliate',
         },
       ],
     },
@@ -230,7 +230,7 @@ export function Sidebar() {
       {/* Footer */}
       <div className="border-t border-sidebar-border p-4 space-y-2">
         <Link
-          href="/settings"
+          href="/dashboard/settings"
           className="flex items-center gap-3 px-4 py-3 rounded-lg text-sidebar-foreground hover:bg-sidebar-primary/10 transition-colors"
         >
           <Settings className="w-5 h-5" />

@@ -92,7 +92,7 @@ export function Pricing() {
               </div>
 
               <Link
-                href="/dashboard"
+                href="/dashboard/main"
                 className={`block text-center py-3 px-6 rounded-lg font-semibold mb-8 transition ${
                   plan.highlighted
                     ? 'bg-white text-blue-600 hover:bg-blue-50'

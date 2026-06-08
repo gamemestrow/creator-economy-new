@@ -19,7 +19,7 @@ export function Hero() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/dashboard" className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition">
+            <Link href="/dashboard/main" className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition">
               Start Free Trial
               <ArrowRight className="w-5 h-5" />
             </Link>

@@ -2,6 +2,7 @@
 
 import { useDashboardStore } from '@/lib/store'
 import { motion } from 'framer-motion'
+import { Package, Users, TrendingUp, FileText, Funnel, Tag, Zap, Plug, Download, Bell, Smartphone, MessageCircle, MessageSquare, Handshake, Lightbulb, Shield } from 'lucide-react'
 import { DashboardOverview } from '@/components/content-views/dashboard-overview'
 import { ProductsView } from '@/components/content-views/products-view'
 import { SalesView } from '@/components/content-views/sales-view'
@@ -32,9 +33,9 @@ export default function DashboardMainPage() {
           case 'courses':
             return <ProductsView />
           case 'digital-products':
-            return <PlaceholderView title="Digital Products" description="Manage your digital product catalog" />
+            return <PlaceholderView title="Digital Products" description="Manage your digital product catalog" icon={<Package className="w-12 h-12" />} />
           case 'memberships':
-            return <PlaceholderView title="Memberships" description="Create and manage membership levels" />
+            return <PlaceholderView title="Memberships" description="Create and manage membership levels" icon={<Users className="w-12 h-12" />} />
           default:
             return <ProductsView />
         }
@@ -45,7 +46,7 @@ export default function DashboardMainPage() {
           case 'orders':
             return <SalesView />
           case 'revenue':
-            return <PlaceholderView title="Revenue Analytics" description="Track your revenue and earnings" />
+            return <PlaceholderView title="Revenue Analytics" description="Track your revenue and earnings" icon={<TrendingUp className="w-12 h-12" />} />
           case 'customers':
             return <CustomersView />
           default:
@@ -58,9 +59,9 @@ export default function DashboardMainPage() {
           case 'landing-pages':
             return <LandingPagesView />
           case 'sales-pages':
-            return <PlaceholderView title="Sales Pages" description="Create high-converting sales pages" />
+            return <PlaceholderView title="Sales Pages" description="Create high-converting sales pages" icon={<FileText className="w-12 h-12" />} />
           case 'funnels':
-            return <PlaceholderView title="Sales Funnels" description="Build complete sales funnels" />
+            return <PlaceholderView title="Sales Funnels" description="Build complete sales funnels" icon={<Funnel className="w-12 h-12" />} />
           default:
             return <LandingPagesView />
         }
@@ -71,9 +72,9 @@ export default function DashboardMainPage() {
           case 'all-customers':
             return <CustomersView />
           case 'segments':
-            return <PlaceholderView title="Customer Segments" description="Segment your audience" />
+            return <PlaceholderView title="Customer Segments" description="Segment your audience" icon={<Users className="w-12 h-12" />} />
           case 'tags':
-            return <PlaceholderView title="Tags & Groups" description="Organize customers with tags" />
+            return <PlaceholderView title="Tags & Groups" description="Organize customers with tags" icon={<Tag className="w-12 h-12" />} />
           default:
             return <CustomersView />
         }
@@ -84,7 +85,7 @@ export default function DashboardMainPage() {
           case 'campaigns':
             return <MarketingView />
           case 'templates':
-            return <PlaceholderView title="Email Templates" description="Manage email templates" />
+            return <PlaceholderView title="Email Templates" description="Manage email templates" icon={<FileText className="w-12 h-12" />} />
           case 'analytics':
             return <AnalyticsView />
           default:
@@ -99,9 +100,9 @@ export default function DashboardMainPage() {
           case 'whatsapp-automation':
             return <WhatsAppAutomationView />
           case 'workflows':
-            return <PlaceholderView title="Workflows" description="Create automated workflows" />
+            return <PlaceholderView title="Workflows" description="Create automated workflows" icon={<Zap className="w-12 h-12" />} />
           case 'integrations':
-            return <PlaceholderView title="Integrations" description="Connect with third-party tools" />
+            return <PlaceholderView title="Integrations" description="Connect with third-party tools" icon={<Plug className="w-12 h-12" />} />
           default:
             return <EmailAutomationView />
         }
@@ -110,22 +111,22 @@ export default function DashboardMainPage() {
       case 'mobile':
         switch (activeSubsection) {
           case 'app-distribution':
-            return <PlaceholderView title="App Distribution" description="Manage app store listings" />
+            return <PlaceholderView title="App Distribution" description="Manage app store listings" icon={<Download className="w-12 h-12" />} />
           case 'push-notifications':
-            return <PlaceholderView title="Push Notifications" description="Send push notifications" />
+            return <PlaceholderView title="Push Notifications" description="Send push notifications" icon={<Bell className="w-12 h-12" />} />
           default:
-            return <PlaceholderView title="Mobile App" description="Manage your mobile applications" />
+            return <PlaceholderView title="Mobile App" description="Manage your mobile applications" icon={<Smartphone className="w-12 h-12" />} />
         }
 
       // Community
       case 'community':
         switch (activeSubsection) {
           case 'forums':
-            return <PlaceholderView title="Forums" description="Manage community forums" />
+            return <PlaceholderView title="Forums" description="Manage community forums" icon={<MessageCircle className="w-12 h-12" />} />
           case 'discussions':
-            return <PlaceholderView title="Discussions" description="Manage discussions" />
+            return <PlaceholderView title="Discussions" description="Manage discussions" icon={<MessageSquare className="w-12 h-12" />} />
           default:
-            return <PlaceholderView title="Community" description="Build and manage your community" />
+            return <PlaceholderView title="Community" description="Build and manage your community" icon={<Users className="w-12 h-12" />} />
         }
 
       // Gamification
@@ -145,7 +146,7 @@ export default function DashboardMainPage() {
           case 'affiliate-program':
             return <AffiliateProgramView />
           case 'partner-program':
-            return <PlaceholderView title="Partner Program" description="Manage your partner network" />
+            return <PlaceholderView title="Partner Program" description="Manage your partner network" icon={<Handshake className="w-12 h-12" />} />
           default:
             return <AffiliateProgramView />
         }
@@ -156,7 +157,7 @@ export default function DashboardMainPage() {
           case 'reports':
             return <AnalyticsView />
           case 'insights':
-            return <PlaceholderView title="Insights" description="Get actionable insights" />
+            return <PlaceholderView title="Insights" description="Get actionable insights" icon={<Lightbulb className="w-12 h-12" />} />
           default:
             return <AnalyticsView />
         }
@@ -167,9 +168,9 @@ export default function DashboardMainPage() {
           case 'account':
             return <SettingsView />
           case 'security':
-            return <PlaceholderView title="Security Settings" description="Manage account security" />
+            return <PlaceholderView title="Security Settings" description="Manage account security" icon={<Shield className="w-12 h-12" />} />
           case 'notifications':
-            return <PlaceholderView title="Notification Preferences" description="Manage your notifications" />
+            return <PlaceholderView title="Notification Preferences" description="Manage your notifications" icon={<Bell className="w-12 h-12" />} />
           default:
             return <SettingsView />
         }

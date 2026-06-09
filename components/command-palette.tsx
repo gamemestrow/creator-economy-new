@@ -1,127 +1,116 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { Command as CommandIcon, BarChart3, Users, BookOpen, MessageSquare, Calendar, Mail, CreditCard, Settings, X } from 'lucide-react'
+import { useEffect, useMemo, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Command } from 'cmdk'
+import { Search, X } from 'lucide-react'
+import { flattenNavItems } from '@/components/sidebar/sidebar-config'
+import { cn } from '@/lib/utils'
 
 interface CommandPaletteProps {
   isOpen: boolean
   onClose: () => void
 }
 
-const commands = [
-  { category: 'Navigation', items: [
-    { label: 'Dashboard', href: '/dashboard', icon: BarChart3 },
-    { label: 'User Management', href: '/users', icon: Users },
-    { label: 'Courses', href: '/courses', icon: BookOpen },
-    { label: 'Communities', href: '/communities', icon: MessageSquare },
-    { label: 'Live Events', href: '/events', icon: Calendar },
-    { label: 'Email Campaigns', href: '/campaigns', icon: Mail },
-    { label: 'Payments', href: '/payments', icon: CreditCard },
-    { label: 'Settings', href: '/settings', icon: Settings },
-  ]}
-]
-
 export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
+  const router = useRouter()
   const [search, setSearch] = useState('')
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const allItems = useMemo(() => flattenNavItems(), [])
 
-  const filteredCommands = commands[0].items.filter(item =>
-    item.label.toLowerCase().includes(search.toLowerCase())
-  )
+  useEffect(() => {
+    if (!isOpen) setSearch('')
+  }, [isOpen])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose()
-      } else if (e.key === 'ArrowDown') {
-        e.preventDefault()
-        setSelectedIndex(prev => (prev + 1) % filteredCommands.length)
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault()
-        setSelectedIndex(prev => (prev - 1 + filteredCommands.length) % filteredCommands.length)
-      } else if (e.key === 'Enter') {
-        e.preventDefault()
-        const selected = filteredCommands[selectedIndex]
-        if (selected) {
-          window.location.href = selected.href
-          onClose()
-        }
-      }
+      if (e.key === 'Escape') onClose()
     }
-
     if (isOpen) {
       window.addEventListener('keydown', handleKeyDown)
       return () => window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [isOpen, selectedIndex, filteredCommands, onClose])
+  }, [isOpen, onClose])
 
   if (!isOpen) return null
 
+  const handleSelect = (href: string) => {
+    router.push(href)
+    onClose()
+  }
+
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-24" onClick={() => onClose()}>
+    <div
+      className="fixed inset-0 z-[100] flex items-start justify-center bg-black/60 pt-[15vh] backdrop-blur-sm"
+      onClick={onClose}
+    >
       <div
-        className="w-full max-w-xl bg-card border border-border rounded-lg shadow-xl"
+        className="w-full max-w-xl overflow-hidden rounded-xl border border-white/[0.08] bg-[#0B1220] shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Search Input */}
-        <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
-          <CommandIcon className="w-5 h-5 text-muted-foreground" />
-          <input
-            autoFocus
-            type="text"
-            placeholder="Search commands..."
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value)
-              setSelectedIndex(0)
-            }}
-            className="flex-1 bg-transparent outline-none text-foreground placeholder-muted-foreground"
-          />
-          <button
-            onClick={() => onClose()}
-            className="p-1 hover:bg-input rounded transition-colors"
-          >
-            <X className="w-4 h-4 text-muted-foreground" />
-          </button>
-        </div>
-
-        {/* Results */}
-        <div className="max-h-96 overflow-y-auto py-2">
-          {filteredCommands.length === 0 ? (
-            <div className="px-4 py-8 text-center text-muted-foreground">
-              No commands found
-            </div>
-          ) : (
-            filteredCommands.map((item, index) => {
-              const Icon = item.icon
-              return (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => {
-                    onClose()
-                  }}
-                  className={`flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors ${
-                    index === selectedIndex
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-foreground hover:bg-input'
-                  }`}
-                >
-                  <Icon className="w-5 h-5" />
-                  <span className="text-sm font-medium">{item.label}</span>
-                </a>
-              )
-            })
-          )}
-        </div>
-
-        {/* Footer */}
-        {filteredCommands.length > 0 && (
-          <div className="px-4 py-3 border-t border-border text-xs text-muted-foreground flex items-center justify-between">
-            <span>Use arrow keys to navigate</span>
-            <span>Press Enter to select</span>
+        <Command
+          className="flex flex-col"
+          loop
+          shouldFilter
+        >
+          <div className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3">
+            <Search className="h-4 w-4 shrink-0 text-[#94A3B8]" />
+            <Command.Input
+              autoFocus
+              value={search}
+              onValueChange={setSearch}
+              placeholder="Search pages and features..."
+              className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-[#64748B]"
+            />
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded p-1 text-[#94A3B8] transition-colors hover:bg-white/[0.06] hover:text-white"
+            >
+              <X className="h-4 w-4" />
+            </button>
           </div>
-        )}
+
+          <Command.List className="max-h-80 overflow-y-auto p-2 admin-sidebar-scroll">
+            <Command.Empty className="py-8 text-center text-sm text-[#94A3B8]">
+              No results found.
+            </Command.Empty>
+
+            <Command.Group heading="Navigation" className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-[10px] [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wider [&_[cmdk-group-heading]]:text-[#64748B]">
+              {allItems.map((item) => {
+                const Icon = item.icon
+                return (
+                  <Command.Item
+                    key={item.href}
+                    value={`${item.label} ${item.group ?? ''} ${item.href}`}
+                    onSelect={() => handleSelect(item.href)}
+                    className={cn(
+                      'flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors',
+                      'text-[#CBD5E1] aria-selected:bg-[rgba(37,99,235,0.12)] aria-selected:text-white'
+                    )}
+                  >
+                    <Icon className="h-4 w-4 text-[#94A3B8] aria-selected:text-[#2563EB]" />
+                    <div className="flex min-w-0 flex-1 flex-col">
+                      <span className="truncate font-medium">{item.label}</span>
+                      {item.group && (
+                        <span className="truncate text-[11px] text-[#64748B]">{item.group}</span>
+                      )}
+                    </div>
+                    {item.badge != null && (
+                      <span className="rounded-full bg-[#2563EB] px-1.5 py-0.5 text-[10px] font-semibold text-white">
+                        {item.badge}
+                      </span>
+                    )}
+                  </Command.Item>
+                )
+              })}
+            </Command.Group>
+          </Command.List>
+
+          <div className="flex items-center justify-between border-t border-white/[0.06] px-4 py-2.5 text-[11px] text-[#64748B]">
+            <span>↑↓ navigate</span>
+            <span>↵ select · esc close</span>
+          </div>
+        </Command>
       </div>
     </div>
   )

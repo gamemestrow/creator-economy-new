@@ -4,7 +4,8 @@ import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { 
   Lock, AlertTriangle, ShieldCheck, Mail, Users, BarChart3, 
-  Settings as SettingsIcon, CreditCard, Gift, Trophy, Bell, ChevronRight
+  Settings as SettingsIcon, CreditCard, Gift, Trophy, Bell, ChevronRight,
+  Package
 } from 'lucide-react'
 
 // Helper to format path slugs into readable titles

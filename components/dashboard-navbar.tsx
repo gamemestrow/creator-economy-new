@@ -2,78 +2,123 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Bell, Settings, User, LogOut } from 'lucide-react'
+import { Bell, Grid, User, LogOut, Compass, Video, BookOpen, MessageSquare, Gauge } from 'lucide-react'
 import { useState } from 'react'
-
-const navItems = [
-  { label: 'Dashboard', href: '/dashboard', icon: '📊' },
-  { label: 'Users', href: '/dashboard/users', icon: '👥' },
-  { label: 'Courses', href: '/dashboard/courses', icon: '📚' },
-  { label: 'Communities', href: '/dashboard/communities', icon: '💬' },
-  { label: 'Events', href: '/dashboard/events', icon: '📅' },
-  { label: 'Payments', href: '/dashboard/payments', icon: '💳' },
-  { label: 'Analytics', href: '/dashboard/analytics', icon: '📈' },
-  { label: 'Marketing', href: '/dashboard/marketing', icon: '📢' },
-]
 
 export function DashboardNavbar() {
   const pathname = usePathname()
   const [showUserMenu, setShowUserMenu] = useState(false)
 
+  const navItems = [
+    { 
+      label: 'Dashboard', 
+      href: '/dashboard/getstarted', 
+      icon: <Gauge className="w-5 h-5 mb-1" />,
+      isActive: (path: string) => {
+        // Active if dashboard but not feed/workshops/courses/messages
+        return path.startsWith('/dashboard') && 
+          !path.startsWith('/dashboard/feed') && 
+          !path.startsWith('/dashboard/workshops') && 
+          !path.startsWith('/dashboard/courses') && 
+          !path.startsWith('/dashboard/messages')
+      }
+    },
+    { 
+      label: 'Feed', 
+      href: '/dashboard/feed', 
+      icon: <Compass className="w-5 h-5 mb-1" />,
+      isActive: (path: string) => path.startsWith('/dashboard/feed')
+    },
+    { 
+      label: 'Workshops', 
+      href: '/dashboard/workshops', 
+      icon: <Video className="w-5 h-5 mb-1" />,
+      isActive: (path: string) => path.startsWith('/dashboard/workshops')
+    },
+    { 
+      label: 'Courses', 
+      href: '/dashboard/courses', 
+      icon: <BookOpen className="w-5 h-5 mb-1" />,
+      isActive: (path: string) => path.startsWith('/dashboard/courses')
+    },
+    { 
+      label: 'Messages', 
+      href: '/dashboard/messages', 
+      icon: <MessageSquare className="w-5 h-5 mb-1" />,
+      isActive: (path: string) => path.startsWith('/dashboard/messages')
+    },
+  ]
+
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-40">
-      <div className="flex items-center h-16 px-6">
+    <nav className="fixed top-0 left-0 right-0 bg-white border-b border-gray-100 z-40 h-20 shadow-sm">
+      <div className="flex items-center justify-between h-full px-8">
+        
         {/* Logo */}
-        <Link href="/dashboard" className="flex items-center gap-2 flex-shrink-0 mr-8">
-          <img src="/cloud-logo.png" alt="Cloud" className="h-8 w-8" />
-          <span className="text-xl font-bold text-slate-900">Cloud</span>
+        <Link href="/dashboard" className="flex items-center gap-2 flex-shrink-0">
+          <span className="text-2xl font-black text-slate-800 tracking-tight lowercase">
+            tag<span className="text-[#e06a28]">mango</span>
+          </span>
         </Link>
 
-        {/* Horizontal Navigation */}
-        <div className="flex items-center gap-1 flex-1 overflow-x-auto">
+        {/* Center Horizontal Navigation */}
+        <div className="flex items-center h-full gap-8">
           {navItems.map((item) => {
-            const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
+            const active = item.isActive(pathname)
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`px-4 py-4 text-sm font-medium whitespace-nowrap transition-colors border-b-2 ${
-                  isActive
-                    ? 'text-blue-600 border-blue-600'
-                    : 'text-gray-600 border-transparent hover:text-gray-900'
+                className={`flex flex-col items-center justify-center h-full px-3 text-[11px] font-bold tracking-wider transition-all border-b-[3px] uppercase ${
+                  active
+                    ? 'text-[#e06a28] border-[#e06a28]'
+                    : 'text-gray-500 border-transparent hover:text-gray-800'
                 }`}
               >
-                <span className="mr-2">{item.icon}</span>
-                {item.label.toUpperCase()}
+                {item.icon}
+                <span>{item.label}</span>
               </Link>
             )
           })}
         </div>
 
         {/* Right Side Actions */}
-        <div className="flex items-center gap-4 flex-shrink-0 ml-8">
-          <button className="p-2 hover:bg-gray-100 rounded-lg transition">
-            <Bell className="w-5 h-5 text-gray-600" />
+        <div className="flex items-center gap-5 flex-shrink-0">
+          {/* App Grid Launcher */}
+          <button className="p-2 hover:bg-gray-50 rounded-full transition text-gray-500 hover:text-gray-800">
+            <Grid className="w-5 h-5" />
           </button>
 
+          {/* Notifications */}
+          <button className="p-2 hover:bg-gray-50 rounded-full transition text-gray-500 hover:text-gray-800 relative">
+            <Bell className="w-5 h-5" />
+            <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+          </button>
+
+          {/* User Profile */}
           <div className="relative">
             <button
               onClick={() => setShowUserMenu(!showUserMenu)}
-              className="p-2 hover:bg-gray-100 rounded-lg transition"
+              className="flex items-center gap-2 p-1 hover:bg-gray-50 rounded-full transition"
             >
-              <User className="w-5 h-5 text-gray-600" />
+              <div className="w-9 h-9 rounded-full bg-[#ffeedc] border border-[#ffdbb8] flex items-center justify-center text-[#e06a28] font-bold text-sm">
+                A
+              </div>
             </button>
 
             {showUserMenu && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200">
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-1.5 z-50">
                 <Link
-                  href="/dashboard/settings"
-                  className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition"
+                  href="/dashboard/settings/platform"
+                  className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition"
+                  onClick={() => setShowUserMenu(false)}
                 >
-                  <Settings className="w-4 h-4" />
-                  <span>Settings</span>
+                  <User className="w-4 h-4 text-gray-400" />
+                  <span>Account Settings</span>
                 </Link>
-                <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition border-t border-gray-200">
+                <button 
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50/50 transition border-t border-gray-100"
+                  onClick={() => setShowUserMenu(false)}
+                >
                   <LogOut className="w-4 h-4" />
                   <span>Logout</span>
                 </button>
@@ -81,6 +126,7 @@ export function DashboardNavbar() {
             )}
           </div>
         </div>
+
       </div>
     </nav>
   )

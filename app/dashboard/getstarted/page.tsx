@@ -29,7 +29,7 @@ export default function GetStartedPage() {
 
       {/* Greeting Header */}
       <div>
-        <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Hello Anamika, welcome!</h1>
+        <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Hello Tannu, welcome!</h1>
         <p className="text-gray-600 text-sm mt-1">Your monetisation journey on TagMango starts here!</p>
       </div>
 

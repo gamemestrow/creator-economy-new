@@ -20,7 +20,7 @@ export function SettingsView() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-              <input type="text" defaultValue="Anamika" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" />
+              <input type="text" defaultValue="Tannu" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>

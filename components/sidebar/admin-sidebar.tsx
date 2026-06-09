@@ -444,7 +444,7 @@ export function AdminSidebar() {
                     AP
                   </div>
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-medium text-white">Anamika Pandey</p>
+                    <p className="truncate text-sm font-medium text-white">Tannu</p>
                     <p className="truncate text-[11px] text-[#94A3B8]">creator@works.cloud</p>
                   </div>
                 </div>

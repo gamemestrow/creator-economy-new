@@ -60,7 +60,7 @@ export function TopNavbar() {
                 <User className="w-4 h-4 text-white" />
               </div>
               <span className="hidden md:inline text-sm font-medium text-gray-900">
-                Anamika
+                Tannu
               </span>
             </button>
 

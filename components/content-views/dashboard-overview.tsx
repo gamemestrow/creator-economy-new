@@ -25,7 +25,7 @@ export function DashboardOverview() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Welcome back, Anamika!</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Welcome back, Tannu!</h1>
         <p className="text-gray-500 mt-1">Here&apos;s what&apos;s happening with your business today.</p>
       </div>
 

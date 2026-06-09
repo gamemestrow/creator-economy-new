@@ -101,7 +101,7 @@ export default function MarketingPage() {
             <p className="text-gray-600 text-sm mb-4">{tool.description}</p>
             {('subscribers' in tool) && (
               <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                <span className="text-sm text-gray-600">Subscribers: {tool.subscribers.toLocaleString()}</span>
+                <span className="text-sm text-gray-600">Subscribers: {tool.subscribers?.toLocaleString() ?? '0'}</span>
                 <button className="text-blue-600 hover:text-blue-700 font-medium text-sm">Configure</button>
               </div>
             )}

@@ -3,7 +3,7 @@
  */
 
 import { useState, useEffect } from 'react'
-import { Course, Enrollment, Progress, Certificate, Event, Community } from '@/lib/firestore'
+import { Course, Enrollment, Progress, Certificate, Event, Community, CommunityMember, EventRegistration } from '@/lib/firestore'
 import * as courseService from '@/lib/firestore/courses'
 import * as enrollmentService from '@/lib/firestore/enrollments'
 import * as progressService from '@/lib/firestore/progress'
@@ -192,7 +192,7 @@ export function useUpcomingEvents() {
  */
 export function useUserEventRegistrations(userId: string) {
   const [registrations, setRegistrations] = useState<
-    (typeof eventService.EventRegistration & { event?: Event })[]
+    (EventRegistration & { event?: Event })[]
   >([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -257,7 +257,7 @@ export function usePublicCommunities() {
  */
 export function useUserCommunities(userId: string) {
   const [communities, setCommunities] = useState<
-    (typeof communityService.CommunityMember & { community?: Community })[]
+    (CommunityMember & { community?: Community })[]
   >([])
   const [count, setCount] = useState(0)
   const [loading, setLoading] = useState(true)

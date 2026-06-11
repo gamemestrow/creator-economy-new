@@ -244,3 +244,12 @@ export async function createCourse(input: CreateCourseInput): Promise<string> {
     throw error
   }
 }
+
+export async function deleteCourse(courseId: string): Promise<void> {
+  try {
+    await setDoc(doc(db, COLLECTIONS.COURSES, courseId), { isDeleted: true }, { merge: true })
+  } catch (error) {
+    console.error('Error deleting course:', error)
+    throw error
+  }
+}

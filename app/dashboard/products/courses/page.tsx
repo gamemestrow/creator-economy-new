@@ -124,14 +124,14 @@ export default function CoursesPage() {
 
     try {
       setIsCreating(true)
-      await createCourse({
-        ...formData,
-        creatorId: user.uid,
-        creatorName: user.displayName || 'Unknown Creator',
-        totalLessons: 1, // Default
-        duration: 60, // Default
-        tags: [formData.category],
-      })
+      // await createCourse({
+      //   ...formData,
+      //   creatorId: user.uid,
+      //   creatorName: user.displayName || 'Unknown Creator',
+      //   totalLessons: 1, // Default
+      //   duration: 60, // Default
+      //   tags: [formData.category],
+      // })
       setShowCreateModal(false)
       setFormData({
         title: '',

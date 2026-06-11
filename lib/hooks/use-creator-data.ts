@@ -15,6 +15,8 @@ import { Order, User } from '@/lib/firestore/types'
 import * as membershipService from '@/lib/firestore/memberships'
 import { Membership } from '@/lib/firestore/types'
 
+import * as userService from '@/lib/firestore/users'
+
 /**
  * Hook to fetch memberships for a creator
  */

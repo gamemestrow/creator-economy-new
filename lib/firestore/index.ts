@@ -24,5 +24,8 @@ export * from './events'
 // Communities
 export * from './communities'
 
+// Users
+export * from './users'
+
 // Security Rules
 export { default as firebaseRules } from './security-rules'

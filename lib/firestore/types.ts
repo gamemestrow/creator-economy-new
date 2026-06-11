@@ -140,6 +140,37 @@ export interface CommunityPost {
   updatedAt: any // Firestore Timestamp
 }
 
+// ============= ORDERS COLLECTION =============
+export interface Order {
+  orderId: string // Document ID
+  userId: string
+  creatorId: string // Reference to creator
+  userName?: string
+  userEmail?: string
+  courseId: string
+  courseName?: string
+  amount: number
+  currency: string
+  status: 'completed' | 'pending' | 'failed' | 'refunded'
+  paymentProvider: 'razorpay' | 'stripe' | 'paypal'
+  createdAt: any // Firestore Timestamp
+}
+
+// ============= MEMBERSHIPS COLLECTION =============
+export interface Membership {
+  membershipId: string // Document ID
+  name: string
+  description: string
+  creatorId: string
+  price: number
+  billingCycle: 'monthly' | 'yearly' | 'lifetime'
+  features: string[]
+  memberCount: number
+  isPublished: boolean
+  createdAt: any
+  updatedAt: any
+}
+
 /**
  * Firestore Collection Paths
  */
@@ -154,6 +185,8 @@ export const COLLECTIONS = {
   COMMUNITIES: 'communities',
   COMMUNITY_MEMBERS: 'communityMembers',
   COMMUNITY_POSTS: 'communityPosts',
+  ORDERS: 'orders',
+  MEMBERSHIPS: 'memberships',
 } as const
 
 /**

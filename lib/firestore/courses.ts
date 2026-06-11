@@ -14,9 +14,81 @@ import {
   orderBy,
   limit,
   startAfter,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  serverTimestamp,
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { Course, COLLECTIONS } from './types'
+
+/**
+ * Create a new course
+ */
+export async function createCourse(courseData: Omit<Course, 'courseId' | 'createdAt' | 'updatedAt' | 'enrollmentCount'>): Promise<string> {
+  try {
+    const docRef = await addDoc(collection(db, COLLECTIONS.COURSES), {
+      ...courseData,
+      enrollmentCount: 0,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    })
+    return docRef.id
+  } catch (error) {
+    console.error('Error creating course:', error)
+    throw error
+  }
+}
+
+/**
+ * Update an existing course
+ */
+export async function updateCourse(courseId: string, updates: Partial<Course>): Promise<void> {
+  try {
+    const docRef = doc(db, COLLECTIONS.COURSES, courseId)
+    await updateDoc(docRef, {
+      ...updates,
+      updatedAt: serverTimestamp(),
+    })
+  } catch (error) {
+    console.error('Error updating course:', error)
+    throw error
+  }
+}
+
+/**
+ * Delete a course
+ */
+export async function deleteCourse(courseId: string): Promise<void> {
+  try {
+    const docRef = doc(db, COLLECTIONS.COURSES, courseId)
+    await deleteDoc(docRef)
+  } catch (error) {
+    console.error('Error deleting course:', error)
+    throw error
+  }
+}
+
+/**
+ * Fetch all courses for a specific creator
+ */
+export async function fetchCreatorCourses(creatorId: string): Promise<Course[]> {
+  try {
+    const q = query(
+      collection(db, COLLECTIONS.COURSES),
+      where('creatorId', '==', creatorId),
+      orderBy('createdAt', 'desc')
+    )
+    const snapshot = await getDocs(q)
+    return snapshot.docs.map((doc) => ({
+      ...doc.data(),
+      courseId: doc.id,
+    } as Course))
+  } catch (error) {
+    console.error('Error fetching creator courses:', error)
+    throw error
+  }
+}
 
 /**
  * Fetch all published courses

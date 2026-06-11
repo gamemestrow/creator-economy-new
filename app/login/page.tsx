@@ -7,6 +7,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { Sparkles, Mail, Lock, ArrowRight, Loader2 } from 'lucide-react'
 import { auth } from '@/lib/firebase'
 import { PRODUCT_NAME } from '@/components/sidebar/sidebar-config'
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from '@/lib/firebase' // adjust path
 
 export default function LoginPage() {
   const router = useRouter()
@@ -26,8 +28,30 @@ export default function LoginPage() {
 
     try {
       setLoading(true)
-      await signInWithEmailAndPassword(auth, email, password)
-      router.push('/dashboard/getstarted')
+
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      )
+
+      const uid = userCredential.user.uid
+
+      const userDoc = await getDoc(doc(db, 'users', uid))
+
+      if (!userDoc.exists()) {
+        throw new Error('User profile not found.')
+      }
+
+      const userData = userDoc.data()
+
+      if (userData.role === 'creator') {
+        router.push('/creator/dashboard')
+      } else if (userData.role === 'attendee') {
+        router.push('/attendee/dashboard')
+      } else {
+        throw new Error('Invalid user role.')
+      }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Failed to sign in.'
       setError(message.replace('Firebase: ', ''))

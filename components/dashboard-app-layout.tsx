@@ -1,10 +1,43 @@
 'use client'
 
+import { usePathname, useRouter } from 'next/navigation'
+import { ChevronRight, ArrowLeft } from 'lucide-react'
 import { AdminSidebar, useSidebarWidth } from '@/components/sidebar/admin-sidebar'
 import { cn } from '@/lib/utils'
+import Link from 'next/link'
+
+function Breadcrumbs() {
+  const pathname = usePathname()
+  const paths = pathname.split('/').filter(Boolean)
+
+  return (
+    <nav className="flex items-center gap-2 text-xs font-medium text-muted-foreground mb-4">
+      {paths.map((path, index) => {
+        const href = `/${paths.slice(0, index + 1).join('/')}`
+        const isLast = index === paths.length - 1
+        const label = path.charAt(0).toUpperCase() + path.slice(1).replace(/-/g, ' ')
+
+        return (
+          <div key={path} className="flex items-center gap-2">
+            {index > 0 && <ChevronRight className="w-3 h-3" />}
+            {isLast ? (
+              <span className="text-foreground font-bold">{label}</span>
+            ) : (
+              <Link href={href} className="hover:text-foreground transition-colors">
+                {label}
+              </Link>
+            )}
+          </div>
+        )
+      })}
+    </nav>
+  )
+}
 
 function DashboardMain({ children }: { children: React.ReactNode }) {
   const sidebarWidth = useSidebarWidth()
+  const router = useRouter()
+  const pathname = usePathname()
 
   return (
     <main
@@ -13,7 +46,21 @@ function DashboardMain({ children }: { children: React.ReactNode }) {
         'min-h-screen flex-1 bg-[#F8FAFC] p-6 transition-[margin] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] md:p-8'
       )}
     >
-      <div className="mx-auto max-w-7xl">{children}</div>
+      <div className="mx-auto max-w-7xl">
+        <div className="flex items-center justify-between mb-2">
+          <Breadcrumbs />
+          {pathname !== '/dashboard/analytics/overview' && (
+            <button 
+              onClick={() => router.back()}
+              className="flex items-center gap-2 text-xs font-bold text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back
+            </button>
+          )}
+        </div>
+        {children}
+      </div>
     </main>
   )
 }
@@ -26,3 +73,4 @@ export function DashboardAppLayout({ children }: { children: React.ReactNode }) 
     </div>
   )
 }
+

@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     }
 
     // Use the model from environment variable if available, otherwise fallback to gemini-1.5-pro
-    const modelName = process.env.GEMINI_MODEL || "gemini-1.5-pro";
+    const modelName = process.env.GEMINI_MODEL || "gemini-2.5-flash";
     const model = genAI.getGenerativeModel({ model: modelName });
 
     // Format history for Gemini

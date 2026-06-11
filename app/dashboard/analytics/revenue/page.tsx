@@ -7,6 +7,7 @@ import {
   Tooltip, Legend, ResponsiveContainer, AreaChart, Area 
 } from 'recharts'
 import { TrendingUp, DollarSign, ShoppingCart, Users, ArrowUpRight, ArrowDownRight } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 export default function RevenuePage() {
   const { user } = useRequireRole(['creator'])

@@ -20,6 +20,8 @@ import {
   Eye,
 } from 'lucide-react'
 import { PRODUCT_NAME } from '@/components/sidebar/sidebar-config'
+import { CreateCourseForm } from '@/components/creator/CreateCourseForm'
+import { createCourse } from '@/lib/firestore/courses'
 
 interface UserData {
   name: string
@@ -31,6 +33,7 @@ export default function CreatorDashboardPage() {
   const { loading, user, authorized } = useRequireRole(['creator'])
   const [userData, setUserData] = useState<UserData | null>(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [showCreateForm, setShowCreateForm] = useState(false)
 
   useEffect(() => {
     if (user && authorized) {
@@ -108,9 +111,8 @@ export default function CreatorDashboardPage() {
       <div className="flex min-h-[calc(100vh-64px)]">
         {/* Sidebar */}
         <aside
-          className={`fixed inset-y-0 top-16 left-0 w-64 border-r border-gray-200 bg-white p-6 transition-transform md:relative md:top-0 md:translate-x-0 md:border-r ${
-            sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
+          className={`fixed inset-y-0 top-16 left-0 w-64 border-r border-gray-200 bg-white p-6 transition-transform md:relative md:top-0 md:translate-x-0 md:border-r ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+            }`}
         >
           <nav className="space-y-2">
             <button className="flex w-full items-center gap-3 rounded-lg bg-[#2563EB]/10 px-4 py-3 text-left font-medium text-[#2563EB]">
@@ -206,11 +208,39 @@ export default function CreatorDashboardPage() {
             <div className="rounded-xl border border-gray-200 bg-white p-6">
               <h2 className="text-lg font-bold text-gray-900">Quick Actions</h2>
               <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                <button className="rounded-lg border-2 border-dashed border-[#2563EB]/30 bg-blue-50/50 px-6 py-8 text-center transition-colors hover:bg-blue-100/50">
+                <button
+                  onClick={() => setShowCreateForm(true)}
+                  className="rounded-lg border-2 border-dashed border-[#2563EB]/30 bg-blue-50/50 px-6 py-8 text-center transition-colors hover:bg-blue-100/50"
+                >
                   <BookOpen className="mx-auto mb-2 h-8 w-8 text-[#2563EB]" />
                   <p className="font-medium text-gray-900">Create Course</p>
                   <p className="text-xs text-gray-600">Build and publish a new course</p>
                 </button>
+                {showCreateForm && (
+                  <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4"
+                    onClick={(e) => {
+                      if (e.target === e.currentTarget) setShowCreateForm(false)
+                    }}
+                  >
+                    <div className="w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-xl">
+                      <CreateCourseForm
+                        onSubmit={async (data) => {
+                          if(!user) return
+                          await createCourse({
+                            title: data.title,
+                            description: data.description,
+                            price: Number(data.price),
+                            image: data.image,
+                            creatorId: user?.uid,
+                          })
+                          setShowCreateForm(false)
+                        }}
+                        onCancel={() => setShowCreateForm(false)}
+                      />
+                    </div>
+                  </div>
+                )}
 
                 <button className="rounded-lg border-2 border-dashed border-[#2563EB]/30 bg-blue-50/50 px-6 py-8 text-center transition-colors hover:bg-blue-100/50">
                   <TrendingUp className="mx-auto mb-2 h-8 w-8 text-[#2563EB]" />

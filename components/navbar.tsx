@@ -39,7 +39,7 @@ export function Navbar() {
             <Link href="/login" className="text-slate-700 hover:text-slate-900 font-medium">
               Log in
             </Link>
-            <Link href="/dashboard/main" className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition font-medium">
+            <Link href="/dashboard" className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition font-medium">
               Get Started
             </Link>
           </div>
@@ -72,7 +72,7 @@ export function Navbar() {
               <Link href="/login" className="flex-1 text-center py-2 text-slate-700 border border-slate-300 rounded-lg">
                 Log in
               </Link>
-              <Link href="/dashboard/main" className="flex-1 text-center py-2 bg-blue-600 text-white rounded-lg">
+              <Link href="/dashboard" className="flex-1 text-center py-2 bg-blue-600 text-white rounded-lg">
                 Get Started
               </Link>
             </div>

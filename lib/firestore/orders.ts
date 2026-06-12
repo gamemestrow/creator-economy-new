@@ -15,8 +15,6 @@ import { Order, COLLECTIONS } from './types'
 
 /**
  * Fetch all orders for a creator's courses
- * In a real app, we might need a composite index or a more complex query
- * For now, we fetch all orders and filter or fetch by creatorId if added to Order type
  */
 export async function fetchCreatorOrders(creatorId: string, limit_: number = 50): Promise<Order[]> {
   try {
@@ -32,9 +30,29 @@ export async function fetchCreatorOrders(creatorId: string, limit_: number = 50)
       ...doc.data(),
       orderId: doc.id,
     } as Order))
-  } catch (error) {
+  } catch (error: any) {
+    // Fallback if index is not yet created
+    if (error.code === 'failed-precondition' || error.message?.includes('index')) {
+      console.warn('Firestore index missing for fetchCreatorOrders, falling back to in-memory sort')
+      const q = query(
+        collection(db, COLLECTIONS.ORDERS),
+        where('creatorId', '==', creatorId)
+      )
+      const snapshot = await getDocs(q)
+      const orders = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        orderId: doc.id,
+      } as Order))
+
+      return orders
+        .sort((a, b) => {
+          const dateA = a.createdAt?.seconds || 0
+          const dateB = b.createdAt?.seconds || 0
+          return dateB - dateA
+        })
+        .slice(0, limit_)
+    }
     console.error('Error fetching orders:', error)
-    // Fallback: If creatorId is not in Order, we might need to fetch by courseIds
     throw error
   }
 }

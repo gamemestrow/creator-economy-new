@@ -12,7 +12,7 @@ interface Message {
   content: string
 }
 
-export function ChatInterface() {
+export function ChatInterface({ showCard = true }: { showCard?: boolean }) {
   const [messages, setMessages] = useState<Message[]>([
     { role: 'assistant', content: 'Hello! I am your AI assistant. How can I help you today?' }
   ])
@@ -54,67 +54,80 @@ export function ChatInterface() {
     }
   }
 
+  const Content = (
+    <div className="flex-1 flex flex-col gap-4 overflow-hidden p-6 bg-background">
+      <div 
+        ref={scrollRef}
+        className="flex-1 overflow-y-auto space-y-4 pr-4"
+      >
+        {messages.map((message, index) => (
+          <div
+            key={index}
+            className={cn(
+              "flex items-start gap-3",
+              message.role === 'user' ? "flex-row-reverse" : "flex-row"
+            )}
+          >
+            <div className={cn(
+              "w-8 h-8 rounded-full flex items-center justify-center shrink-0",
+              message.role === 'user' ? "bg-primary text-primary-foreground" : "bg-muted"
+            )}>
+              {message.role === 'user' ? <User className="w-5 h-5" /> : <Bot className="w-5 h-5" />}
+            </div>
+            <div className={cn(
+              "rounded-lg px-4 py-2 max-w-[80%] text-sm",
+              message.role === 'user' 
+                ? "bg-primary text-primary-foreground rounded-tr-none" 
+                : "bg-muted text-foreground rounded-tl-none"
+            )}>
+              {message.content}
+            </div>
+          </div>
+        ))}
+        {isLoading && (
+          <div className="flex items-start gap-3">
+            <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+              <Bot className="w-5 h-5" />
+            </div>
+            <div className="bg-muted text-foreground rounded-lg rounded-tl-none px-4 py-2">
+              <Loader2 className="w-4 h-4 animate-spin" />
+            </div>
+          </div>
+        )}
+      </div>
+      
+      <form onSubmit={handleSubmit} className="flex gap-2 pt-4 border-t">
+        <Input
+          placeholder="Type your message..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          disabled={isLoading}
+        />
+        <Button type="submit" disabled={isLoading || !input.trim()}>
+          {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+        </Button>
+      </form>
+    </div>
+  )
+
+  if (!showCard) {
+    return (
+      <div className="flex flex-col h-full w-full">
+        {Content}
+      </div>
+    )
+  }
+
   return (
     <Card className="flex flex-col h-[600px] w-full max-w-2xl mx-auto">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Bot className="w-6 h-6 text-primary" />
-          Gemini Chat Assistant
+          Chat Assistant
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex-1 flex flex-col gap-4 overflow-hidden p-6">
-        <div 
-          ref={scrollRef}
-          className="flex-1 overflow-y-auto space-y-4 pr-4"
-        >
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={cn(
-                "flex items-start gap-3",
-                message.role === 'user' ? "flex-row-reverse" : "flex-row"
-              )}
-            >
-              <div className={cn(
-                "w-8 h-8 rounded-full flex items-center justify-center shrink-0",
-                message.role === 'user' ? "bg-primary text-primary-foreground" : "bg-muted"
-              )}>
-                {message.role === 'user' ? <User className="w-5 h-5" /> : <Bot className="w-5 h-5" />}
-              </div>
-              <div className={cn(
-                "rounded-lg px-4 py-2 max-w-[80%] text-sm",
-                message.role === 'user' 
-                  ? "bg-primary text-primary-foreground rounded-tr-none" 
-                  : "bg-muted text-foreground rounded-tl-none"
-              )}>
-                {message.content}
-              </div>
-            </div>
-          ))}
-          {isLoading && (
-            <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
-                <Bot className="w-5 h-5" />
-              </div>
-              <div className="bg-muted text-foreground rounded-lg rounded-tl-none px-4 py-2">
-                <Loader2 className="w-4 h-4 animate-spin" />
-              </div>
-            </div>
-          )}
-        </div>
-        
-        <form onSubmit={handleSubmit} className="flex gap-2 pt-4 border-t">
-          <Input
-            placeholder="Type your message..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            disabled={isLoading}
-          />
-          <Button type="submit" disabled={isLoading || !input.trim()}>
-            {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-          </Button>
-        </form>
-      </CardContent>
+      {Content}
     </Card>
   )
 }
+

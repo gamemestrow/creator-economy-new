@@ -56,7 +56,7 @@ function MembershipCard({ membership, onDelete }: { membership: Membership, onDe
 }
 
 export default function MembershipsPage() {
-  const { user } = useRequireRole(['creator'])
+  const { user } = useRequireRole(['creator', 'attendee'])
   const { memberships, loading, refresh } = useCreatorMemberships(user?.uid || '')
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [isCreating, setIsCreating] = useState(false)

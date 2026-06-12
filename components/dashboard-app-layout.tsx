@@ -1,10 +1,13 @@
 'use client'
 
 import { usePathname, useRouter } from 'next/navigation'
-import { ChevronRight, ArrowLeft } from 'lucide-react'
+import { ChevronRight, ArrowLeft, Crown } from 'lucide-react'
 import { AdminSidebar, useSidebarWidth } from '@/components/sidebar/admin-sidebar'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
+import { FloatingChat } from '@/components/floating-chat'
+import { useState } from 'react'
+import { UpgradePlanModal } from '@/components/upgrade-plan-modal'
 
 function Breadcrumbs() {
   const pathname = usePathname()
@@ -38,6 +41,7 @@ function DashboardMain({ children }: { children: React.ReactNode }) {
   const sidebarWidth = useSidebarWidth()
   const router = useRouter()
   const pathname = usePathname()
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false)
 
   return (
     <main
@@ -49,28 +53,38 @@ function DashboardMain({ children }: { children: React.ReactNode }) {
       <div className="mx-auto max-w-7xl">
         <div className="flex items-center justify-between mb-2">
           <Breadcrumbs />
-          {pathname !== '/dashboard/analytics/overview' && (
-            <button 
-              onClick={() => router.back()}
-              className="flex items-center gap-2 text-xs font-bold text-muted-foreground hover:text-foreground transition-colors"
+          <div className="flex items-center gap-4">
+            {/* <button
+              onClick={() => setShowUpgradeModal(true)}
+              className="flex items-center gap-2 px-3 py-1.5 bg-white border border-amber-200 text-amber-700 rounded-lg text-[10px] font-black uppercase tracking-wider shadow-sm hover:shadow-md transition-all hover:bg-amber-50"
             >
-              <ArrowLeft className="w-4 h-4" />
-              Back
-            </button>
-          )}
+              <Crown className="w-3 h-3 text-amber-500" />
+              Upgrade
+            </button> */}
+            {pathname !== '/dashboard/analytics/overview' && (
+              <button 
+                onClick={() => router.back()}
+                className="flex items-center gap-2 text-xs font-bold text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back
+              </button>
+            )}
+          </div>
         </div>
         {children}
       </div>
+      <UpgradePlanModal isOpen={showUpgradeModal} onClose={() => setShowUpgradeModal(false)} />
     </main>
   )
 }
 
 export function DashboardAppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-[#F8FAFC]">
+    <div className="min-h-screen bg-[#F8FAFC] relative">
       <AdminSidebar />
       <DashboardMain>{children}</DashboardMain>
+      <FloatingChat />
     </div>
   )
 }
-

@@ -14,6 +14,8 @@ import {
   LogOut,
   Crown,
   Command,
+  Menu,
+  X,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useSidebarStore } from '@/lib/sidebar-store'
@@ -97,6 +99,7 @@ function AccordionGroup({
   pathname,
   onToggle,
   searchQuery,
+  onNavigate,
 }: {
   group: NavGroup
   isExpanded: boolean
@@ -104,6 +107,7 @@ function AccordionGroup({
   pathname: string
   onToggle: () => void
   searchQuery: string
+  onNavigate?: () => void
 }) {
   const Icon = group.icon
   const hasActiveChild = group.items.some((item) => isRouteActive(pathname, item.href))
@@ -173,6 +177,7 @@ function AccordionGroup({
                   item={item}
                   isActive={isRouteActive(pathname, item.href)}
                   isCollapsed={false}
+                  onNavigate={onNavigate}
                 />
               ))}
             </div>
@@ -183,6 +188,251 @@ function AccordionGroup({
   )
 }
 
+// ─── Mobile Top Bar ────────────────────────────────────────────────────────────
+
+function MobileTopBar({
+  onOpen,
+  pathname,
+}: {
+  onOpen: () => void
+  pathname: string
+}) {
+  return (
+    <div className="fixed left-0 right-0 top-0 z-40 flex h-14 items-center gap-3 border-b border-white/[0.06] bg-[#0B1220] px-4 md:hidden">
+      <button
+        type="button"
+        onClick={onOpen}
+        aria-label="Open navigation"
+        className="flex h-9 w-9 items-center justify-center rounded-lg text-[#94A3B8] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-white"
+      >
+        <Menu className="h-5 w-5" />
+      </button>
+
+      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#2563EB] shadow-lg shadow-blue-500/20">
+        <Sparkles className="h-3.5 w-3.5 text-white" />
+      </div>
+
+      <p className="flex-1 truncate text-sm font-semibold text-white">{PRODUCT_NAME}</p>
+
+      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#2563EB] text-[10px] font-bold text-white">
+        AP
+      </div>
+    </div>
+  )
+}
+
+// ─── Mobile Drawer ─────────────────────────────────────────────────────────────
+
+function MobileDrawer({
+  isOpen,
+  onClose,
+  pathname,
+  router,
+}: {
+  isOpen: boolean
+  onClose: () => void
+  pathname: string
+  router: ReturnType<typeof useRouter>
+}) {
+  const [searchQuery, setSearchQuery] = useState('')
+  const [expandedGroups, setExpandedGroups] = useState<string[]>(() => {
+    const active = getActiveGroupId(pathname)
+    return active ? [active] : ['analytics']
+  })
+
+  const filteredGroups = useMemo(() => filterNavGroups(searchQuery), [searchQuery])
+  const DashboardIcon = dashboardLink.icon
+  const dashboardActive = isRouteActive(pathname, dashboardLink.href)
+
+  const toggleGroup = useCallback((groupId: string) => {
+    setExpandedGroups((prev) =>
+      prev.includes(groupId) ? prev.filter((id) => id !== groupId) : [...prev, groupId]
+    )
+  }, [])
+
+  // Close on route change
+  useEffect(() => {
+    onClose()
+  }, [pathname]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Trap scroll behind overlay
+  useEffect(() => {
+    if (isOpen) document.body.style.overflow = 'hidden'
+    else document.body.style.overflow = ''
+    return () => { document.body.style.overflow = '' }
+  }, [isOpen])
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            key="backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={onClose}
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm md:hidden"
+          />
+
+          {/* Drawer panel */}
+          <motion.div
+            key="drawer"
+            initial={{ x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%' }}
+            transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+            className="fixed bottom-0 left-0 top-0 z-50 flex w-[280px] flex-col border-r border-white/[0.06] bg-[#0B1220] text-[#CBD5E1] md:hidden"
+          >
+            {/* Drawer header */}
+            <div className="shrink-0 border-b border-white/[0.06] p-4">
+              <div className="flex items-center gap-3">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#2563EB] shadow-lg shadow-blue-500/20">
+                  <Sparkles className="h-4 w-4 text-white" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-semibold text-white">{PRODUCT_NAME}</p>
+                  <button
+                    type="button"
+                    className="mt-0.5 flex w-full items-center gap-1.5 rounded-md px-1 py-0.5 text-left text-xs text-[#94A3B8] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-[#CBD5E1]"
+                  >
+                    <span className="truncate">My Workspace</span>
+                    <ChevronsUpDown className="h-3 w-3 shrink-0" />
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  aria-label="Close navigation"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[#94A3B8] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-white"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Search */}
+            <div className="shrink-0 px-4 py-3">
+              <div className="relative">
+                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94A3B8]" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search navigation..."
+                  className="w-full rounded-lg border border-white/[0.06] bg-white/[0.04] py-2 pl-9 pr-4 text-sm text-[#CBD5E1] placeholder:text-[#64748B] outline-none transition-all focus:border-[#2563EB]/40 focus:bg-white/[0.06] focus:ring-1 focus:ring-[#2563EB]/30"
+                />
+              </div>
+            </div>
+
+            {/* Navigation */}
+            <nav className="admin-sidebar-scroll flex-1 space-y-1 overflow-y-auto px-3 py-2">
+              <p className="px-3 pb-1 pt-2 text-[12px] font-semibold uppercase tracking-wider text-[#64748B]">
+                Main
+              </p>
+
+              <Link
+                href={dashboardLink.href}
+                onClick={onClose}
+                className={cn(
+                  'flex items-center gap-3 rounded-lg px-3 py-2.5 text-[15px] font-medium transition-all duration-200',
+                  dashboardActive
+                    ? 'bg-[rgba(37,99,235,0.12)] text-white'
+                    : 'text-[#CBD5E1] hover:bg-[rgba(37,99,235,0.08)] hover:text-white'
+                )}
+              >
+                <DashboardIcon
+                  className={cn(
+                    'h-[18px] w-[18px]',
+                    dashboardActive ? 'text-[#2563EB]' : 'text-[#94A3B8]'
+                  )}
+                />
+                <span>{dashboardLink.label}</span>
+              </Link>
+
+              <p className="px-3 pb-1 pt-4 text-[12px] font-semibold uppercase tracking-wider text-[#64748B]">
+                Platform
+              </p>
+
+              {filteredGroups.map((group) => (
+                <AccordionGroup
+                  key={group.id}
+                  group={group}
+                  isExpanded={expandedGroups.includes(group.id) || !!searchQuery}
+                  isCollapsed={false}
+                  pathname={pathname}
+                  onToggle={() => toggleGroup(group.id)}
+                  searchQuery={searchQuery}
+                  onNavigate={onClose}
+                />
+              ))}
+            </nav>
+
+            {/* Footer */}
+            <div className="shrink-0 space-y-2 border-t border-white/[0.06] p-3">
+              <Link
+                href="/dashboard/billing/plans"
+                onClick={onClose}
+                className="block rounded-xl border border-[#2563EB]/20 bg-gradient-to-br from-[#2563EB]/15 to-[#4F46E5]/10 p-3 transition-all hover:border-[#2563EB]/40 hover:shadow-lg hover:shadow-blue-500/10"
+              >
+                <div className="flex items-center gap-2">
+                  <Crown className="h-4 w-4 text-[#2563EB]" />
+                  <span className="text-xs font-semibold text-white">Upgrade Plan</span>
+                </div>
+                <p className="mt-1 text-[11px] leading-relaxed text-[#94A3B8]">
+                  Unlock advanced analytics, automation, and team seats.
+                </p>
+              </Link>
+
+              <div className="rounded-lg border border-white/[0.06] bg-white/[0.03] px-3 py-2">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-[#64748B]">
+                  Subscription
+                </p>
+                <p className="mt-0.5 text-xs font-medium text-white">Pro Plan</p>
+                <p className="text-[11px] text-[#94A3B8]">Renews Apr 9, 2026</p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <div className="flex min-w-0 flex-1 items-center gap-2 rounded-lg px-2 py-1.5">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#2563EB] text-xs font-bold text-white">
+                    AP
+                  </div>
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-medium text-white">Tannu</p>
+                    <p className="truncate text-[11px] text-[#94A3B8]">creator@works.cloud</p>
+                  </div>
+                </div>
+                <SidebarTooltip label="Settings" side="top">
+                  <Link
+                    href="/dashboard/settings/general"
+                    onClick={onClose}
+                    className="flex h-8 w-8 items-center justify-center rounded-lg text-[#94A3B8] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-white"
+                  >
+                    <Settings className="h-4 w-4" />
+                  </Link>
+                </SidebarTooltip>
+                <SidebarTooltip label="Logout" side="top">
+                  <button
+                    type="button"
+                    onClick={() => { onClose(); router.push('/login') }}
+                    className="flex h-8 w-8 items-center justify-center rounded-lg text-[#94A3B8] transition-colors hover:bg-red-500/10 hover:text-red-400"
+                  >
+                    <LogOut className="h-4 w-4" />
+                  </button>
+                </SidebarTooltip>
+              </div>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  )
+}
+
+// ─── Main Export ───────────────────────────────────────────────────────────────
+
 export function AdminSidebar() {
   const pathname = usePathname()
   const router = useRouter()
@@ -190,6 +440,7 @@ export function AdminSidebar() {
   const { isCollapsed, commandOpen, toggleCollapse, setCommandOpen, toggleCommand } =
     useSidebarStore()
 
+  const [mobileOpen, setMobileOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [expandedGroups, setExpandedGroups] = useState<string[]>(() => {
     const active = getActiveGroupId(pathname)
@@ -268,12 +519,22 @@ export function AdminSidebar() {
 
   return (
     <>
+      {/* ── Mobile: top bar + slide-over drawer ── */}
+      <MobileTopBar onOpen={() => setMobileOpen(true)} pathname={pathname} />
+      <MobileDrawer
+        isOpen={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        pathname={pathname}
+        router={router}
+      />
+
+      {/* ── Desktop: fixed sidebar (unchanged behaviour) ── */}
       <motion.aside
         initial={false}
         animate={{ width: isCollapsed ? SIDEBAR_COLLAPSED : SIDEBAR_EXPANDED }}
         transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
         className={cn(
-          'admin-sidebar fixed left-0 top-0 z-40 flex h-screen flex-col',
+          'admin-sidebar fixed left-0 top-0 z-40 hidden h-screen flex-col md:flex',
           'border-r border-white/[0.06] bg-[#0B1220] text-[#CBD5E1]'
         )}
       >
@@ -352,7 +613,6 @@ export function AdminSidebar() {
             </p>
           )}
 
-          {/* Dashboard direct link */}
           {isCollapsed ? (
             <SidebarTooltip label={dashboardLink.label}>
               <Link
@@ -515,5 +775,15 @@ export function AdminSidebar() {
 
 export function useSidebarWidth() {
   const isCollapsed = useSidebarStore((s) => s.isCollapsed)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  if (isMobile) return 0
   return isCollapsed ? SIDEBAR_COLLAPSED : SIDEBAR_EXPANDED
 }

@@ -1,11 +1,18 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Plus, MoreHorizontal, Users, TrendingUp, Clock, BookOpen, Trash2, Loader2, X } from 'lucide-react'
 import { useRequireRole } from '@/lib/use-auth-redirect'
 import { useCreatorCourses } from '@/lib/hooks/use-creator-data'
 import { createCourse, deleteCourse } from '@/lib/firestore/courses'
 import { Course } from '@/lib/firestore/types'
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from '@/lib/firebase'
+
+interface UserData {
+  name: string
+  email: string
+}
 
 function StatCard({ icon: Icon, label, value, loading }: any) {
   return (
@@ -38,16 +45,16 @@ function CourseCard({ course, onDelete }: { course: Course, onDelete: (id: strin
           <p className="text-sm text-muted-foreground">{course.category}</p>
         </div>
         <div className="relative">
-          <button 
+          <button
             onClick={() => setShowMenu(!showMenu)}
             className="p-2 hover:bg-input rounded transition-colors"
           >
             <MoreHorizontal className="w-5 h-5 text-muted-foreground" />
           </button>
-          
+
           {showMenu && (
             <div className="absolute right-0 top-10 w-40 bg-card border border-border rounded-lg shadow-xl z-10 py-1">
-              <button 
+              <button
                 onClick={() => {
                   if (window.confirm('Are you sure you want to delete this course?')) {
                     onDelete(course.courseId)
@@ -79,11 +86,10 @@ function CourseCard({ course, onDelete }: { course: Course, onDelete: (id: strin
         <div className="flex items-center justify-between text-sm">
           <span className="font-semibold text-foreground">${course.price || 0}</span>
           <span
-            className={`px-3 py-1 rounded-full text-xs font-medium ${
-              course.isPublished
+            className={`px-3 py-1 rounded-full text-xs font-medium ${course.isPublished
                 ? 'bg-green-100 text-green-800'
                 : 'bg-gray-100 text-gray-800'
-            }`}
+              }`}
           >
             {course.isPublished ? 'Published' : 'Draft'}
           </span>
@@ -100,10 +106,31 @@ function CourseCard({ course, onDelete }: { course: Course, onDelete: (id: strin
 }
 
 export default function CoursesPage() {
-  const { loading: authLoading, user } = useRequireRole(['creator'])
+  const { loading: authLoading, user, authorized } = useRequireRole(['creator', 'attendee'])
   const { courses, loading: coursesLoading, refresh } = useCreatorCourses(user?.uid || '')
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [isCreating, setIsCreating] = useState(false)
+
+  const [userData, setUserData] = useState<UserData | null>(null)
+
+  useEffect(() => {
+    if (user && authorized) {
+      const fetchUserData = async () => {
+        const userDocRef = doc(db, 'users', user.uid)
+        const userDocSnap = await getDoc(userDocRef)
+
+        if (userDocSnap.exists()) {
+          const data = userDocSnap.data()
+          setUserData({
+            name: data.name || user.displayName || 'Creator',
+            email: user.email || '',
+          })
+        }
+      }
+
+      fetchUserData()
+    }
+  }, [user, authorized])
 
   // Form state
   const [formData, setFormData] = useState({
@@ -121,17 +148,18 @@ export default function CoursesPage() {
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!user) return
+    console.log(user)
 
     try {
       setIsCreating(true)
-      // await createCourse({
-      //   ...formData,
-      //   creatorId: user.uid,
-      //   creatorName: user.displayName || 'Unknown Creator',
-      //   totalLessons: 1, // Default
-      //   duration: 60, // Default
-      //   tags: [formData.category],
-      // })
+      await createCourse({
+        ...formData,
+        creatorId: user.uid,
+        creatorName: userData?.name || 'Unknown Creator',
+        totalLessons: 1, // Default
+        duration: 60, // Default
+        tags: [formData.category],
+      })
       setShowCreateModal(false)
       setFormData({
         title: '',
@@ -177,7 +205,7 @@ export default function CoursesPage() {
             <h1 className="text-4xl font-bold text-foreground">Courses</h1>
             <p className="text-muted-foreground mt-2">Manage all online courses and learning content</p>
           </div>
-          <button 
+          <button
             onClick={() => setShowCreateModal(true)}
             className="flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors"
           >
@@ -211,7 +239,7 @@ export default function CoursesPage() {
             <BookOpen className="w-12 h-12 text-muted-foreground mb-4" />
             <h3 className="text-lg font-semibold text-foreground">No courses found</h3>
             <p className="text-muted-foreground">Start by creating your first online course.</p>
-            <button 
+            <button
               onClick={() => setShowCreateModal(true)}
               className="mt-6 text-primary hover:underline font-medium"
             >
@@ -231,7 +259,7 @@ export default function CoursesPage() {
                 <X className="w-6 h-6" />
               </button>
             </div>
-            
+
             <form onSubmit={handleCreate} className="p-6 space-y-4">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-1">Course Title</label>

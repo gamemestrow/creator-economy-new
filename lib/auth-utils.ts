@@ -24,10 +24,8 @@ export async function getUserRole(user: User | null): Promise<UserRole> {
 }
 
 export function getRedirectPath(role: UserRole): string {
-  if (role === 'creator') {
-    return '/creator/dashboard'
-  } else if (role === 'attendee') {
-    return '/attendee/dashboard'
+  if (role) {
+    return '/dashboard'
   }
   return '/select-role'
 }

@@ -39,7 +39,7 @@ export default function SelectRolePage() {
       const userDocRef = doc(db, 'users', userId)
       await updateDoc(userDocRef, { role })
 
-      const redirectPath = role === 'creator' ? '/creator/dashboard' : '/attendee/dashboard'
+      const redirectPath = '/dashboard'
       router.push(redirectPath)
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to save role.'

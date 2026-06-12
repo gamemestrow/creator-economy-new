@@ -195,6 +195,8 @@ export const COLLECTIONS = {
  * 1. courses collection
  *    - isPublished (Ascending)
  *    - createdAt (Descending)
+ *    - creatorId (Ascending)
+ *    - createdAt (Descending)
  * 
  * 2. enrollments collection
  *    - userId (Ascending)
@@ -211,8 +213,18 @@ export const COLLECTIONS = {
  * 5. events collection
  *    - isPublished (Ascending)
  *    - date (Ascending)
+ *    - isPublished (Ascending)
+ *    - date (Descending)
  * 
  * 6. communityMembers collection
  *    - communityId (Ascending)
  *    - userId (Ascending)
+ * 
+ * 7. memberships collection
+ *    - creatorId (Ascending)
+ *    - createdAt (Descending)
+ * 
+ * 8. orders collection
+ *    - creatorId (Ascending)
+ *    - createdAt (Descending)
  */

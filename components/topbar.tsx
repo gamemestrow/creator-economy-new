@@ -1,12 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Search, Bell, User, LogOut, Command } from 'lucide-react'
+import { Search, Bell, User, LogOut, Command, Crown } from 'lucide-react'
 import { CommandPalette } from './command-palette'
+import { UpgradePlanModal } from './upgrade-plan-modal'
 
 export function Topbar() {
   const [showCommandPalette, setShowCommandPalette] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false)
 
   // Listen for keyboard shortcut
   useEffect(() => {
@@ -37,6 +39,15 @@ export function Topbar() {
 
         {/* Right side - Actions */}
         <div className="flex items-center gap-4">
+          {/* Upgrade Button */}
+          <button
+            onClick={() => setShowUpgradeModal(true)}
+            className="hidden sm:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-lg text-xs font-bold shadow-sm hover:shadow-md transition-all hover:scale-105"
+          >
+            <Crown className="w-4 h-4" />
+            Upgrade Plan
+          </button>
+
           {/* Notifications */}
           <button className="relative p-2 text-muted-foreground hover:text-foreground hover:bg-input rounded-lg transition-colors">
             <Bell className="w-5 h-5" />
@@ -76,6 +87,9 @@ export function Topbar() {
       {showCommandPalette && (
         <CommandPalette isOpen={showCommandPalette} onClose={() => setShowCommandPalette(false)} />
       )}
+
+      {/* Upgrade Modal */}
+      <UpgradePlanModal isOpen={showUpgradeModal} onClose={() => setShowUpgradeModal(false)} />
     </>
   )
 }

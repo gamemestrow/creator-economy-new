@@ -45,12 +45,10 @@ export default function LoginPage() {
 
       const userData = userDoc.data()
 
-      if (userData.role === 'creator') {
-        router.push('/creator/dashboard')
-      } else if (userData.role === 'attendee') {
-        router.push('/attendee/dashboard')
+      if (userData.role) {
+        router.push('/dashboard')
       } else {
-        throw new Error('Invalid user role.')
+        router.push('/select-role')
       }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Failed to sign in.'

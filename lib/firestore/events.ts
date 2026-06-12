@@ -12,11 +12,8 @@ import {
   getDoc,
   orderBy,
   limit,
-  addDoc,
-  deleteDoc,
   writeBatch,
   serverTimestamp,
-  Timestamp,
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { Event, EventRegistration, COLLECTIONS } from './types'
@@ -43,7 +40,32 @@ export async function fetchUpcomingEvents(
       ...doc.data(),
       eventId: doc.id,
     } as Event))
-  } catch (error) {
+  } catch (error: any) {
+    if (error.code === 'failed-precondition' || error.message?.includes('index')) {
+      console.warn('Firestore index missing for fetchUpcomingEvents, falling back to in-memory filter/sort')
+      const now = new Date()
+      const q = query(
+        collection(db, COLLECTIONS.EVENTS),
+        where('isPublished', '==', true)
+      )
+      const snapshot = await getDocs(q)
+      const events = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        eventId: doc.id,
+      } as Event))
+
+      return events
+        .filter(event => {
+          const eventDate = event.date?.toDate ? event.date.toDate() : new Date(event.date)
+          return eventDate >= now
+        })
+        .sort((a, b) => {
+          const dateA = a.date?.toDate ? a.date.toDate().getTime() : new Date(a.date).getTime()
+          const dateB = b.date?.toDate ? b.date.toDate().getTime() : new Date(b.date).getTime()
+          return dateA - dateB
+        })
+        .slice(0, limit_)
+    }
     console.error('Error fetching upcoming events:', error)
     throw error
   }
@@ -69,7 +91,32 @@ export async function fetchPastEvents(limit_: number = 10): Promise<Event[]> {
       ...doc.data(),
       eventId: doc.id,
     } as Event))
-  } catch (error) {
+  } catch (error: any) {
+    if (error.code === 'failed-precondition' || error.message?.includes('index')) {
+      console.warn('Firestore index missing for fetchPastEvents, falling back to in-memory filter/sort')
+      const now = new Date()
+      const q = query(
+        collection(db, COLLECTIONS.EVENTS),
+        where('isPublished', '==', true)
+      )
+      const snapshot = await getDocs(q)
+      const events = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        eventId: doc.id,
+      } as Event))
+
+      return events
+        .filter(event => {
+          const eventDate = event.date?.toDate ? event.date.toDate() : new Date(event.date)
+          return eventDate < now
+        })
+        .sort((a, b) => {
+          const dateA = a.date?.toDate ? a.date.toDate().getTime() : new Date(a.date).getTime()
+          const dateB = b.date?.toDate ? b.date.toDate().getTime() : new Date(b.date).getTime()
+          return dateB - dateA
+        })
+        .slice(0, limit_)
+    }
     console.error('Error fetching past events:', error)
     throw error
   }
@@ -128,13 +175,11 @@ export async function registerUserForEvent(
   eventId: string
 ): Promise<string> {
   try {
-    // Check if already registered
     const isRegistered = await isUserRegisteredForEvent(userId, eventId)
     if (isRegistered) {
       throw new Error('User is already registered for this event')
     }
 
-    // Check if event exists and is published
     const eventRef = doc(db, COLLECTIONS.EVENTS, eventId)
     const eventSnap = await getDoc(eventRef)
 
@@ -144,7 +189,6 @@ export async function registerUserForEvent(
 
     const eventData = eventSnap.data()
 
-    // Check if event has reached max attendees
     if (
       eventData.maxAttendees &&
       eventData.currentAttendees >= eventData.maxAttendees
@@ -152,9 +196,7 @@ export async function registerUserForEvent(
       throw new Error('Event is full')
     }
 
-    // Create registration
     const batch = writeBatch(db)
-
     const registrationRef = doc(collection(db, COLLECTIONS.EVENT_REGISTRATIONS))
 
     batch.set(registrationRef, {
@@ -164,7 +206,6 @@ export async function registerUserForEvent(
       status: 'registered',
     })
 
-    // Increment attendee count
     batch.update(eventRef, {
       currentAttendees: (eventData.currentAttendees || 0) + 1,
     })
@@ -203,13 +244,11 @@ export async function cancelEventRegistration(
     const batch = writeBatch(db)
     const registrationDoc = snapshot.docs[0]
 
-    // Update registration status
     batch.update(registrationDoc.ref, {
       status: 'cancelled',
       cancellationReason: reason || 'User cancelled',
     })
 
-    // Decrement attendee count
     const eventRef = doc(db, COLLECTIONS.EVENTS, eventId)
     const eventSnap = await getDoc(eventRef)
 
@@ -248,7 +287,6 @@ export async function getUserEventRegistrations(
         registrationId: regDoc.id,
       } as EventRegistration
 
-      // Fetch event data
       const eventRef = doc(db, COLLECTIONS.EVENTS, registration.eventId)
       const eventSnap = await getDoc(eventRef)
 

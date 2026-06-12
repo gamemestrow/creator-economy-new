@@ -80,7 +80,26 @@ export async function fetchCreatorMemberships(creatorId: string): Promise<Member
       ...doc.data(),
       membershipId: doc.id,
     } as Membership))
-  } catch (error) {
+  } catch (error: any) {
+    // Fallback if index is not yet created
+    if (error.code === 'failed-precondition' || error.message?.includes('index')) {
+      console.warn('Firestore index missing for fetchCreatorMemberships, falling back to in-memory sort')
+      const q = query(
+        collection(db, COLLECTIONS.MEMBERSHIPS),
+        where('creatorId', '==', creatorId)
+      )
+      const snapshot = await getDocs(q)
+      const memberships = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        membershipId: doc.id,
+      } as Membership))
+
+      return memberships.sort((a, b) => {
+        const dateA = a.createdAt?.seconds || 0
+        const dateB = b.createdAt?.seconds || 0
+        return dateB - dateA
+      })
+    }
     console.error('Error fetching creator memberships:', error)
     throw error
   }

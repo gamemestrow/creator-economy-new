@@ -6,7 +6,7 @@ import { useRequireRole } from '@/lib/use-auth-redirect'
 import { useCreatorStats } from '@/lib/hooks/use-creator-data'
 
 export default function ProductsOverviewPage() {
-  const { user } = useRequireRole(['creator'])
+  const { user } = useRequireRole(['creator', 'attendee'])
   const { stats, loading } = useCreatorStats(user?.uid || '')
 
   const productTypes = [

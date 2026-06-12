@@ -10,7 +10,7 @@ import { TrendingUp, DollarSign, ShoppingCart, Users, ArrowUpRight, ArrowDownRig
 import { cn } from '@/lib/utils'
 
 export default function RevenuePage() {
-  const { user } = useRequireRole(['creator'])
+  const { user } = useRequireRole(['creator', 'attendee'])
   const { orders, loading } = useCreatorOrders(user?.uid || '')
 
   // Calculate stats

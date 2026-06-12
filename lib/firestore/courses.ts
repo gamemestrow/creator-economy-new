@@ -16,18 +16,21 @@ import {
   startAfter,
   setDoc,
   serverTimestamp,
+  deleteDoc,
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { Course, COLLECTIONS } from './types'
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-// import { storage } from '@/lib/firebase'
 
 interface CreateCourseInput {
   title: string
   description: string
   price: number
-  image: File | null
   creatorId: string
+  creatorName: string
+  totalLessons: number
+  duration: number
+  tags?: string[]
+  category?: string
 }
 
 /**
@@ -69,7 +72,34 @@ export async function fetchPublishedCourses(
     }
 
     return { courses, nextCursor }
-  } catch (error) {
+  } catch (error: any) {
+    if (error.code === 'failed-precondition' || error.message?.includes('index')) {
+      console.warn('Firestore index missing for fetchPublishedCourses, falling back to in-memory sort')
+      
+      const q = query(
+        collection(db, COLLECTIONS.COURSES),
+        where('isPublished', '==', true),
+        limit(100)
+      )
+      
+      const snapshot = await getDocs(q)
+      let allCourses = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        courseId: doc.id,
+      } as Course))
+
+      allCourses.sort((a, b) => {
+        const dateA = a.createdAt?.seconds || 0
+        const dateB = b.createdAt?.seconds || 0
+        return dateB - dateA
+      })
+
+      const courses = allCourses.slice(0, pageSize)
+      return { 
+        courses, 
+        nextCursor: allCourses.length > pageSize ? snapshot.docs[pageSize] : null 
+      }
+    }
     console.error('Error fetching published courses:', error)
     throw error
   }
@@ -172,7 +202,25 @@ export async function fetchCreatorCourses(creatorId: string): Promise<Course[]> 
       ...doc.data(),
       courseId: doc.id,
     } as Course))
-  } catch (error) {
+  } catch (error: any) {
+    if (error.code === 'failed-precondition' || error.message?.includes('index')) {
+      console.warn('Firestore index missing for fetchCreatorCourses, falling back to in-memory sort')
+      const q = query(
+        collection(db, COLLECTIONS.COURSES),
+        where('creatorId', '==', creatorId)
+      )
+      const snapshot = await getDocs(q)
+      const courses = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        courseId: doc.id,
+      } as Course))
+
+      return courses.sort((a, b) => {
+        const dateA = a.createdAt?.seconds || 0
+        const dateB = b.createdAt?.seconds || 0
+        return dateB - dateA
+      })
+    }
     console.error('Error fetching creator courses:', error)
     throw error
   }
@@ -206,28 +254,17 @@ export async function fetchTopRatedCourses(limit_: number = 6): Promise<Course[]
 
 export async function createCourse(input: CreateCourseInput): Promise<string> {
   try {
-    // 1. Upload image if provided
-    // let thumbnailUrl = ''
-    // if (input.image) {
-    //   const storageRef = ref(
-    //     storage,
-    //     `courses/${input.creatorId}/${Date.now()}_${input.image.name}`
-    //   )
-    //   await uploadBytes(storageRef, input.image)
-    //   thumbnailUrl = await getDownloadURL(storageRef)
-    // }
-
-    // 2. Write to Firestore
     const courseRef = doc(collection(db, COLLECTIONS.COURSES))
     await setDoc(courseRef, {
       courseId: courseRef.id,
       title: input.title,
       description: input.description,
       price: input.price,
-      // thumbnail: thumbnailUrl,
+      creatorName: input.creatorName || 'Unknown Creator',
       creatorId: input.creatorId,
       isPublished: false,
       totalLessons: 0,
+      duration: input.duration || 0,
       enrollmentCount: 0,
       rating: null,
       tags: [],
@@ -235,8 +272,6 @@ export async function createCourse(input: CreateCourseInput): Promise<string> {
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     })
-
-    
 
     return courseRef.id
   } catch (error) {
@@ -247,7 +282,7 @@ export async function createCourse(input: CreateCourseInput): Promise<string> {
 
 export async function deleteCourse(courseId: string): Promise<void> {
   try {
-    await setDoc(doc(db, COLLECTIONS.COURSES, courseId), { isDeleted: true }, { merge: true })
+    await deleteDoc(doc(db, COLLECTIONS.COURSES, courseId))
   } catch (error) {
     console.error('Error deleting course:', error)
     throw error

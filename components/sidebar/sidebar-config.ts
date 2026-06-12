@@ -111,7 +111,6 @@ export const navGroups: NavGroup[] = [
     items: [
       { label: 'Email Campaigns', href: '/dashboard/marketing/email-campaigns' },
       { label: 'WhatsApp Automation', href: '/dashboard/marketing/whatsapp-automation' },
-      { label: 'Push Notifications', href: '/dashboard/marketing/push-notifications' },
       { label: 'Broadcasts', href: '/dashboard/marketing/broadcasts' },
     ],
   },
@@ -164,7 +163,6 @@ export const navGroups: NavGroup[] = [
     icon: Smartphone,
     items: [
       { label: 'App Branding', href: '/dashboard/mobile-app/app-branding' },
-      { label: 'Push Notifications', href: '/dashboard/mobile-app/push-notifications' },
       { label: 'App Analytics', href: '/dashboard/mobile-app/app-analytics' },
     ],
   },
@@ -173,9 +171,6 @@ export const navGroups: NavGroup[] = [
     label: 'Payments',
     icon: CreditCard,
     items: [
-      { label: 'Razorpay', href: '/dashboard/payments/razorpay' },
-      { label: 'Stripe', href: '/dashboard/payments/stripe' },
-      { label: 'PayPal', href: '/dashboard/payments/paypal' },
       { label: 'Billing', href: '/dashboard/payments/billing' },
     ],
   },
@@ -185,7 +180,6 @@ export const navGroups: NavGroup[] = [
     icon: Settings,
     items: [
       { label: 'General', href: '/dashboard/settings/general' },
-      { label: 'Team Members', href: '/dashboard/settings/team-members' },
       { label: 'Roles & Permissions', href: '/dashboard/settings/roles-permissions' },
       { label: 'Security', href: '/dashboard/settings/security' },
       { label: 'Integrations', href: '/dashboard/settings/integrations' },

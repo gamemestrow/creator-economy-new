@@ -6,7 +6,7 @@ import { useRequireRole } from '@/lib/use-auth-redirect'
 import { useCreatorOrders } from '@/lib/hooks/use-creator-data'
 
 export default function OrdersPage() {
-  const { user } = useRequireRole(['creator'])
+  const { user } = useRequireRole(['creator', 'attendee'])
   const { orders, loading } = useCreatorOrders(user?.uid || '')
   const [search, setSearch] = useState('')
 

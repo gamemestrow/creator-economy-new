@@ -8,24 +8,6 @@ export default function GetStartedPage() {
 
   return (
     <div className="space-y-6">
-      {/* KYC Warning Banner */}
-      <div className="bg-[#1D1035] text-white rounded-xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border border-[#2D1B4E]">
-        <div className="flex items-start gap-4 flex-1">
-          <div className="p-2.5 bg-[#ff823a]/10 text-[#ff823a] rounded-lg mt-0.5">
-            <AlertTriangle className="w-6 h-6" />
-          </div>
-          <div>
-            <h4 className="text-[#ff823a] font-bold text-lg mb-1">Important!</h4>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              Your KYC details have not been updated yet. This will prevent any future withdrawals from this account. 
-              Update your KYC now to ensure a smooth withdrawal experience!
-            </p>
-          </div>
-        </div>
-        <button className="px-5 py-2.5 bg-[#e06a28] hover:bg-[#ff733b] text-white text-sm font-semibold rounded-lg transition shrink-0">
-          Update KYC
-        </button>
-      </div>
 
       {/* Greeting Header */}
       <div>

@@ -1,0 +1,247 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isUser(userId) {
+      return request.auth.uid == userId;
+    }
+
+    function userExists(userId) {
+      return exists(/databases/{database}/documents/users/{userId});
+    }
+
+    function isEnrolledInCourse(userId, courseId) {
+      return exists(/databases/{database}/documents/enrollments/{document=**}
+        where document.userId == userId && document.courseId == courseId);
+    }
+
+    function isCommunitymember(userId, communityId) {
+      return exists(/databases/{database}/documents/communityMembers/{document=**}
+        where document.userId == userId && document.communityId == communityId);
+    }
+
+    function isCommunityAdmin(userId, communityId) {
+      return exists(/databases/{database}/documents/communityMembers/{document=**}
+        where document.userId == userId && 
+              document.communityId == communityId && 
+              document.role in ['admin', 'moderator']);
+    }
+
+    // ============= USERS COLLECTION =============
+    match /users/{userId} {
+      // Users can read their own profile
+      allow read: if isUser(userId);
+      
+      // Users can read other users' public profile info
+      allow read: if isAuthenticated();
+      
+      // Users can create their own profile during signup
+      allow create: if isUser(userId) && 
+                       request.resource.data.uid == userId &&
+                       request.resource.data.role in ['creator', 'attendee'];
+      
+      // Users can update their own profile
+      allow update: if isUser(userId) &&
+                       !request.resource.data.diff(resource.data).affectedKeys().hasAny(['uid', 'role']);
+      
+      // Users cannot delete their profile
+      allow delete: if false;
+    }
+
+    // ============= COURSES COLLECTION =============
+    match /courses/{courseId} {
+      // Anyone can read published courses
+      allow read: if resource.data.isPublished == true;
+      
+      // Creators can read their own unpublished courses
+      allow read: if isAuthenticated() && resource.data.creatorId == request.auth.uid;
+      
+      // Creators can create courses
+      allow create: if isAuthenticated() && 
+                       request.resource.data.creatorId == request.auth.uid;
+      
+      // Creators can update their own courses
+      allow update: if isAuthenticated() && 
+                       resource.data.creatorId == request.auth.uid;
+      
+      // Creators can delete their own courses
+      allow delete: if isAuthenticated() && 
+                       resource.data.creatorId == request.auth.uid;
+    }
+
+    // ============= ENROLLMENTS COLLECTION =============
+    match /enrollments/{enrollmentId} {
+      // Users can read their own enrollments
+      allow read: if isUser(resource.data.userId);
+      
+      // Creators can read enrollments for their courses
+      allow read: if isAuthenticated() && 
+                     get(/databases/{database}/documents/courses/{resource.data.courseId}).data.creatorId == request.auth.uid;
+      
+      // Users can enroll in published courses
+      allow create: if isAuthenticated() && 
+                       isUser(request.resource.data.userId) &&
+                       get(/databases/{database}/documents/courses/{request.resource.data.courseId}).data.isPublished == true;
+      
+      // Users can update their own enrollments
+      allow update: if isUser(resource.data.userId);
+      
+      // Users can unenroll by deleting enrollment
+      allow delete: if isUser(resource.data.userId);
+    }
+
+    // ============= PROGRESS COLLECTION =============
+    match /progress/{progressId} {
+      // Users can read their own progress
+      allow read: if isUser(resource.data.userId);
+      
+      // Creators can read progress for their courses
+      allow read: if isAuthenticated() &&
+                     get(/databases/{database}/documents/courses/{resource.data.courseId}).data.creatorId == request.auth.uid;
+      
+      // Users can create progress tracking
+      allow create: if isAuthenticated() && 
+                       isUser(request.resource.data.userId) &&
+                       isEnrolledInCourse(request.auth.uid, request.resource.data.courseId);
+      
+      // Users can update their own progress
+      allow update: if isUser(resource.data.userId);
+      
+      // Users cannot delete progress
+      allow delete: if false;
+    }
+
+    // ============= CERTIFICATES COLLECTION =============
+    match /certificates/{certificateId} {
+      // Users can read their own certificates
+      allow read: if isUser(resource.data.userId);
+      
+      // System can create certificates when progress reaches 100%
+      allow create: if isAuthenticated() && 
+                       isUser(request.resource.data.userId);
+      
+      // Users cannot update or delete certificates
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    // ============= EVENTS COLLECTION =============
+    match /events/{eventId} {
+      // Anyone can read published events
+      allow read: if resource.data.isPublished == true;
+      
+      // Creators can read their own unpublished events
+      allow read: if isAuthenticated() && resource.data.creatorId == request.auth.uid;
+      
+      // Creators can create events
+      allow create: if isAuthenticated() && 
+                       request.resource.data.creatorId == request.auth.uid;
+      
+      // Creators can update their own events
+      allow update: if isAuthenticated() && 
+                       resource.data.creatorId == request.auth.uid;
+      
+      // Creators can delete their own events
+      allow delete: if isAuthenticated() && 
+                       resource.data.creatorId == request.auth.uid;
+    }
+
+    // ============= EVENT_REGISTRATIONS COLLECTION =============
+    match /eventRegistrations/{registrationId} {
+      // Users can read their own registrations
+      allow read: if isUser(resource.data.userId);
+      
+      // Creators can read registrations for their events
+      allow read: if isAuthenticated() &&
+                     get(/databases/{database}/documents/events/{resource.data.eventId}).data.creatorId == request.auth.uid;
+      
+      // Users can register for published events
+      allow create: if isAuthenticated() && 
+                       isUser(request.resource.data.userId) &&
+                       get(/databases/{database}/documents/events/{request.resource.data.eventId}).data.isPublished == true;
+      
+      // Users can update their own registrations
+      allow update: if isUser(resource.data.userId);
+      
+      // Users can cancel registrations
+      allow delete: if isUser(resource.data.userId);
+    }
+
+    // ============= COMMUNITIES COLLECTION =============
+    match /communities/{communityId} {
+      // Anyone can read public communities
+      allow read: if resource.data.isPublic == true;
+      
+      // Users can read private communities they're members of
+      allow read: if isAuthenticated() && 
+                     isCommunitymember(request.auth.uid, communityId);
+      
+      // Creators can read their own communities
+      allow read: if isAuthenticated() && 
+                     resource.data.creatorId == request.auth.uid;
+      
+      // Users can create communities
+      allow create: if isAuthenticated() && 
+                       request.resource.data.creatorId == request.auth.uid;
+      
+      // Community admins can update
+      allow update: if isAuthenticated() && 
+                       (resource.data.creatorId == request.auth.uid ||
+                        isCommunityAdmin(request.auth.uid, communityId));
+      
+      // Only creator can delete community
+      allow delete: if isAuthenticated() && 
+                       resource.data.creatorId == request.auth.uid;
+    }
+
+    // ============= COMMUNITY_MEMBERS COLLECTION =============
+    match /communityMembers/{memberId} {
+      // Users can read their own membership
+      allow read: if isUser(resource.data.userId);
+      
+      // Community admins can read all members
+      allow read: if isAuthenticated() && 
+                     isCommunityAdmin(request.auth.uid, resource.data.communityId);
+      
+      // Users can join public communities
+      allow create: if isAuthenticated() && 
+                       isUser(request.resource.data.userId) &&
+                       get(/databases/{database}/documents/communities/{request.resource.data.communityId}).data.isPublic == true &&
+                       request.resource.data.role == 'member';
+      
+      // Users can leave communities
+      allow delete: if isUser(resource.data.userId);
+      
+      // Community admins can promote/demote members
+      allow update: if isAuthenticated() && 
+                       isCommunityAdmin(request.auth.uid, resource.data.communityId);
+    }
+
+    // ============= COMMUNITY_POSTS COLLECTION =============
+    match /communityPosts/{postId} {
+      // Members can read posts
+      allow read: if isAuthenticated() && 
+                     isCommunitymember(request.auth.uid, resource.data.communityId);
+      
+      // Members can create posts
+      allow create: if isAuthenticated() && 
+                       isUser(request.resource.data.userId) &&
+                       isCommunitymember(request.auth.uid, request.resource.data.communityId);
+      
+      // Users can update their own posts
+      allow update: if isUser(resource.data.userId);
+      
+      // Users can delete their own posts
+      allow delete: if isUser(resource.data.userId);
+    }
+
+    // Catch-all deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

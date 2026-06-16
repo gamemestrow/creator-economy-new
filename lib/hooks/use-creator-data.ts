@@ -15,6 +15,8 @@ import { Order, User } from '@/lib/firestore/types'
 import * as membershipService from '@/lib/firestore/memberships'
 import { Membership } from '@/lib/firestore/types'
 
+import * as communityService from '@/lib/firestore/communities'
+
 import * as userService from '@/lib/firestore/users'
 
 /**
@@ -83,6 +85,8 @@ export function useCreatorOrders(creatorId: string) {
 
   return { orders, loading, error }
 }
+
+
 export function useCustomers() {
   const [customers, setCustomers] = useState<User[]>([])
   const [loading, setLoading] = useState(true)
@@ -91,7 +95,7 @@ export function useCustomers() {
   const fetchCustomers = async (searchTerm?: string) => {
     try {
       setLoading(true)
-      const data = searchTerm 
+      const data = searchTerm
         ? await userService.searchAttendees(searchTerm)
         : await userService.fetchAllAttendees()
       setCustomers(data)
@@ -118,43 +122,31 @@ export function useCreatorCourses(creatorId: string) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
+
+
+  const fetchCourses = async () => {
     if (!creatorId) {
       setLoading(false)
       return
     }
-
-    const fetchCourses = async () => {
-      try {
-        setLoading(true)
-        const data = await courseService.fetchCreatorCourses(creatorId)
-        setCourses(data)
-        setError(null)
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch courses')
-        setCourses([])
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchCourses()
-  }, [creatorId])
-
-  const refresh = async () => {
-    if (!creatorId) return
     try {
       setLoading(true)
       const data = await courseService.fetchCreatorCourses(creatorId)
       setCourses(data)
+      setError(null)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to refresh courses')
+      setError(err instanceof Error ? err.message : 'Failed to fetch courses')
+      setCourses([])
     } finally {
       setLoading(false)
     }
   }
 
-  return { courses, loading, error, refresh }
+  useEffect(() => {
+    fetchCourses()
+  }, [creatorId])
+
+  return { courses, loading, error, refresh: fetchCourses }
 }
 
 /**
@@ -179,10 +171,10 @@ export function useCreatorStats(creatorId: string) {
     const fetchStats = async () => {
       try {
         setLoading(true)
-        
+
         // Fetch all courses to calculate total students and revenue
         const courses = await courseService.fetchCreatorCourses(creatorId)
-        
+
         const totalCourses = courses.length
         const totalStudents = courses.reduce((sum, c) => sum + (c.enrollmentCount || 0), 0)
         const totalRevenue = courses.reduce((sum, c) => sum + ((c.enrollmentCount || 0) * (c.price || 0)), 0)
@@ -214,4 +206,37 @@ export function useCreatorStats(creatorId: string) {
   }, [creatorId])
 
   return { stats, loading, error }
+}
+
+/*
+* Fetch communities for a specific creator
+*/
+export function useCreatorcommunities(creatorId: string) {
+  const [communities, setCommunities] = useState<Community[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  const fetchCommunities = async () => {
+    if (!creatorId) {
+      setLoading(false)
+      return
+    }
+    try {
+      setLoading(true)
+      const data = await communityService.fetchCreatorCommunities(creatorId)
+      setCommunities(data)
+      setError(null)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch communities')
+      setCommunities([])
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchCommunities()
+  }, [creatorId])
+
+  return { communities, loading, error, refresh: fetchCommunities }
 }

@@ -252,6 +252,10 @@ export async function fetchTopRatedCourses(limit_: number = 6): Promise<Course[]
   }
 }
 
+/**
+ * Create a new course
+ */
+
 export async function createCourse(input: CreateCourseInput): Promise<string> {
   try {
     const courseRef = doc(collection(db, COLLECTIONS.COURSES))

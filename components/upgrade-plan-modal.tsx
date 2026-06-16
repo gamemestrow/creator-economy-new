@@ -7,22 +7,22 @@ import { Button } from '@/components/ui/button'
 
 const plans = [
   {
+
     id: 'free',
     name: 'Free',
     price: '0 rupees ',
     description: 'Perfect for new creators getting started.',
     features: [
-      'Up to 100 active members',
-      'Basic course builder',
-      'Community forums',
-      'Standard payouts',
-      'Basic analytics'
+      '1 Course',
+      '100 Students',
+      'Basic Community',
+      'Basic Analytics',
+      'Email Support'
     ],
-    icon: <Zap className="w-6 h-6 text-blue-500" />,
-    color: 'bg-blue-50',
-    current: true
+    current: true,
   },
   {
+
     id: 'basic',
     name: 'Basic',
     price: '3000 rupees',
@@ -50,9 +50,6 @@ const plans = [
       'Detailed analytics',
       'Email marketing tools'
     ],
-    icon: <Crown className="w-6 h-6 text-purple-500" />,
-    color: 'bg-purple-50',
-    popular: true
   },
   {
     id: 'premium',
@@ -60,16 +57,14 @@ const plans = [
     price: '200000 rupees',
     description: 'The ultimate toolkit for large organizations.',
     features: [
-      'Everything in Pro',
-      'White-label mobile app',
-      'Dedicated account manager',
-      'API access',
-      'SSO & Advanced security',
-      'Custom integrations'
+      'Everything in Medium',
+      'White Label Mobile App',
+      'Dedicated Account Manager',
+      'API Access',
+      'Custom Integrations',
+      '24/7 Support'
     ],
-    icon: <Rocket className="w-6 h-6 text-orange-500" />,
-    color: 'bg-orange-50'
-  }
+  },
 ]
 
 interface UpgradePlanModalProps {
@@ -110,24 +105,28 @@ export function UpgradePlanModal({ isOpen, onClose, onUpgrade }: UpgradePlanModa
             onClick={onClose}
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
           />
+
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-5xl bg-background rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
+            className="relative w-full max-w-7xl bg-background rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
           >
-            {/* Header */}
             <div className="p-8 border-b bg-muted/30 relative">
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 p-2 rounded-full hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+                className="absolute top-4 right-4 p-2 rounded-full hover:bg-muted"
               >
                 <X className="w-5 h-5" />
               </button>
+
               <div className="text-center max-w-2xl mx-auto">
-                <h2 className="text-3xl font-bold mb-2">Upgrade Your Plan</h2>
+                <h2 className="text-3xl font-bold mb-2">
+                  Upgrade Your Plan
+                </h2>
+
                 <p className="text-muted-foreground">
-                  Choose the plan that's right for your growing business and unlock advanced features to scale your impact.
+                  Choose the perfect plan for your creator business.
                 </p>
                 
                 {error && (
@@ -139,7 +138,6 @@ export function UpgradePlanModal({ isOpen, onClose, onUpgrade }: UpgradePlanModa
               </div>
             </div>
 
-            {/* Content */}
             <div className="p-8 overflow-y-auto flex-1">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {plans.map((plan) => {
@@ -172,7 +170,6 @@ export function UpgradePlanModal({ isOpen, onClose, onUpgrade }: UpgradePlanModa
                           </div>
                         </div>
                       </div>
-
                       <p className="text-sm text-muted-foreground mb-6 h-10">
                         {plan.description}
                       </p>
@@ -203,9 +200,9 @@ export function UpgradePlanModal({ isOpen, onClose, onUpgrade }: UpgradePlanModa
               </div>
             </div>
 
-            {/* Footer */}
-            <div className="p-6 bg-muted/30 border-t text-center text-sm text-muted-foreground">
-              <p>All plans include 14-day free trial. Need more? <button className="text-primary font-semibold hover:underline">Contact sales</button> for custom enterprise solutions.</p>
+            <div className="p-6 border-t text-center text-sm text-muted-foreground">
+              All plans include secure payments, analytics,
+              and creator tools.
             </div>
           </motion.div>
         </div>

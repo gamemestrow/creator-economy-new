@@ -16,9 +16,22 @@ import {
   serverTimestamp,
   orderBy,
   limit,
+  setDoc,
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { Community, CommunityMember, COLLECTIONS } from './types'
+
+
+interface CommunityInput {
+  name: string
+  description: string
+  creatorId: string // Reference to creator who created the community
+  creatorName?: string // Denormalized
+  thumbnail?: string
+  category: string
+  isPublic: boolean
+  rules?: string
+}
 
 /**
  * Fetch all public communities
@@ -293,6 +306,58 @@ export async function searchCommunities(searchTerm: string): Promise<Community[]
     return communities
   } catch (error) {
     console.error('Error searching communities:', error)
+    throw error
+  }
+}
+
+/*
+  * Create a new community
+*/
+
+export async function createCommunity(input: CommunityInput): Promise<string> {
+  try {
+    const docRef = doc(collection(db, COLLECTIONS.COMMUNITIES))
+
+    await setDoc(docRef, {
+      communityId: docRef.id,
+      name: input.name,
+      description: input.description,
+      creatorId: input.creatorId,
+      creatorName: input.creatorName || '',
+      thumbnail: input.thumbnail || '',
+      category: input.category,
+      isPublic: input.isPublic,
+      rules: input.rules || '',
+      memberCount: 0,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    })
+
+    return docRef.id
+  } catch (error) {
+    console.error('Error creating community:', error)
+    throw error
+  }
+}
+
+/*
+* fetech communities for a specific creator
+*/
+
+export async function fetchCreatorCommunities(creatorId: string): Promise<Community[]> {
+  try {
+    const q = query(
+      collection(db, COLLECTIONS.COMMUNITIES),
+      where("creatorId", "==", creatorId)
+    );
+
+    const snapshot = getDocs(q);
+    return (await snapshot).docs.map((doc) => ({
+      ...doc.data(),
+      communityId: doc.id
+    } as Community))
+  } catch (error) {
+    console.error('Error fetching creator courses:', error)
     throw error
   }
 }

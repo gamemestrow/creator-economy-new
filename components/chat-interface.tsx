@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -56,7 +58,7 @@ export function ChatInterface({ showCard = true }: { showCard?: boolean }) {
 
   const Content = (
     <div className="flex-1 flex flex-col gap-4 overflow-hidden p-6 bg-background">
-      <div 
+      <div
         ref={scrollRef}
         className="flex-1 overflow-y-auto space-y-4 pr-4"
       >
@@ -74,13 +76,19 @@ export function ChatInterface({ showCard = true }: { showCard?: boolean }) {
             )}>
               {message.role === 'user' ? <User className="w-5 h-5" /> : <Bot className="w-5 h-5" />}
             </div>
-            <div className={cn(
-              "rounded-lg px-4 py-2 max-w-[80%] text-sm",
-              message.role === 'user' 
-                ? "bg-primary text-primary-foreground rounded-tr-none" 
-                : "bg-muted text-foreground rounded-tl-none"
-            )}>
-              {message.content}
+            <div
+              className={cn(
+                "rounded-lg px-4 py-2 max-w-[80%] text-sm",
+                message.role === 'user'
+                  ? "bg-primary text-primary-foreground rounded-tr-none"
+                  : "bg-muted text-foreground rounded-tl-none"
+              )}
+            >
+              <div className="space-y-2">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {message.content}
+                </ReactMarkdown>
+              </div>
             </div>
           </div>
         ))}
@@ -95,7 +103,7 @@ export function ChatInterface({ showCard = true }: { showCard?: boolean }) {
           </div>
         )}
       </div>
-      
+
       <form onSubmit={handleSubmit} className="flex gap-2 pt-4 border-t">
         <Input
           placeholder="Type your message..."

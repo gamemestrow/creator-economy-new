@@ -1,8 +1,25 @@
 'use client'
 
+import { useState } from 'react'
 import { Briefcase, CreditCard, ChevronRight, HelpCircle } from 'lucide-react'
+import { UpgradePlanModal } from '@/components/upgrade-plan-modal'
 
 export default function PlansPage() {
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false)
+
+  const handleUpgrade = async (planId: string) => {
+    // Mock upgrade process
+    console.log(`Upgrading to ${planId}...`)
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    // Randomly fail to show error handling
+    if (Math.random() > 0.7) {
+      throw new Error('Simulation failed')
+    }
+    
+    console.log('Upgrade successful!')
+  }
+
   return (
     <div className="space-y-8">
       {/* Page Title */}
@@ -51,9 +68,12 @@ export default function PlansPage() {
           {/* Right Action */}
           <div className="bg-[#FFFBF7] border border-[#ffeedc] rounded-xl p-5 lg:w-96 text-center lg:text-left space-y-4">
             <p className="text-sm font-semibold text-gray-600 leading-normal">
-              For more upgrade to <strong className="text-gray-900">Freedom</strong> or <strong className="text-gray-900">Enterprise Plan</strong> now
+              For more upgrade to <strong className="text-gray-900">Pro</strong> or <strong className="text-gray-900">Premium Plan</strong> now
             </p>
-            <button className="w-full py-2.5 bg-[#e06a28] hover:bg-[#ff733b] text-white font-bold rounded-lg transition shadow-sm text-sm">
+            <button 
+              onClick={() => setShowUpgradeModal(true)}
+              className="w-full py-2.5 bg-[#e06a28] hover:bg-[#ff733b] text-white font-bold rounded-lg transition shadow-sm text-sm"
+            >
               Upgrade now
             </button>
           </div>
@@ -112,6 +132,12 @@ export default function PlansPage() {
           </div>
         </div>
       </div>
+
+      <UpgradePlanModal 
+        isOpen={showUpgradeModal} 
+        onClose={() => setShowUpgradeModal(false)}
+        onUpgrade={handleUpgrade}
+      />
     </div>
   )
 }

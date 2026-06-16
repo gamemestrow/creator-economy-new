@@ -12,6 +12,7 @@ const plans = [
     name: 'Free',
     price: '0 rupees ',
     description: 'Perfect for new creators getting started.',
+
     features: [
       '1 Course',
       '100 Students',
@@ -79,10 +80,10 @@ export function UpgradePlanModal({ isOpen, onClose, onUpgrade }: UpgradePlanModa
 
   const handleUpgrade = async (planId: string) => {
     if (!onUpgrade) return
-    
+
     setLoadingPlan(planId)
     setError(null)
-    
+
     try {
       await onUpgrade(planId)
       onClose()
@@ -128,7 +129,7 @@ export function UpgradePlanModal({ isOpen, onClose, onUpgrade }: UpgradePlanModa
                 <p className="text-muted-foreground">
                   Choose the perfect plan for your creator business.
                 </p>
-                
+
                 {error && (
                   <div className="mt-4 flex items-center justify-center gap-2 text-red-600 bg-red-50 p-3 rounded-lg max-w-md mx-auto">
                     <AlertCircle className="w-4 h-4" />
@@ -146,18 +147,12 @@ export function UpgradePlanModal({ isOpen, onClose, onUpgrade }: UpgradePlanModa
                   return (
                     <div
                       key={plan.name}
-                      className={`relative flex flex-col p-6 rounded-xl border-2 transition-all ${
-                        plan.popular 
-                          ? 'border-primary shadow-xl md:scale-105 z-10 bg-background' 
-                          : 'border-border bg-card'
-                      }`}
+                      className="relative flex flex-col p-6 rounded-xl border-2 transition-all 
+                         'border-primary shadow-xl md:scale-105 z-10 bg-background' 
+                          
+                      "
                     >
-                      {plan.popular && (
-                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-bold rounded-full">
-                          MOST POPULAR
-                        </div>
-                      )}
-                      
+
                       <div className="flex items-center gap-4 mb-4">
                         <div className={`p-3 rounded-lg ${plan.color}`}>
                           {plan.icon}
@@ -166,7 +161,6 @@ export function UpgradePlanModal({ isOpen, onClose, onUpgrade }: UpgradePlanModa
                           <h3 className="font-bold text-lg">{plan.name}</h3>
                           <div className="flex items-baseline">
                             <span className="text-3xl font-black">{plan.price}</span>
-                            <span className="text-muted-foreground ml-1">{plan.period}</span>
                           </div>
                         </div>
                       </div>
@@ -185,8 +179,7 @@ export function UpgradePlanModal({ isOpen, onClose, onUpgrade }: UpgradePlanModa
                         ))}
                       </div>
 
-                      <Button 
-                        variant={plan.current ? 'outline' : plan.popular ? 'default' : 'secondary'}
+                      <Button
                         className="w-full font-bold h-11 gap-2"
                         disabled={plan.current || !!loadingPlan}
                         onClick={() => handleUpgrade(plan.id)}

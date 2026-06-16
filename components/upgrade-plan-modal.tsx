@@ -1,14 +1,17 @@
 'use client'
 
-import { X, Check } from 'lucide-react'
+import { useState } from 'react'
+import { Check, X, Crown, Zap, Rocket, Shield, Loader2, AlertCircle } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 
 const plans = [
   {
+
+    id: 'free',
     name: 'Free',
-    price: '$0',
-    description: 'Perfect for creators getting started.',
+    price: '0 rupees ',
+    description: 'Perfect for new creators getting started.',
     features: [
       '1 Course',
       '100 Students',
@@ -19,40 +22,40 @@ const plans = [
     current: true,
   },
   {
+
+    id: 'basic',
     name: 'Basic',
-    price: '$19',
-    period: '/month',
-    description: 'Best for growing creators.',
+    price: '3000 rupees',
+    description: 'Essential tools for growing your community.',
     features: [
-      '10 Courses',
-      '1,000 Students',
-      'Communities',
-      'Email Marketing',
-      'Custom Branding',
-      'Priority Support'
+      'Up to 1,000 active members',
+      'Enhanced course builder',
+      'Basic custom branding',
+      'Email support',
+      'Intermediate analytics'
+    ],
+    icon: <Shield className="w-6 h-6 text-green-500" />,
+    color: 'bg-green-50'
+  },
+  {
+    id: 'pro',
+    name: 'Pro',
+    price: '10000 rupees',
+    description: 'Advanced features for professional creators.',
+    features: [
+      'Unlimited active members',
+      'Advanced course builder',
+      'Full custom branding',
+      'Priority payouts',
+      'Detailed analytics',
+      'Email marketing tools'
     ],
   },
   {
-    name: 'Medium',
-    price: '$49',
-    period: '/month',
-    description: 'Most popular choice for scaling businesses.',
-    features: [
-      'Unlimited Courses',
-      '10,000 Students',
-      'Automation Workflows',
-      'Memberships',
-      'Advanced Analytics',
-      'Affiliate System',
-      'Priority Support'
-    ],
-    popular: true,
-  },
-  {
+    id: 'premium',
     name: 'Premium',
-    price: '$99',
-    period: '/month',
-    description: 'Enterprise-grade creator platform.',
+    price: '200000 rupees',
+    description: 'The ultimate toolkit for large organizations.',
     features: [
       'Everything in Medium',
       'White Label Mobile App',
@@ -67,12 +70,30 @@ const plans = [
 interface UpgradePlanModalProps {
   isOpen: boolean
   onClose: () => void
+  onUpgrade?: (planId: string) => Promise<void>
 }
 
-export function UpgradePlanModal({
-  isOpen,
-  onClose,
-}: UpgradePlanModalProps) {
+export function UpgradePlanModal({ isOpen, onClose, onUpgrade }: UpgradePlanModalProps) {
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  const handleUpgrade = async (planId: string) => {
+    if (!onUpgrade) return
+    
+    setLoadingPlan(planId)
+    setError(null)
+    
+    try {
+      await onUpgrade(planId)
+      onClose()
+    } catch (err) {
+      console.error('Upgrade error:', err)
+      setError('Failed to process upgrade. Please try again.')
+    } finally {
+      setLoadingPlan(null)
+    }
+  }
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -107,77 +128,75 @@ export function UpgradePlanModal({
                 <p className="text-muted-foreground">
                   Choose the perfect plan for your creator business.
                 </p>
+                
+                {error && (
+                  <div className="mt-4 flex items-center justify-center gap-2 text-red-600 bg-red-50 p-3 rounded-lg max-w-md mx-auto">
+                    <AlertCircle className="w-4 h-4" />
+                    <p className="text-sm font-medium">{error}</p>
+                  </div>
+                )}
               </div>
             </div>
 
             <div className="p-8 overflow-y-auto flex-1">
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-                {plans.map((plan) => (
-                  <div
-                    key={plan.name}
-                    className={`relative flex flex-col p-6 rounded-xl border-2 transition-all ${
-                      plan.popular
-                        ? 'border-primary shadow-xl scale-105'
-                        : 'border-border'
-                    }`}
-                  >
-                    {plan.popular && (
-                      <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-bold rounded-full">
-                        MOST POPULAR
-                      </div>
-                    )}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {plans.map((plan) => {
+                  const isLoading = loadingPlan === plan.id
 
-                    <div className="mb-4">
-                      <h3 className="text-xl font-bold">
-                        {plan.name}
-                      </h3>
-
-                      <div className="flex items-end gap-1 mt-2">
-                        <span className="text-4xl font-black">
-                          {plan.price}
-                        </span>
-
-                        <span className="text-muted-foreground">
-                          {plan.period}
-                        </span>
-                      </div>
-                    </div>
-
-                    <p className="text-sm text-muted-foreground mb-6 min-h-[50px]">
-                      {plan.description}
-                    </p>
-
-                    <div className="space-y-3 flex-1">
-                      {plan.features.map((feature) => (
-                        <div
-                          key={feature}
-                          className="flex items-center gap-3"
-                        >
-                          <Check className="h-4 w-4 text-green-600" />
-                          <span className="text-sm">
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <Button
-                      className="w-full mt-8"
-                      variant={
-                        plan.current
-                          ? 'outline'
-                          : plan.popular
-                          ? 'default'
-                          : 'secondary'
-                      }
-                      disabled={plan.current}
+                  return (
+                    <div
+                      key={plan.name}
+                      className={`relative flex flex-col p-6 rounded-xl border-2 transition-all ${
+                        plan.popular 
+                          ? 'border-primary shadow-xl md:scale-105 z-10 bg-background' 
+                          : 'border-border bg-card'
+                      }`}
                     >
-                      {plan.current
-                        ? 'Current Plan'
-                        : `Upgrade to ${plan.name}`}
-                    </Button>
-                  </div>
-                ))}
+                      {plan.popular && (
+                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-bold rounded-full">
+                          MOST POPULAR
+                        </div>
+                      )}
+                      
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className={`p-3 rounded-lg ${plan.color}`}>
+                          {plan.icon}
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-lg">{plan.name}</h3>
+                          <div className="flex items-baseline">
+                            <span className="text-3xl font-black">{plan.price}</span>
+                            <span className="text-muted-foreground ml-1">{plan.period}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-6 h-10">
+                        {plan.description}
+                      </p>
+
+                      <div className="space-y-4 mb-8 flex-1">
+                        {plan.features.map((feature) => (
+                          <div key={feature} className="flex items-start gap-3 text-sm">
+                            <div className="mt-1 bg-green-100 rounded-full p-0.5">
+                              <Check className="w-3 h-3 text-green-600" />
+                            </div>
+                            <span>{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <Button 
+                        variant={plan.current ? 'outline' : plan.popular ? 'default' : 'secondary'}
+                        className="w-full font-bold h-11 gap-2"
+                        disabled={plan.current || !!loadingPlan}
+                        onClick={() => handleUpgrade(plan.id)}
+                      >
+                        {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
+                        {plan.current ? 'Current Plan' : `Upgrade to ${plan.name}`}
+                      </Button>
+                    </div>
+                  )
+                })}
               </div>
             </div>
 

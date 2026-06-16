@@ -1,58 +1,67 @@
 'use client'
 
-import { Check, X, Crown, Zap, Rocket } from 'lucide-react'
+import { X, Check } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 
 const plans = [
   {
-    name: 'Starter',
+    name: 'Free',
     price: '$0',
-    description: 'Perfect for new creators getting started.',
+    description: 'Perfect for creators getting started.',
     features: [
-      'Up to 100 active members',
-      'Basic course builder',
-      'Community forums',
-      'Standard payouts',
-      'Basic analytics'
+      '1 Course',
+      '100 Students',
+      'Basic Community',
+      'Basic Analytics',
+      'Email Support'
     ],
-    icon: <Zap className="w-6 h-6 text-blue-500" />,
-    color: 'bg-blue-50',
-    current: true
+    current: true,
   },
   {
-    name: 'Pro',
-    price: '$29',
+    name: 'Basic',
+    price: '$19',
     period: '/month',
-    description: 'Advanced features for growing creators.',
+    description: 'Best for growing creators.',
     features: [
-      'Unlimited active members',
-      'Advanced course builder',
-      'Custom branding',
-      'Priority payouts',
-      'Detailed analytics',
-      'Email marketing tools'
+      '10 Courses',
+      '1,000 Students',
+      'Communities',
+      'Email Marketing',
+      'Custom Branding',
+      'Priority Support'
     ],
-    icon: <Crown className="w-6 h-6 text-purple-500" />,
-    color: 'bg-purple-50',
-    popular: true
   },
   {
-    name: 'Business',
+    name: 'Medium',
+    price: '$49',
+    period: '/month',
+    description: 'Most popular choice for scaling businesses.',
+    features: [
+      'Unlimited Courses',
+      '10,000 Students',
+      'Automation Workflows',
+      'Memberships',
+      'Advanced Analytics',
+      'Affiliate System',
+      'Priority Support'
+    ],
+    popular: true,
+  },
+  {
+    name: 'Premium',
     price: '$99',
     period: '/month',
-    description: 'The ultimate toolkit for large organizations.',
+    description: 'Enterprise-grade creator platform.',
     features: [
-      'Everything in Pro',
-      'White-label mobile app',
-      'Dedicated account manager',
-      'API access',
-      'SSO & Advanced security',
-      'Custom integrations'
+      'Everything in Medium',
+      'White Label Mobile App',
+      'Dedicated Account Manager',
+      'API Access',
+      'Custom Integrations',
+      '24/7 Support'
     ],
-    icon: <Rocket className="w-6 h-6 text-orange-500" />,
-    color: 'bg-orange-50'
-  }
+  },
 ]
 
 interface UpgradePlanModalProps {
@@ -60,7 +69,10 @@ interface UpgradePlanModalProps {
   onClose: () => void
 }
 
-export function UpgradePlanModal({ isOpen, onClose }: UpgradePlanModalProps) {
+export function UpgradePlanModal({
+  isOpen,
+  onClose,
+}: UpgradePlanModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -72,38 +84,41 @@ export function UpgradePlanModal({ isOpen, onClose }: UpgradePlanModalProps) {
             onClick={onClose}
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
           />
+
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-5xl bg-background rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
+            className="relative w-full max-w-7xl bg-background rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
           >
-            {/* Header */}
             <div className="p-8 border-b bg-muted/30 relative">
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 p-2 rounded-full hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+                className="absolute top-4 right-4 p-2 rounded-full hover:bg-muted"
               >
                 <X className="w-5 h-5" />
               </button>
+
               <div className="text-center max-w-2xl mx-auto">
-                <h2 className="text-3xl font-bold mb-2">Upgrade Your Plan</h2>
+                <h2 className="text-3xl font-bold mb-2">
+                  Upgrade Your Plan
+                </h2>
+
                 <p className="text-muted-foreground">
-                  Choose the plan that's right for your growing business and unlock advanced features to scale your impact.
+                  Choose the perfect plan for your creator business.
                 </p>
               </div>
             </div>
 
-            {/* Content */}
             <div className="p-8 overflow-y-auto flex-1">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
                 {plans.map((plan) => (
                   <div
                     key={plan.name}
                     className={`relative flex flex-col p-6 rounded-xl border-2 transition-all ${
-                      plan.popular 
-                        ? 'border-primary shadow-xl md:scale-105 z-10 bg-background' 
-                        : 'border-border bg-card'
+                      plan.popular
+                        ? 'border-primary shadow-xl scale-105'
+                        : 'border-border'
                     }`}
                   >
                     {plan.popular && (
@@ -111,50 +126,64 @@ export function UpgradePlanModal({ isOpen, onClose }: UpgradePlanModalProps) {
                         MOST POPULAR
                       </div>
                     )}
-                    
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className={`p-3 rounded-lg ${plan.color}`}>
-                        {plan.icon}
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-lg">{plan.name}</h3>
-                        <div className="flex items-baseline">
-                          <span className="text-3xl font-black">{plan.price}</span>
-                          <span className="text-muted-foreground ml-1">{plan.period}</span>
-                        </div>
+
+                    <div className="mb-4">
+                      <h3 className="text-xl font-bold">
+                        {plan.name}
+                      </h3>
+
+                      <div className="flex items-end gap-1 mt-2">
+                        <span className="text-4xl font-black">
+                          {plan.price}
+                        </span>
+
+                        <span className="text-muted-foreground">
+                          {plan.period}
+                        </span>
                       </div>
                     </div>
 
-                    <p className="text-sm text-muted-foreground mb-6 h-10">
+                    <p className="text-sm text-muted-foreground mb-6 min-h-[50px]">
                       {plan.description}
                     </p>
 
-                    <div className="space-y-4 mb-8 flex-1">
+                    <div className="space-y-3 flex-1">
                       {plan.features.map((feature) => (
-                        <div key={feature} className="flex items-start gap-3 text-sm">
-                          <div className="mt-1 bg-green-100 rounded-full p-0.5">
-                            <Check className="w-3 h-3 text-green-600" />
-                          </div>
-                          <span>{feature}</span>
+                        <div
+                          key={feature}
+                          className="flex items-center gap-3"
+                        >
+                          <Check className="h-4 w-4 text-green-600" />
+                          <span className="text-sm">
+                            {feature}
+                          </span>
                         </div>
                       ))}
                     </div>
 
-                    <Button 
-                      variant={plan.current ? 'outline' : plan.popular ? 'default' : 'secondary'}
-                      className="w-full font-bold h-11"
+                    <Button
+                      className="w-full mt-8"
+                      variant={
+                        plan.current
+                          ? 'outline'
+                          : plan.popular
+                          ? 'default'
+                          : 'secondary'
+                      }
                       disabled={plan.current}
                     >
-                      {plan.current ? 'Current Plan' : `Upgrade to ${plan.name}`}
+                      {plan.current
+                        ? 'Current Plan'
+                        : `Upgrade to ${plan.name}`}
                     </Button>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Footer */}
-            <div className="p-6 bg-muted/30 border-t text-center text-sm text-muted-foreground">
-              <p>All plans include 14-day free trial. Need more? <button className="text-primary font-semibold hover:underline">Contact sales</button> for custom enterprise solutions.</p>
+            <div className="p-6 border-t text-center text-sm text-muted-foreground">
+              All plans include secure payments, analytics,
+              and creator tools.
             </div>
           </motion.div>
         </div>

@@ -54,13 +54,6 @@ function DashboardMain({ children }: { children: React.ReactNode }) {
         <div className="flex items-center justify-between mb-2">
           <Breadcrumbs />
           <div className="flex items-center gap-4">
-            {/* <button
-              onClick={() => setShowUpgradeModal(true)}
-              className="flex items-center gap-2 px-3 py-1.5 bg-white border border-amber-200 text-amber-700 rounded-lg text-[10px] font-black uppercase tracking-wider shadow-sm hover:shadow-md transition-all hover:bg-amber-50"
-            >
-              <Crown className="w-3 h-3 text-amber-500" />
-              Upgrade
-            </button> */}
             {pathname !== '/dashboard/analytics/overview' && (
               <button 
                 onClick={() => router.back()}

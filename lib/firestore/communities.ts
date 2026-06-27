@@ -315,6 +315,8 @@ export async function searchCommunities(searchTerm: string): Promise<Community[]
 */
 
 export async function createCommunity(input: CommunityInput): Promise<string> {
+    console.log(input)
+
   try {
     const docRef = doc(collection(db, COLLECTIONS.COMMUNITIES))
 
@@ -332,6 +334,8 @@ export async function createCommunity(input: CommunityInput): Promise<string> {
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     })
+
+    console.log(docRef)
 
     return docRef.id
   } catch (error) {

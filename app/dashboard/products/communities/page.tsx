@@ -21,32 +21,7 @@ import { createCommunity } from '@/lib/firestore'
 import { db } from '@/lib/firebase'
 import { doc, getDoc } from 'firebase/firestore'
 import { useCreatorcommunities } from '@/lib/hooks/use-creator-data'
-
-const communities = [
-  {
-    id: 1,
-    name: 'Creator Growth Club',
-    members: 4250,
-    posts: 1280,
-    status: 'Active',
-  },
-  {
-    id: 2,
-    name: 'Instagram Mastermind',
-    members: 1840,
-    posts: 640,
-    status: 'Active',
-  },
-  {
-    id: 3,
-    name: 'Premium Coaching Community',
-    members: 780,
-    posts: 320,
-    status: 'Private',
-  },
-]
-
-
+import { usePageState } from '@/contexts/PageStatesContext'
 
 export default function CommunitiesPage() {
 
@@ -55,6 +30,8 @@ export default function CommunitiesPage() {
   const [isCreating, setIsCreating] = useState(false)
   const { communities, loading, error, refresh } = useCreatorcommunities(user?.uid || '')
   const [userData, setUserData] = useState<{ name: string; email: string } | null>(null)
+
+  const { setpageState } = usePageState()
 
   const [formData, setFormData] = useState({
     name: '',
@@ -65,30 +42,33 @@ export default function CommunitiesPage() {
     thumbnail: '',
   });
 
-    useEffect(() => {
-      if (user && authorized) {
-        const fetchUserData = async () => {
-          const userDocRef = doc(db, 'users', user.uid)
-          const userDocSnap = await getDoc(userDocRef)
-  
-          if (userDocSnap.exists()) {
-            const data = userDocSnap.data()
-            setUserData({
-              name: data.name || user.displayName || 'Creator',
-              email: user.email || '',
-            })
-          }
+  useEffect(() => {
+    if (user && authorized) {
+      const fetchUserData = async () => {
+        const userDocRef = doc(db, 'users', user.uid)
+        const userDocSnap = await getDoc(userDocRef)
+
+        if (userDocSnap.exists()) {
+          const data = userDocSnap.data()
+          setUserData({
+            name: data.name || user.displayName || 'Creator',
+            email: user.email || '',
+          })
         }
-  
-        fetchUserData()
       }
-    }, [user, authorized])
+
+      fetchUserData()
+    }
+  }, [user, authorized])
+
+  useEffect(() => {
+    setpageState(formData)
+  }, [])
 
 
   const handleCreateCommunity = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!user) return
-    console.log(user)
 
     try {
       setIsCreating(true)
@@ -107,6 +87,8 @@ export default function CommunitiesPage() {
         rules: '',
         thumbnail: '',
       })
+
+      await refresh();
     } catch (error) {
       console.error('Failed to create course:', error)
       alert('Failed to create course. Please try again.')
@@ -115,7 +97,7 @@ export default function CommunitiesPage() {
     }
   }
 
-const totalMembers = communities.reduce((sum, community) => sum + community.memberCount, 0)
+  const totalMembers = communities.reduce((sum, community) => sum + community.memberCount, 0)
 
 
   return (

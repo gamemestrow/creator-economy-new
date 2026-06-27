@@ -1,11 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Plus, Users, CreditCard, Trash2, Loader2, X, Star, Check } from 'lucide-react'
 import { useRequireRole } from '@/lib/use-auth-redirect'
 import { useCreatorMemberships } from '@/lib/hooks/use-creator-data'
 import { createMembership, deleteMembership } from '@/lib/firestore/memberships'
 import { Membership } from '@/lib/firestore/types'
+import { usePageState } from '@/contexts/PageStatesContext'
 
 function MembershipCard({ membership, onDelete }: { membership: Membership, onDelete: (id: string) => void }) {
   return (
@@ -14,7 +15,7 @@ function MembershipCard({ membership, onDelete }: { membership: Membership, onDe
         <div className="p-2 bg-primary/10 rounded-lg text-primary">
           <Star className="w-6 h-6" />
         </div>
-        <button 
+        <button
           onClick={() => {
             if (window.confirm('Delete this membership plan?')) {
               onDelete(membership.membershipId)
@@ -61,6 +62,8 @@ export default function MembershipsPage() {
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [isCreating, setIsCreating] = useState(false)
 
+  const { setpageState } = usePageState()
+
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -68,6 +71,10 @@ export default function MembershipsPage() {
     billingCycle: 'monthly' as const,
     features: ['Community Access', 'Exclusive Content', 'Weekly Live Q&A'],
   })
+
+  useEffect(() => {
+    setpageState(formData)
+  }, [])
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -116,7 +123,7 @@ export default function MembershipsPage() {
             <h1 className="text-4xl font-bold text-foreground">Memberships</h1>
             <p className="text-muted-foreground mt-2">Create and manage recurring membership plans</p>
           </div>
-          <button 
+          <button
             onClick={() => setShowCreateModal(true)}
             className="flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors"
           >
@@ -145,7 +152,7 @@ export default function MembershipsPage() {
             <p className="text-muted-foreground max-w-sm mt-2">
               Offer exclusive content and community access with recurring subscription plans.
             </p>
-            <button 
+            <button
               onClick={() => setShowCreateModal(true)}
               className="mt-6 text-primary hover:underline font-bold"
             >
@@ -165,7 +172,7 @@ export default function MembershipsPage() {
                 <X className="w-6 h-6" />
               </button>
             </div>
-            
+
             <form onSubmit={handleCreate} className="p-6 space-y-4">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-1">Plan Name</label>

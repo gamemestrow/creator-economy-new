@@ -1,210 +1,93 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import {
-  Layout,
-  Plus,
-  Eye,
-  Globe,
-  Edit,
-  Copy,
-  Trash2,
-  TrendingUp,
-} from 'lucide-react'
+import Link from 'next/link'
+import { ArrowRight, FileEdit, LayoutTemplate, Plus } from 'lucide-react'
 
-const pages = [
+import { buttonVariants } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+
+const recentPages = [
   {
-    id: 1,
-    name: 'Home Page',
-    url: '/',
-    visitors: '12.4K',
-    status: 'Published',
-  },
-  {
-    id: 2,
-    name: 'Course Landing Page',
-    url: '/course-growth',
-    visitors: '8.2K',
-    status: 'Published',
-  },
-  {
-    id: 3,
-    name: 'Webinar Registration',
-    url: '/webinar-registration',
-    visitors: '3.1K',
+    id: 'course-sales',
+    name: 'Course Sales Page',
     status: 'Draft',
+    updated: 'Just now',
   },
   {
-    id: 4,
-    name: 'Membership Sales Page',
-    url: '/membership',
-    visitors: '5.7K',
-    status: 'Published',
+    id: 'webinar-registration',
+    name: 'Webinar Registration',
+    status: 'Draft',
+    updated: 'Today',
+  },
+  {
+    id: 'membership',
+    name: 'Membership Landing Page',
+    status: 'Draft',
+    updated: 'Today',
   },
 ]
 
 export default function PageBuilderPage() {
   return (
     <div className="space-y-6 p-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <h1 className="text-3xl font-bold">Page Builder</h1>
-          <p className="text-muted-foreground">
-            Create landing pages, sales pages and funnels
+          <p className="mt-1 text-muted-foreground">
+            Choose a template or continue editing an existing landing page.
           </p>
         </div>
 
-        <Button>
-          <Plus className="mr-2 h-4 w-4" />
-          Create New Page
-        </Button>
-      </div>
-
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card>
-          <CardHeader>
-            <CardTitle>Total Pages</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-3xl font-bold">24</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Published</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-3xl font-bold text-green-600">18</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Total Visitors</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-3xl font-bold">58K</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Conversions</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-3xl font-bold">2.4K</p>
-          </CardContent>
-        </Card>
+        <div className="flex flex-wrap gap-2">
+          <Link href="/dashboard/landing-pages/templates" className={buttonVariants()}>
+            <LayoutTemplate className="mr-2 h-4 w-4" />
+            Choose template
+          </Link>
+          <Link
+            href="/dashboard/landing-pages/page-builder/edit?template=blank"
+            className={buttonVariants({ variant: 'outline' })}
+          >
+            <Plus className="mr-2 h-4 w-4" />
+            Start blank
+          </Link>
+        </div>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Pages Library</CardTitle>
+          <CardTitle>Editable Pages</CardTitle>
         </CardHeader>
-
-        <CardContent>
-          <div className="space-y-4">
-            {pages.map((page) => (
-              <div
-                key={page.id}
-                className="flex items-center justify-between rounded-lg border p-4"
-              >
-                <div className="flex items-center gap-4">
-                  <Layout className="h-8 w-8 text-blue-500" />
-
-                  <div>
-                    <h3 className="font-semibold">
-                      {page.name}
-                    </h3>
-
-                    <p className="text-sm text-muted-foreground">
-                      {page.url}
-                    </p>
-
-                    <p className="text-xs text-muted-foreground">
-                      {page.visitors} visitors
-                    </p>
-                  </div>
+        <CardContent className="space-y-3">
+          {recentPages.map((page) => (
+            <div
+              key={page.id}
+              className="flex flex-col gap-3 rounded-lg border bg-white p-4 sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-primary">
+                  <FileEdit className="h-5 w-5" />
                 </div>
-
-                <div className="flex gap-2">
-                  <Button size="sm" variant="outline">
-                    <Eye className="h-4 w-4" />
-                  </Button>
-
-                  <Button size="sm" variant="outline">
-                    <Edit className="h-4 w-4" />
-                  </Button>
-
-                  <Button size="sm" variant="outline">
-                    <Copy className="h-4 w-4" />
-                  </Button>
-
-                  <Button size="sm" variant="outline">
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
+                <div>
+                  <h2 className="font-semibold">{page.name}</h2>
+                  <p className="text-sm text-muted-foreground">
+                    {page.status} - Updated {page.updated}
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
+
+              <Link
+                href={`/dashboard/landing-pages/page-builder/edit?template=${page.id}`}
+                className={buttonVariants({ variant: 'outline' })}
+              >
+                Edit
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </div>
+          ))}
         </CardContent>
       </Card>
-
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Templates</CardTitle>
-          </CardHeader>
-
-          <CardContent className="space-y-3">
-            <div className="border rounded-lg p-3">
-              Landing Page Template
-            </div>
-
-            <div className="border rounded-lg p-3">
-              Webinar Registration Template
-            </div>
-
-            <div className="border rounded-lg p-3">
-              Sales Funnel Template
-            </div>
-
-            <div className="border rounded-lg p-3">
-              Membership Page Template
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Performance Analytics</CardTitle>
-          </CardHeader>
-
-          <CardContent className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Globe className="h-5 w-5 text-blue-500" />
-              <span>58,000 page visits</span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <TrendingUp className="h-5 w-5 text-green-500" />
-              <span>22% conversion increase</span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <Eye className="h-5 w-5 text-purple-500" />
-              <span>Top page: Course Landing Page</span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <Layout className="h-5 w-5 text-orange-500" />
-              <span>24 pages currently active</span>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
     </div>
   )
 }
+
+

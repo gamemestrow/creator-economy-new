@@ -1,227 +1,148 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { useRouter } from 'next/navigation'
+import { ArrowRight, Eye, LayoutTemplate, Sparkles } from 'lucide-react'
+
 import { Button } from '@/components/ui/button'
-import {
-  LayoutTemplate,
-  Plus,
-  Eye,
-  Copy,
-  Star,
-  TrendingUp,
-  Globe,
-  Users,
-} from 'lucide-react'
+import { Card, CardContent } from '@/components/ui/card'
 
 const templates = [
   {
-    id: 1,
+    id: 'course-sales',
     name: 'Course Sales Page',
-    category: 'Sales',
-    usage: '1,240',
-    status: 'Popular',
+    category: 'Online course',
+    description: 'A conversion-focused page for launching a paid course.',
+    accent: '#2563eb',
+    background: 'from-blue-50 via-white to-cyan-50',
+    sections: ['Hero', 'Outcomes', 'Curriculum', 'Pricing'],
   },
   {
-    id: 2,
+    id: 'webinar-registration',
     name: 'Webinar Registration',
-    category: 'Events',
-    usage: '980',
-    status: 'Trending',
+    category: 'Live event', description: 'A compact signup page for webinars and workshops.',
+    accent: '#16a34a',
+    background: 'from-emerald-50 via-white to-lime-50',
+    sections: ['Headline', 'Host', 'Agenda', 'Form'],
   },
   {
-    id: 3,
+    id: 'membership',
     name: 'Membership Landing Page',
-    category: 'Membership',
-    usage: '760',
-    status: 'Popular',
+    category: 'Community',
+    description: 'A warm landing page for paid memberships and cohorts.',
+    accent: '#db2777',
+    background: 'from-rose-50 via-white to-fuchsia-50',
+    sections: ['Promise', 'Benefits', 'Community', 'CTA'],
   },
   {
-    id: 4,
+    id: 'lead-magnet',
     name: 'Lead Magnet Funnel',
-    category: 'Marketing',
-    usage: '540',
-    status: 'New',
+    category: 'Lead capture',
+    description: 'A simple opt-in page for free guides, templates and kits.',
+    accent: '#ea580c',
+    background: 'from-orange-50 via-white to-amber-50',
+    sections: ['Offer', 'Preview', 'Proof', 'Download'],
   },
 ]
 
 export default function TemplatesPage() {
+  const router = useRouter()
+
+  const useTemplate = (templateId: string) => {
+    router.push(`/dashboard/landing-pages/page-builder/edit?template=${templateId}`)
+  }
+
   return (
     <div className="space-y-6 p-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h1 className="text-3xl font-bold">
-            Templates Library
-          </h1>
-
-          <p className="text-muted-foreground">
-            Ready-to-use templates for courses, funnels,
-            webinars and memberships
+          <div className="mb-2 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium text-muted-foreground">
+            <LayoutTemplate className="h-3.5 w-3.5" />
+            Template first page builder
+          </div>
+          <h1 className="text-3xl font-bold">Choose a page design</h1>
+          <p className="mt-1 max-w-2xl text-muted-foreground">
+            Pick a starting template, then customize text, images, links and layout in the builder.
           </p>
         </div>
 
-        <Button>
-          <Plus className="mr-2 h-4 w-4" />
-          Create Template
+        <Button variant="outline" onClick={() => useTemplate('blank')}>
+          <Sparkles className="mr-2 h-4 w-4" />
+          Start blank
         </Button>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card>
-          <CardHeader>
-            <CardTitle>Total Templates</CardTitle>
-          </CardHeader>
+      <div className="grid gap-5 xl:grid-cols-2">
+        {templates.map((template) => (
+          <Card key={template.id} className="overflow-hidden bg-white">
+            <CardContent className="grid gap-0 p-0 md:grid-cols-[1.1fr_0.9fr]">
+              <div className={`min-h-[260px] bg-gradient-to-br ${template.background} p-5`}>
+                <div className="flex h-full flex-col rounded-lg border bg-white/78 p-4 shadow-sm backdrop-blur">
+                  <div className="mb-5 flex items-center justify-between">
+                    <div className="h-2.5 w-24 rounded-full bg-slate-900" />
+                    <div className="flex gap-1.5">
+                      <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
+                    </div>
+                  </div>
 
-          <CardContent>
-            <p className="text-3xl font-bold">48</p>
-          </CardContent>
-        </Card>
+                  <div className="grid flex-1 gap-4 sm:grid-cols-[1fr_120px]">
+                    <div className="space-y-3">
+                      <div
+                        className="h-3 w-20 rounded-full"
+                        style={{ backgroundColor: template.accent }}
+                      />
+                      <div className="h-7 w-4/5 rounded-md bg-slate-900" />
+                      <div className="h-7 w-3/5 rounded-md bg-slate-900" />
+                      <div className="h-2.5 w-full rounded-full bg-slate-200" />
+                      <div className="h-2.5 w-5/6 rounded-full bg-slate-200" />
+                      <div
+                        className="mt-4 h-9 w-32 rounded-md"
+                        style={{ backgroundColor: template.accent }}
+                      />
+                    </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Popular Templates</CardTitle>
-          </CardHeader>
+                    <div className="rounded-lg border bg-slate-100 p-3">
+                      <div className="h-full rounded-md bg-white shadow-inner" />
+                    </div>
+                  </div>
 
-          <CardContent>
-            <p className="text-3xl font-bold">12</p>
-          </CardContent>
-        </Card>
+                  <div className="mt-5 grid grid-cols-4 gap-2">
+                    {template.sections.map((section) => (
+                      <div key={section} className="h-10 rounded-md bg-white shadow-sm" />
+                    ))}
+                  </div>
+                </div>
+              </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Total Uses</CardTitle>
-          </CardHeader>
+              <div className="flex flex-col justify-between p-5">
+                <div>
+                  <div className="text-sm font-medium text-muted-foreground">{template.category}</div>
+                  <h2 className="mt-2 text-2xl font-semibold">{template.name}</h2>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{template.description}</p>
 
-          <CardContent>
-            <p className="text-3xl font-bold">18K</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Conversion Rate</CardTitle>
-          </CardHeader>
-
-          <CardContent>
-            <p className="text-3xl font-bold text-green-600">
-              24%
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Template Marketplace</CardTitle>
-        </CardHeader>
-
-        <CardContent>
-          <div className="grid gap-4 md:grid-cols-2">
-            {templates.map((template) => (
-              <div
-                key={template.id}
-                className="rounded-xl border p-5"
-              >
-                <div className="flex items-center justify-between">
-                  <h3 className="font-semibold text-lg">
-                    {template.name}
-                  </h3>
-
-                  <span className="text-xs rounded-full bg-blue-100 px-3 py-1">
-                    {template.status}
-                  </span>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {template.sections.map((section) => (
+                      <span key={section} className="rounded-full border px-3 py-1 text-xs text-muted-foreground">
+                        {section}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Category: {template.category}
-                </p>
-
-                <p className="text-sm text-muted-foreground">
-                  Used {template.usage} times
-                </p>
-
-                <div className="mt-4 flex gap-2">
-                  <Button size="sm">
-                    Use Template
+                <div className="mt-6 flex gap-2">
+                  <Button className="flex-1" onClick={() => useTemplate(template.id)}>
+                    Use template
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
-
-                  <Button
-                    size="sm"
-                    variant="outline"
-                  >
+                  <Button size="icon" variant="outline" aria-label={`Preview ${template.name}`}>
                     <Eye className="h-4 w-4" />
-                  </Button>
-
-                  <Button
-                    size="sm"
-                    variant="outline"
-                  >
-                    <Copy className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>
-              Recently Used Templates
-            </CardTitle>
-          </CardHeader>
-
-          <CardContent className="space-y-3">
-            <div className="flex items-center justify-between border rounded-lg p-3">
-              <span>Course Launch Funnel</span>
-              <Button size="sm">Edit</Button>
-            </div>
-
-            <div className="flex items-center justify-between border rounded-lg p-3">
-              <span>Creator Webinar Page</span>
-              <Button size="sm">Edit</Button>
-            </div>
-
-            <div className="flex items-center justify-between border rounded-lg p-3">
-              <span>Membership Sales Page</span>
-              <Button size="sm">Edit</Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Template Analytics</CardTitle>
-          </CardHeader>
-
-          <CardContent className="space-y-4">
-            <div className="flex items-center gap-3">
-              <LayoutTemplate className="h-5 w-5 text-blue-500" />
-              <span>48 templates available</span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <TrendingUp className="h-5 w-5 text-green-500" />
-              <span>24% average conversion rate</span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <Users className="h-5 w-5 text-purple-500" />
-              <span>18,000 template deployments</span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <Globe className="h-5 w-5 text-orange-500" />
-              <span>Top template: Course Sales Page</span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <Star className="h-5 w-5 text-yellow-500" />
-              <span>12 featured templates</span>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </div>
   )

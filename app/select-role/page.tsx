@@ -2,45 +2,36 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { onAuthStateChanged } from 'firebase/auth'
 import { doc, updateDoc } from 'firebase/firestore'
-import { auth, db } from '@/lib/firebase'
-import { Sparkles, Users, Zap, ArrowRight, Loader2, Crown, Users2 } from 'lucide-react'
+import { db } from '@/lib/firebase'
+import { Sparkles, Zap, ArrowRight, Loader2, Crown, Users2 } from 'lucide-react'
 import { PRODUCT_NAME } from '@/components/sidebar/sidebar-config'
 import { useEffect } from 'react'
+import { useAuth } from '@/contexts/AuthContext'
 
 export default function SelectRolePage() {
   const router = useRouter()
+  const { user, loading: authLoading } = useAuth()
   const [selectedRole, setSelectedRole] = useState<'creator' | 'attendee' | null>(null)
   const [loading, setLoading] = useState(false)
   const [userId, setUserId] = useState<string | null>(null)
   const [error, setError] = useState('')
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        router.push('/login')
-      } else {
-        setUserId(user.uid)
-      }
-    })
-
-    return () => unsubscribe()
-  }, [router])
+   useEffect(() => {
+    if (!authLoading && !user) {
+      router.push('/login')
+    }
+  }, [authLoading, user, router])
 
   const handleRoleSelection = async (role: 'creator' | 'attendee') => {
-    if (!userId) return
-
+    if (!user) return
     try {
       setLoading(true)
       setError('')
       setSelectedRole(role)
-
-      const userDocRef = doc(db, 'users', userId)
+      const userDocRef = doc(db, 'users', user.uid)
       await updateDoc(userDocRef, { role })
-
-      const redirectPath = '/dashboard'
-      router.push(redirectPath)
+      router.push(role === 'creator' ? '/dashboard' : '/attendee/dashboard')
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to save role.'
       setError(message)
@@ -88,11 +79,10 @@ export default function SelectRolePage() {
           <button
             onClick={() => handleRoleSelection('creator')}
             disabled={loading}
-            className={`group relative overflow-hidden rounded-2xl border-2 p-8 text-left transition-all duration-300 ${
-              selectedRole === 'creator'
+            className={`group relative overflow-hidden rounded-2xl border-2 p-8 text-left transition-all duration-300 ${selectedRole === 'creator'
                 ? 'border-[#2563EB] bg-blue-50'
                 : 'border-gray-200 bg-white hover:border-[#2563EB] hover:bg-blue-50'
-            } ${loading ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
+              } ${loading ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
           >
             {/* Background accent */}
             <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-blue-100 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -132,11 +122,10 @@ export default function SelectRolePage() {
               {/* Button */}
               <div className="flex items-center justify-between">
                 <span
-                  className={`font-semibold transition-colors ${
-                    selectedRole === 'creator'
+                  className={`font-semibold transition-colors ${selectedRole === 'creator'
                       ? 'text-[#2563EB]'
                       : 'text-gray-900 group-hover:text-[#2563EB]'
-                  }`}
+                    }`}
                 >
                   {selectedRole === 'creator' && loading ? (
                     <span className="flex items-center gap-2">
@@ -148,11 +137,10 @@ export default function SelectRolePage() {
                   )}
                 </span>
                 <ArrowRight
-                  className={`h-5 w-5 transition-all ${
-                    selectedRole === 'creator'
+                  className={`h-5 w-5 transition-all ${selectedRole === 'creator'
                       ? 'translate-x-1 text-[#2563EB]'
                       : 'text-gray-400 group-hover:translate-x-1 group-hover:text-[#2563EB]'
-                  }`}
+                    }`}
                 />
               </div>
             </div>
@@ -162,11 +150,10 @@ export default function SelectRolePage() {
           <button
             onClick={() => handleRoleSelection('attendee')}
             disabled={loading}
-            className={`group relative overflow-hidden rounded-2xl border-2 p-8 text-left transition-all duration-300 ${
-              selectedRole === 'attendee'
+            className={`group relative overflow-hidden rounded-2xl border-2 p-8 text-left transition-all duration-300 ${selectedRole === 'attendee'
                 ? 'border-blue-400 bg-blue-50'
                 : 'border-gray-200 bg-white hover:border-blue-400 hover:bg-blue-50'
-            } ${loading ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
+              } ${loading ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
           >
             {/* Background accent */}
             <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-blue-100 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -206,11 +193,10 @@ export default function SelectRolePage() {
               {/* Button */}
               <div className="flex items-center justify-between">
                 <span
-                  className={`font-semibold transition-colors ${
-                    selectedRole === 'attendee'
+                  className={`font-semibold transition-colors ${selectedRole === 'attendee'
                       ? 'text-blue-600'
                       : 'text-gray-900 group-hover:text-blue-600'
-                  }`}
+                    }`}
                 >
                   {selectedRole === 'attendee' && loading ? (
                     <span className="flex items-center gap-2">
@@ -222,11 +208,10 @@ export default function SelectRolePage() {
                   )}
                 </span>
                 <ArrowRight
-                  className={`h-5 w-5 transition-all ${
-                    selectedRole === 'attendee'
+                  className={`h-5 w-5 transition-all ${selectedRole === 'attendee'
                       ? 'translate-x-1 text-blue-600'
                       : 'text-gray-400 group-hover:translate-x-1 group-hover:text-blue-600'
-                  }`}
+                    }`}
                 />
               </div>
             </div>

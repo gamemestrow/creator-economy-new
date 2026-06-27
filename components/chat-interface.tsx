@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import { usePageState } from '@/contexts/PageStatesContext'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -21,6 +22,9 @@ export function ChatInterface({ showCard = true }: { showCard?: boolean }) {
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const { pageState,setpageState } = usePageState()
+
+
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -41,13 +45,17 @@ export function ChatInterface({ showCard = true }: { showCard?: boolean }) {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: [...messages, userMessage] }),
+        body: JSON.stringify({ messages: [...messages, userMessage], pageState }),
       })
 
       const data = await response.json()
       if (data.error) throw new Error(data.error)
 
       setMessages(prev => [...prev, { role: 'assistant', content: data.text }])
+
+      if (data.formUpdates) {
+        setpageState(prev => ({ ...prev, ...data.formUpdates }))
+      }
     } catch (error) {
       console.error('Chat error:', error)
       setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, I encountered an error. Please try again.' }])

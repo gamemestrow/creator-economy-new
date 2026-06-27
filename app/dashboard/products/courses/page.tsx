@@ -1,13 +1,14 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Plus, MoreHorizontal, Users, TrendingUp, Clock, BookOpen, Trash2, Loader2, X } from 'lucide-react'
+import { Plus, Users, TrendingUp, BookOpen, Loader2, X } from 'lucide-react'
 import { useRequireRole } from '@/lib/use-auth-redirect'
 import { useCreatorCourses } from '@/lib/hooks/use-creator-data'
 import { createCourse, deleteCourse } from '@/lib/firestore/courses'
-import { Course } from '@/lib/firestore/types'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
+import { usePageState } from '@/contexts/PageStatesContext'
+import CourseCard from '@/components/ui/CourseCard'
 
 interface UserData {
   name: string
@@ -34,82 +35,13 @@ function StatCard({ icon: Icon, label, value, loading }: any) {
   )
 }
 
-function CourseCard({ course, onDelete }: { course: Course, onDelete: (id: string) => void }) {
-  const [showMenu, setShowMenu] = useState(false)
-
-  return (
-    <div className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow relative">
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex-1">
-          <h3 className="text-lg font-bold text-foreground mb-2">{course.title}</h3>
-          <p className="text-sm text-muted-foreground">{course.category}</p>
-        </div>
-        <div className="relative">
-          <button
-            onClick={() => setShowMenu(!showMenu)}
-            className="p-2 hover:bg-input rounded transition-colors"
-          >
-            <MoreHorizontal className="w-5 h-5 text-muted-foreground" />
-          </button>
-
-          {showMenu && (
-            <div className="absolute right-0 top-10 w-40 bg-card border border-border rounded-lg shadow-xl z-10 py-1">
-              <button
-                onClick={() => {
-                  if (window.confirm('Are you sure you want to delete this course?')) {
-                    onDelete(course.courseId)
-                  }
-                  setShowMenu(false)
-                }}
-                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
-              >
-                <Trash2 className="w-4 h-4" />
-                Delete Course
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div className="space-y-3 mb-4">
-        <div className="flex items-center gap-4 text-sm">
-          <div className="flex items-center gap-1 text-muted-foreground">
-            <Users className="w-4 h-4" />
-            <span>{(course.enrollmentCount || 0).toLocaleString()} students</span>
-          </div>
-          <div className="flex items-center gap-1 text-muted-foreground">
-            <TrendingUp className="w-4 h-4" />
-            <span>{course.rating || 0} ★</span>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between text-sm">
-          <span className="font-semibold text-foreground">${course.price || 0}</span>
-          <span
-            className={`px-3 py-1 rounded-full text-xs font-medium ${course.isPublished
-                ? 'bg-green-100 text-green-800'
-                : 'bg-gray-100 text-gray-800'
-              }`}
-          >
-            {course.isPublished ? 'Published' : 'Draft'}
-          </span>
-        </div>
-      </div>
-
-      <div className="pt-4 border-t border-border">
-        <p className="text-xs text-muted-foreground">
-          Created {new Date(course.createdAt?.seconds * 1000).toLocaleDateString()}
-        </p>
-      </div>
-    </div>
-  )
-}
-
 export default function CoursesPage() {
   const { loading: authLoading, user, authorized } = useRequireRole(['creator', 'attendee'])
   const { courses, loading: coursesLoading, refresh } = useCreatorCourses(user?.uid || '')
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [isCreating, setIsCreating] = useState(false)
+
+  const { setpageState } = usePageState()
 
   const [userData, setUserData] = useState<UserData | null>(null)
 
@@ -141,6 +73,12 @@ export default function CoursesPage() {
     difficulty: 'beginner' as const,
     isPublished: true,
   })
+  
+
+  useEffect(() => {
+    setpageState(formData)
+  }, [])
+  
 
   const totalStudents = courses.reduce((sum, c) => sum + (c.enrollmentCount || 0), 0)
   const totalRevenue = courses.reduce((sum, c) => sum + ((c.enrollmentCount || 0) * (c.price || 0)), 0)
@@ -148,7 +86,7 @@ export default function CoursesPage() {
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!user) return
-    console.log(user)
+    console.log(formData)
 
     try {
       setIsCreating(true)
@@ -304,7 +242,10 @@ export default function CoursesPage() {
                     required
                     type="number"
                     value={formData.price}
-                    onChange={(e) => setFormData({ ...formData, price: parseInt(e.target.value) })}
+                    onChange={(e) => {
+                      const val = e.target.value === '' ? 0 : parseInt(e.target.value)
+                      setFormData({ ...formData, price: isNaN(val) ? 0 : val })
+                    }}
                     className="w-full bg-input border border-border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary/20"
                   />
                 </div>

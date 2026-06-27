@@ -4,6 +4,8 @@ import { Plus, MoreHorizontal, Brain, Zap, MessageSquare, TrendingUp, MessageCir
 import { ChatInterface } from '@/components/chat-interface'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { usePageInView } from 'framer-motion'
+import { usePageState } from '@/contexts/PageStatesContext'
 
 const aiAssistants = [
   {

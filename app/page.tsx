@@ -1,10 +1,11 @@
 import { Navbar } from '@/components/navbar'
 import { Hero } from '@/components/hero'
-import { Features } from '@/components/features'
-import { Pricing } from '@/components/pricing'
-import { Testimonials } from '@/components/testimonials'
-import { Footer } from '@/components/footer'
+import dynamic from 'next/dynamic'
 
+const Features = dynamic(() => import('@/components/features').then(mod => mod.Features))
+const Pricing = dynamic(() => import('@/components/pricing').then(mod => mod.Pricing))
+const Testimonials = dynamic(() => import('@/components/testimonials').then(mod => mod.Testimonials))
+const Footer = dynamic(() => import('@/components/footer').then(mod => mod.Footer))
 export default function Page() {
   return (
     <main className="bg-white">

@@ -26,7 +26,7 @@ export default function SignupPage() {
               <p className="text-sm text-[#64748B]">Creators</p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">$2M+</p>
+              <p className="text-2xl font-bold text-white">₹2M+</p>
               <p className="text-sm text-[#64748B]">Processed</p>
             </div>
             <div>

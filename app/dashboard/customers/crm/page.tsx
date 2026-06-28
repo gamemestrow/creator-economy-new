@@ -11,7 +11,7 @@ const contacts = [
     company: 'Tech Corp',
     status: 'Active',
     lastContact: '2 days ago',
-    value: '$5,000',
+    value: '₹5,000',
     avatar: '👩‍💼',
   },
   {
@@ -22,7 +22,7 @@ const contacts = [
     company: 'Innovation Labs',
     status: 'Lead',
     lastContact: '1 week ago',
-    value: '$2,500',
+    value: '₹2,500',
     avatar: '👨‍💼',
   },
   {
@@ -33,7 +33,7 @@ const contacts = [
     company: 'Digital Solutions',
     status: 'Active',
     lastContact: 'Today',
-    value: '$8,000',
+    value: '₹8,000',
     avatar: '👩‍💻',
   },
   {
@@ -44,7 +44,7 @@ const contacts = [
     company: 'Global Ventures',
     status: 'Inactive',
     lastContact: '3 weeks ago',
-    value: '$1,500',
+    value: '₹1,500',
     avatar: '👨‍🔬',
   },
 ]
@@ -98,7 +98,7 @@ export default function CRMPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-muted-foreground text-sm">Pipeline Value</p>
-                <p className="text-3xl font-bold text-foreground mt-2">$234K</p>
+                <p className="text-3xl font-bold text-foreground mt-2">₹234K</p>
               </div>
               <MapPin className="w-12 h-12 text-chart-2 opacity-20" />
             </div>

@@ -23,19 +23,19 @@ export default function BillingPage() {
     {
       id: 'INV-1001',
       date: '12 Jun 2026',
-      amount: '$99',
+      amount: '₹99',
       status: 'Paid',
     },
     {
       id: 'INV-1002',
       date: '12 May 2026',
-      amount: '$99',
+      amount: '₹99',
       status: 'Paid',
     },
     {
       id: 'INV-1003',
       date: '12 Apr 2026',
-      amount: '$99',
+      amount: '₹99',
       status: 'Paid',
     },
   ]
@@ -78,7 +78,7 @@ export default function BillingPage() {
                 <p className="text-sm text-muted-foreground">
                   Monthly Cost
                 </p>
-                <h2 className="text-2xl font-bold">$99</h2>
+                <h2 className="text-2xl font-bold">₹99</h2>
               </div>
               <DollarSign className="h-8 w-8 text-green-600" />
             </div>
@@ -134,7 +134,7 @@ export default function BillingPage() {
 
                 <div className="text-right">
                   <h3 className="text-2xl font-bold">
-                    $99/mo
+                    ₹99/mo
                   </h3>
                   <p className="text-green-600 text-sm">
                     Active Subscription

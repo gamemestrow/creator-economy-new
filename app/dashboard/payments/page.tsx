@@ -4,12 +4,12 @@ import { CreditCard, DollarSign, TrendingUp, AlertCircle, MoreHorizontal, Search
 import { useState } from 'react'
 
 const mockTransactions = [
-  { id: 1, user: 'Sarah Chen', amount: '$1,200', status: 'Completed', date: '2024-06-10', method: 'Credit Card' },
-  { id: 2, user: 'John Developer', amount: '$2,500', status: 'Completed', date: '2024-06-09', method: 'Bank Transfer' },
-  { id: 3, user: 'Emma Watson', amount: '$450', status: 'Completed', date: '2024-06-08', method: 'PayPal' },
-  { id: 4, user: 'Lisa Johnson', amount: '$1,800', status: 'Pending', date: '2024-06-07', method: 'Credit Card' },
-  { id: 5, user: 'Alex Thompson', amount: '$5,000', status: 'Completed', date: '2024-06-06', method: 'Bank Transfer' },
-  { id: 6, user: 'Casey Rivera', amount: '$1,600', status: 'Failed', date: '2024-06-05', method: 'Credit Card' },
+  { id: 1, user: 'Sarah Chen', amount: '₹1,200', status: 'Completed', date: '2024-06-10', method: 'Credit Card' },
+  { id: 2, user: 'John Developer', amount: '₹2,500', status: 'Completed', date: '2024-06-09', method: 'Bank Transfer' },
+  { id: 3, user: 'Emma Watson', amount: '₹450', status: 'Completed', date: '2024-06-08', method: 'PayPal' },
+  { id: 4, user: 'Lisa Johnson', amount: '₹1,800', status: 'Pending', date: '2024-06-07', method: 'Credit Card' },
+  { id: 5, user: 'Alex Thompson', amount: '₹5,000', status: 'Completed', date: '2024-06-06', method: 'Bank Transfer' },
+  { id: 6, user: 'Casey Rivera', amount: '₹1,600', status: 'Failed', date: '2024-06-05', method: 'Credit Card' },
 ]
 
 function StatusBadge({ status }: { status: string }) {
@@ -54,7 +54,7 @@ export default function PaymentsPage() {
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-sm text-muted-foreground mb-2">Total Revenue</p>
-                <p className="text-3xl font-bold text-foreground">${totalRevenue.toLocaleString()}</p>
+                <p className="text-3xl font-bold text-foreground">₹{totalRevenue.toLocaleString()}</p>
               </div>
               <div className="p-3 bg-primary/10 rounded-lg">
                 <DollarSign className="w-6 h-6 text-primary" />

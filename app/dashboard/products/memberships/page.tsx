@@ -32,7 +32,7 @@ function MembershipCard({ membership, onDelete }: { membership: Membership, onDe
 
       <div className="space-y-4 mb-6">
         <div className="flex items-baseline gap-1">
-          <span className="text-3xl font-bold text-foreground">${membership.price}</span>
+          <span className="text-3xl font-bold text-foreground">₹{membership.price}</span>
           <span className="text-muted-foreground text-sm">/{membership.billingCycle}</span>
         </div>
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -198,7 +198,7 @@ export default function MembershipsPage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-1">Price ($)</label>
+                  <label className="block text-sm font-medium text-foreground mb-1">Price (₹)</label>
                   <input
                     required
                     type="number"

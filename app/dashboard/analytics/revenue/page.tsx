@@ -55,7 +55,7 @@ export default function RevenuePage() {
                 <DollarSign className="w-4 h-4 text-green-600" />
               </div>
             </div>
-            <p className="text-2xl font-bold text-foreground">${totalRevenue.toLocaleString()}</p>
+            <p className="text-2xl font-bold text-foreground">₹{totalRevenue.toLocaleString()}</p>
             <div className="flex items-center gap-1 mt-2 text-xs text-green-600">
               <ArrowUpRight className="w-3 h-3" />
               <span>12.5% from last period</span>
@@ -69,7 +69,7 @@ export default function RevenuePage() {
                 <ShoppingCart className="w-4 h-4 text-blue-600" />
               </div>
             </div>
-            <p className="text-2xl font-bold text-foreground">${averageOrderValue.toFixed(2)}</p>
+            <p className="text-2xl font-bold text-foreground">₹{averageOrderValue.toFixed(2)}</p>
             <div className="flex items-center gap-1 mt-2 text-xs text-green-600">
               <ArrowUpRight className="w-3 h-3" />
               <span>4.2% from last period</span>

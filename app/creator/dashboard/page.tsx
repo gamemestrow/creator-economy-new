@@ -186,7 +186,7 @@ export default function CreatorDashboardPage() {
 
             <div className="mb-8 grid gap-4 sm:gap-6 grid-cols-1 xs:grid-cols-2 lg:grid-cols-4">
               {[
-                { icon: DollarSign, label: 'Total Revenue', value: '$0.00', sub: 'No transactions yet', color: 'bg-blue-100', text: 'text-[#2563EB]' },
+                { icon: DollarSign, label: 'Total Revenue', value: '₹0.00', sub: 'No transactions yet', color: 'bg-blue-100', text: 'text-[#2563EB]' },
                 { icon: Users, label: 'Total Students', value: '0', sub: 'No students yet', color: 'bg-blue-100', text: 'text-[#2563EB]' },
                 { icon: BookOpen, label: 'Active Courses', value: '0', sub: 'Create your first course', color: 'bg-green-100', text: 'text-green-600' },
                 { icon: Eye, label: 'Profile Views', value: '0', sub: 'No views yet', color: 'bg-purple-100', text: 'text-purple-600' },

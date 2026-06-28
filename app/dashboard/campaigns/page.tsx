@@ -98,7 +98,7 @@ export default function CampaignsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-muted-foreground text-sm">Revenue Generated</p>
-                <p className="text-3xl font-bold text-foreground mt-2">$47.3K</p>
+                <p className="text-3xl font-bold text-foreground mt-2">₹47.3K</p>
               </div>
               <Clock className="w-12 h-12 text-chart-3 opacity-20" />
             </div>

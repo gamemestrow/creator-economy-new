@@ -52,7 +52,7 @@ function CourseCard({ course, onDelete }: { course: Course, onDelete: (id: strin
         </div>
 
         <div className="flex items-center justify-between text-sm">
-          <span className="font-semibold text-foreground">${course.price || 0}</span>
+          <span className="font-semibold text-foreground">₹{course.price || 0}</span>
           <span
             className={`px-3 py-1 rounded-full text-xs font-medium ${course.isPublished
                 ? 'bg-green-100 text-green-800'

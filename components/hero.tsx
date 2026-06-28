@@ -35,7 +35,7 @@ export function Hero() {
               <p className="text-sm text-slate-600">Active Creators</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-slate-900">$50M+</p>
+              <p className="text-3xl font-bold text-slate-900">₹50M+</p>
               <p className="text-sm text-slate-600">Revenue Generated</p>
             </div>
             <div>
@@ -53,7 +53,7 @@ export function Hero() {
               <div className="flex items-center justify-between bg-white rounded-lg p-4 shadow-sm">
                 <div>
                   <p className="text-xs text-slate-500 uppercase tracking-wider">Monthly Revenue</p>
-                  <p className="text-2xl font-bold text-slate-900">$12,450</p>
+                  <p className="text-2xl font-bold text-slate-900">₹12,450</p>
                 </div>
                 <TrendingUp className="w-8 h-8 text-green-500" />
               </div>

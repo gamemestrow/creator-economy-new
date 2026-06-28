@@ -8,7 +8,7 @@ const plans = [
   {
     id: 'free',
     name: 'Free',
-    price: '$0',
+    price: '₹0',
     period: '/month',
     description: 'Perfect for new creators getting started',
     features: [
@@ -25,7 +25,7 @@ const plans = [
   {
     id: 'basic',
     name: 'Basic',
-    price: '$15',
+    price: '₹15',
     period: '/month',
     description: 'Essential tools for growing creators',
     features: [
@@ -42,7 +42,7 @@ const plans = [
   {
     id: 'pro',
     name: 'Pro',
-    price: '$39',
+    price: '₹39',
     period: '/month',
     description: 'Advanced features for scaling up',
     features: [
@@ -59,7 +59,7 @@ const plans = [
   },
   {
     name: 'Premium',
-    price: '$99',
+    price: '₹99',
     period: '/month',
     description: 'The ultimate toolkit for businesses',
     features: [

@@ -3,10 +3,10 @@
 import { Plus, MoreHorizontal, Eye, Edit, Trash2 } from 'lucide-react'
 
 const products = [
-  { id: 1, name: 'Advanced React Course', price: '$99', students: 1243, rating: 4.8, status: 'active' },
-  { id: 2, name: 'Web Design Masterclass', price: '$149', students: 856, rating: 4.9, status: 'active' },
-  { id: 3, name: 'JavaScript Bundle', price: '$199', students: 2341, rating: 4.7, status: 'active' },
-  { id: 4, name: 'UI/UX Design Basics', price: '$79', students: 542, rating: 4.6, status: 'draft' },
+  { id: 1, name: 'Advanced React Course', price: '₹99', students: 1243, rating: 4.8, status: 'active' },
+  { id: 2, name: 'Web Design Masterclass', price: '₹149', students: 856, rating: 4.9, status: 'active' },
+  { id: 3, name: 'JavaScript Bundle', price: '₹199', students: 2341, rating: 4.7, status: 'active' },
+  { id: 4, name: 'UI/UX Design Basics', price: '₹79', students: 542, rating: 4.6, status: 'draft' },
 ]
 
 export function ProductsView() {

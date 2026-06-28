@@ -40,7 +40,7 @@ export default function OrdersPage() {
           <div className="bg-card border border-border rounded-xl p-6">
             <p className="text-sm text-muted-foreground mb-1">Total Revenue</p>
             <p className="text-2xl font-bold text-foreground">
-              ${orders.reduce((sum, o) => sum + (o.status === 'completed' ? o.amount : 0), 0).toLocaleString()}
+              ₹{orders.reduce((sum, o) => sum + (o.status === 'completed' ? o.amount : 0), 0).toLocaleString()}
             </p>
           </div>
           <div className="bg-card border border-border rounded-xl p-6">
@@ -109,10 +109,10 @@ export default function OrdersPage() {
                         <p className="text-sm text-foreground font-medium">{order.courseName}</p>
                       </td>
                       <td className="px-6 py-4">
-                        <p className="text-sm font-bold text-foreground">${order.amount}</p>
+                        <p className="text-sm font-bold text-foreground">₹{order.amount}</p>
                       </td>
                       <td className="px-6 py-4">
-                        <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                        <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ₹{
                           order.status === 'completed' ? 'bg-green-100 text-green-700' :
                           order.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
                           'bg-red-100 text-red-700'

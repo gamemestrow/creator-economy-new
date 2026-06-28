@@ -170,7 +170,7 @@ export function FeaturedCourses({ userId }: FeaturedCoursesProps) {
 
                 <div className="mb-4 flex items-center justify-between">
                   <span className="font-semibold text-gray-900">
-                    {course.price === 0 ? 'Free' : `$${course.price}`}
+                    {course.price === 0 ? 'Free' : `₹${course.price}`}
                   </span>
                   <span className="text-xs text-gray-600">
                     {course.enrollmentCount} enrolled

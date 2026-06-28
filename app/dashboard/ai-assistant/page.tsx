@@ -52,7 +52,7 @@ const aiUsageStats = [
   },
   {
     metric: 'Cost Savings',
-    value: '$12.4K',
+    value: '₹12.4K',
     change: '+34%',
     icon: '💰',
   },

@@ -3,11 +3,11 @@
 import { Plus, Mail, MoreHorizontal } from 'lucide-react'
 
 const customers = [
-  { id: 1, name: 'Sarah Johnson', email: 'sarah@example.com', joined: '2024-01-15', purchases: 5, spent: '$450', status: 'active' },
-  { id: 2, name: 'Mike Chen', email: 'mike@example.com', joined: '2024-02-20', purchases: 3, spent: '$290', status: 'active' },
-  { id: 3, name: 'Emma Davis', email: 'emma@example.com', joined: '2024-03-10', purchases: 8, spent: '$720', status: 'active' },
-  { id: 4, name: 'John Smith', email: 'john@example.com', joined: '2024-01-05', purchases: 2, spent: '$150', status: 'inactive' },
-  { id: 5, name: 'Lisa Wang', email: 'lisa@example.com', joined: '2024-04-01', purchases: 6, spent: '$540', status: 'active' },
+  { id: 1, name: 'Sarah Johnson', email: 'sarah@example.com', joined: '2024-01-15', purchases: 5, spent: '₹450', status: 'active' },
+  { id: 2, name: 'Mike Chen', email: 'mike@example.com', joined: '2024-02-20', purchases: 3, spent: '₹290', status: 'active' },
+  { id: 3, name: 'Emma Davis', email: 'emma@example.com', joined: '2024-03-10', purchases: 8, spent: '₹720', status: 'active' },
+  { id: 4, name: 'John Smith', email: 'john@example.com', joined: '2024-01-05', purchases: 2, spent: '₹150', status: 'inactive' },
+  { id: 5, name: 'Lisa Wang', email: 'lisa@example.com', joined: '2024-04-01', purchases: 6, spent: '₹540', status: 'active' },
 ]
 
 export function CustomersView() {
@@ -29,7 +29,7 @@ export function CustomersView() {
         {[
           { label: 'Total Customers', value: '2,543', change: '+18.5%' },
           { label: 'Active Customers', value: '2,124', change: '+12.3%' },
-          { label: 'Avg Lifetime Value', value: '$342', change: '+8.2%' },
+          { label: 'Avg Lifetime Value', value: '₹342', change: '+8.2%' },
           { label: 'Retention Rate', value: '87.5%', change: '+2.1%' },
         ].map((stat, i) => (
           <div key={i} className="bg-white p-6 rounded-xl border border-gray-200">

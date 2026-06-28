@@ -32,7 +32,7 @@ export function DashboardOverview() {
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {[
-          { icon: DollarSign, label: 'Total Revenue', value: '$45,231', change: '+12.5%', color: 'bg-blue-50' },
+          { icon: DollarSign, label: 'Total Revenue', value: '₹45,231', change: '+12.5%', color: 'bg-blue-50' },
           { icon: Users, label: 'Active Users', value: '12,543', change: '+8.2%', color: 'bg-indigo-50' },
           { icon: ShoppingCart, label: 'Total Orders', value: '1,234', change: '+23.1%', color: 'bg-purple-50' },
           { icon: TrendingUp, label: 'Conversion', value: '3.24%', change: '+4.3%', color: 'bg-cyan-50' },
@@ -65,7 +65,7 @@ export function DashboardOverview() {
               <YAxis stroke="#9ca3af" />
               <Tooltip contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb' }} />
               <Legend />
-              <Line type="monotone" dataKey="revenue" stroke="#2563EB" name="Revenue ($)" strokeWidth={2} />
+              <Line type="monotone" dataKey="revenue" stroke="#2563EB" name="Revenue (₹)" strokeWidth={2} />
               <Line type="monotone" dataKey="users" stroke="#4F46E5" name="Users" strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>

@@ -48,7 +48,7 @@ export function AffiliateProgramView() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-gray-600">Total Sales</p>
-              <p className="text-3xl font-bold text-gray-900 mt-1">$88,400</p>
+              <p className="text-3xl font-bold text-gray-900 mt-1">₹88,400</p>
             </div>
             <TrendingUp className="w-8 h-8 text-green-500" />
           </div>
@@ -57,7 +57,7 @@ export function AffiliateProgramView() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-gray-600">Commission Paid</p>
-              <p className="text-3xl font-bold text-gray-900 mt-1">$8,840</p>
+              <p className="text-3xl font-bold text-gray-900 mt-1">₹8,840</p>
             </div>
             <DollarSign className="w-8 h-8 text-yellow-500" />
           </div>
@@ -115,8 +115,8 @@ export function AffiliateProgramView() {
                 <tr key={affiliate.id} className="border-b border-gray-200 hover:bg-gray-50">
                   <td className="px-6 py-4 text-sm text-gray-900 font-medium">{affiliate.name}</td>
                   <td className="px-6 py-4 text-sm text-gray-600">{affiliate.referrals}</td>
-                  <td className="px-6 py-4 text-sm text-gray-900">${affiliate.sales.toLocaleString()}</td>
-                  <td className="px-6 py-4 text-sm text-green-600 font-medium">${affiliate.commission.toLocaleString()}</td>
+                  <td className="px-6 py-4 text-sm text-gray-900">₹{affiliate.sales.toLocaleString()}</td>
+                  <td className="px-6 py-4 text-sm text-green-600 font-medium">₹{affiliate.commission.toLocaleString()}</td>
                   <td className="px-6 py-4">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                       affiliate.status === 'active'

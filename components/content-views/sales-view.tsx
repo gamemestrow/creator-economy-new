@@ -14,10 +14,10 @@ const salesData = [
 ]
 
 const topProducts = [
-  { name: 'React Course', sales: 1240, revenue: '$12,400' },
-  { name: 'Design Kit', sales: 856, revenue: '$8,560' },
-  { name: 'Bundle Pack', sales: 643, revenue: '$12,860' },
-  { name: 'Workshop Access', sales: 521, revenue: '$5,210' },
+  { name: 'React Course', sales: 1240, revenue: '₹12,400' },
+  { name: 'Design Kit', sales: 856, revenue: '₹8,560' },
+  { name: 'Bundle Pack', sales: 643, revenue: '₹12,860' },
+  { name: 'Workshop Access', sales: 521, revenue: '₹5,210' },
 ]
 
 export function SalesView() {
@@ -37,9 +37,9 @@ export function SalesView() {
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {[
-          { label: 'Total Sales', value: '$24,580', change: '+12.5%' },
+          { label: 'Total Sales', value: '₹24,580', change: '+12.5%' },
           { label: 'Orders', value: '189', change: '+8.2%' },
-          { label: 'Avg Order Value', value: '$130', change: '+3.1%' },
+          { label: 'Avg Order Value', value: '₹130', change: '+3.1%' },
         ].map((stat, i) => (
           <div key={i} className="bg-white p-6 rounded-xl border border-gray-200">
             <p className="text-gray-600 text-sm font-medium">{stat.label}</p>
@@ -59,7 +59,7 @@ export function SalesView() {
             <YAxis stroke="#9ca3af" />
             <Tooltip contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb' }} />
             <Legend />
-            <Bar dataKey="sales" fill="#2563EB" name="Sales ($)" />
+            <Bar dataKey="sales" fill="#2563EB" name="Sales (₹)" />
             <Bar dataKey="orders" fill="#4F46E5" name="Orders" />
           </BarChart>
         </ResponsiveContainer>

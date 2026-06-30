@@ -86,7 +86,6 @@ export default function CoursesPage() {
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!user) return
-    console.log(formData)
 
     try {
       setIsCreating(true)

@@ -172,6 +172,28 @@ export interface Membership {
 }
 
 /**
+ * Digital downloads
+ */
+export interface DigitalDownload {
+  downloadId: string
+  name: string
+  price: number
+  description: string
+  isPublic: boolean
+  fileUrl: string
+  filePublicId: string
+  fileName: string       
+  fileType: string        
+  fileSize: number
+  creatorId: string
+  creatorName: string
+  downloadCount: number
+  createdAt: any
+  updatedAt: any
+}
+
+
+/**
  * Firestore Collection Paths
  */
 export const COLLECTIONS = {
@@ -187,6 +209,7 @@ export const COLLECTIONS = {
   COMMUNITY_POSTS: 'communityPosts',
   ORDERS: 'orders',
   MEMBERSHIPS: 'memberships',
+  DIGITAL_DOWNLOADS:'DigitalDownload'
 } as const
 
 /**

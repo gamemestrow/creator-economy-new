@@ -21,6 +21,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useEffect, useState } from "react";
+import { UploadDigitalDownloadModal } from "@/components/creator/DigitalDownloadModel";
+import { createDigitalDownload } from "@/lib/firestore/digitalDownloads";
+import { useRequireRole } from "@/lib/use-auth-redirect";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+import { useCreatorDigitalDownloads } from "@/lib/hooks/use-digital-download-hook";
 
 const downloads = [
   {
@@ -62,6 +69,43 @@ const downloads = [
 ];
 
 export default function Page() {
+
+  const [isModelOpen, setisModelOpen] = useState(false)
+  const { loading: authLoading, user, authorized } = useRequireRole(['creator', 'attendee'])
+
+  const { downloads, loading, error, refresh } = useCreatorDigitalDownloads(user?.uid || '')
+
+  const [userData, setUserData] = useState<{ name: string; email: string } | null>(null)
+  useEffect(() => {
+    if (user && authorized) {
+      const fetchUserData = async () => {
+        const userDocRef = doc(db, 'users', user.uid)
+        const userDocSnap = await getDoc(userDocRef)
+
+        if (userDocSnap.exists()) {
+          const data = userDocSnap.data()
+          setUserData({
+            name: data.name || user.displayName || 'Creator',
+            email: user.email || '',
+          })
+        }
+      }
+
+      fetchUserData()
+    }
+  }, [user, authorized])
+
+  const totalDownloads = downloads.reduce((sum, c) => sum + (c.downloadCount || 0), 0)
+  const totalRevenue = downloads.reduce((sum, c) => sum + (c.price* c.downloadCount || 0), 0)
+
+
+ function formatFileSize(bytes: number): string {
+  if (bytes === 0) return '0 B'
+  const units = ['B', 'KB', 'MB', 'GB']
+  const i = Math.floor(Math.log(bytes) / Math.log(1024))
+  return `${(bytes / Math.pow(1024, i)).toFixed(1)} ${units[i]}`
+}
+
   return (
     <div className="space-y-6 p-6">
       {/* Header */}
@@ -73,7 +117,7 @@ export default function Page() {
           </p>
         </div>
 
-        <Button>
+        <Button onClick={() => setisModelOpen(true)}>
           <Plus className="mr-2 h-4 w-4" />
           Upload Download
         </Button>
@@ -88,7 +132,7 @@ export default function Page() {
                 <p className="text-sm text-muted-foreground">
                   Total Products
                 </p>
-                <h2 className="mt-2 text-3xl font-bold">42</h2>
+                <h2 className="mt-2 text-3xl font-bold">{downloads.length}</h2>
               </div>
               <FileText className="h-10 w-10 text-blue-500" />
             </div>
@@ -102,7 +146,7 @@ export default function Page() {
                 <p className="text-sm text-muted-foreground">
                   Total Downloads
                 </p>
-                <h2 className="mt-2 text-3xl font-bold">7,842</h2>
+                <h2 className="mt-2 text-3xl font-bold">{totalDownloads}</h2>
               </div>
               <Download className="h-10 w-10 text-green-500" />
             </div>
@@ -130,7 +174,7 @@ export default function Page() {
                 <p className="text-sm text-muted-foreground">
                   Revenue
                 </p>
-                <h2 className="mt-2 text-3xl font-bold">₹22.6L</h2>
+                <h2 className="mt-2 text-3xl font-bold">{totalRevenue}</h2>
               </div>
               <IndianRupee className="h-10 w-10 text-orange-500" />
             </div>
@@ -147,35 +191,34 @@ export default function Page() {
 
           <CardContent>
             <div className="space-y-4">
-              {downloads.map((item) => (
+              {downloads.map((item, index) => (
                 <div
-                  key={item.name}
+                  key={index}
                   className="flex items-center justify-between rounded-lg border p-4"
                 >
                   <div>
                     <h3 className="font-semibold">{item.name}</h3>
                     <p className="text-sm text-muted-foreground">
-                      {item.type} • {item.size}
+                      {item.fileType} • {formatFileSize(item.fileSize)}
                     </p>
                   </div>
 
                   <div className="text-right">
                     <p className="font-semibold">{item.price}</p>
                     <p className="text-sm text-muted-foreground">
-                      {item.downloads} Downloads
+                      {item.downloadCount} Downloads
                     </p>
                   </div>
 
                   <div className="text-right">
-                    <p className="font-semibold">{item.revenue}</p>
+                    <p className="font-semibold">{item.price * item.downloadCount}</p>
                     <p
-                      className={`text-sm ${
-                        item.status === "Published"
+                      className={`text-sm ${item.isPublic ? "Public" : "Draft"}
                           ? "text-green-600"
                           : "text-yellow-600"
-                      }`}
+                        }`}
                     >
-                      {item.status}
+                      {item.isPublic}
                     </p>
                   </div>
                 </div>
@@ -288,26 +331,25 @@ export default function Page() {
               </thead>
 
               <tbody>
-                {downloads.map((item) => (
+                {downloads.map((item, index) => (
                   <tr
-                    key={item.name}
+                    key={index}
                     className="border-b transition-colors hover:bg-muted/50"
                   >
                     <td className="py-4 font-medium">{item.name}</td>
-                    <td>{item.type}</td>
-                    <td>{item.size}</td>
+                    <td>{item.fileType}</td>
+                    <td>{formatFileSize(item.fileSize)}</td>
                     <td>{item.price}</td>
-                    <td>{item.downloads}</td>
-                    <td>{item.revenue}</td>
+                    <td>{item.downloadCount}</td>
+                    <td>{item.price * item.downloadCount}</td>
                     <td>
                       <span
-                        className={`rounded-full px-3 py-1 text-xs font-medium ${
-                          item.status === "Published"
+                        className={`rounded-full px-3 py-1 text-xs font-medium ${item.isPublic ? "Public" : "Draft"}
                             ? "bg-green-100 text-green-700"
                             : "bg-yellow-100 text-yellow-700"
-                        }`}
+                          }`}
                       >
-                        {item.status}
+                        {item.isPublic ? "Public" : "Draft"}
                       </span>
                     </td>
                   </tr>
@@ -317,6 +359,17 @@ export default function Page() {
           </div>
         </CardContent>
       </Card>
+
+      {isModelOpen && (
+        <UploadDigitalDownloadModal isOpen={isModelOpen} onClose={() => setisModelOpen(false)} onSubmit={async (data) => {
+          if (!user) return
+          await createDigitalDownload({
+            ...data,
+            creatorId: user.uid,
+            creatorName: userData?.name || 'Unknown Creator',
+          })
+        }} refresh={refresh}/>
+      )}
     </div>
   );
 }

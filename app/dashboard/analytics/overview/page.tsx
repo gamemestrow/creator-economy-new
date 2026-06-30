@@ -19,7 +19,6 @@ const analyticsData = [
 export default function AnalyticsPage() {
 
   const user = useAuth()
-  console.log(user)
   return (
     <div className="flex-1 overflow-auto bg-background">
       <div className="p-8 space-y-6">

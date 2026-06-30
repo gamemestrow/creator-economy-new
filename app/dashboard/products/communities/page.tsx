@@ -1,6 +1,7 @@
 'use client'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Users,
@@ -66,38 +67,88 @@ export default function CommunitiesPage() {
   }, [])
 
 
-  const handleCreateCommunity = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!user) return
+const handleCreateCommunity = async (e: React.FormEvent) => {
+  e.preventDefault()
+  if (!user) return
 
-    try {
-      setIsCreating(true)
-      await createCommunity({
-        ...formData,
-        creatorId: user.uid,
-        creatorName: userData?.name || 'Unknown Creator',
-        thumbnail: 'thumbnail',
-      })
-      setShowCreateCommunityModal(false)
-      setFormData({
-        name: '',
-        description: '',
-        category: 'Technology',
-        isPublic: true,
-        rules: '',
-        thumbnail: '',
-      })
+  try {
+    setIsCreating(true)
+    await createCommunity({
+      ...formData,
+      creatorId: user.uid,
+      creatorName: userData?.name || 'Unknown Creator',
+      // remove the hardcoded thumbnail: 'thumbnail' — formData.thumbnail is already spread in above
+    })
+    setShowCreateCommunityModal(false)
+    setFormData({
+      name: '',
+      description: '',
+      category: 'Technology',
+      isPublic: true,
+      rules: '',
+      thumbnail: '',
+    })
 
-      await refresh();
-    } catch (error) {
-      console.error('Failed to create course:', error)
-      alert('Failed to create course. Please try again.')
-    } finally {
-      setIsCreating(false)
-    }
+    await refresh()
+  } catch (error) {
+    console.error('Failed to create course:', error)
+    alert('Failed to create course. Please try again.')
+  } finally {
+    setIsCreating(false)
   }
+}
 
   const totalMembers = communities.reduce((sum, community) => sum + community.memberCount, 0)
+
+
+
+  const thumbnailInputRef = useRef<HTMLInputElement>(null)
+  const [isUploadingThumbnail, setIsUploadingThumbnail] = useState(false)
+
+  const handleThumbnailChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    if (!file.type.startsWith('image/')) {
+      alert('Please upload a valid image file')
+      return
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      alert('Image must be under 2MB')
+      return
+    }
+
+    setIsUploadingThumbnail(true)
+
+    try {
+      const uploadData = new FormData()
+
+      uploadData.append('file', file)
+      uploadData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!)
+
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: 'POST',
+          body: uploadData,
+        }
+      )
+
+      if (!res.ok) throw new Error('Upload failed')
+
+      const data = await res.json()
+
+      // Store the secure URL for display, and you may also want public_id
+      setFormData((prev) => ({ ...prev, thumbnail: data.secure_url }))
+    } catch (error) {
+      console.error('Thumbnail upload error:', error)
+      alert('Failed to upload thumbnail')
+    } finally {
+      setIsUploadingThumbnail(false)
+      // allow re-selecting the same file later
+      e.target.value = ''
+    }
+  }
 
 
   return (
@@ -278,10 +329,14 @@ export default function CommunitiesPage() {
 
               {/* Thumbnail upload */}
               <div
-                // onClick={() => thumbnailInputRef.current?.click()}
+                onClick={() => !isUploadingThumbnail && thumbnailInputRef.current?.click()}
                 className="flex items-center gap-3 p-3 border border-dashed border-border rounded-lg cursor-pointer hover:bg-muted/50 transition-colors"
               >
-                {formData.thumbnail ? (
+                {isUploadingThumbnail ? (
+                  <div className="w-14 h-14 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
+                    <Loader2 className="w-5 h-5 text-muted-foreground animate-spin" />
+                  </div>
+                ) : formData.thumbnail ? (
                   <img src={formData.thumbnail} className="w-14 h-14 rounded-lg object-cover" />
                 ) : (
                   <div className="w-14 h-14 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
@@ -289,15 +344,17 @@ export default function CommunitiesPage() {
                   </div>
                 )}
                 <div>
-                  <p className="text-sm font-medium text-foreground">Upload thumbnail</p>
+                  <p className="text-sm font-medium text-foreground">
+                    {isUploadingThumbnail ? 'Uploading...' : 'Upload thumbnail'}
+                  </p>
                   <p className="text-xs text-muted-foreground">PNG, JPG up to 2MB</p>
                 </div>
                 <input
-                  // ref={thumbnailInputRef}
+                  ref={thumbnailInputRef}
                   type="file"
                   accept="image/*"
                   className="hidden"
-                // onChange={handleThumbnailChange}
+                  onChange={handleThumbnailChange}
                 />
               </div>
 

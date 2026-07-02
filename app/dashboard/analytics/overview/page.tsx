@@ -4,7 +4,6 @@ import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, L
 import Link from 'next/link'
 import { ShoppingBag, BookOpen, Users } from 'lucide-react'
 
-import { useAuth } from '@/contexts/AuthContext'
 
 const analyticsData = [
   { day: 'Mon', pageViews: 4200, users: 2400 },
@@ -18,7 +17,6 @@ const analyticsData = [
 
 export default function AnalyticsPage() {
 
-  const user = useAuth()
   return (
     <div className="flex-1 overflow-auto bg-background">
       <div className="p-8 space-y-6">

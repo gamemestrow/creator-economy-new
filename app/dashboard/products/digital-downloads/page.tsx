@@ -27,7 +27,7 @@ import { createDigitalDownload } from "@/lib/firestore/digitalDownloads";
 import { useRequireRole } from "@/lib/use-auth-redirect";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { useCreatorDigitalDownloads } from "@/lib/hooks/use-digital-download-hook";
+import { useCreatorDigitalDownloads } from "@/lib/hooks/use-creator-data";
 
 const downloads = [
   {

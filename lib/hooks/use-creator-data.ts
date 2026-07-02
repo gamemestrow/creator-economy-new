@@ -2,7 +2,7 @@
  * Custom React Hooks for Creator Data
  */
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Course, Event, Community } from '@/lib/firestore'
 import * as courseService from '@/lib/firestore/courses'
 import { db } from '@/lib/firebase'
@@ -18,6 +18,8 @@ import { Membership } from '@/lib/firestore/types'
 import * as communityService from '@/lib/firestore/communities'
 
 import * as userService from '@/lib/firestore/users'
+
+import { getCreatorDigitalDownloads, DigitalDownload } from '@/lib/firestore/digitalDownloads'
 
 /**
  * Hook to fetch memberships for a creator
@@ -239,4 +241,38 @@ export function useCreatorcommunities(creatorId: string) {
   }, [creatorId])
 
   return { communities, loading, error, refresh: fetchCommunities }
+}
+
+/**
+ * Hook to fetch digital downloads for a specific creator
+ */
+
+export function useCreatorDigitalDownloads(creatorId: string) {
+  const [downloads, setDownloads] = useState<DigitalDownload[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  const fetchDownloads = useCallback(async () => {
+    if (!creatorId) {
+      setLoading(false)
+      return
+    }
+    try {
+      setLoading(true)
+      setError(null)
+      const data = await getCreatorDigitalDownloads(creatorId)
+      setDownloads(data)
+    } catch (err) {
+      console.error('Failed to fetch digital downloads:', err)
+      setError('Failed to load digital downloads')
+    } finally {
+      setLoading(false)
+    }
+  }, [creatorId])
+
+  useEffect(() => {
+    fetchDownloads()
+  }, [fetchDownloads])
+
+  return { downloads, loading, error, refresh: fetchDownloads }
 }

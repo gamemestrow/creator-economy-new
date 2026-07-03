@@ -31,6 +31,7 @@ interface CreateCourseInput {
   duration: number
   tags?: string[]
   category?: string
+  isPublished: boolean
 }
 
 /**
@@ -266,7 +267,7 @@ export async function createCourse(input: CreateCourseInput): Promise<string> {
       price: input.price,
       creatorName: input.creatorName || 'Unknown Creator',
       creatorId: input.creatorId,
-      isPublished: false,
+      isPublished: input.isPublished,
       totalLessons: 0,
       duration: input.duration || 0,
       enrollmentCount: 0,

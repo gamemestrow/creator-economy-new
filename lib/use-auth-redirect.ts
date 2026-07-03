@@ -31,32 +31,36 @@ export function useAuthRedirect() {
 
 export function useRequireRole(allowedRoles: UserRole[]) {
   const router = useRouter()
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [user, setUser] = useState<User | null>(null)
   const [authorized, setAuthorized] = useState(false)
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+    try {
       if (!firebaseUser) {
-        router.push('/login')
-        return
+        setLoading(false);
+        router.replace("/login");
+        return;
       }
 
-      const userRole = await getUserRole(firebaseUser)
+      const userRole = await getUserRole(firebaseUser);
 
       if (!userRole || !allowedRoles.includes(userRole)) {
-        const redirectPath = getRedirectPath(userRole)
-        router.push(redirectPath)
-        return
+        setLoading(false);
+        router.replace(getRedirectPath(userRole));
+        return;
       }
 
-      setUser(firebaseUser)
-      setAuthorized(true)
-      setLoading(false)
-    })
+      setUser(firebaseUser);
+      setAuthorized(true);
+    } finally {
+      setLoading(false);
+    }
+  });
 
-    return () => unsubscribe()
-  }, [router, allowedRoles])
+  return unsubscribe;
+}, [router, allowedRoles]);
 
   return { loading, user, authorized }
 }

@@ -243,6 +243,7 @@ export default function CreatorDashboardPage() {
                 await createCourse({
                   title: data.title,
                   description: data.description,
+                  isPublished: false,
                   price: Number(data.price),
                   category: 'Development',
                   creatorId: user.uid,

@@ -35,7 +35,7 @@ export function DashboardStats({ stats, loading = false }: DashboardStatsProps) 
       value: stats.enrolledCount,
       icon: BookOpen,
       color: 'bg-primary/10',
-      iconColor: 'text-[#9AA59E]',
+      iconColor: 'text-[#78866B]',
     },
     {
       title: 'In Progress',

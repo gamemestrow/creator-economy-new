@@ -36,7 +36,7 @@ export function CourseSearch({ searchQuery, onSearchChange }: CourseSearchProps)
           placeholder="Search courses by title, creatorName, or keyword..."
           value={localQuery}
           onChange={handleInputChange}
-          className="w-full pl-12 pr-10 py-3 bg-white border border-border rounded-lg text-foreground placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#9AA59E] focus:border-transparent transition-all"
+          className="w-full pl-12 pr-10 py-3 bg-white border border-border rounded-lg text-foreground placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#78866B] focus:border-transparent transition-all"
         />
         {localQuery && (
           <button

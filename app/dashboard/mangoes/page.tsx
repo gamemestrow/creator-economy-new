@@ -36,12 +36,12 @@ export default function MangoesPage() {
       {/* Video Walkthrough Breadcrumb Banner */}
       <div className="bg-[#EBF5FF] border border-[#D0E7FF] text-[#1E40AF] rounded-lg px-4 py-3 flex items-center justify-between text-sm font-semibold">
         <div className="flex items-center gap-2.5">
-          <div className="w-5 h-5 bg-[#9AA59E] text-white rounded-full flex items-center justify-center">
+          <div className="w-5 h-5 bg-[#78866B] text-white rounded-full flex items-center justify-center">
             <Play className="w-3 h-3 fill-current translate-x-0.5" />
           </div>
           <span>Video walkthrough &gt; Mango flow</span>
         </div>
-        <button className="text-[#9AA59E] hover:text-[#9AA59E] tracking-wide text-xs font-bold transition">
+        <button className="text-[#78866B] hover:text-[#78866B] tracking-wide text-xs font-bold transition">
           WATCH
         </button>
       </div>
@@ -56,7 +56,7 @@ export default function MangoesPage() {
               <button 
                 onClick={() => setShowFreeMangoes(!showFreeMangoes)}
                 className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                  showFreeMangoes ? 'bg-[#9AA59E]' : 'bg-card'
+                  showFreeMangoes ? 'bg-[#78866B]' : 'bg-card'
                 }`}
               >
                 <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
@@ -70,7 +70,7 @@ export default function MangoesPage() {
         </div>
 
         <div className="flex items-center gap-3">
-          <button className="flex items-center gap-2 px-4 py-2.5 bg-[#9AA59E] hover:bg-[#ff733b] text-white text-sm font-bold rounded-lg transition shadow-sm">
+          <button className="flex items-center gap-2 px-4 py-2.5 bg-[#78866B] hover:bg-[#ff733b] text-white text-sm font-bold rounded-lg transition shadow-sm">
             <Plus className="w-4 h-4" />
             <span>Create new mango</span>
           </button>
@@ -139,7 +139,7 @@ export default function MangoesPage() {
                   {/* Title and ID */}
                   <td className="py-5 px-6 border-b border-gray-50">
                     <div className="space-y-1">
-                      <p className="font-bold text-foreground hover:text-[#9AA59E] cursor-pointer transition">
+                      <p className="font-bold text-foreground hover:text-[#78866B] cursor-pointer transition">
                         {mango.title}
                       </p>
                       <p className="text-[10px] text-muted-foreground font-mono tracking-tight">

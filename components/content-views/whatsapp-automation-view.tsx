@@ -84,7 +84,7 @@ export function WhatsAppAutomationView() {
             <XAxis dataKey="name" stroke="#6b7280" />
             <YAxis stroke="#6b7280" />
             <Tooltip contentStyle={{ backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }} />
-            <Line type="monotone" dataKey="sent" stroke="#9AA59E" strokeWidth={2} />
+            <Line type="monotone" dataKey="sent" stroke="#78866B" strokeWidth={2} />
             <Line type="monotone" dataKey="delivered" stroke="#10b981" strokeWidth={2} />
             <Line type="monotone" dataKey="failed" stroke="#ef4444" strokeWidth={2} />
           </LineChart>

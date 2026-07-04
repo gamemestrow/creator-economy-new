@@ -100,7 +100,7 @@ export function DashboardNavbar() {
               onClick={() => setShowUserMenu(!showUserMenu)}
               className="flex items-center gap-2 p-1 hover:bg-muted rounded-full transition"
             >
-              <div className="w-9 h-9 rounded-full bg-[#EEF2EC] border border-[#ECE8DF] flex items-center justify-center text-[#8FA193] font-bold text-sm">
+              <div className="w-9 h-9 rounded-full bg-[#EEF2EC] border border-[#E4E6DE] flex items-center justify-center text-[#8FA193] font-bold text-sm">
                 A
               </div>
             </button>

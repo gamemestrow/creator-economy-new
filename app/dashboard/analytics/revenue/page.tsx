@@ -113,28 +113,28 @@ export default function RevenuePage() {
               <AreaChart data={chartData}>
                 <defs>
                   <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#9AA59E" stopOpacity={0.1}/>
-                    <stop offset="95%" stopColor="#9AA59E" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="#78866B" stopOpacity={0.1}/>
+                    <stop offset="95%" stopColor="#78866B" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ECE8DF" />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E4E6DE" />
                 <XAxis 
                   dataKey="name" 
                   axisLine={false} 
                   tickLine={false} 
-                  tick={{ fill: '#666666', fontSize: 12 }}
+                  tick={{ fill: '#6B7280', fontSize: 12 }}
                   dy={10}
                 />
                 <YAxis 
                   axisLine={false} 
                   tickLine={false} 
-                  tick={{ fill: '#666666', fontSize: 12 }}
+                  tick={{ fill: '#6B7280', fontSize: 12 }}
                   tickFormatter={(value) => `$${value}`}
                 />
                 <Tooltip 
                   contentStyle={{ 
                     backgroundColor: '#FFF', 
-                    border: '1px solid #ECE8DF',
+                    border: '1px solid #E4E6DE',
                     borderRadius: '8px',
                     boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
                   }}
@@ -142,7 +142,7 @@ export default function RevenuePage() {
                 <Area 
                   type="monotone" 
                   dataKey="revenue" 
-                  stroke="#9AA59E" 
+                  stroke="#78866B" 
                   strokeWidth={2}
                   fillOpacity={1} 
                   fill="url(#colorRevenue)" 
@@ -164,11 +164,11 @@ export default function RevenuePage() {
                   { category: 'Community', sales: 800 },
                   { category: 'Other', sales: 300 },
                 ]}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ECE8DF" />
-                  <XAxis dataKey="category" axisLine={false} tickLine={false} tick={{ fill: '#666666', fontSize: 12 }} />
-                  <YAxis axisLine={false} tickLine={false} tick={{ fill: '#666666', fontSize: 12 }} />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E4E6DE" />
+                  <XAxis dataKey="category" axisLine={false} tickLine={false} tick={{ fill: '#6B7280', fontSize: 12 }} />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fill: '#6B7280', fontSize: 12 }} />
                   <Tooltip />
-                  <Bar dataKey="sales" fill="#7F8F84" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="sales" fill="#65735A" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>

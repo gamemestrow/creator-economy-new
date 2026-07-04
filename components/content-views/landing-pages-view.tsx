@@ -65,7 +65,7 @@ export function LandingPagesView() {
             <XAxis dataKey="name" stroke="#6b7280" />
             <YAxis stroke="#6b7280" />
             <Tooltip contentStyle={{ backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }} />
-            <Bar dataKey="visits" fill="#9AA59E" radius={[8, 8, 0, 0]} />
+            <Bar dataKey="visits" fill="#78866B" radius={[8, 8, 0, 0]} />
             <Bar dataKey="conversions" fill="#10b981" radius={[8, 8, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>

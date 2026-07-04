@@ -147,7 +147,7 @@ export function UpcomingEvents({ userId }: UpcomingEventsProps) {
             >
               <div className="flex items-start gap-4">
                 {/* Event Thumbnail */}
-                <div className="h-20 w-20 flex-shrink-0 rounded-lg bg-primary from-[#9AA59E]/10  flex items-center justify-center">
+                <div className="h-20 w-20 flex-shrink-0 rounded-lg bg-primary from-[#78866B]/10  flex items-center justify-center">
                   {event.thumbnail ? (
                     <img
                       src={event.thumbnail}
@@ -163,7 +163,7 @@ export function UpcomingEvents({ userId }: UpcomingEventsProps) {
                 <div className="flex-1">
                   <div className="mb-2 flex items-center gap-2">
                     <h3 className="font-semibold text-foreground">{event.title}</h3>
-                    <span className="inline-block rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-[#9AA59E]">
+                    <span className="inline-block rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-[#78866B]">
                       {event.eventType}
                     </span>
                   </div>
@@ -199,7 +199,7 @@ export function UpcomingEvents({ userId }: UpcomingEventsProps) {
                   className={`flex-shrink-0 rounded-lg px-4 py-2 font-medium transition-all disabled:cursor-not-allowed disabled:opacity-60 ${
                     isRegistered
                       ? 'bg-muted text-foreground hover:bg-card'
-                      : 'bg-[#9AA59E] text-white hover:bg-primary'
+                      : 'bg-[#78866B] text-white hover:bg-primary'
                   }`}
                 >
                   {isRegistering ? (

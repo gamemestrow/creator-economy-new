@@ -4,7 +4,7 @@ import { Trophy, Star, Zap, Plus, Award, Target } from 'lucide-react'
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 
 const badgeData = [
-  { name: 'Earned', value: 1240, color: '#9AA59E' },
+  { name: 'Earned', value: 1240, color: '#78866B' },
   { name: 'Available', value: 3760, color: '#e5e7eb' },
 ]
 
@@ -112,7 +112,7 @@ export function GamificationDetailedView() {
               <XAxis dataKey="day" stroke="#6b7280" />
               <YAxis stroke="#6b7280" />
               <Tooltip contentStyle={{ backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }} />
-              <Line type="monotone" dataKey="points" stroke="#9AA59E" strokeWidth={2} dot={{ fill: '#9AA59E' }} />
+              <Line type="monotone" dataKey="points" stroke="#78866B" strokeWidth={2} dot={{ fill: '#78866B' }} />
             </LineChart>
           </ResponsiveContainer>
         </div>

@@ -19,10 +19,10 @@ export function DashboardStats({ stats, loading = false }: DashboardStatsProps) 
         {[...Array(4)].map((_, i) => (
           <div
             key={i}
-            className="h-32 rounded-xl border border-gray-200 bg-white p-6 animate-pulse"
+            className="h-32 rounded-xl border border-border bg-white p-6 animate-pulse"
           >
-            <div className="h-4 w-24 bg-gray-200 rounded mb-4" />
-            <div className="h-8 w-12 bg-gray-200 rounded" />
+            <div className="h-4 w-24 bg-card rounded mb-4" />
+            <div className="h-8 w-12 bg-card rounded" />
           </div>
         ))}
       </div>
@@ -34,8 +34,8 @@ export function DashboardStats({ stats, loading = false }: DashboardStatsProps) 
       title: 'Courses Enrolled',
       value: stats.enrolledCount,
       icon: BookOpen,
-      color: 'bg-blue-100',
-      iconColor: 'text-[#2563EB]',
+      color: 'bg-primary/10',
+      iconColor: 'text-[#9AA59E]',
     },
     {
       title: 'In Progress',
@@ -48,8 +48,8 @@ export function DashboardStats({ stats, loading = false }: DashboardStatsProps) 
       title: 'Certificates Earned',
       value: stats.certificateCount,
       icon: Award,
-      color: 'bg-purple-100',
-      iconColor: 'text-purple-600',
+      color: 'bg-primary/10',
+      iconColor: 'text-primary',
     },
     {
       title: 'Communities Joined',
@@ -67,13 +67,13 @@ export function DashboardStats({ stats, loading = false }: DashboardStatsProps) 
         return (
           <div
             key={stat.title}
-            className="rounded-xl border border-gray-200 bg-white p-6"
+            className="rounded-xl border border-border bg-white p-6"
           >
             <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-lg ${stat.color}`}>
               <Icon className={`h-6 w-6 ${stat.iconColor}`} />
             </div>
-            <p className="text-sm text-gray-600">{stat.title}</p>
-            <p className="mt-2 text-2xl font-bold text-gray-900">{stat.value}</p>
+            <p className="text-sm text-muted-foreground">{stat.title}</p>
+            <p className="mt-2 text-2xl font-bold text-foreground">{stat.value}</p>
           </div>
         )
       })}

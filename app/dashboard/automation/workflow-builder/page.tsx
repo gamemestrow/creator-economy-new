@@ -84,7 +84,7 @@ export default function WorkflowBuilderPage() {
                 className="flex items-center justify-between rounded-lg border p-4"
               >
                 <div className="flex items-center gap-4">
-                  <Workflow className="h-8 w-8 text-blue-500" />
+                  <Workflow className="h-8 w-8 text-primary" />
 
                   <div>
                     <h3 className="font-semibold">{workflow.name}</h3>

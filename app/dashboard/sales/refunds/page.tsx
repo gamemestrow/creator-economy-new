@@ -92,7 +92,7 @@ export default function RefundsPage() {
 
         <Card>
           <CardContent className="pt-6">
-            <RotateCcw className="h-5 w-5 text-blue-600" />
+            <RotateCcw className="h-5 w-5 text-primary" />
             <h2 className="mt-4 text-3xl font-bold">
               248
             </h2>
@@ -269,7 +269,7 @@ export default function RefundsPage() {
 
         <Card>
           <CardContent className="pt-6">
-            <Users className="h-5 w-5 text-blue-600" />
+            <Users className="h-5 w-5 text-primary" />
             <h3 className="mt-3 text-2xl font-bold">
               248
             </h3>

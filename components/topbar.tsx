@@ -42,7 +42,7 @@ export function Topbar() {
           {/* Upgrade Button */}
           <button
             onClick={() => setShowUpgradeModal(true)}
-            className="hidden sm:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-lg text-xs font-bold shadow-sm hover:shadow-md transition-all hover:scale-105"
+            className="hidden sm:flex items-center gap-2 px-4 py-2 bg-primary from-amber-500 to-orange-600 text-white rounded-lg text-xs font-bold shadow-sm hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all hover:scale-105"
           >
             <Crown className="w-4 h-4" />
             Upgrade Plan
@@ -60,14 +60,14 @@ export function Topbar() {
               onClick={() => setShowUserMenu(!showUserMenu)}
               className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-input transition-colors"
             >
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-sm font-semibold">
+              <div className="w-8 h-8 rounded-full bg-primary from-primary to-secondary flex items-center justify-center text-white text-sm font-semibold">
                 A
               </div>
               <span className="text-sm font-medium text-foreground">Admin</span>
             </button>
 
             {showUserMenu && (
-              <div className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-lg py-2 z-50">
+              <div className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-[0_10px_30px_rgba(0,0,0,0.05)] py-2 z-50">
                 <button className="w-full flex items-center gap-3 px-4 py-2 text-sm text-foreground hover:bg-input transition-colors">
                   <User className="w-4 h-4" />
                   Profile

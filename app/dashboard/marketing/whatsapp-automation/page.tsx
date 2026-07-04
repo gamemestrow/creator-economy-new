@@ -144,12 +144,12 @@ export default function CommissionTrackingPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <Wallet className="h-5 w-5 text-blue-500" />
+              <Wallet className="h-5 w-5 text-primary" />
               <span>₹72K awaiting payout</span>
             </div>
 
             <div className="flex items-center gap-3">
-              <Percent className="h-5 w-5 text-purple-500" />
+              <Percent className="h-5 w-5 text-primary" />
               <span>Average commission rate 20%</span>
             </div>
 
@@ -172,12 +172,12 @@ export default function CommissionTrackingPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <Users className="h-5 w-5 text-blue-500" />
+              <Users className="h-5 w-5 text-primary" />
               <span>1,284 successful referrals</span>
             </div>
 
             <div className="flex items-center gap-3">
-              <ArrowUpRight className="h-5 w-5 text-purple-500" />
+              <ArrowUpRight className="h-5 w-5 text-primary" />
               <span>Top affiliate generated ₹45,600</span>
             </div>
 

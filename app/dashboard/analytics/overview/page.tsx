@@ -65,11 +65,11 @@ export default function AnalyticsPage() {
                     border: '1px solid #e5e7eb',
                     borderRadius: '0.5rem',
                   }}
-                  labelStyle={{ color: '#0B1220' }}
+                  labelStyle={{ color: '#FBFAF7' }}
                 />
                 <Legend />
-                <Bar dataKey="pageViews" fill="#2563EB" radius={[8, 8, 0, 0]} />
-                <Bar dataKey="users" fill="#4F46E5" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="pageViews" fill="#9AA59E" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="users" fill="#7F8F84" radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -87,11 +87,11 @@ export default function AnalyticsPage() {
                     border: '1px solid #e5e7eb',
                     borderRadius: '0.5rem',
                   }}
-                  labelStyle={{ color: '#0B1220' }}
+                  labelStyle={{ color: '#FBFAF7' }}
                 />
                 <Legend />
-                <Line type="monotone" dataKey="pageViews" stroke="#2563EB" strokeWidth={2} dot={{ fill: '#2563EB', r: 4 }} />
-                <Line type="monotone" dataKey="users" stroke="#4F46E5" strokeWidth={2} dot={{ fill: '#4F46E5', r: 4 }} />
+                <Line type="monotone" dataKey="pageViews" stroke="#9AA59E" strokeWidth={2} dot={{ fill: '#9AA59E', r: 4 }} />
+                <Line type="monotone" dataKey="users" stroke="#7F8F84" strokeWidth={2} dot={{ fill: '#7F8F84', r: 4 }} />
               </LineChart>
             </ResponsiveContainer>
           </div>

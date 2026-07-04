@@ -46,7 +46,7 @@ function AttendeeMain({ children }: { children: React.ReactNode }) {
   return (
     <main
       className={cn(
-        'min-h-screen flex-1 bg-[#F8FAFC] p-6 transition-[margin] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] md:p-8'
+        'min-h-screen flex-1 bg-[#F7F7F4] p-6 transition-[margin] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] md:p-8'
       )}
     >
       <div className="mx-auto max-w-7xl">
@@ -75,7 +75,7 @@ export function AttendeeAppLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] relative">
+    <div className="min-h-screen bg-[#F7F7F4] relative">
       <AttendeeHeader sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="flex">
         <AttendeeSidebar sidebarOpen={sidebarOpen} />

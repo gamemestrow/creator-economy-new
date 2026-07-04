@@ -193,7 +193,7 @@ export default function XPSystemPage() {
 
           <CardContent className="space-y-4">
             <div className="flex items-center gap-3">
-              <Users className="h-5 w-5 text-blue-500" />
+              <Users className="h-5 w-5 text-primary" />
               <span>2,598 active users earning XP</span>
             </div>
 
@@ -208,7 +208,7 @@ export default function XPSystemPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <Zap className="h-5 w-5 text-purple-500" />
+              <Zap className="h-5 w-5 text-primary" />
               <span>84 users leveled up today</span>
             </div>
 

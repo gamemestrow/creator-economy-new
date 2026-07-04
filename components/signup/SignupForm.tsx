@@ -56,58 +56,58 @@ const SignupForm = () => {
     }
   }
   return (
-    <div className="rounded-2xl border border-[#E2E8F0] bg-white p-8 shadow-sm">
-      <h2 className="text-2xl font-bold text-[#0B1220]">Create your account</h2>
-      <p className="mt-1 text-sm text-[#64748B]">Start your 14-day free trial. No credit card required.</p>
+    <div className="rounded-2xl border border-[#ECE8DF] bg-white p-8 shadow-sm">
+      <h2 className="text-2xl font-bold text-[#FBFAF7]">Create your account</h2>
+      <p className="mt-1 text-sm text-[#666666]">Start your 14-day free trial. No credit card required.</p>
 
       <form onSubmit={handleSignup} className="mt-8 space-y-4">
         <div>
-          <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-[#334155]">
+          <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-[#232323]">
             Full name
           </label>
           <div className="relative">
-            <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94A3B8]" />
+            <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#666666]" />
             <input
               id="name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Jane Creator"
-              className="w-full rounded-lg border border-[#E2E8F0] bg-white py-2.5 pl-10 pr-4 text-sm text-[#0B1220] outline-none transition-all placeholder:text-[#94A3B8] focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20"
+              className="w-full rounded-lg border border-[#ECE8DF] bg-white py-2.5 pl-10 pr-4 text-sm text-[#FBFAF7] outline-none transition-all placeholder:text-[#666666] focus:border-[#9AA59E] focus:ring-2 focus:ring-[#9AA59E]/20"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-[#334155]">
+          <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-[#232323]">
             Email address
           </label>
           <div className="relative">
-            <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94A3B8]" />
+            <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#666666]" />
             <input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@company.com"
-              className="w-full rounded-lg border border-[#E2E8F0] bg-white py-2.5 pl-10 pr-4 text-sm text-[#0B1220] outline-none transition-all placeholder:text-[#94A3B8] focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20"
+              className="w-full rounded-lg border border-[#ECE8DF] bg-white py-2.5 pl-10 pr-4 text-sm text-[#FBFAF7] outline-none transition-all placeholder:text-[#666666] focus:border-[#9AA59E] focus:ring-2 focus:ring-[#9AA59E]/20"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-[#334155]">
+          <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-[#232323]">
             Password
           </label>
           <div className="relative">
-            <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94A3B8]" />
+            <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#666666]" />
             <input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Min. 6 characters"
-              className="w-full rounded-lg border border-[#E2E8F0] bg-white py-2.5 pl-10 pr-4 text-sm text-[#0B1220] outline-none transition-all placeholder:text-[#94A3B8] focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20"
+              className="w-full rounded-lg border border-[#ECE8DF] bg-white py-2.5 pl-10 pr-4 text-sm text-[#FBFAF7] outline-none transition-all placeholder:text-[#666666] focus:border-[#9AA59E] focus:ring-2 focus:ring-[#9AA59E]/20"
             />
           </div>
         </div>
@@ -119,7 +119,7 @@ const SignupForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#2563EB] py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#1D4ED8] disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#9AA59E] py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#7F8F84] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {loading ? (
             <>
@@ -135,9 +135,9 @@ const SignupForm = () => {
         </button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-[#64748B]">
+      <p className="mt-6 text-center text-sm text-[#666666]">
         Already have an account?{' '}
-        <Link href="/login" className="font-semibold text-[#2563EB] hover:text-[#1D4ED8]">
+        <Link href="/login" className="font-semibold text-[#9AA59E] hover:text-[#7F8F84]">
           Sign in
         </Link>
       </p>

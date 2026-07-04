@@ -77,7 +77,7 @@ export default function SubscriptionsPage() {
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <Card>
           <CardContent className="pt-6">
-            <Users className="h-5 w-5 text-blue-600" />
+            <Users className="h-5 w-5 text-primary" />
             <h2 className="mt-4 text-3xl font-bold">
               2,481
             </h2>
@@ -101,7 +101,7 @@ export default function SubscriptionsPage() {
 
         <Card>
           <CardContent className="pt-6">
-            <RefreshCcw className="h-5 w-5 text-purple-600" />
+            <RefreshCcw className="h-5 w-5 text-primary" />
             <h2 className="mt-4 text-3xl font-bold">
               89%
             </h2>
@@ -246,7 +246,7 @@ export default function SubscriptionsPage() {
 
         <Card>
           <CardContent className="pt-6">
-            <Calendar className="h-5 w-5 text-blue-600" />
+            <Calendar className="h-5 w-5 text-primary" />
             <h3 className="mt-3 text-2xl font-bold">
               732
             </h3>

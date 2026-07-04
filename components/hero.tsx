@@ -10,10 +10,10 @@ export function Hero() {
         {/* Left Content */}
         <div className="space-y-8">
           <div className="space-y-4">
-            <h1 className="text-5xl md:text-6xl font-bold text-slate-900 leading-tight text-balance">
+            <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight text-balance">
               Empower Your Creator Journey
             </h1>
-            <p className="text-xl text-slate-600 leading-relaxed">
+            <p className="text-xl text-muted-foreground leading-relaxed">
               Cloud is the all-in-one platform for creators to manage their audience, monetize content, and scale their business effortlessly.
             </p>
           </div>
@@ -23,24 +23,24 @@ export function Hero() {
               Start Free Trial
               <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link href="#demo" className="inline-flex items-center justify-center gap-2 border-2 border-slate-300 text-slate-900 px-8 py-3 rounded-full font-semibold hover:border-slate-400 transition">
+            <Link href="#demo" className="inline-flex items-center justify-center gap-2 border-2 border-border text-foreground px-8 py-3 rounded-full font-semibold hover:border-border transition">
               Watch Demo
             </Link>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-6 pt-8 border-t border-slate-200">
+          <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border">
             <div>
-              <p className="text-3xl font-bold text-slate-900">10K+</p>
-              <p className="text-sm text-slate-600">Active Creators</p>
+              <p className="text-3xl font-bold text-foreground">10K+</p>
+              <p className="text-sm text-muted-foreground">Active Creators</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-slate-900">₹50M+</p>
-              <p className="text-sm text-slate-600">Revenue Generated</p>
+              <p className="text-3xl font-bold text-foreground">₹50M+</p>
+              <p className="text-sm text-muted-foreground">Revenue Generated</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-slate-900">95%</p>
-              <p className="text-sm text-slate-600">Satisfaction Rate</p>
+              <p className="text-3xl font-bold text-foreground">95%</p>
+              <p className="text-sm text-muted-foreground">Satisfaction Rate</p>
             </div>
           </div>
         </div>
@@ -52,23 +52,23 @@ export function Hero() {
             <div className="space-y-4">
               <div className="flex items-center justify-between bg-white rounded-lg p-4 shadow-sm">
                 <div>
-                  <p className="text-xs text-slate-500 uppercase tracking-wider">Monthly Revenue</p>
-                  <p className="text-2xl font-bold text-slate-900">₹12,450</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Monthly Revenue</p>
+                  <p className="text-2xl font-bold text-foreground">₹12,450</p>
                 </div>
                 <TrendingUp className="w-8 h-8 text-green-500" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white rounded-lg p-4 shadow-sm">
-                  <p className="text-xs text-slate-500 uppercase tracking-wider">Audience</p>
-                  <p className="text-xl font-bold text-slate-900">25,348</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Audience</p>
+                  <p className="text-xl font-bold text-foreground">25,348</p>
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow-sm">
-                  <p className="text-xs text-slate-500 uppercase tracking-wider">Engagement</p>
-                  <p className="text-xl font-bold text-slate-900">8.5%</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Engagement</p>
+                  <p className="text-xl font-bold text-foreground">8.5%</p>
                 </div>
               </div>
               <div className="bg-white rounded-lg p-4 shadow-sm">
-                <p className="text-xs text-slate-500 uppercase tracking-wider">Active Courses</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">Active Courses</p>
                 <div className="flex gap-2 mt-2">
                   <div className="h-2 flex-1 bg-primary rounded-full" />
                   <div className="h-2 flex-1 bg-primary/60 rounded-full" />

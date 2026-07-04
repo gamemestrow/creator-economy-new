@@ -107,7 +107,7 @@ export function SidebarDynamic() {
         initial={{ x: -300 }}
         animate={{ x: sidebarOpen ? 0 : -300 }}
         transition={{ type: 'spring', damping: 20 }}
-        className="fixed left-0 top-0 h-screen pt-20 w-64 bg-white border-r border-gray-200 overflow-y-auto z-50 lg:z-auto lg:static lg:translate-x-0"
+        className="fixed left-0 top-0 h-screen pt-20 w-64 bg-white border-r border-border overflow-y-auto z-50 lg:z-auto lg:static lg:translate-x-0"
       >
         <div className="p-6">
           {/* Logo */}
@@ -116,8 +116,8 @@ export function SidebarDynamic() {
               <Cloud className="w-6 h-6 text-primary-foreground" />
             </div>
             <div>
-              <p className="font-bold text-gray-900">Cloud</p>
-              <p className="text-xs text-gray-500">Creator Platform</p>
+              <p className="font-bold text-foreground">Cloud</p>
+              <p className="text-xs text-muted-foreground">Creator Platform</p>
             </div>
           </div>
 
@@ -129,7 +129,7 @@ export function SidebarDynamic() {
                   <>
                     <button
                       onClick={() => toggleGroup(group.label)}
-                      className="w-full flex items-center justify-between px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+                      className="w-full flex items-center justify-between px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
                     >
                       <span>{group.label}</span>
                       <ChevronDown
@@ -150,7 +150,7 @@ export function SidebarDynamic() {
                               className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm transition-all ${
                                 isActive
                                   ? 'bg-primary/10 text-primary font-medium'
-                                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                                  : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                               }`}
                             >
                               <Icon className="w-4 h-4" />
@@ -172,7 +172,7 @@ export function SidebarDynamic() {
                         className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm transition-all ${
                           isActive
                             ? 'bg-primary/10 text-primary font-medium'
-                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                            : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                         }`}
                       >
                         <Icon className="w-4 h-4" />
@@ -193,7 +193,7 @@ export function SidebarDynamic() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           onClick={() => toggleSidebar()}
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          className="fixed inset-0 bg-foreground/50 z-40 lg:hidden"
         />
       )}
     </>

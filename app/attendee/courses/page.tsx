@@ -171,15 +171,15 @@ export default function CoursesPage() {
     return (
       <div className="flex min-h-screen items-center justify-center bg-white p-4 text-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-200 border-t-[#2563EB]" />
-          <p className="text-gray-600 font-medium">Loading courses...</p>
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-border border-t-[#9AA59E]" />
+          <p className="text-muted-foreground font-medium">Loading courses...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]">
+    <div className="min-h-screen bg-[#F7F7F4]">
 
 
       <div className="flex min-h-[calc(100vh-73px)]">
@@ -188,10 +188,10 @@ export default function CoursesPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
             {/* Page Header */}
             <div className="mb-8">
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
                 Explore Courses 📚
               </h1>
-              <p className="mt-1 text-gray-600 text-sm sm:text-base">
+              <p className="mt-1 text-muted-foreground text-sm sm:text-base">
                 Find and enroll in courses that match your learning goals.
               </p>
             </div>
@@ -220,10 +220,10 @@ export default function CoursesPage() {
                 {filteredCourses(filters).length === 0 && (
                   <div className="text-center py-16">
                     <div className="text-5xl mb-4">🔍</div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    <h3 className="text-lg font-semibold text-foreground mb-2">
                       No courses found
                     </h3>
-                    <p className="text-gray-600">
+                    <p className="text-muted-foreground">
                       Try adjusting your search or filters to find what you're looking for.
                     </p>
                   </div>

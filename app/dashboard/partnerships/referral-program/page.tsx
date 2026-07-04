@@ -162,7 +162,7 @@ export default function ReferralProgramPage() {
 
           <CardContent className="space-y-4">
             <div className="flex items-center gap-3">
-              <Users className="h-5 w-5 text-blue-500" />
+              <Users className="h-5 w-5 text-primary" />
               <span>1,284 referred users joined</span>
             </div>
 
@@ -172,7 +172,7 @@ export default function ReferralProgramPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <DollarSign className="h-5 w-5 text-purple-500" />
+              <DollarSign className="h-5 w-5 text-primary" />
               <span>₹12.6L generated through referrals</span>
             </div>
 
@@ -195,12 +195,12 @@ export default function ReferralProgramPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <UserPlus className="h-5 w-5 text-blue-500" />
+              <UserPlus className="h-5 w-5 text-primary" />
               <span>280 new members acquired</span>
             </div>
 
             <div className="flex items-center gap-3">
-              <Share2 className="h-5 w-5 text-purple-500" />
+              <Share2 className="h-5 w-5 text-primary" />
               <span>3,800 referral link clicks</span>
             </div>
 

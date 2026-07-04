@@ -130,7 +130,7 @@ export default function CampaignsPage() {
                     <td className="px-6 py-4 text-sm font-medium text-foreground">{campaign.name}</td>
                     <td className="px-6 py-4 text-sm">
                       <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        campaign.type === 'Email' ? 'bg-blue-100 text-blue-800' :
+                        campaign.type === 'Email' ? 'bg-primary/10 text-primary-hover' :
                         'bg-green-100 text-green-800'
                       }`}>
                         {campaign.type}

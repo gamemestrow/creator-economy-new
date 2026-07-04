@@ -16,7 +16,7 @@ export default function ProductsOverviewPage() {
       icon: BookOpen,
       href: '/dashboard/products/courses',
       count: stats.totalCourses,
-      color: 'bg-blue-500',
+      color: 'bg-primary',
     },
     {
       title: 'Memberships',
@@ -24,7 +24,7 @@ export default function ProductsOverviewPage() {
       icon: Star,
       href: '/dashboard/products/memberships',
       count: 0, // Should use membership count
-      color: 'bg-purple-500',
+      color: 'bg-primary',
     },
     {
       title: 'Communities',
@@ -74,12 +74,12 @@ export default function ProductsOverviewPage() {
             <Link 
               key={type.title} 
               href={type.href}
-              className="group bg-card border border-border rounded-2xl p-8 hover:border-primary/50 transition-all hover:shadow-xl relative overflow-hidden"
+              className="group bg-card border border-border rounded-2xl p-8 hover:border-primary/50 transition-all hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] relative overflow-hidden"
             >
               <div className={cn("absolute top-0 right-0 w-32 h-32 -mr-8 -mt-8 opacity-10 rounded-full blur-3xl transition-opacity group-hover:opacity-20", type.color)} />
               
               <div className="flex items-start justify-between">
-                <div className={cn("p-4 rounded-2xl text-white shadow-lg", type.color)}>
+                <div className={cn("p-4 rounded-2xl text-white shadow-[0_10px_30px_rgba(0,0,0,0.05)]", type.color)}>
                   <type.icon className="w-8 h-8" />
                 </div>
                 <div className="text-right">

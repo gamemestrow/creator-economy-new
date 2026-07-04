@@ -227,7 +227,7 @@ const handleCreateCommunity = async (e: React.FormEvent) => {
                 className="flex items-center justify-between rounded-lg border p-4"
               >
                 <div className="flex items-center gap-4">
-                  <Users className="h-8 w-8 text-blue-500" />
+                  <Users className="h-8 w-8 text-primary" />
 
                   <div>
                     <h3 className="font-semibold">
@@ -261,7 +261,7 @@ const handleCreateCommunity = async (e: React.FormEvent) => {
 
           <CardContent className="space-y-4">
             <div className="flex items-center gap-3">
-              <Users className="h-5 w-5 text-blue-500" />
+              <Users className="h-5 w-5 text-primary" />
               <span>{totalMembers.toLocaleString()} active members</span>
             </div>
 
@@ -271,7 +271,7 @@ const handleCreateCommunity = async (e: React.FormEvent) => {
             </div>
 
             <div className="flex items-center gap-3">
-              <UserPlus className="h-5 w-5 text-purple-500" />
+              <UserPlus className="h-5 w-5 text-primary" />
               <span>840 new members joined</span>
             </div>
 
@@ -299,12 +299,12 @@ const handleCreateCommunity = async (e: React.FormEvent) => {
             </div>
 
             <div className="flex items-center gap-3">
-              <Globe className="h-5 w-5 text-blue-500" />
+              <Globe className="h-5 w-5 text-primary" />
               <span>Members from 24 countries</span>
             </div>
 
             <div className="flex items-center gap-3">
-              <MessageSquare className="h-5 w-5 text-purple-500" />
+              <MessageSquare className="h-5 w-5 text-primary" />
               <span>12,400 total discussions</span>
             </div>
           </CardContent>
@@ -312,8 +312,8 @@ const handleCreateCommunity = async (e: React.FormEvent) => {
       </div>
 
       {showCreateCommunityModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-card border border-border rounded-xl w-full max-w-lg shadow-2xl overflow-hidden">
+        <div className="fixed inset-0 bg-foreground/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-card border border-border rounded-xl w-full max-w-lg shadow-[0_10px_30px_rgba(0,0,0,0.05)] overflow-hidden">
 
             <div className="flex items-center justify-between p-6 border-b border-border">
               <div className="flex items-center gap-2">

@@ -18,7 +18,7 @@ export default function RolesPage() {
       description: 'Can create and manage content',
       users: 24,
       permissions: 18,
-      color: 'bg-blue-100 text-blue-800',
+      color: 'bg-primary/10 text-primary-hover',
     },
     {
       id: 3,
@@ -26,7 +26,7 @@ export default function RolesPage() {
       description: 'Can moderate content and users',
       users: 8,
       permissions: 12,
-      color: 'bg-purple-100 text-purple-800',
+      color: 'bg-primary/10 text-primary-hover',
     },
     {
       id: 4,
@@ -66,7 +66,7 @@ export default function RolesPage() {
       {/* Roles Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {roles.map((role) => (
-          <div key={role.id} className="bg-card border border-border rounded-lg p-4 hover:shadow-md transition-shadow">
+          <div key={role.id} className="bg-card border border-border rounded-lg p-4 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-shadow">
             <div className="flex items-start justify-between mb-3">
               <div>
                 <h3 className="font-semibold text-foreground">{role.name}</h3>

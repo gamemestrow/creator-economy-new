@@ -10,7 +10,7 @@ import { usePageState } from '@/contexts/PageStatesContext'
 
 function MembershipCard({ membership, onDelete }: { membership: Membership, onDelete: (id: string) => void }) {
   return (
-    <div className="bg-card border border-border rounded-xl p-6 hover:shadow-xl transition-all relative group">
+    <div className="bg-card border border-border rounded-xl p-6 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all relative group">
       <div className="flex justify-between items-start mb-4">
         <div className="p-2 bg-primary/10 rounded-lg text-primary">
           <Star className="w-6 h-6" />
@@ -164,8 +164,8 @@ export default function MembershipsPage() {
 
       {/* Modal */}
       {showCreateModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-card border border-border rounded-xl w-full max-w-md shadow-2xl overflow-hidden">
+        <div className="fixed inset-0 bg-foreground/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-card border border-border rounded-xl w-full max-w-md shadow-[0_10px_30px_rgba(0,0,0,0.05)] overflow-hidden">
             <div className="flex items-center justify-between p-6 border-b border-border">
               <h2 className="text-xl font-bold text-foreground">Create Membership Plan</h2>
               <button onClick={() => setShowCreateModal(false)} className="text-muted-foreground hover:text-foreground">

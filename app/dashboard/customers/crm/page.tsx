@@ -140,8 +140,8 @@ export default function CRMPage() {
                     <td className="px-6 py-4 text-sm">
                       <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                         contact.status === 'Active' ? 'bg-green-100 text-green-800' :
-                        contact.status === 'Lead' ? 'bg-blue-100 text-blue-800' :
-                        'bg-gray-100 text-gray-800'
+                        contact.status === 'Lead' ? 'bg-primary/10 text-primary-hover' :
+                        'bg-muted text-foreground'
                       }`}>
                         {contact.status}
                       </span>

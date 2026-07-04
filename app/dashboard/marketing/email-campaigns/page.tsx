@@ -111,7 +111,7 @@ export default function EmailCampaignsPage() {
                 className="flex items-center justify-between rounded-lg border p-4"
               >
                 <div className="flex items-center gap-4">
-                  <Mail className="h-8 w-8 text-blue-500" />
+                  <Mail className="h-8 w-8 text-primary" />
 
                   <div>
                     <h3 className="font-semibold">
@@ -170,7 +170,7 @@ export default function EmailCampaignsPage() {
 
           <CardContent className="space-y-4">
             <div className="flex items-center gap-3">
-              <Send className="h-5 w-5 text-blue-500" />
+              <Send className="h-5 w-5 text-primary" />
               <span>124,000 emails delivered</span>
             </div>
 
@@ -180,7 +180,7 @@ export default function EmailCampaignsPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <MousePointer className="h-5 w-5 text-purple-500" />
+              <MousePointer className="h-5 w-5 text-primary" />
               <span>26,040 link clicks</span>
             </div>
 
@@ -203,12 +203,12 @@ export default function EmailCampaignsPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <Calendar className="h-5 w-5 text-blue-500" />
+              <Calendar className="h-5 w-5 text-primary" />
               <span>12 campaigns scheduled this month</span>
             </div>
 
             <div className="flex items-center gap-3">
-              <Mail className="h-5 w-5 text-purple-500" />
+              <Mail className="h-5 w-5 text-primary" />
               <span>Best campaign open rate: 82%</span>
             </div>
 

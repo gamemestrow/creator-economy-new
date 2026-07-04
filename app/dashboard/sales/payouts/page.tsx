@@ -88,7 +88,7 @@ export default function PayoutsPage() {
 
         <Card>
           <CardContent className="pt-6">
-            <Wallet className="h-5 w-5 text-blue-600" />
+            <Wallet className="h-5 w-5 text-primary" />
             <h2 className="mt-4 text-3xl font-bold">
               ₹2.7L
             </h2>
@@ -219,7 +219,7 @@ export default function PayoutsPage() {
                             ? 'bg-green-100 text-green-700'
                             : payout.status === 'Pending'
                             ? 'bg-yellow-100 text-yellow-700'
-                            : 'bg-blue-100 text-blue-700'
+                            : 'bg-primary/10 text-primary'
                         }`}
                       >
                         {payout.status}
@@ -252,7 +252,7 @@ export default function PayoutsPage() {
 
         <Card>
           <CardContent className="pt-6">
-            <CheckCircle className="h-5 w-5 text-blue-600" />
+            <CheckCircle className="h-5 w-5 text-primary" />
             <h3 className="mt-3 text-2xl font-bold">
               98.4%
             </h3>

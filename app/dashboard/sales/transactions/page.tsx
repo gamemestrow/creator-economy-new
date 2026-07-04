@@ -90,7 +90,7 @@ export default function TransactionsPage() {
 
         <Card>
           <CardContent className="pt-6">
-            <CreditCard className="h-5 w-5 text-blue-600" />
+            <CreditCard className="h-5 w-5 text-primary" />
             <h2 className="mt-4 text-3xl font-bold">1,248</h2>
             <p className="text-muted-foreground">
               Total Transactions

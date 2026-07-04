@@ -135,8 +135,8 @@ export function UploadDigitalDownloadModal({
     }
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-card border border-border rounded-xl w-full max-w-lg shadow-2xl overflow-hidden">
+        <div className="fixed inset-0 bg-foreground/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-card border border-border rounded-xl w-full max-w-lg shadow-[0_10px_30px_rgba(0,0,0,0.05)] overflow-hidden">
                 <div className="flex items-center justify-between p-6 border-b border-border">
                     <div className="flex items-center gap-2">
                         <FileText className="w-5 h-5 text-muted-foreground" />

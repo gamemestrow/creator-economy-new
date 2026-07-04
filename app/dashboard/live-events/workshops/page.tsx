@@ -108,7 +108,7 @@ export default function WorkshopsPage() {
                 className="flex items-center justify-between rounded-lg border p-4"
               >
                 <div className="flex items-center gap-4">
-                  <Hammer className="h-8 w-8 text-blue-500" />
+                  <Hammer className="h-8 w-8 text-primary" />
 
                   <div>
                     <h3 className="font-semibold">
@@ -151,7 +151,7 @@ export default function WorkshopsPage() {
 
           <CardContent className="space-y-4">
             <div className="flex items-center gap-3">
-              <Users className="h-5 w-5 text-blue-500" />
+              <Users className="h-5 w-5 text-primary" />
               <span>9,840 total participants</span>
             </div>
 
@@ -161,7 +161,7 @@ export default function WorkshopsPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <TrendingUp className="h-5 w-5 text-purple-500" />
+              <TrendingUp className="h-5 w-5 text-primary" />
               <span>29% growth this month</span>
             </div>
 

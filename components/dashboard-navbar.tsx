@@ -55,7 +55,7 @@ export function DashboardNavbar() {
         
         {/* Logo */}
         <Link href="/dashboard" className="flex items-center gap-2 flex-shrink-0">
-          <span className="text-2xl font-black text-slate-800 tracking-tight lowercase">
+          <span className="text-2xl font-black text-foreground tracking-tight lowercase">
             tag<span className="text-primary">mango</span>
           </span>
         </Link>
@@ -84,12 +84,12 @@ export function DashboardNavbar() {
         {/* Right Side Actions */}
         <div className="flex items-center gap-5 flex-shrink-0">
           {/* App Grid Launcher */}
-          <button className="p-2 hover:bg-gray-50 rounded-full transition text-gray-500 hover:text-gray-800">
+          <button className="p-2 hover:bg-muted rounded-full transition text-muted-foreground hover:text-foreground">
             <Grid className="w-5 h-5" />
           </button>
 
           {/* Notifications */}
-          <button className="p-2 hover:bg-gray-50 rounded-full transition text-gray-500 hover:text-gray-800 relative">
+          <button className="p-2 hover:bg-muted rounded-full transition text-muted-foreground hover:text-foreground relative">
             <Bell className="w-5 h-5" />
             <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
           </button>
@@ -98,7 +98,7 @@ export function DashboardNavbar() {
           <div className="relative">
             <button
               onClick={() => setShowUserMenu(!showUserMenu)}
-              className="flex items-center gap-2 p-1 hover:bg-gray-50 rounded-full transition"
+              className="flex items-center gap-2 p-1 hover:bg-muted rounded-full transition"
             >
               <div className="w-9 h-9 rounded-full bg-[#EEF2EC] border border-[#ECE8DF] flex items-center justify-center text-[#8FA193] font-bold text-sm">
                 A
@@ -106,17 +106,17 @@ export function DashboardNavbar() {
             </button>
 
             {showUserMenu && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-1.5 z-50">
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.05)] border border-border py-1.5 z-50">
                 <Link
                   href="/dashboard/settings/platform"
-                  className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition"
+                  className="flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition"
                   onClick={() => setShowUserMenu(false)}
                 >
-                  <User className="w-4 h-4 text-gray-400" />
+                  <User className="w-4 h-4 text-muted-foreground" />
                   <span>Account Settings</span>
                 </Link>
                 <button 
-                  className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50/50 transition border-t border-gray-100"
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50/50 transition border-t border-border"
                   onClick={() => setShowUserMenu(false)}
                 >
                   <LogOut className="w-4 h-4" />

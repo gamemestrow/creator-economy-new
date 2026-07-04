@@ -49,7 +49,7 @@ function EventCard({ event }: { event: any }) {
   const occupancy = ((event.attendees / event.capacity) * 100).toFixed(0)
   
   return (
-    <div className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow">
+    <div className="bg-card border border-border rounded-lg p-6 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-shadow">
       <div className="flex items-start justify-between mb-4">
         <h3 className="text-lg font-bold text-foreground flex-1">{event.title}</h3>
         <button className="p-2 hover:bg-input rounded transition-colors">
@@ -92,8 +92,8 @@ function EventCard({ event }: { event: any }) {
         <span
           className={`px-3 py-1 rounded-full text-xs font-medium ${
             event.status === 'Upcoming'
-              ? 'bg-blue-100 text-blue-800'
-              : 'bg-gray-100 text-gray-800'
+              ? 'bg-primary/10 text-primary-hover'
+              : 'bg-muted text-foreground'
           }`}
         >
           {event.status}

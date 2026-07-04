@@ -43,7 +43,7 @@ const mockCommunities = [
 
 function CommunityCard({ community }: { community: any }) {
   return (
-    <div className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow">
+    <div className="bg-card border border-border rounded-lg p-6 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-shadow">
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
           <h3 className="text-lg font-bold text-foreground mb-2">{community.name}</h3>
@@ -74,7 +74,7 @@ function CommunityCard({ community }: { community: any }) {
           className={`px-3 py-1 rounded-full text-xs font-medium ${
             community.status === 'Active'
               ? 'bg-green-100 text-green-800'
-              : 'bg-gray-100 text-gray-800'
+              : 'bg-muted text-foreground'
           }`}
         >
           {community.status}

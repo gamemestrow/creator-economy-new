@@ -108,7 +108,7 @@ export default function LiveEventRegistrationPage() {
                 className="flex items-center justify-between border rounded-lg p-4"
               >
                 <div className="flex items-center gap-4">
-                  <Video className="h-8 w-8 text-blue-500" />
+                  <Video className="h-8 w-8 text-primary" />
 
                   <div>
                     <h3 className="font-semibold">
@@ -169,7 +169,7 @@ export default function LiveEventRegistrationPage() {
 
           <CardContent className="space-y-4">
             <div className="flex items-center gap-3">
-              <Clock className="h-5 w-5 text-blue-500" />
+              <Clock className="h-5 w-5 text-primary" />
               <span>Average watch time: 78 mins</span>
             </div>
 
@@ -179,7 +179,7 @@ export default function LiveEventRegistrationPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <MapPin className="h-5 w-5 text-purple-500" />
+              <MapPin className="h-5 w-5 text-primary" />
               <span>Users from 18 countries</span>
             </div>
 

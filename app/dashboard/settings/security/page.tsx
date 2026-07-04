@@ -111,7 +111,7 @@ export default function Page() {
                 </p>
                 <h2 className="mt-2 text-3xl font-bold">3</h2>
               </div>
-              <Users className="h-10 w-10 text-blue-500" />
+              <Users className="h-10 w-10 text-primary" />
             </div>
           </CardContent>
         </Card>
@@ -139,7 +139,7 @@ export default function Page() {
                 </p>
                 <h2 className="mt-2 text-3xl font-bold">248</h2>
               </div>
-              <Activity className="h-10 w-10 text-purple-500" />
+              <Activity className="h-10 w-10 text-primary" />
             </div>
           </CardContent>
         </Card>
@@ -155,7 +155,7 @@ export default function Page() {
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between rounded-lg border p-4">
               <div className="flex items-center gap-3">
-                <Lock className="h-5 w-5 text-blue-500" />
+                <Lock className="h-5 w-5 text-primary" />
                 <div>
                   <p className="font-medium">Password Protection</p>
                   <p className="text-sm text-muted-foreground">
@@ -169,7 +169,7 @@ export default function Page() {
 
             <div className="flex items-center justify-between rounded-lg border p-4">
               <div className="flex items-center gap-3">
-                <Smartphone className="h-5 w-5 text-purple-500" />
+                <Smartphone className="h-5 w-5 text-primary" />
                 <div>
                   <p className="font-medium">
                     Two-Factor Authentication
@@ -265,7 +265,7 @@ export default function Page() {
                     className={`font-medium ${
                       session.status === "Active"
                         ? "text-green-600"
-                        : "text-gray-500"
+                        : "text-muted-foreground"
                     }`}
                   >
                     {session.status}
@@ -336,7 +336,7 @@ export default function Page() {
             </div>
 
             <div className="flex items-center gap-3 rounded-lg border p-4">
-              <Globe className="h-8 w-8 text-blue-500" />
+              <Globe className="h-8 w-8 text-primary" />
               <div>
                 <h3 className="font-semibold">
                   Suspicious Login Detection
@@ -348,7 +348,7 @@ export default function Page() {
             </div>
 
             <div className="flex items-center gap-3 rounded-lg border p-4">
-              <Eye className="h-8 w-8 text-purple-500" />
+              <Eye className="h-8 w-8 text-primary" />
               <div>
                 <h3 className="font-semibold">
                   Real-Time Monitoring

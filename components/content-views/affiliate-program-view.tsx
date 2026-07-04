@@ -24,10 +24,10 @@ export function AffiliateProgramView() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Affiliate Program</h1>
-          <p className="text-gray-600 mt-2">Manage your affiliate partners and track commissions</p>
+          <h1 className="text-3xl font-bold text-foreground">Affiliate Program</h1>
+          <p className="text-muted-foreground mt-2">Manage your affiliate partners and track commissions</p>
         </div>
-        <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+        <button className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary transition">
           <Plus className="w-5 h-5" />
           Invite Affiliate
         </button>
@@ -35,87 +35,87 @@ export function AffiliateProgramView() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-white border border-gray-200 rounded-lg p-6">
+        <div className="bg-white border border-border rounded-lg p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Active Affiliates</p>
-              <p className="text-3xl font-bold text-gray-900 mt-1">34</p>
+              <p className="text-sm text-muted-foreground">Active Affiliates</p>
+              <p className="text-3xl font-bold text-foreground mt-1">34</p>
             </div>
-            <Users className="w-8 h-8 text-blue-500" />
+            <Users className="w-8 h-8 text-primary" />
           </div>
         </div>
-        <div className="bg-white border border-gray-200 rounded-lg p-6">
+        <div className="bg-white border border-border rounded-lg p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Total Sales</p>
-              <p className="text-3xl font-bold text-gray-900 mt-1">₹88,400</p>
+              <p className="text-sm text-muted-foreground">Total Sales</p>
+              <p className="text-3xl font-bold text-foreground mt-1">₹88,400</p>
             </div>
             <TrendingUp className="w-8 h-8 text-green-500" />
           </div>
         </div>
-        <div className="bg-white border border-gray-200 rounded-lg p-6">
+        <div className="bg-white border border-border rounded-lg p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Commission Paid</p>
-              <p className="text-3xl font-bold text-gray-900 mt-1">₹8,840</p>
+              <p className="text-sm text-muted-foreground">Commission Paid</p>
+              <p className="text-3xl font-bold text-foreground mt-1">₹8,840</p>
             </div>
             <DollarSign className="w-8 h-8 text-yellow-500" />
           </div>
         </div>
-        <div className="bg-white border border-gray-200 rounded-lg p-6">
+        <div className="bg-white border border-border rounded-lg p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Avg Commission</p>
-              <p className="text-3xl font-bold text-gray-900 mt-1">10%</p>
+              <p className="text-sm text-muted-foreground">Avg Commission</p>
+              <p className="text-3xl font-bold text-foreground mt-1">10%</p>
             </div>
-            <Handshake className="w-8 h-8 text-purple-500" />
+            <Handshake className="w-8 h-8 text-primary" />
           </div>
         </div>
       </div>
 
       {/* Commission Trend */}
-      <div className="bg-white border border-gray-200 rounded-lg p-6">
-        <h2 className="text-lg font-bold text-gray-900 mb-6">Commission Trend</h2>
+      <div className="bg-white border border-border rounded-lg p-6">
+        <h2 className="text-lg font-bold text-foreground mb-6">Commission Trend</h2>
         <ResponsiveContainer width="100%" height={300}>
           <AreaChart data={commissionData}>
             <defs>
               <linearGradient id="colorCommission" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#2563eb" stopOpacity={0.3}/>
-                <stop offset="95%" stopColor="#2563eb" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#9AA59E" stopOpacity={0.3}/>
+                <stop offset="95%" stopColor="#9AA59E" stopOpacity={0}/>
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
             <XAxis dataKey="month" stroke="#6b7280" />
             <YAxis stroke="#6b7280" />
             <Tooltip contentStyle={{ backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }} />
-            <Area type="monotone" dataKey="commission" stroke="#2563eb" fillOpacity={1} fill="url(#colorCommission)" />
+            <Area type="monotone" dataKey="commission" stroke="#9AA59E" fillOpacity={1} fill="url(#colorCommission)" />
           </AreaChart>
         </ResponsiveContainer>
       </div>
 
       {/* Top Affiliates */}
-      <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
-        <div className="p-6 border-b border-gray-200">
-          <h2 className="text-lg font-bold text-gray-900">Top Affiliates</h2>
+      <div className="bg-white border border-border rounded-lg overflow-hidden">
+        <div className="p-6 border-b border-border">
+          <h2 className="text-lg font-bold text-foreground">Top Affiliates</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-200 bg-gray-50">
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Name</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Referrals</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Sales</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Commission</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Status</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900"></th>
+              <tr className="border-b border-border bg-muted">
+                <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Name</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Referrals</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Sales</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Commission</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Status</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-foreground"></th>
               </tr>
             </thead>
             <tbody>
               {topAffiliates.map((affiliate) => (
-                <tr key={affiliate.id} className="border-b border-gray-200 hover:bg-gray-50">
-                  <td className="px-6 py-4 text-sm text-gray-900 font-medium">{affiliate.name}</td>
-                  <td className="px-6 py-4 text-sm text-gray-600">{affiliate.referrals}</td>
-                  <td className="px-6 py-4 text-sm text-gray-900">₹{affiliate.sales.toLocaleString()}</td>
+                <tr key={affiliate.id} className="border-b border-border hover:bg-muted">
+                  <td className="px-6 py-4 text-sm text-foreground font-medium">{affiliate.name}</td>
+                  <td className="px-6 py-4 text-sm text-muted-foreground">{affiliate.referrals}</td>
+                  <td className="px-6 py-4 text-sm text-foreground">₹{affiliate.sales.toLocaleString()}</td>
                   <td className="px-6 py-4 text-sm text-green-600 font-medium">₹{affiliate.commission.toLocaleString()}</td>
                   <td className="px-6 py-4">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${
@@ -127,8 +127,8 @@ export function AffiliateProgramView() {
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <button className="p-2 hover:bg-gray-100 rounded-lg transition">
-                      <Edit2 className="w-4 h-4 text-gray-400" />
+                    <button className="p-2 hover:bg-muted rounded-lg transition">
+                      <Edit2 className="w-4 h-4 text-muted-foreground" />
                     </button>
                   </td>
                 </tr>

@@ -80,12 +80,12 @@ export function FeaturedCourses({ userId }: FeaturedCoursesProps) {
   if (loading) {
     return (
       <div>
-        <h2 className="mb-6 text-xl font-bold text-gray-900">Featured Courses</h2>
+        <h2 className="mb-6 text-xl font-bold text-foreground">Featured Courses</h2>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {[...Array(3)].map((_, i) => (
             <div
               key={i}
-              className="h-64 rounded-xl border border-gray-200 bg-white animate-pulse"
+              className="h-64 rounded-xl border border-border bg-white animate-pulse"
             />
           ))}
         </div>
@@ -96,11 +96,11 @@ export function FeaturedCourses({ userId }: FeaturedCoursesProps) {
   if (courses.length === 0) {
     return (
       <div>
-        <h2 className="mb-6 text-xl font-bold text-gray-900">Featured Courses</h2>
-        <div className="rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 px-6 py-12 text-center">
-          <BookOpen className="mx-auto mb-3 h-12 w-12 text-gray-400" />
-          <h3 className="mb-2 font-medium text-gray-900">No courses available yet</h3>
-          <p className="text-sm text-gray-600">
+        <h2 className="mb-6 text-xl font-bold text-foreground">Featured Courses</h2>
+        <div className="rounded-xl border-2 border-dashed border-border bg-muted px-6 py-12 text-center">
+          <BookOpen className="mx-auto mb-3 h-12 w-12 text-muted-foreground" />
+          <h3 className="mb-2 font-medium text-foreground">No courses available yet</h3>
+          <p className="text-sm text-muted-foreground">
             Check back soon for new courses from top creators.
           </p>
         </div>
@@ -111,8 +111,8 @@ export function FeaturedCourses({ userId }: FeaturedCoursesProps) {
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-xl font-bold text-gray-900">Featured Courses</h2>
-        <a href="/attendee/courses" className="text-sm font-medium text-blue-600 hover:text-blue-700">
+        <h2 className="text-xl font-bold text-foreground">Featured Courses</h2>
+        <a href="/attendee/courses" className="text-sm font-medium text-primary hover:text-primary">
           View All →
         </a>
       </div>
@@ -125,10 +125,10 @@ export function FeaturedCourses({ userId }: FeaturedCoursesProps) {
           return (
             <div
               key={course.courseId}
-              className="overflow-hidden rounded-xl border border-gray-200 bg-white transition-all hover:shadow-lg"
+              className="overflow-hidden rounded-xl border border-border bg-white transition-all hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
             >
               {/* Thumbnail */}
-              <div className="h-40 bg-gradient-to-br from-[#2563EB]/10 to-blue-100 flex items-center justify-center">
+              <div className="h-40 bg-primary from-[#9AA59E]/10  flex items-center justify-center">
                 {course.thumbnail ? (
                   <img
                     src={course.thumbnail}
@@ -136,32 +136,32 @@ export function FeaturedCourses({ userId }: FeaturedCoursesProps) {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <BookOpen className="h-12 w-12 text-gray-400" />
+                  <BookOpen className="h-12 w-12 text-muted-foreground" />
                 )}
               </div>
 
               {/* Content */}
               <div className="p-4">
-                <div className="mb-2 inline-block rounded-full bg-blue-100 px-2.5 py-1 text-xs font-medium text-[#2563EB]">
+                <div className="mb-2 inline-block rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-[#9AA59E]">
                   {course.difficulty}
                 </div>
 
-                <h3 className="mb-2 line-clamp-2 font-semibold text-gray-900">
+                <h3 className="mb-2 line-clamp-2 font-semibold text-foreground">
                   {course.title}
                 </h3>
 
-                <p className="mb-3 line-clamp-2 text-sm text-gray-600">
+                <p className="mb-3 line-clamp-2 text-sm text-muted-foreground">
                   {course.description}
                 </p>
 
                 <div className="mb-4 flex items-center justify-between text-sm">
-                  <span className="text-gray-600">
+                  <span className="text-muted-foreground">
                     {course.totalLessons || 0} lessons
                   </span>
                   {course.rating && (
                     <div className="flex items-center gap-1">
                       <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      <span className="font-medium text-gray-900">
+                      <span className="font-medium text-foreground">
                         {course.rating.toFixed(1)}
                       </span>
                     </div>
@@ -169,10 +169,10 @@ export function FeaturedCourses({ userId }: FeaturedCoursesProps) {
                 </div>
 
                 <div className="mb-4 flex items-center justify-between">
-                  <span className="font-semibold text-gray-900">
+                  <span className="font-semibold text-foreground">
                     {course.price === 0 ? 'Free' : `₹${course.price}`}
                   </span>
-                  <span className="text-xs text-gray-600">
+                  <span className="text-xs text-muted-foreground">
                     {course.enrollmentCount} enrolled
                   </span>
                 </div>
@@ -187,8 +187,8 @@ export function FeaturedCourses({ userId }: FeaturedCoursesProps) {
                   disabled={isEnrolling}
                   className={`w-full rounded-lg px-4 py-2 font-medium transition-all disabled:cursor-not-allowed disabled:opacity-60 ${
                     isEnrolled
-                      ? 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-                      : 'bg-[#2563EB] text-white hover:bg-blue-700'
+                      ? 'bg-muted text-foreground hover:bg-card'
+                      : 'bg-[#9AA59E] text-white hover:bg-primary'
                   }`}
                 >
                   {isEnrolling ? (

@@ -47,7 +47,7 @@ function DashboardMain({ children }: { children: React.ReactNode }) {
     <main
       style={{ marginLeft: sidebarWidth }}
       className={cn(
-        'min-h-screen flex-1 bg-[#F8FAFC] p-6 transition-[margin] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] md:p-8'
+        'min-h-screen flex-1 bg-[#F7F7F4] p-6 transition-[margin] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] md:p-8'
       )}
     >
       <div className="mx-auto max-w-7xl">
@@ -74,7 +74,7 @@ function DashboardMain({ children }: { children: React.ReactNode }) {
 
 export function DashboardAppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-[#F8FAFC] relative">
+    <div className="min-h-screen bg-[#F7F7F4] relative">
       <AdminSidebar />
       <DashboardMain>{children}</DashboardMain>
       <FloatingChat />

@@ -93,7 +93,7 @@ export default function Page() {
                 </p>
                 <h2 className="mt-2 text-3xl font-bold">18</h2>
               </div>
-              <Plug className="h-10 w-10 text-blue-500" />
+              <Plug className="h-10 w-10 text-primary" />
             </div>
           </CardContent>
         </Card>
@@ -135,7 +135,7 @@ export default function Page() {
                 </p>
                 <h2 className="mt-2 text-3xl font-bold">1.2M</h2>
               </div>
-              <Webhook className="h-10 w-10 text-purple-500" />
+              <Webhook className="h-10 w-10 text-primary" />
             </div>
           </CardContent>
         </Card>
@@ -155,10 +155,10 @@ export default function Page() {
               return (
                 <div
                   key={integration.name}
-                  className="rounded-xl border p-5 transition-all hover:shadow-md"
+                  className="rounded-xl border p-5 transition-all hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
                 >
                   <div className="flex items-center justify-between">
-                    <Icon className="h-10 w-10 text-blue-600" />
+                    <Icon className="h-10 w-10 text-primary" />
 
                     <span
                       className={`rounded-full px-3 py-1 text-xs font-medium ${
@@ -208,7 +208,7 @@ export default function Page() {
 
         <Card>
           <CardContent className="flex items-center gap-4 p-6">
-            <Mail className="h-8 w-8 text-blue-500" />
+            <Mail className="h-8 w-8 text-primary" />
             <div>
               <h3 className="font-semibold">Email</h3>
               <p className="text-sm text-muted-foreground">
@@ -220,7 +220,7 @@ export default function Page() {
 
         <Card>
           <CardContent className="flex items-center gap-4 p-6">
-            <MessageSquare className="h-8 w-8 text-purple-500" />
+            <MessageSquare className="h-8 w-8 text-primary" />
             <div>
               <h3 className="font-semibold">Messaging</h3>
               <p className="text-sm text-muted-foreground">
@@ -318,7 +318,7 @@ export default function Page() {
             </div>
 
             <div className="flex items-center gap-3">
-              <Smartphone className="h-5 w-5 text-blue-500" />
+              <Smartphone className="h-5 w-5 text-primary" />
               <div>
                 <p className="font-medium">2FA Enabled</p>
                 <p className="text-sm text-muted-foreground">

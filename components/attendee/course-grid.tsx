@@ -23,14 +23,14 @@ export function CourseGrid({ courses }: CourseGridProps) {
       {/* Results count */}
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm text-gray-600">
-            Showing <span className="font-semibold text-gray-900">{courses.length}</span> courses
+          <p className="text-sm text-muted-foreground">
+            Showing <span className="font-semibold text-foreground">{courses.length}</span> courses
           </p>
         </div>
         <div>
           <select
             defaultValue="popular"
-            className="px-3 py-2 text-sm text-gray-700 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB] transition-all"
+            className="px-3 py-2 text-sm text-foreground bg-white border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9AA59E] transition-all"
           >
             <option value="popular">Most Popular</option>
             <option value="rating">Highest Rated</option>

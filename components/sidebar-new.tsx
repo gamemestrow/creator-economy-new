@@ -205,14 +205,14 @@ export function SidebarNew({ activeTab, onSelectTab, isCollapsed, onToggleCollap
   return (
     <div 
       className={cn(
-        "fixed left-0 top-16 bottom-0 bg-white border-r border-slate-100 flex flex-col z-30 select-none shadow-sm transition-all duration-300",
+        "fixed left-0 top-16 bottom-0 bg-white border-r border-border flex flex-col z-30 select-none shadow-sm transition-all duration-300",
         isCollapsed ? "w-20" : "w-64"
       )}
     >
       {/* Collapse button floating */}
       <button
         onClick={onToggleCollapse}
-        className="absolute -right-3 top-4 w-6 h-6 bg-white border border-slate-100 rounded-full flex items-center justify-center shadow-sm text-slate-500 hover:text-[#f06529] z-50 hover:shadow-md transition-all"
+        className="absolute -right-3 top-4 w-6 h-6 bg-white border border-border rounded-full flex items-center justify-center shadow-sm text-muted-foreground hover:text-[#f06529] z-50 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all"
       >
         <ChevronLeft className={cn("w-4 h-4 transition-transform", isCollapsed && "rotate-180")} />
       </button>
@@ -220,14 +220,14 @@ export function SidebarNew({ activeTab, onSelectTab, isCollapsed, onToggleCollap
       {/* Search Bar - Hidden when collapsed */}
       {!isCollapsed && (
         <div className="p-4 border-b border-slate-50">
-          <div className="relative flex items-center bg-slate-50 border border-slate-100 rounded-xl px-3 py-2 group focus-within:border-slate-200 focus-within:bg-white transition-all">
-            <Search className="w-4 h-4 text-slate-400 mr-2 group-focus-within:text-slate-600 transition-colors" />
+          <div className="relative flex items-center bg-muted border border-border rounded-xl px-3 py-2 group focus-within:border-border focus-within:bg-white transition-all">
+            <Search className="w-4 h-4 text-muted-foreground mr-2 group-focus-within:text-muted-foreground transition-colors" />
             <input
               type="text"
               placeholder="Search features..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-transparent text-xs text-slate-700 outline-none placeholder-slate-400"
+              className="w-full bg-transparent text-xs text-foreground outline-none placeholder-slate-400"
             />
           </div>
         </div>
@@ -250,12 +250,12 @@ export function SidebarNew({ activeTab, onSelectTab, isCollapsed, onToggleCollap
                 className={cn(
                   "w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all border-l-[3.5px]",
                   isGroupActive
-                    ? "bg-slate-50/80 text-slate-900 border-[#f06529]"
-                    : "text-slate-500 border-transparent hover:bg-slate-50/50 hover:text-slate-800"
+                    ? "bg-muted/80 text-foreground border-[#f06529]"
+                    : "text-muted-foreground border-transparent hover:bg-muted/50 hover:text-foreground"
                 )}
               >
                 <div className="flex items-center gap-3">
-                  <span className={cn(isGroupActive ? "text-[#f06529]" : "text-slate-400")}>
+                  <span className={cn(isGroupActive ? "text-[#f06529]" : "text-muted-foreground")}>
                     {group.icon}
                   </span>
                   {!isCollapsed && <span>{group.label}</span>}
@@ -263,8 +263,8 @@ export function SidebarNew({ activeTab, onSelectTab, isCollapsed, onToggleCollap
                 {!isCollapsed && (
                   <ChevronDown
                     className={cn(
-                      "w-3.5 h-3.5 text-slate-400 transition-transform duration-200",
-                      isExpanded && "rotate-180 text-slate-600"
+                      "w-3.5 h-3.5 text-muted-foreground transition-transform duration-200",
+                      isExpanded && "rotate-180 text-muted-foreground"
                     )}
                   />
                 )}
@@ -285,7 +285,7 @@ export function SidebarNew({ activeTab, onSelectTab, isCollapsed, onToggleCollap
                             "w-full flex items-center justify-between px-3 py-2 text-[11px] font-semibold rounded-lg text-left transition-all",
                             isActive
                               ? "bg-[#fff6f0] text-[#f06529]"
-                              : "text-slate-400 hover:bg-slate-50/50 hover:text-slate-700"
+                              : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
                           )}
                         >
                           {sub.label}
@@ -304,7 +304,7 @@ export function SidebarNew({ activeTab, onSelectTab, isCollapsed, onToggleCollap
         <div className="p-4 border-t border-slate-50 bg-white">
           <button 
             onClick={() => onSelectTab('partnerships-affiliates')}
-            className="w-full text-left bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-xl p-4 transition shadow-sm relative overflow-hidden group hover:shadow-md"
+            className="w-full text-left bg-primary   text-white rounded-xl p-4 transition shadow-sm relative overflow-hidden group hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
           >
             <div className="absolute right-0 bottom-0 opacity-10 translate-x-2 translate-y-2 pointer-events-none group-hover:scale-110 transition-transform">
               <Sparkles className="w-12 h-12 text-white" />

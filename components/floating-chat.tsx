@@ -17,7 +17,7 @@ export function FloatingChat() {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="absolute bottom-16 right-0 w-[400px] max-w-[calc(100vw-3rem)] shadow-2xl rounded-xl overflow-hidden border bg-background"
+            className="absolute bottom-16 right-0 w-[400px] max-w-[calc(100vw-3rem)] shadow-[0_10px_30px_rgba(0,0,0,0.05)] rounded-xl overflow-hidden border bg-background"
           >
             <div className="flex items-center justify-between p-4 border-b bg-primary text-primary-foreground">
               <div className="flex items-center gap-2 font-semibold">
@@ -42,7 +42,7 @@ export function FloatingChat() {
 
       <Button
         size="lg"
-        className="rounded-full w-14 h-14 shadow-lg p-0"
+        className="rounded-full w-14 h-14 shadow-[0_10px_30px_rgba(0,0,0,0.05)] p-0"
         onClick={() => setIsChatOpen(!isChatOpen)}
       >
         {isChatOpen ? (

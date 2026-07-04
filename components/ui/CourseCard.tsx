@@ -6,7 +6,7 @@ function CourseCard({ course, onDelete }: { course: Course, onDelete: (id: strin
   const [showMenu, setShowMenu] = useState(false)
 
   return (
-    <div className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow relative">
+    <div className="bg-card border border-border rounded-lg p-6 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-shadow relative">
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
           <h3 className="text-lg font-bold text-foreground mb-2">{course.title}</h3>
@@ -21,7 +21,7 @@ function CourseCard({ course, onDelete }: { course: Course, onDelete: (id: strin
           </button>
 
           {showMenu && (
-            <div className="absolute right-0 top-10 w-40 bg-card border border-border rounded-lg shadow-xl z-10 py-1">
+            <div className="absolute right-0 top-10 w-40 bg-card border border-border rounded-lg shadow-[0_10px_30px_rgba(0,0,0,0.05)] z-10 py-1">
               <button
                 onClick={() => {
                   if (window.confirm('Are you sure you want to delete this course?')) {
@@ -56,7 +56,7 @@ function CourseCard({ course, onDelete }: { course: Course, onDelete: (id: strin
           <span
             className={`px-3 py-1 rounded-full text-xs font-medium ${course.isPublished
                 ? 'bg-green-100 text-green-800'
-                : 'bg-gray-100 text-gray-800'
+                : 'bg-muted text-foreground'
               }`}
           >
             {course.isPublished ? 'Published' : 'Draft'}

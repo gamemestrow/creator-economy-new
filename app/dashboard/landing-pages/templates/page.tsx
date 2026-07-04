@@ -12,8 +12,8 @@ const templates = [
     name: 'Course Sales Page',
     category: 'Online course',
     description: 'A conversion-focused page for launching a paid course.',
-    accent: '#2563eb',
-    background: 'from-blue-50 via-white to-cyan-50',
+    accent: '#9AA59E',
+    background: ' via-white to-cyan-50',
     sections: ['Hero', 'Outcomes', 'Curriculum', 'Pricing'],
   },
   {
@@ -75,14 +75,14 @@ export default function TemplatesPage() {
         {templates.map((template) => (
           <Card key={template.id} className="overflow-hidden bg-white">
             <CardContent className="grid gap-0 p-0 md:grid-cols-[1.1fr_0.9fr]">
-              <div className={`min-h-[260px] bg-gradient-to-br ${template.background} p-5`}>
+              <div className={`min-h-[260px] bg-primary ${template.background} p-5`}>
                 <div className="flex h-full flex-col rounded-lg border bg-white/78 p-4 shadow-sm backdrop-blur">
                   <div className="mb-5 flex items-center justify-between">
-                    <div className="h-2.5 w-24 rounded-full bg-slate-900" />
+                    <div className="h-2.5 w-24 rounded-full bg-card" />
                     <div className="flex gap-1.5">
-                      <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-card" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-card" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-card" />
                     </div>
                   </div>
 
@@ -92,17 +92,17 @@ export default function TemplatesPage() {
                         className="h-3 w-20 rounded-full"
                         style={{ backgroundColor: template.accent }}
                       />
-                      <div className="h-7 w-4/5 rounded-md bg-slate-900" />
-                      <div className="h-7 w-3/5 rounded-md bg-slate-900" />
-                      <div className="h-2.5 w-full rounded-full bg-slate-200" />
-                      <div className="h-2.5 w-5/6 rounded-full bg-slate-200" />
+                      <div className="h-7 w-4/5 rounded-md bg-card" />
+                      <div className="h-7 w-3/5 rounded-md bg-card" />
+                      <div className="h-2.5 w-full rounded-full bg-card" />
+                      <div className="h-2.5 w-5/6 rounded-full bg-card" />
                       <div
                         className="mt-4 h-9 w-32 rounded-md"
                         style={{ backgroundColor: template.accent }}
                       />
                     </div>
 
-                    <div className="rounded-lg border bg-slate-100 p-3">
+                    <div className="rounded-lg border bg-muted p-3">
                       <div className="h-full rounded-md bg-white shadow-inner" />
                     </div>
                   </div>

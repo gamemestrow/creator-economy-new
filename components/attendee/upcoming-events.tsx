@@ -88,12 +88,12 @@ export function UpcomingEvents({ userId }: UpcomingEventsProps) {
   if (loading) {
     return (
       <div>
-        <h2 className="mb-6 text-xl font-bold text-gray-900">Upcoming Events</h2>
+        <h2 className="mb-6 text-xl font-bold text-foreground">Upcoming Events</h2>
         <div className="space-y-3">
           {[...Array(3)].map((_, i) => (
             <div
               key={i}
-              className="h-24 rounded-xl border border-gray-200 bg-white animate-pulse"
+              className="h-24 rounded-xl border border-border bg-white animate-pulse"
             />
           ))}
         </div>
@@ -104,11 +104,11 @@ export function UpcomingEvents({ userId }: UpcomingEventsProps) {
   if (events.length === 0) {
     return (
       <div>
-        <h2 className="mb-6 text-xl font-bold text-gray-900">Upcoming Events</h2>
-        <div className="rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 px-6 py-12 text-center">
-          <MessageSquare className="mx-auto mb-3 h-12 w-12 text-gray-400" />
-          <h3 className="mb-2 font-medium text-gray-900">No upcoming events</h3>
-          <p className="text-sm text-gray-600">
+        <h2 className="mb-6 text-xl font-bold text-foreground">Upcoming Events</h2>
+        <div className="rounded-xl border-2 border-dashed border-border bg-muted px-6 py-12 text-center">
+          <MessageSquare className="mx-auto mb-3 h-12 w-12 text-muted-foreground" />
+          <h3 className="mb-2 font-medium text-foreground">No upcoming events</h3>
+          <p className="text-sm text-muted-foreground">
             Check back soon for upcoming webinars and workshops from creators.
           </p>
         </div>
@@ -119,8 +119,8 @@ export function UpcomingEvents({ userId }: UpcomingEventsProps) {
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-xl font-bold text-gray-900">Upcoming Events</h2>
-        <a href="/attendee/events" className="text-sm font-medium text-blue-600 hover:text-blue-700">
+        <h2 className="text-xl font-bold text-foreground">Upcoming Events</h2>
+        <a href="/attendee/events" className="text-sm font-medium text-primary hover:text-primary">
           View All →
         </a>
       </div>
@@ -143,11 +143,11 @@ export function UpcomingEvents({ userId }: UpcomingEventsProps) {
           return (
             <div
               key={event.eventId}
-              className="rounded-xl border border-gray-200 bg-white p-4 transition-all hover:shadow-md"
+              className="rounded-xl border border-border bg-white p-4 transition-all hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
             >
               <div className="flex items-start gap-4">
                 {/* Event Thumbnail */}
-                <div className="h-20 w-20 flex-shrink-0 rounded-lg bg-gradient-to-br from-[#2563EB]/10 to-blue-100 flex items-center justify-center">
+                <div className="h-20 w-20 flex-shrink-0 rounded-lg bg-primary from-[#9AA59E]/10  flex items-center justify-center">
                   {event.thumbnail ? (
                     <img
                       src={event.thumbnail}
@@ -155,24 +155,24 @@ export function UpcomingEvents({ userId }: UpcomingEventsProps) {
                       className="w-full h-full object-cover rounded-lg"
                     />
                   ) : (
-                    <Calendar className="h-8 w-8 text-gray-400" />
+                    <Calendar className="h-8 w-8 text-muted-foreground" />
                   )}
                 </div>
 
                 {/* Event Info */}
                 <div className="flex-1">
                   <div className="mb-2 flex items-center gap-2">
-                    <h3 className="font-semibold text-gray-900">{event.title}</h3>
-                    <span className="inline-block rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-[#2563EB]">
+                    <h3 className="font-semibold text-foreground">{event.title}</h3>
+                    <span className="inline-block rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-[#9AA59E]">
                       {event.eventType}
                     </span>
                   </div>
 
-                  <p className="mb-3 line-clamp-1 text-sm text-gray-600">
+                  <p className="mb-3 line-clamp-1 text-sm text-muted-foreground">
                     {event.description}
                   </p>
 
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-1.5">
                       <Calendar className="h-4 w-4" />
                       {formattedDate}
@@ -198,8 +198,8 @@ export function UpcomingEvents({ userId }: UpcomingEventsProps) {
                   disabled={isRegistering}
                   className={`flex-shrink-0 rounded-lg px-4 py-2 font-medium transition-all disabled:cursor-not-allowed disabled:opacity-60 ${
                     isRegistered
-                      ? 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-                      : 'bg-[#2563EB] text-white hover:bg-blue-700'
+                      ? 'bg-muted text-foreground hover:bg-card'
+                      : 'bg-[#9AA59E] text-white hover:bg-primary'
                   }`}
                 >
                   {isRegistering ? (

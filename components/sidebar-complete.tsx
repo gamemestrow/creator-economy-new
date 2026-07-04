@@ -157,7 +157,7 @@ export function SidebarComplete() {
       {/* Mobile Toggle */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 left-4 z-50 lg:hidden p-2 hover:bg-gray-100 rounded-lg"
+        className="fixed top-4 left-4 z-50 lg:hidden p-2 hover:bg-muted rounded-lg"
       >
         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
@@ -170,7 +170,7 @@ export function SidebarComplete() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsOpen(false)}
-            className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+            className="fixed inset-0 bg-foreground/50 z-30 lg:hidden"
           />
         )}
       </AnimatePresence>
@@ -180,14 +180,14 @@ export function SidebarComplete() {
         initial={false}
         animate={{ x: isOpen ? 0 : -384 }}
         transition={{ duration: 0.3 }}
-        className="fixed left-0 top-0 h-full w-96 bg-white border-r border-gray-200 z-40 lg:relative lg:translate-x-0 overflow-y-auto"
+        className="fixed left-0 top-0 h-full w-96 bg-white border-r border-border z-40 lg:relative lg:translate-x-0 overflow-y-auto"
       >
         {/* Logo */}
-        <div className="p-6 border-b border-gray-200 flex items-center gap-3">
+        <div className="p-6 border-b border-border flex items-center gap-3">
           <div className="w-10 h-10 bg-primary rounded-[14px] flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
             <Cloud className="w-6 h-6 text-primary-foreground" />
           </div>
-          <span className="text-xl font-bold text-gray-900">Cloud</span>
+          <span className="text-xl font-bold text-foreground">Cloud</span>
         </div>
 
         {/* Menu Items */}
@@ -202,7 +202,7 @@ export function SidebarComplete() {
                 className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all ${
                   activeSection === group.id
                     ? 'bg-primary/10 text-primary'
-                    : 'text-gray-700 hover:bg-gray-50'
+                    : 'text-foreground hover:bg-muted'
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -238,7 +238,7 @@ export function SidebarComplete() {
                           className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm transition-all ${
                             activeSubsection === item.id && activeSection === group.id
                               ? 'bg-primary/20 text-primary font-medium'
-                              : 'text-gray-600 hover:bg-gray-50'
+                              : 'text-muted-foreground hover:bg-muted'
                           }`}
                         >
                           <item.icon className="w-4 h-4" />

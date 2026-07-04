@@ -155,9 +155,9 @@ export default function GamificationPage() {
                     <div className="text-right">
                       <p className="text-sm font-medium text-foreground">{badge.points} pts</p>
                       <p className={`text-xs font-medium ${
-                        badge.rarity === 'Common' ? 'text-gray-600' :
-                        badge.rarity === 'Rare' ? 'text-blue-600' :
-                        'text-purple-600'
+                        badge.rarity === 'Common' ? 'text-muted-foreground' :
+                        badge.rarity === 'Rare' ? 'text-primary' :
+                        'text-primary'
                       }`}>
                         {badge.rarity}
                       </p>

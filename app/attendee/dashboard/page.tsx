@@ -40,24 +40,24 @@ export default function AttendeeDashboardPage() {
     return (
       <div className="flex min-h-screen items-center justify-center bg-white p-4 text-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-200 border-t-[#2563EB]" />
-          <p className="text-gray-600 font-medium">Loading your dashboard...</p>
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-border border-t-[#9AA59E]" />
+          <p className="text-muted-foreground font-medium">Loading your dashboard...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]">
+    <div className="min-h-screen bg-[#F7F7F4]">
       <div className="flex min-h-[calc(100vh-73px)]">
 
         <main className="flex-1 overflow-x-hidden">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
             <div className="mb-8">
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
                 Welcome, {userData?.name}! 🎓
               </h1>
-              <p className="mt-1 text-gray-600 text-sm sm:text-base">
+              <p className="mt-1 text-muted-foreground text-sm sm:text-base">
                 Continue learning and grow your skills.
               </p>
             </div>

@@ -39,11 +39,11 @@ function getDifficultyColor(difficulty: Course['difficulty']) {
     case 'beginner':
       return 'bg-emerald-50 text-emerald-700 border border-emerald-200'
     case 'intermediate':
-      return 'bg-blue-50 text-blue-700 border border-blue-200'
+      return 'bg-primary/10 text-primary border border-primary/20'
     case 'advanced':
-      return 'bg-purple-50 text-purple-700 border border-purple-200'
+      return 'bg-primary/10 text-primary border border-primary/20'
     default:
-      return 'bg-gray-50 text-gray-700 border border-gray-200'
+      return 'bg-muted text-foreground border border-border'
   }
 }
 
@@ -112,22 +112,22 @@ export default function CourseDetailPage() {
   // Loading skeleton
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-muted">
         <div className="max-w-6xl mx-auto px-4 py-8 lg:py-12">
           <div className="flex flex-col lg:flex-row gap-6 items-start animate-pulse">
-            <div className="w-full lg:w-2/3 bg-white border border-gray-200 rounded-lg overflow-hidden">
-              <div className="w-full h-64 sm:h-80 bg-gray-100" />
+            <div className="w-full lg:w-2/3 bg-white border border-border rounded-lg overflow-hidden">
+              <div className="w-full h-64 sm:h-80 bg-muted" />
               <div className="p-6 sm:p-8 space-y-4">
-                <div className="h-4 w-24 bg-gray-100 rounded" />
-                <div className="h-7 w-2/3 bg-gray-100 rounded" />
-                <div className="h-4 w-1/3 bg-gray-100 rounded" />
-                <div className="h-20 w-full bg-gray-100 rounded" />
+                <div className="h-4 w-24 bg-muted rounded" />
+                <div className="h-7 w-2/3 bg-muted rounded" />
+                <div className="h-4 w-1/3 bg-muted rounded" />
+                <div className="h-20 w-full bg-muted rounded" />
               </div>
             </div>
             <div className="w-full lg:w-1/3">
-              <div className="bg-white border border-gray-200 rounded-lg p-6 space-y-4">
-                <div className="h-8 w-20 bg-gray-100 rounded" />
-                <div className="h-11 w-full bg-gray-100 rounded-lg" />
+              <div className="bg-white border border-border rounded-lg p-6 space-y-4">
+                <div className="h-8 w-20 bg-muted rounded" />
+                <div className="h-11 w-full bg-muted rounded-lg" />
               </div>
             </div>
           </div>
@@ -139,13 +139,13 @@ export default function CourseDetailPage() {
   // Not found / error state
   if (error || !course) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-        <div className="bg-white border border-gray-200 rounded-lg p-8 max-w-md w-full text-center">
-          <AlertCircle className="h-8 w-8 text-gray-400 mx-auto mb-3" />
-          <h1 className="text-base font-semibold text-gray-900 mb-1">
+      <div className="min-h-screen bg-muted flex items-center justify-center px-4">
+        <div className="bg-white border border-border rounded-lg p-8 max-w-md w-full text-center">
+          <AlertCircle className="h-8 w-8 text-muted-foreground mx-auto mb-3" />
+          <h1 className="text-base font-semibold text-foreground mb-1">
             {error === 'not-found' ? 'Course not found' : 'Something went wrong'}
           </h1>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-muted-foreground">
             {error === 'not-found'
               ? "This course doesn't exist or may have been removed."
               : "We couldn't load this course. Please try again."}
@@ -171,20 +171,20 @@ export default function CourseDetailPage() {
   } = course
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-muted">
       <div className="max-w-6xl mx-auto px-4 py-8 lg:py-12">
         <div className="flex flex-col lg:flex-row gap-6 items-start">
           {/* Main content — 2/3 width */}
-          <div className="w-full lg:w-2/3 bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <div className="w-full lg:w-2/3 bg-white border border-border rounded-lg overflow-hidden">
             {/* Thumbnail */}
-            <div className="relative w-full h-64 sm:h-80 bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center overflow-hidden">
+            <div className="relative w-full h-64 sm:h-80 bg-primary   flex items-center justify-center overflow-hidden">
               <div className="text-8xl">{thumbnail || '📘'}</div>
             </div>
 
             <div className="p-6 sm:p-8">
               {/* Category & Level */}
               <div className="flex items-center gap-2 mb-4">
-                <span className="inline-block px-2.5 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded">
+                <span className="inline-block px-2.5 py-1 text-xs font-medium bg-muted text-foreground rounded">
                   {category}
                 </span>
                 <span
@@ -197,14 +197,14 @@ export default function CourseDetailPage() {
               </div>
 
               {/* Title */}
-              <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">
+              <h1 className="text-2xl sm:text-3xl font-semibold text-foreground mb-2">
                 {title}
               </h1>
 
               {/* Creator */}
               {creatorName && (
-                <p className="text-sm text-gray-600 mb-4">
-                  by <span className="font-medium text-gray-900">{creatorName}</span>
+                <p className="text-sm text-muted-foreground mb-4">
+                  by <span className="font-medium text-foreground">{creatorName}</span>
                 </p>
               )}
 
@@ -223,31 +223,31 @@ export default function CourseDetailPage() {
                       />
                     ))}
                   </div>
-                  <span className="text-sm font-semibold text-gray-900">{rating}</span>
+                  <span className="text-sm font-semibold text-foreground">{rating}</span>
                 </div>
-                <div className="flex items-center gap-1 text-xs text-gray-600">
+                <div className="flex items-center gap-1 text-xs text-muted-foreground">
                   <Users className="h-3.5 w-3.5" />
                   <span>{enrollmentCount.toLocaleString()} students</span>
                 </div>
-                <div className="flex items-center gap-1 text-xs text-gray-600">
+                <div className="flex items-center gap-1 text-xs text-muted-foreground">
                   <Clock className="h-3.5 w-3.5" />
                   <span>{formatDuration(duration)}</span>
                 </div>
-                <div className="flex items-center gap-1 text-xs text-gray-600">
+                <div className="flex items-center gap-1 text-xs text-muted-foreground">
                   <BookOpen className="h-3.5 w-3.5" />
                   <span>{totalLessons} lessons</span>
                 </div>
               </div>
 
               {/* Divider */}
-              <div className="border-t border-gray-100 my-6" />
+              <div className="border-t border-border my-6" />
 
               {/* Description */}
               <div className="mb-6">
-                <h2 className="text-base font-semibold text-gray-900 mb-3">
+                <h2 className="text-base font-semibold text-foreground mb-3">
                   About this course
                 </h2>
-                <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">
+                <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
                   {description}
                 </p>
               </div>
@@ -258,7 +258,7 @@ export default function CourseDetailPage() {
                   {tags.map((tag) => (
                     <span
                       key={tag}
-                      className="inline-block px-2.5 py-1 text-xs font-medium bg-gray-50 text-gray-600 border border-gray-200 rounded"
+                      className="inline-block px-2.5 py-1 text-xs font-medium bg-muted text-muted-foreground border border-border rounded"
                     >
                       {tag}
                     </span>
@@ -270,9 +270,9 @@ export default function CourseDetailPage() {
 
           {/* Sidebar — 1/3 width */}
           <div className="w-full lg:w-1/3 lg:sticky lg:top-8">
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
+            <div className="bg-white border border-border rounded-lg p-6">
               <div className="mb-5">
-                <span className="text-3xl font-bold text-gray-900">
+                <span className="text-3xl font-bold text-foreground">
                   {price === 0 ? 'Free' : `$${price.toFixed(2)}`}
                 </span>
               </div>
@@ -281,7 +281,7 @@ export default function CourseDetailPage() {
                 onClick={() => enroll(uid, courseId)}
                 disabled={enrolling || isEnrolled}
                 className={`w-full px-4 py-3 ${
-                  isEnrolled ? 'bg-green-500' : 'bg-[#2563EB] hover:bg-blue-700'
+                  isEnrolled ? 'bg-green-500' : 'bg-[#9AA59E] hover:bg-primary'
                 } text-white text-sm font-semibold rounded-lg transition-colors active:scale-95 disabled:opacity-70 flex items-center justify-center gap-2`}
               >
                 {isEnrolled ? (
@@ -296,19 +296,19 @@ export default function CourseDetailPage() {
                 )}
               </button>
 
-              <div className="border-t border-gray-100 my-5" />
+              <div className="border-t border-border my-5" />
 
-              <ul className="space-y-3 text-sm text-gray-600">
+              <ul className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-gray-400" />
+                  <Clock className="h-4 w-4 text-muted-foreground" />
                   <span>{formatDuration(duration)} of content</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <BookOpen className="h-4 w-4 text-gray-400" />
+                  <BookOpen className="h-4 w-4 text-muted-foreground" />
                   <span>{totalLessons} lessons</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Users className="h-4 w-4 text-gray-400" />
+                  <Users className="h-4 w-4 text-muted-foreground" />
                   <span>{enrollmentCount.toLocaleString()} students enrolled</span>
                 </li>
               </ul>

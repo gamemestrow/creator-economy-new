@@ -14,9 +14,70 @@ import {
   limit,
   writeBatch,
   serverTimestamp,
+  setDoc,
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { Event, EventRegistration, COLLECTIONS } from './types'
+
+
+export interface CreateEventInput {
+  eventId: string // Document ID
+  title: string
+  description: string
+  creatorId: string // Reference to creator
+  creatorName?: string // Denormalized
+  thumbnail?: string
+  date: any // Firestore Timestamp
+  duration: number // in minutes
+  maxAttendees?: number
+  currentAttendees: number // Denormalized count
+  eventType: 'live' | 'webinar' | 'workshop'
+  registrationDeadline?: any // Firestore Timestamp
+  isPublished: boolean
+  createdAt: any // Firestore Timestamp
+  updatedAt: any // Firestore Timestamp
+}
+
+
+/**
+ * Fetch all Events for a specific creator
+ */
+export async function fetchCreatorEvents(creatorId: string): Promise<Event[]> {
+  try {
+    const q = query(
+      collection(db, COLLECTIONS.EVENTS),
+      where('creatorId', '==', creatorId),
+      orderBy('createdAt', 'desc')
+    )
+    const snapshot = await getDocs(q)
+    return snapshot.docs.map((doc) => ({
+      ...doc.data(),
+      eventId: doc.id,
+    } as Event))
+  } catch (error: any) {
+    if (error.code === 'failed-precondition' || error.message?.includes('index')) {
+      console.warn('Firestore index missing for fetchCreatorEvent, falling back to in-memory sort')
+      const q = query(
+        collection(db, COLLECTIONS.EVENTS),
+        where('creatorId', '==', creatorId)
+      )
+      const snapshot = await getDocs(q)
+      const courses = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        eventId: doc.id,
+      } as Event))
+
+      return courses.sort((a, b) => {
+        const dateA = a.createdAt?.seconds || 0
+        const dateB = b.createdAt?.seconds || 0
+        return dateB - dateA
+      })
+    }
+    console.error('Error fetching creator events:', error)
+    throw error
+  }
+}
+
 
 /**
  * Fetch upcoming published events
@@ -325,6 +386,40 @@ export async function getUserEventRegistrationsCount(
     return snapshot.size
   } catch (error) {
     console.error('Error getting event registrations count:', error)
+    throw error
+  }
+}
+
+
+
+/**
+ * Organize an event
+ */
+
+export async function createAnEvent(input: CreateEventInput): Promise<string> {
+  try {
+    const eventRef = doc(collection(db, COLLECTIONS.EVENTS))
+    await setDoc(eventRef, {
+      eventId: eventRef.id, // Document ID
+      title: input.title,
+      description: input.description,
+      creatorId: input.creatorId,
+      creatorName: input.creatorName,
+      thumbnail: input.thumbnail,
+      date: input.date,
+      duration: input.duration,
+      maxAttendees: 0,
+      currentAttendees: 0, // Denormalized count
+      eventType: 'live',
+      registrationDeadline: input.registrationDeadline, // Firestore Timestamp
+      isPublished: input.isPublished,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(), // Firestore Timestamp
+    })
+
+    return eventRef.id
+  } catch (error) {
+    console.error('Error creating event:', error)
     throw error
   }
 }

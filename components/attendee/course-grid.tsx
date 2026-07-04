@@ -1,17 +1,18 @@
 import { CourseCard } from './course-card'
+import {Course} from '@/lib/firestore/types'
 
-interface Course {
-  id: string
-  title: string
-  creatorName: string
-  category: string
-  level: string
-  rating: number
-  reviews: number
-  price: number
-  image: string
-  enrollmentCount: number
-}
+// interface Course {
+//   id: string
+//   title: string
+//   creatorName: string
+//   category: string
+//   level: string
+//   rating: number
+//   reviews: number
+//   price: number
+//   image: string
+//   enrollmentCount: number
+// }
 
 interface CourseGridProps {
   courses: Course[]
@@ -45,7 +46,7 @@ export function CourseGrid({ courses }: CourseGridProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {courses.map((course) => (
           <CourseCard
-            key={course.id}
+            key={course.courseId}
             {...course}
           />
         ))}

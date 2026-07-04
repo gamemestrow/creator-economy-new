@@ -111,6 +111,8 @@ export interface Community {
   memberCount: number // Denormalized count
   isPublic: boolean
   rules?: string
+  postsCount: number // Denormalized count
+  posts?: CommunityPost[] // Optional denormalized posts
   createdAt: any // Firestore Timestamp
   updatedAt: any // Firestore Timestamp
 }

@@ -9,7 +9,7 @@ import { CourseFilters } from '@/components/attendee/course-filters'
 import { CourseGrid } from '@/components/attendee/course-grid'
 import { FloatingChat } from '@/components/floating-chat'
 import { UpgradePlanModal } from '@/components/upgrade-plan-modal'
-import { useCourses } from '@/lib/use-courses'
+import { usePublishedCourses } from '@/lib/hooks/use-attendee-data'
 
 interface UserData {
   name: string
@@ -127,7 +127,8 @@ export default function CoursesPage() {
   const { loading: authLoading, user, authorized } = useRequireRole(['attendee'])
   const [userData, setUserData] = useState<UserData | null>(null)
   const [showUpgradeModal, setShowUpgradeModal] = useState(false)
-  const { courses, loading, error, refetch: fetchCourses, filteredCourses } = useCourses({ autoFetch: true, limit: 20 })
+
+  const { courses, loading, error, refetch: fetchCourses, filteredCourses } = usePublishedCourses({ autoFetch: true, limit: 20 })
   const [filters, setFilters] = useState<CourseFiltersType>({
     search: '',
     category: '',

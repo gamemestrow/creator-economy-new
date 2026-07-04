@@ -4,31 +4,33 @@ import { useRequireRole } from '@/lib/use-auth-redirect'
 import { useEffect, useState } from 'react'
 import { isUserEnrolled } from '@/lib/firestore/enrollments'
 import { useRouter } from 'next/navigation'
-interface CourseCardProps {
-  id: string
-  title: string
-  creatorName: string
-  category: string
-  level: string
-  rating: number
-  reviews: number
-  price: number
-  image: string
-  enrollmentCount: number
-}
+import { Course } from '@/lib/firestore/types'
+import { placeOrder } from '@/lib/firestore/orders'
+import Link from 'next/link'
+
+// interface CourseCardProps {
+//   id: string
+//   title: string
+//   creatorName: string
+//   category: string
+//   level: string
+//   rating: number
+//   reviews: number
+//   price: number
+//   image: string
+//   enrollmentCount: number
+// }
 
 export function CourseCard({
-  id,
+  courseId,
   title,
   creatorName,
   category,
-  level,
   rating,
-  reviews,
   price,
-  image,
   enrollmentCount,
-}: CourseCardProps) {
+  isPublished,
+}: Course) {
   const getLevelColor = (level: string) => {
     switch (level) {
       case 'Beginner':
@@ -59,7 +61,7 @@ export function CourseCard({
   useEffect(() => {
 
     async function checkEnrollment() {
-      const isEnrolled = await isUserEnrolled(uid, id);
+      const isEnrolled = await isUserEnrolled(uid, courseId);
 
       if (isEnrolled) {
         setisEnrolled(true)
@@ -68,14 +70,44 @@ export function CourseCard({
       }
     }
     checkEnrollment();
-  }, [isEnrolled, uid, id]);
+  }, [isEnrolled, uid, courseId]);
+
+  const data = {
+    userId: uid,
+    creatorId: courseId,
+    userName: user?.displayName || 'Unknown User',
+    userEmail: user?.email || 'Unknown Email',
+    courseId: courseId,
+    courseName: title,
+    amount: price,
+    currency: 'USD',
+    paymentProvider: 'stripe' as const,
+    status: 'pending' as const,
+  }
+
+
+  const createPreorder = async () => {
+    await placeOrder(data)
+  }
+
+  const handleEnrollClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    if (isPublished) {
+      enroll(uid, courseId)
+    } else {
+      createPreorder()
+    }
+  }
+
 
   return (
-    <div className="group flex flex-col h-full bg-white border border-border rounded-lg overflow-hidden hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-300 hover:border-border" onClick={() => router.push(`courses/${id}`)}>
+    <Link className="group flex flex-col h-full bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 hover:border-gray-300" href={(`courses/${courseId}`)}>
       {/* Image */}
-      <div className="relative w-full h-48 bg-primary   flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-300">
-        <div className="text-6xl">{image}</div>
-        <div className="absolute inset-0 bg-primary from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="relative w-full h-48 bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-300">
+        <div className="text-6xl">image</div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
       {/* Content */}
@@ -84,9 +116,6 @@ export function CourseCard({
         <div className="flex items-center gap-2 mb-3">
           <span className="inline-block px-2.5 py-1 text-xs font-medium bg-muted text-foreground rounded">
             {category}
-          </span>
-          <span className={`inline-block px-2.5 py-1 text-xs font-medium rounded text-center ${getLevelColor(level)}`}>
-            {level}
           </span>
         </div>
 
@@ -104,7 +133,7 @@ export function CourseCard({
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
-                className={`h-3.5 w-3.5 ${i < Math.floor(rating)
+                className={`h-3.5 w-3.5 ${i < Math.floor(rating || 0)
                   ? 'fill-yellow-400 text-yellow-400'
                   : 'text-gray-300'
                   }`}
@@ -129,11 +158,14 @@ export function CourseCard({
           <div>
             <span className="text-lg font-bold text-foreground">${price.toFixed(2)}</span>
           </div>
-          <button onClick={() => enroll(uid, id)} className={`px-4 py-2 ${isEnrolled ? "bg-green-500" : "bg-[#9AA59E]"} text-white text-xs font-semibold rounded-lg hover:bg-primary transition-colors active:scale-95`}>
-            {isEnrolled ? 'Enrolled' : 'Enroll'}
+          <button
+            onClick={handleEnrollClick}
+            className={`px-4 py-2 ${isEnrolled ? "bg-green-500" : "bg-[#2563EB]"} text-white text-xs font-semibold rounded-lg hover:bg-blue-700 transition-colors active:scale-95`}
+          >
+            {isPublished ? (isEnrolled ? 'Enrolled' : 'Enroll') : 'Pre Order'}
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

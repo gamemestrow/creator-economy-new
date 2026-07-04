@@ -99,6 +99,7 @@ const handleCreateCommunity = async (e: React.FormEvent) => {
 }
 
   const totalMembers = communities.reduce((sum, community) => sum + community.memberCount, 0)
+  const totalPosts = communities.reduce((sum, community) => sum + (community.postsCount || 0), 0)
 
 
 
@@ -197,7 +198,7 @@ const handleCreateCommunity = async (e: React.FormEvent) => {
           </CardHeader>
 
           <CardContent>
-            <p className="text-3xl font-bold">2,180</p>
+            <p className="text-3xl font-bold">{totalPosts.toLocaleString()}</p>
           </CardContent>
         </Card>
 

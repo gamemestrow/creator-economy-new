@@ -12,6 +12,13 @@ import {
   PlayCircle,
   Download,
 } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import CreateWebinerModel from '@/components/creator/CreateWebinerModel'
+import { createAnEvent } from '@/lib/firestore/events'
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from '@/lib/firebase'
+import { useRequireRole } from '@/lib/use-auth-redirect'
+import { useCreatorEvent } from '@/lib/hooks/use-creator-data'
 
 const webinars = [
   {
@@ -40,7 +47,52 @@ const webinars = [
   },
 ]
 
+interface UserData {
+  name: string
+  email: string
+}
+
+
 export default function WebinarsPage() {
+
+  const [isModelOpen, setisModelOpen] = useState(false)
+
+const { loading: authLoading, user, authorized } = useRequireRole(['creator', 'attendee'])
+const [userData, setUserData] = useState<UserData | null>(null)
+// const { events, loading, error, refresh: fetchEvent } = useCreatorEvent(user?.uid || '')
+
+useEffect(() => {
+  if (user && authorized) {
+    const fetchUserData = async () => {
+      const userDocRef = doc(db, 'users', user.uid)
+      const userDocSnap = await getDoc(userDocRef)
+
+      if (userDocSnap.exists()) {
+        const data = userDocSnap.data()
+        setUserData({
+          name: data.name || user.displayName || 'Creator',
+          email: user.email || '',
+        })
+      }
+    }
+
+    fetchUserData()
+  }
+}, [user, authorized])
+
+// --- guard before rendering the form ---
+if (authLoading) {
+  return <div>Loading...</div>
+}
+
+if (!user || !authorized) {
+  return <div>You must be signed in to create an event.</div>
+}
+
+  const onSubmit = (data: any) => {
+    createAnEvent(data)
+    setisModelOpen(false)
+  }
   return (
     <div className="space-y-6 p-6">
       <div className="flex items-center justify-between">
@@ -51,7 +103,7 @@ export default function WebinarsPage() {
           </p>
         </div>
 
-        <Button>
+        <Button onClick={() => setisModelOpen(true)}>
           <Plus className="mr-2 h-4 w-4" />
           Create Webinar
         </Button>
@@ -206,6 +258,13 @@ export default function WebinarsPage() {
           </CardContent>
         </Card>
       </div>
+      {isModelOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="w-full max-w-md rounded-lg bg-white p-6">
+            <CreateWebinerModel creatorId={user?.uid} creatorName={userData?.name} onSubmit={onSubmit} onCancel={() => setisModelOpen(false)} />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

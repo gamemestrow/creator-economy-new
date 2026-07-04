@@ -35,15 +35,14 @@ interface CreateCourseInput {
 }
 
 /**
- * Fetch all published courses
+ * Fetch all courses for attendees 
  */
-export async function fetchPublishedCourses(
+export async function fetchCoursesForAttendee(
   pageSize: number = 12,
   cursor?: any
 ): Promise<{ courses: Course[]; nextCursor?: any }> {
   try {
     const constraints: QueryConstraint[] = [
-      where('isPublished', '==', true),
       orderBy('createdAt', 'desc'),
       limit(pageSize + 1),
     ]
@@ -272,8 +271,8 @@ export async function createCourse(input: CreateCourseInput): Promise<string> {
       duration: input.duration || 0,
       enrollmentCount: 0,
       rating: null,
-      tags: [],
-      category: '',
+      tags: input.tags || [],
+      category: input.category || 'Uncategorized',
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     })

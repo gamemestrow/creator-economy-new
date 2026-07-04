@@ -70,7 +70,7 @@ export function FeaturedCourses({ userId }: FeaturedCoursesProps) {
           <AlertCircle className="mt-0.5 h-5 w-5 text-red-600 flex-shrink-0" />
           <div>
             <p className="font-medium text-red-900">Failed to load courses</p>
-            <p className="text-sm text-red-700">{error}</p>
+            <p className="text-sm text-red-700">{error?.message}</p>
           </div>
         </div>
       </div>

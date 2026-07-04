@@ -2,7 +2,7 @@
  * Custom React Hooks for Attendee Data
  */
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Course, Enrollment, Progress, Certificate, Event, Community, CommunityMember, EventRegistration } from '@/lib/firestore'
 import * as courseService from '@/lib/firestore/courses'
 import * as enrollmentService from '@/lib/firestore/enrollments'
@@ -10,6 +10,21 @@ import * as progressService from '@/lib/firestore/progress'
 import * as certificateService from '@/lib/firestore/certificates'
 import * as eventService from '@/lib/firestore/events'
 import * as communityService from '@/lib/firestore/communities'
+import { CourseFilters } from '@/components/attendee/courses-types'
+
+
+interface UseCourcesOptions {
+  autoFetch?: boolean
+  limit?: number
+}
+
+interface UseCourcesReturn {
+  courses: Course[]
+  loading: boolean
+  error: Error | null
+  refetch: () => Promise<void>
+  filteredCourses: (filters: CourseFilters) => Course[]
+}
 
 /**
  * Hook to fetch user's enrolled courses
@@ -129,33 +144,71 @@ export function useUserCertificates(userId: string) {
   return { certificates, count, loading, error }
 }
 
-/**
- * Hook to fetch published courses
- */
-export function usePublishedCourses() {
-  const [courses, setCourses] = useState<Course[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+export function usePublishedCourses(options: UseCourcesOptions = {}): UseCourcesReturn {
+  const { autoFetch = true, limit = 12 } = options;
+
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const fetchCourses = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const { courses } = await courseService.fetchCoursesForAttendee(limit);
+      setCourses(courses);
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error("Failed to fetch courses");
+      setError(error);
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [limit]);
 
   useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        setLoading(true)
-        const { courses: data } = await courseService.fetchPublishedCourses(12)
-        setCourses(data)
-        setError(null)
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch courses')
-        setCourses([])
-      } finally {
-        setLoading(false)
-      }
+    if (autoFetch) {
+      fetchCourses();
     }
+  }, [autoFetch, fetchCourses]);
 
-    fetchCourses()
-  }, [])
+  const filteredCourses = useCallback(
+    (filters: CourseFilters): Course[] => {
+      return courses.filter((course) => {
+        const matchesSearch =
+          course.title
+            .toLowerCase()
+            .includes(filters.search.toLowerCase());
 
-  return { courses, loading, error }
+        const matchesCategory =
+          !filters.category || course.category === filters.category;
+
+        const matchesPrice =
+          course.price >= filters.priceRange[0] &&
+          course.price <= filters.priceRange[1];
+
+        const matchesRating =
+          (course.rating ?? 0) >= filters.rating;
+
+        return (
+          matchesSearch &&
+          matchesCategory &&
+          matchesPrice &&
+          matchesRating
+        );
+      });
+    },
+    [courses]
+  );
+
+  return {
+    courses,
+    loading,
+    error,
+    refetch: fetchCourses,
+    filteredCourses,
+  };
 }
 
 /**

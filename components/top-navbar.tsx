@@ -12,7 +12,7 @@ export function TopNavbar() {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 h-20 bg-white border-b border-gray-200 z-40">
+      <div className="fixed top-0 left-0 right-0 h-20 bg-white/80 backdrop-blur-md border-b border-border shadow-[0_10px_30px_rgba(0,0,0,0.02)] z-40">
         <div className="flex items-center justify-between h-full px-6">
           {/* Left */}
           <div className="flex items-center gap-4">
@@ -32,7 +32,7 @@ export function TopNavbar() {
               <input
                 type="text"
                 placeholder="Search..."
-                className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:bg-white focus:border-blue-300"
+                className="w-full pl-10 pr-4 py-2 bg-input border border-border rounded-[14px] text-sm focus:outline-none focus:bg-white focus:border-ring transition-all duration-250 ease-out"
               />
             </div>
           </div>
@@ -41,7 +41,7 @@ export function TopNavbar() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setShowUpgradeModal(true)}
-              className="hidden sm:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-lg text-sm font-bold shadow-md hover:shadow-lg transition-all hover:scale-105"
+              className="hidden sm:flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-[14px] text-sm font-bold shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-250 ease-out hover:scale-[1.02] hover:bg-primary-hover"
             >
               <Crown className="w-4 h-4" />
               Upgrade
@@ -67,8 +67,8 @@ export function TopNavbar() {
                 onClick={() => setShowUserMenu(!showUserMenu)}
                 className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg"
               >
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                  <User className="w-4 h-4 text-white" />
+                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                  <User className="w-4 h-4 text-primary-foreground" />
                 </div>
                 <span className="hidden md:inline text-sm font-medium text-gray-900">
                   Tannu

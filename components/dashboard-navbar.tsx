@@ -50,13 +50,13 @@ export function DashboardNavbar() {
   ]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white border-b border-gray-100 z-40 h-20 shadow-sm">
+    <nav className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-border z-40 h-20 shadow-[0_10px_30px_rgba(0,0,0,0.02)]">
       <div className="flex items-center justify-between h-full px-8">
         
         {/* Logo */}
         <Link href="/dashboard" className="flex items-center gap-2 flex-shrink-0">
           <span className="text-2xl font-black text-slate-800 tracking-tight lowercase">
-            tag<span className="text-[#e06a28]">mango</span>
+            tag<span className="text-primary">mango</span>
           </span>
         </Link>
 
@@ -70,8 +70,8 @@ export function DashboardNavbar() {
                 href={item.href}
                 className={`flex flex-col items-center justify-center h-full px-3 text-[11px] font-bold tracking-wider transition-all border-b-[3px] uppercase ${
                   active
-                    ? 'text-[#e06a28] border-[#e06a28]'
-                    : 'text-gray-500 border-transparent hover:text-gray-800'
+                    ? 'text-primary border-primary'
+                    : 'text-muted-foreground border-transparent hover:text-foreground'
                 }`}
               >
                 {item.icon}
@@ -100,7 +100,7 @@ export function DashboardNavbar() {
               onClick={() => setShowUserMenu(!showUserMenu)}
               className="flex items-center gap-2 p-1 hover:bg-gray-50 rounded-full transition"
             >
-              <div className="w-9 h-9 rounded-full bg-[#ffeedc] border border-[#ffdbb8] flex items-center justify-center text-[#e06a28] font-bold text-sm">
+              <div className="w-9 h-9 rounded-full bg-[#EEF2EC] border border-[#ECE8DF] flex items-center justify-center text-[#8FA193] font-bold text-sm">
                 A
               </div>
             </button>

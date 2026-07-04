@@ -19,7 +19,7 @@ export function Hero() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/dashboard" className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition">
+            <Link href="/dashboard" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-3 rounded-full font-semibold hover:bg-primary-hover transition shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:scale-[1.02]">
               Start Free Trial
               <ArrowRight className="w-5 h-5" />
             </Link>
@@ -47,8 +47,8 @@ export function Hero() {
 
         {/* Right Image/Visual */}
         <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-indigo-600/20 rounded-2xl blur-3xl" />
-          <div className="relative bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200">
+          <div className="absolute inset-0 bg-[#F7F7F4] rounded-2xl blur-3xl shadow-[0_10px_30px_rgba(0,0,0,0.05)]" />
+          <div className="relative bg-[#FBFAF7] rounded-[20px] p-8 border border-border shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
             <div className="space-y-4">
               <div className="flex items-center justify-between bg-white rounded-lg p-4 shadow-sm">
                 <div>
@@ -70,9 +70,9 @@ export function Hero() {
               <div className="bg-white rounded-lg p-4 shadow-sm">
                 <p className="text-xs text-slate-500 uppercase tracking-wider">Active Courses</p>
                 <div className="flex gap-2 mt-2">
-                  <div className="h-2 flex-1 bg-blue-600 rounded-full" />
-                  <div className="h-2 flex-1 bg-blue-300 rounded-full" />
-                  <div className="h-2 flex-1 bg-blue-100 rounded-full" />
+                  <div className="h-2 flex-1 bg-primary rounded-full" />
+                  <div className="h-2 flex-1 bg-primary/60 rounded-full" />
+                  <div className="h-2 flex-1 bg-primary/30 rounded-full" />
                 </div>
               </div>
             </div>

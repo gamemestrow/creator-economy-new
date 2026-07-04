@@ -97,7 +97,7 @@ export function SidebarDynamic() {
       {/* Mobile Toggle */}
       <button
         onClick={toggleSidebar}
-        className="lg:hidden fixed top-20 left-4 z-40 p-2 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100"
+        className="lg:hidden fixed top-20 left-4 z-40 p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20"
       >
         <Menu className="w-5 h-5" />
       </button>
@@ -112,8 +112,8 @@ export function SidebarDynamic() {
         <div className="p-6">
           {/* Logo */}
           <div className="flex items-center gap-2 mb-8">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center">
-              <Cloud className="w-6 h-6 text-white" />
+            <div className="w-10 h-10 rounded-[14px] bg-primary flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
+              <Cloud className="w-6 h-6 text-primary-foreground" />
             </div>
             <div>
               <p className="font-bold text-gray-900">Cloud</p>
@@ -149,7 +149,7 @@ export function SidebarDynamic() {
                               onClick={() => setActiveSection(item.id)}
                               className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm transition-all ${
                                 isActive
-                                  ? 'bg-blue-50 text-blue-600 font-medium'
+                                  ? 'bg-primary/10 text-primary font-medium'
                                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                               }`}
                             >
@@ -171,7 +171,7 @@ export function SidebarDynamic() {
                         onClick={() => setActiveSection(item.id)}
                         className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm transition-all ${
                           isActive
-                            ? 'bg-blue-50 text-blue-600 font-medium'
+                            ? 'bg-primary/10 text-primary font-medium'
                             : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                         }`}
                       >

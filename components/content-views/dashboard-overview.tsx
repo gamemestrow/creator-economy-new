@@ -18,23 +18,23 @@ const salesData = [
   { name: 'Workshops', value: 25 },
 ]
 
-const COLORS = ['#2563EB', '#4F46E5', '#7C3AED']
+const COLORS = ['#9AA59E', '#7F8F84', '#7C3AED']
 
 export function DashboardOverview() {
   return (
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Welcome back, Tannu!</h1>
-        <p className="text-gray-500 mt-1">Here&apos;s what&apos;s happening with your business today.</p>
+        <h1 className="text-3xl font-bold text-foreground">Welcome back, Tannu!</h1>
+        <p className="text-muted-foreground mt-1">Here&apos;s what&apos;s happening with your business today.</p>
       </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {[
-          { icon: DollarSign, label: 'Total Revenue', value: '₹45,231', change: '+12.5%', color: 'bg-blue-50' },
-          { icon: Users, label: 'Active Users', value: '12,543', change: '+8.2%', color: 'bg-indigo-50' },
-          { icon: ShoppingCart, label: 'Total Orders', value: '1,234', change: '+23.1%', color: 'bg-purple-50' },
+          { icon: DollarSign, label: 'Total Revenue', value: '₹45,231', change: '+12.5%', color: 'bg-primary/10' },
+          { icon: Users, label: 'Active Users', value: '12,543', change: '+8.2%', color: 'bg-primary/10' },
+          { icon: ShoppingCart, label: 'Total Orders', value: '1,234', change: '+23.1%', color: 'bg-primary/10' },
           { icon: TrendingUp, label: 'Conversion', value: '3.24%', change: '+4.3%', color: 'bg-cyan-50' },
         ].map((stat, i) => {
           const Icon = stat.icon
@@ -42,10 +42,10 @@ export function DashboardOverview() {
             <div key={i} className={`${stat.color} p-6 rounded-xl`}>
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-600 text-sm font-medium">{stat.label}</p>
-                  <p className="text-2xl font-bold text-gray-900 mt-2">{stat.value}</p>
+                  <p className="text-muted-foreground text-sm font-medium">{stat.label}</p>
+                  <p className="text-2xl font-bold text-foreground mt-2">{stat.value}</p>
                 </div>
-                <Icon className="w-10 h-10 text-gray-400" />
+                <Icon className="w-10 h-10 text-muted-foreground" />
               </div>
               <p className="text-green-600 text-sm font-medium mt-4">{stat.change} from last month</p>
             </div>
@@ -56,8 +56,8 @@ export function DashboardOverview() {
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Revenue Chart */}
-        <div className="lg:col-span-2 bg-white p-6 rounded-xl border border-gray-200">
-          <h3 className="text-lg font-bold text-gray-900 mb-6">Revenue Trend</h3>
+        <div className="lg:col-span-2 bg-white p-6 rounded-xl border border-border">
+          <h3 className="text-lg font-bold text-foreground mb-6">Revenue Trend</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={revenueData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -65,15 +65,15 @@ export function DashboardOverview() {
               <YAxis stroke="#9ca3af" />
               <Tooltip contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb' }} />
               <Legend />
-              <Line type="monotone" dataKey="revenue" stroke="#2563EB" name="Revenue (₹)" strokeWidth={2} />
-              <Line type="monotone" dataKey="users" stroke="#4F46E5" name="Users" strokeWidth={2} />
+              <Line type="monotone" dataKey="revenue" stroke="#9AA59E" name="Revenue (₹)" strokeWidth={2} />
+              <Line type="monotone" dataKey="users" stroke="#7F8F84" name="Users" strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>
         </div>
 
         {/* Sales Distribution */}
-        <div className="bg-white p-6 rounded-xl border border-gray-200">
-          <h3 className="text-lg font-bold text-gray-900 mb-6">Sales Distribution</h3>
+        <div className="bg-white p-6 rounded-xl border border-border">
+          <h3 className="text-lg font-bold text-foreground mb-6">Sales Distribution</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -97,8 +97,8 @@ export function DashboardOverview() {
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-white p-6 rounded-xl border border-gray-200">
-        <h3 className="text-lg font-bold text-gray-900 mb-6">Recent Activity</h3>
+      <div className="bg-white p-6 rounded-xl border border-border">
+        <h3 className="text-lg font-bold text-foreground mb-6">Recent Activity</h3>
         <div className="space-y-4">
           {[
             { activity: 'New course created', timestamp: '2 hours ago', status: 'completed' },
@@ -106,10 +106,10 @@ export function DashboardOverview() {
             { activity: 'New user registered', timestamp: '6 hours ago', status: 'pending' },
             { activity: 'Email campaign sent', timestamp: '1 day ago', status: 'completed' },
           ].map((item, i) => (
-            <div key={i} className="flex items-center justify-between p-4 hover:bg-gray-50 rounded-lg">
+            <div key={i} className="flex items-center justify-between p-4 hover:bg-muted rounded-lg">
               <div>
-                <p className="font-medium text-gray-900">{item.activity}</p>
-                <p className="text-sm text-gray-500">{item.timestamp}</p>
+                <p className="font-medium text-foreground">{item.activity}</p>
+                <p className="text-sm text-muted-foreground">{item.timestamp}</p>
               </div>
               <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                 item.status === 'completed'

@@ -37,7 +37,7 @@ const SIDEBAR_COLLAPSED = 80
 
 function NavBadge({ badge }: { badge: number | string }) {
   return (
-    <span className="ml-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-[#2563EB] px-1.5 text-[10px] font-semibold text-white">
+    <span className="ml-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-[#9AA59E] px-1.5 text-[10px] font-semibold text-white">
       {badge}
     </span>
   )
@@ -62,7 +62,7 @@ function SubNavLink({
         'group flex w-full items-center gap-2 rounded-lg px-3 py-2 text-[15px] font-medium transition-all duration-200',
         isActive
           ? 'bg-[rgba(37,99,235,0.12)] text-white'
-          : 'text-[#CBD5E1] hover:bg-[rgba(37,99,235,0.08)] hover:text-white'
+          : 'text-[#232323] hover:bg-[rgba(37,99,235,0.08)] hover:text-white'
       )}
     >
       <span className={cn('flex-1 truncate', isActive && 'text-white')}>{item.label}</span>
@@ -80,7 +80,7 @@ function SubNavLink({
             'flex h-9 w-9 items-center justify-center rounded-lg transition-all duration-200',
             isActive
               ? 'bg-[rgba(37,99,235,0.12)] text-white'
-              : 'text-[#94A3B8] hover:bg-[rgba(37,99,235,0.08)] hover:text-white'
+              : 'text-[#666666] hover:bg-[rgba(37,99,235,0.08)] hover:text-white'
           )}
         >
           <span className="text-[10px] font-bold">{item.label.charAt(0)}</span>
@@ -129,13 +129,13 @@ function AccordionGroup({
         'flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-[15px] font-medium transition-all duration-200',
         hasActiveChild
           ? 'bg-[rgba(37,99,235,0.12)] text-white'
-          : 'text-[#CBD5E1] hover:bg-[rgba(37,99,235,0.08)] hover:text-[#FFFFFF]'
+          : 'text-[#232323] hover:bg-[rgba(37,99,235,0.08)] hover:text-[#FFFFFF]'
       )}
     >
       <Icon
         className={cn(
           'h-[18px] w-[18px] shrink-0 transition-colors',
-          hasActiveChild ? 'text-[#2563EB]' : 'text-[#94A3B8] group-hover:text-white'
+          hasActiveChild ? 'text-[#9AA59E]' : 'text-[#666666] group-hover:text-white'
         )}
       />
       {!isCollapsed && (
@@ -144,7 +144,7 @@ function AccordionGroup({
           <motion.span
             animate={{ rotate: isExpanded ? 180 : 0 }}
             transition={{ duration: 0.2 }}
-            className="text-[#94A3B8]"
+            className="text-[#666666]"
           >
             <ChevronDown className="h-4 w-4" />
           </motion.span>
@@ -198,23 +198,23 @@ function MobileTopBar({
   pathname: string
 }) {
   return (
-    <div className="fixed left-0 right-0 top-0 z-40 flex h-14 items-center gap-3 border-b border-white/[0.06] bg-[#0B1220] px-4 md:hidden">
+    <div className="fixed left-0 right-0 top-0 z-40 flex h-14 items-center gap-3 border-b border-white/[0.06] bg-[#FBFAF7] px-4 md:hidden">
       <button
         type="button"
         onClick={onOpen}
         aria-label="Open navigation"
-        className="flex h-9 w-9 items-center justify-center rounded-lg text-[#94A3B8] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-white"
+        className="flex h-9 w-9 items-center justify-center rounded-lg text-[#666666] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-white"
       >
         <Menu className="h-5 w-5" />
       </button>
 
-      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#2563EB] shadow-lg shadow-blue-500/20">
+      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#9AA59E] shadow-[0_10px_30px_rgba(0,0,0,0.05)] shadow-blue-500/20">
         <Sparkles className="h-3.5 w-3.5 text-white" />
       </div>
 
       <p className="flex-1 truncate text-sm font-semibold text-white">{PRODUCT_NAME}</p>
 
-      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#2563EB] text-[10px] font-bold text-white">
+      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#9AA59E] text-[10px] font-bold text-white">
         AP
       </div>
     </div>
@@ -274,7 +274,7 @@ function MobileDrawer({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={onClose}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 z-50 bg-foreground/60 backdrop-blur-sm md:hidden"
           />
 
           {/* Drawer panel */}
@@ -284,19 +284,19 @@ function MobileDrawer({
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-            className="fixed bottom-0 left-0 top-0 z-50 flex w-[280px] flex-col border-r border-white/[0.06] bg-[#0B1220] text-[#CBD5E1] md:hidden"
+            className="fixed bottom-0 left-0 top-0 z-50 flex w-[280px] flex-col border-r border-white/[0.06] bg-[#FBFAF7] text-[#232323] md:hidden"
           >
             {/* Drawer header */}
             <div className="shrink-0 border-b border-white/[0.06] p-4">
               <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#2563EB] shadow-lg shadow-blue-500/20">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#9AA59E] shadow-[0_10px_30px_rgba(0,0,0,0.05)] shadow-blue-500/20">
                   <Sparkles className="h-4 w-4 text-white" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold text-white">{PRODUCT_NAME}</p>
                   <button
                     type="button"
-                    className="mt-0.5 flex w-full items-center gap-1.5 rounded-md px-1 py-0.5 text-left text-xs text-[#94A3B8] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-[#CBD5E1]"
+                    className="mt-0.5 flex w-full items-center gap-1.5 rounded-md px-1 py-0.5 text-left text-xs text-[#666666] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-[#232323]"
                   >
                     <span className="truncate">My Workspace</span>
                     <ChevronsUpDown className="h-3 w-3 shrink-0" />
@@ -306,7 +306,7 @@ function MobileDrawer({
                   type="button"
                   onClick={onClose}
                   aria-label="Close navigation"
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[#94A3B8] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-white"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[#666666] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-white"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -316,20 +316,20 @@ function MobileDrawer({
             {/* Search */}
             <div className="shrink-0 px-4 py-3">
               <div className="relative">
-                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94A3B8]" />
+                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#666666]" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search navigation..."
-                  className="w-full rounded-lg border border-white/[0.06] bg-white/[0.04] py-2 pl-9 pr-4 text-sm text-[#CBD5E1] placeholder:text-[#64748B] outline-none transition-all focus:border-[#2563EB]/40 focus:bg-white/[0.06] focus:ring-1 focus:ring-[#2563EB]/30"
+                  className="w-full rounded-lg border border-white/[0.06] bg-white/[0.04] py-2 pl-9 pr-4 text-sm text-[#232323] placeholder:text-[#666666] outline-none transition-all focus:border-[#9AA59E]/40 focus:bg-white/[0.06] focus:ring-1 focus:ring-[#9AA59E]/30"
                 />
               </div>
             </div>
 
             {/* Navigation */}
             <nav className="admin-sidebar-scroll flex-1 space-y-1 overflow-y-auto px-3 py-2">
-              <p className="px-3 pb-1 pt-2 text-[12px] font-semibold uppercase tracking-wider text-[#64748B]">
+              <p className="px-3 pb-1 pt-2 text-[12px] font-semibold uppercase tracking-wider text-[#666666]">
                 Main
               </p>
 
@@ -340,19 +340,19 @@ function MobileDrawer({
                   'flex items-center gap-3 rounded-lg px-3 py-2.5 text-[15px] font-medium transition-all duration-200',
                   dashboardActive
                     ? 'bg-[rgba(37,99,235,0.12)] text-white'
-                    : 'text-[#CBD5E1] hover:bg-[rgba(37,99,235,0.08)] hover:text-white'
+                    : 'text-[#232323] hover:bg-[rgba(37,99,235,0.08)] hover:text-white'
                 )}
               >
                 <DashboardIcon
                   className={cn(
                     'h-[18px] w-[18px]',
-                    dashboardActive ? 'text-[#2563EB]' : 'text-[#94A3B8]'
+                    dashboardActive ? 'text-[#9AA59E]' : 'text-[#666666]'
                   )}
                 />
                 <span>{dashboardLink.label}</span>
               </Link>
 
-              <p className="px-3 pb-1 pt-4 text-[12px] font-semibold uppercase tracking-wider text-[#64748B]">
+              <p className="px-3 pb-1 pt-4 text-[12px] font-semibold uppercase tracking-wider text-[#666666]">
                 Platform
               </p>
 
@@ -375,40 +375,40 @@ function MobileDrawer({
               <Link
                 href="/dashboard/billing/plans"
                 onClick={onClose}
-                className="block rounded-xl border border-[#2563EB]/20 bg-gradient-to-br from-[#2563EB]/15 to-[#4F46E5]/10 p-3 transition-all hover:border-[#2563EB]/40 hover:shadow-lg hover:shadow-blue-500/10"
+                className="block rounded-xl border border-[#9AA59E]/20 bg-primary from-[#9AA59E]/15 to-[#7F8F84]/10 p-3 transition-all hover:border-[#9AA59E]/40 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-blue-500/10"
               >
                 <div className="flex items-center gap-2">
-                  <Crown className="h-4 w-4 text-[#2563EB]" />
+                  <Crown className="h-4 w-4 text-[#9AA59E]" />
                   <span className="text-xs font-semibold text-white">Upgrade Plan</span>
                 </div>
-                <p className="mt-1 text-[11px] leading-relaxed text-[#94A3B8]">
+                <p className="mt-1 text-[11px] leading-relaxed text-[#666666]">
                   Unlock advanced analytics, automation, and team seats.
                 </p>
               </Link>
 
               <div className="rounded-lg border border-white/[0.06] bg-white/[0.03] px-3 py-2">
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-[#64748B]">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-[#666666]">
                   Subscription
                 </p>
                 <p className="mt-0.5 text-xs font-medium text-white">Pro Plan</p>
-                <p className="text-[11px] text-[#94A3B8]">Renews Apr 9, 2026</p>
+                <p className="text-[11px] text-[#666666]">Renews Apr 9, 2026</p>
               </div>
 
               <div className="flex items-center gap-2">
                 <div className="flex min-w-0 flex-1 items-center gap-2 rounded-lg px-2 py-1.5">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#2563EB] text-xs font-bold text-white">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#9AA59E] text-xs font-bold text-white">
                     AP
                   </div>
                   <div className="min-w-0">
                     <p className="truncate text-sm font-medium text-white">Tannu</p>
-                    <p className="truncate text-[11px] text-[#94A3B8]">creator@works.cloud</p>
+                    <p className="truncate text-[11px] text-[#666666]">creator@works.cloud</p>
                   </div>
                 </div>
                 <SidebarTooltip label="Settings" side="top">
                   <Link
                     href="/dashboard/settings/general"
                     onClick={onClose}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg text-[#94A3B8] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-white"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg text-[#666666] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-white"
                   >
                     <Settings className="h-4 w-4" />
                   </Link>
@@ -417,7 +417,7 @@ function MobileDrawer({
                   <button
                     type="button"
                     onClick={() => { onClose(); router.push('/login') }}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg text-[#94A3B8] transition-colors hover:bg-red-500/10 hover:text-red-400"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg text-[#666666] transition-colors hover:bg-red-500/10 hover:text-red-400"
                   >
                     <LogOut className="h-4 w-4" />
                   </button>
@@ -535,13 +535,13 @@ export function AdminSidebar() {
         transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
         className={cn(
           'admin-sidebar fixed left-0 top-0 z-40 hidden h-screen flex-col md:flex',
-          'border-r border-white/[0.06] bg-[#0B1220] text-[#CBD5E1]'
+          'border-r border-white/[0.06] bg-[#FBFAF7] text-[#232323]'
         )}
       >
         {/* Header */}
         <div className="shrink-0 border-b border-white/[0.06] p-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#2563EB] shadow-lg shadow-blue-500/20">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#9AA59E] shadow-[0_10px_30px_rgba(0,0,0,0.05)] shadow-blue-500/20">
               <Sparkles className="h-4 w-4 text-white" />
             </div>
             {!isCollapsed && (
@@ -553,7 +553,7 @@ export function AdminSidebar() {
                 <p className="truncate text-sm font-semibold text-white">{PRODUCT_NAME}</p>
                 <button
                   type="button"
-                  className="mt-0.5 flex w-full items-center gap-1.5 rounded-md px-1 py-0.5 text-left text-xs text-[#94A3B8] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-[#CBD5E1]"
+                  className="mt-0.5 flex w-full items-center gap-1.5 rounded-md px-1 py-0.5 text-left text-xs text-[#666666] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-[#232323]"
                 >
                   <span className="truncate">My Workspace</span>
                   <ChevronsUpDown className="h-3 w-3 shrink-0" />
@@ -567,7 +567,7 @@ export function AdminSidebar() {
         {!isCollapsed ? (
           <div className="shrink-0 px-4 py-3">
             <div className="relative">
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94A3B8]" />
+              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#666666]" />
               <input
                 ref={searchRef}
                 type="text"
@@ -577,12 +577,12 @@ export function AdminSidebar() {
                   setFocusedIndex(-1)
                 }}
                 placeholder="Search navigation..."
-                className="w-full rounded-lg border border-white/[0.06] bg-white/[0.04] py-2 pl-9 pr-16 text-sm text-[#CBD5E1] placeholder:text-[#64748B] outline-none transition-all focus:border-[#2563EB]/40 focus:bg-white/[0.06] focus:ring-1 focus:ring-[#2563EB]/30"
+                className="w-full rounded-lg border border-white/[0.06] bg-white/[0.04] py-2 pl-9 pr-16 text-sm text-[#232323] placeholder:text-[#666666] outline-none transition-all focus:border-[#9AA59E]/40 focus:bg-white/[0.06] focus:ring-1 focus:ring-[#9AA59E]/30"
               />
               <button
                 type="button"
                 onClick={() => setCommandOpen(true)}
-                className="absolute right-2 top-1/2 flex -translate-y-1/2 items-center gap-0.5 rounded border border-white/[0.08] bg-white/[0.04] px-1.5 py-0.5 text-[10px] text-[#94A3B8] transition-colors hover:text-white"
+                className="absolute right-2 top-1/2 flex -translate-y-1/2 items-center gap-0.5 rounded border border-white/[0.08] bg-white/[0.04] px-1.5 py-0.5 text-[10px] text-[#666666] transition-colors hover:text-white"
               >
                 <Command className="h-2.5 w-2.5" />K
               </button>
@@ -597,7 +597,7 @@ export function AdminSidebar() {
                   toggleCollapse()
                   setTimeout(() => searchRef.current?.focus(), 300)
                 }}
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-[#94A3B8] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-white"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-[#666666] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-white"
               >
                 <Search className="h-4 w-4" />
               </button>
@@ -608,7 +608,7 @@ export function AdminSidebar() {
         {/* Navigation */}
         <nav className="admin-sidebar-scroll flex-1 space-y-1 overflow-y-auto px-3 py-2">
           {!isCollapsed && (
-            <p className="px-3 pb-1 pt-2 text-[12px] font-semibold uppercase tracking-wider text-[#64748B]">
+            <p className="px-3 pb-1 pt-2 text-[12px] font-semibold uppercase tracking-wider text-[#666666]">
               Main
             </p>
           )}
@@ -620,8 +620,8 @@ export function AdminSidebar() {
                 className={cn(
                   'mx-auto flex h-9 w-9 items-center justify-center rounded-lg transition-all duration-200',
                   dashboardActive
-                    ? 'bg-[rgba(37,99,235,0.12)] text-[#2563EB]'
-                    : 'text-[#94A3B8] hover:bg-[rgba(37,99,235,0.08)] hover:text-white'
+                    ? 'bg-[rgba(37,99,235,0.12)] text-[#9AA59E]'
+                    : 'text-[#666666] hover:bg-[rgba(37,99,235,0.08)] hover:text-white'
                 )}
               >
                 <DashboardIcon className="h-[18px] w-[18px]" />
@@ -634,13 +634,13 @@ export function AdminSidebar() {
                 'flex items-center gap-3 rounded-lg px-3 py-2.5 text-[15px] font-medium transition-all duration-200',
                 dashboardActive
                   ? 'bg-[rgba(37,99,235,0.12)] text-white'
-                  : 'text-[#CBD5E1] hover:bg-[rgba(37,99,235,0.08)] hover:text-white'
+                  : 'text-[#232323] hover:bg-[rgba(37,99,235,0.08)] hover:text-white'
               )}
             >
               <DashboardIcon
                 className={cn(
                   'h-[18px] w-[18px]',
-                  dashboardActive ? 'text-[#2563EB]' : 'text-[#94A3B8]'
+                  dashboardActive ? 'text-[#9AA59E]' : 'text-[#666666]'
                 )}
               />
               <span>{dashboardLink.label}</span>
@@ -648,7 +648,7 @@ export function AdminSidebar() {
           )}
 
           {!isCollapsed && (
-            <p className="px-3 pb-1 pt-4 text-[12px] font-semibold uppercase tracking-wider text-[#64748B]">
+            <p className="px-3 pb-1 pt-4 text-[12px] font-semibold uppercase tracking-wider text-[#666666]">
               Platform
             </p>
           )}
@@ -674,13 +674,13 @@ export function AdminSidebar() {
           {!isCollapsed && (
             <Link
               href="/dashboard/billing/plans"
-              className="block rounded-xl border border-[#2563EB]/20 bg-gradient-to-br from-[#2563EB]/15 to-[#4F46E5]/10 p-3 transition-all hover:border-[#2563EB]/40 hover:shadow-lg hover:shadow-blue-500/10"
+              className="block rounded-xl border border-[#9AA59E]/20 bg-primary from-[#9AA59E]/15 to-[#7F8F84]/10 p-3 transition-all hover:border-[#9AA59E]/40 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-blue-500/10"
             >
               <div className="flex items-center gap-2">
-                <Crown className="h-4 w-4 text-[#2563EB]" />
+                <Crown className="h-4 w-4 text-[#9AA59E]" />
                 <span className="text-xs font-semibold text-white">Upgrade Plan</span>
               </div>
-              <p className="mt-1 text-[11px] leading-relaxed text-[#94A3B8]">
+              <p className="mt-1 text-[11px] leading-relaxed text-[#666666]">
                 Unlock advanced analytics, automation, and team seats.
               </p>
             </Link>
@@ -688,11 +688,11 @@ export function AdminSidebar() {
 
           {!isCollapsed && (
             <div className="rounded-lg border border-white/[0.06] bg-white/[0.03] px-3 py-2">
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-[#64748B]">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-[#666666]">
                 Subscription
               </p>
               <p className="mt-0.5 text-xs font-medium text-white">Pro Plan</p>
-              <p className="text-[11px] text-[#94A3B8]">Renews Apr 9, 2026</p>
+              <p className="text-[11px] text-[#666666]">Renews Apr 9, 2026</p>
             </div>
           )}
 
@@ -700,18 +700,18 @@ export function AdminSidebar() {
             {!isCollapsed ? (
               <>
                 <div className="flex min-w-0 flex-1 items-center gap-2 rounded-lg px-2 py-1.5">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#2563EB] text-xs font-bold text-white">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#9AA59E] text-xs font-bold text-white">
                     AP
                   </div>
                   <div className="min-w-0">
                     <p className="truncate text-sm font-medium text-white">Tannu</p>
-                    <p className="truncate text-[11px] text-[#94A3B8]">creator@works.cloud</p>
+                    <p className="truncate text-[11px] text-[#666666]">creator@works.cloud</p>
                   </div>
                 </div>
                 <SidebarTooltip label="Settings" side="top">
                   <Link
                     href="/dashboard/settings/general"
-                    className="flex h-8 w-8 items-center justify-center rounded-lg text-[#94A3B8] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-white"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg text-[#666666] transition-colors hover:bg-[rgba(37,99,235,0.08)] hover:text-white"
                   >
                     <Settings className="h-4 w-4" />
                   </Link>
@@ -720,7 +720,7 @@ export function AdminSidebar() {
                   <button
                     type="button"
                     onClick={() => router.push('/login')}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg text-[#94A3B8] transition-colors hover:bg-red-500/10 hover:text-red-400"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg text-[#666666] transition-colors hover:bg-red-500/10 hover:text-red-400"
                   >
                     <LogOut className="h-4 w-4" />
                   </button>
@@ -729,14 +729,14 @@ export function AdminSidebar() {
             ) : (
               <div className="mx-auto flex flex-col items-center gap-2">
                 <SidebarTooltip label="Profile">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#2563EB] text-xs font-bold text-white">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#9AA59E] text-xs font-bold text-white">
                     AP
                   </div>
                 </SidebarTooltip>
                 <SidebarTooltip label="Settings">
                   <Link
                     href="/dashboard/settings/general"
-                    className="flex h-8 w-8 items-center justify-center rounded-lg text-[#94A3B8] hover:bg-[rgba(37,99,235,0.08)] hover:text-white"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg text-[#666666] hover:bg-[rgba(37,99,235,0.08)] hover:text-white"
                   >
                     <Settings className="h-4 w-4" />
                   </Link>
@@ -745,7 +745,7 @@ export function AdminSidebar() {
                   <button
                     type="button"
                     onClick={() => router.push('/login')}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg text-[#94A3B8] hover:bg-red-500/10 hover:text-red-400"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg text-[#666666] hover:bg-red-500/10 hover:text-red-400"
                   >
                     <LogOut className="h-4 w-4" />
                   </button>
@@ -760,7 +760,7 @@ export function AdminSidebar() {
           type="button"
           onClick={toggleCollapse}
           aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          className="absolute -right-3 top-20 z-50 flex h-6 w-6 items-center justify-center rounded-full border border-white/[0.08] bg-[#0B1220] text-[#94A3B8] shadow-lg transition-all hover:border-[#2563EB]/40 hover:text-white"
+          className="absolute -right-3 top-20 z-50 flex h-6 w-6 items-center justify-center rounded-full border border-white/[0.08] bg-[#FBFAF7] text-[#666666] shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all hover:border-[#9AA59E]/40 hover:text-white"
         >
           <ChevronLeft
             className={cn('h-3.5 w-3.5 transition-transform duration-300', isCollapsed && 'rotate-180')}

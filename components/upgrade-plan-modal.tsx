@@ -104,14 +104,14 @@ export function UpgradePlanModal({ isOpen, onClose, onUpgrade }: UpgradePlanModa
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-foreground/60 backdrop-blur-sm"
           />
 
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-7xl bg-background rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
+            className="relative w-full max-w-7xl bg-background rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.05)] overflow-hidden max-h-[90vh] flex flex-col"
           >
             <div className="p-8 border-b bg-muted/30 relative">
               <button
@@ -148,7 +148,7 @@ export function UpgradePlanModal({ isOpen, onClose, onUpgrade }: UpgradePlanModa
                     <div
                       key={plan.name}
                       className="relative flex flex-col p-6 rounded-xl border-2 transition-all 
-                         'border-primary shadow-xl md:scale-105 z-10 bg-background' 
+                         'border-primary shadow-[0_10px_30px_rgba(0,0,0,0.05)] md:scale-105 z-10 bg-background' 
                           
                       "
                     >

@@ -66,7 +66,7 @@ export default function BillingPage() {
                 </p>
                 <h2 className="text-2xl font-bold">Growth</h2>
               </div>
-              <CreditCard className="h-8 w-8 text-blue-600" />
+              <CreditCard className="h-8 w-8 text-primary" />
             </div>
           </CardContent>
         </Card>
@@ -108,7 +108,7 @@ export default function BillingPage() {
                 </p>
                 <h2 className="text-2xl font-bold">12 Jul</h2>
               </div>
-              <Calendar className="h-8 w-8 text-purple-600" />
+              <Calendar className="h-8 w-8 text-primary" />
             </div>
           </CardContent>
         </Card>

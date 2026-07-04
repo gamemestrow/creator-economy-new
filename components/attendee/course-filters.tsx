@@ -67,10 +67,10 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-6 space-y-6">
+    <div className="bg-white border border-border rounded-lg p-6 space-y-6">
       {/* Header */}
       <div>
-        <h3 className="text-lg font-semibold text-gray-900">Filters</h3>
+        <h3 className="text-lg font-semibold text-foreground">Filters</h3>
         {(filters.category || filters.level || filters.rating > 0 || 
           filters.priceRange[0] > 0 || filters.priceRange[1] < 150) && (
           <button
@@ -83,7 +83,7 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
                 rating: 0,
               })
             }
-            className="text-xs text-[#2563EB] hover:text-blue-700 font-medium mt-2 transition-colors"
+            className="text-xs text-[#9AA59E] hover:text-primary font-medium mt-2 transition-colors"
           >
             Clear all filters
           </button>
@@ -91,14 +91,14 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
       </div>
 
       {/* Category Filter */}
-      <div className="border-b border-gray-200 pb-6">
+      <div className="border-b border-border pb-6">
         <button
           onClick={() => toggleSection('category')}
           className="flex items-center justify-between w-full mb-4 group"
         >
-          <h4 className="font-semibold text-gray-900">Category</h4>
+          <h4 className="font-semibold text-foreground">Category</h4>
           <ChevronDown
-            className={`h-5 w-5 text-gray-400 transition-transform duration-300 ${
+            className={`h-5 w-5 text-muted-foreground transition-transform duration-300 ${
               expandedSections.category ? 'rotate-180' : ''
             }`}
           />
@@ -114,9 +114,9 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
                   type="checkbox"
                   checked={filters.category === category}
                   onChange={() => handleCategoryChange(category)}
-                  className="h-4 w-4 rounded border-gray-300 text-[#2563EB] focus:ring-[#2563EB]"
+                  className="h-4 w-4 rounded border-border text-[#9AA59E] focus:ring-[#9AA59E]"
                 />
-                <span className="text-sm text-gray-700 group-hover:text-gray-900 transition-colors">
+                <span className="text-sm text-foreground group-hover:text-foreground transition-colors">
                   {category}
                 </span>
               </label>
@@ -126,14 +126,14 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
       </div>
 
       {/* Level Filter */}
-      <div className="border-b border-gray-200 pb-6">
+      <div className="border-b border-border pb-6">
         <button
           onClick={() => toggleSection('level')}
           className="flex items-center justify-between w-full mb-4 group"
         >
-          <h4 className="font-semibold text-gray-900">Level</h4>
+          <h4 className="font-semibold text-foreground">Level</h4>
           <ChevronDown
-            className={`h-5 w-5 text-gray-400 transition-transform duration-300 ${
+            className={`h-5 w-5 text-muted-foreground transition-transform duration-300 ${
               expandedSections.level ? 'rotate-180' : ''
             }`}
           />
@@ -149,9 +149,9 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
                   type="checkbox"
                   checked={filters.level === level}
                   onChange={() => handleLevelChange(level)}
-                  className="h-4 w-4 rounded border-gray-300 text-[#2563EB] focus:ring-[#2563EB]"
+                  className="h-4 w-4 rounded border-border text-[#9AA59E] focus:ring-[#9AA59E]"
                 />
-                <span className="text-sm text-gray-700 group-hover:text-gray-900 transition-colors">
+                <span className="text-sm text-foreground group-hover:text-foreground transition-colors">
                   {level}
                 </span>
               </label>
@@ -161,14 +161,14 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
       </div>
 
       {/* Price Filter */}
-      <div className="border-b border-gray-200 pb-6">
+      <div className="border-b border-border pb-6">
         <button
           onClick={() => toggleSection('price')}
           className="flex items-center justify-between w-full mb-4 group"
         >
-          <h4 className="font-semibold text-gray-900">Price Range</h4>
+          <h4 className="font-semibold text-foreground">Price Range</h4>
           <ChevronDown
-            className={`h-5 w-5 text-gray-400 transition-transform duration-300 ${
+            className={`h-5 w-5 text-muted-foreground transition-transform duration-300 ${
               expandedSections.price ? 'rotate-180' : ''
             }`}
           />
@@ -177,7 +177,7 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <div className="flex-1">
-                <label className="text-xs text-gray-600 block mb-2">Min</label>
+                <label className="text-xs text-muted-foreground block mb-2">Min</label>
                 <input
                   type="number"
                   min="0"
@@ -189,11 +189,11 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
                       filters.priceRange[1]
                     )
                   }
-                  className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
+                  className="w-full px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9AA59E]"
                 />
               </div>
               <div className="flex-1">
-                <label className="text-xs text-gray-600 block mb-2">Max</label>
+                <label className="text-xs text-muted-foreground block mb-2">Max</label>
                 <input
                   type="number"
                   min="0"
@@ -205,11 +205,11 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
                       Number(e.target.value)
                     )
                   }
-                  className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
+                  className="w-full px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9AA59E]"
                 />
               </div>
             </div>
-            <div className="text-sm text-gray-700 font-medium">
+            <div className="text-sm text-foreground font-medium">
               ${filters.priceRange[0]} - ${filters.priceRange[1]}
             </div>
           </div>
@@ -222,9 +222,9 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
           onClick={() => toggleSection('rating')}
           className="flex items-center justify-between w-full mb-4 group"
         >
-          <h4 className="font-semibold text-gray-900">Rating</h4>
+          <h4 className="font-semibold text-foreground">Rating</h4>
           <ChevronDown
-            className={`h-5 w-5 text-gray-400 transition-transform duration-300 ${
+            className={`h-5 w-5 text-muted-foreground transition-transform duration-300 ${
               expandedSections.rating ? 'rotate-180' : ''
             }`}
           />
@@ -241,9 +241,9 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
                   name="rating"
                   checked={filters.rating === ratingOption.value}
                   onChange={() => handleRatingChange(ratingOption.value)}
-                  className="h-4 w-4 border-gray-300 text-[#2563EB] focus:ring-[#2563EB]"
+                  className="h-4 w-4 border-border text-[#9AA59E] focus:ring-[#9AA59E]"
                 />
-                <span className="text-sm text-gray-700 group-hover:text-gray-900 transition-colors">
+                <span className="text-sm text-foreground group-hover:text-foreground transition-colors">
                   {ratingOption.label}
                 </span>
               </label>

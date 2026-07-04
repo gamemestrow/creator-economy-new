@@ -105,10 +105,10 @@ export function Pricing({ onSelectPlan }: PricingProps) {
     <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Simple, Transparent Pricing
           </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Choose the perfect plan for your creator journey. No hidden fees, cancel anytime.
           </p>
           
@@ -128,30 +128,30 @@ export function Pricing({ onSelectPlan }: PricingProps) {
             return (
               <div
                 key={index}
-                className={`rounded-2xl p-8 transition ${
+                className={`rounded-[20px] p-8 transition-all duration-250 ease-out shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:-translate-y-1 ${
                   plan.highlighted
-                    ? 'bg-gradient-to-br from-blue-600 to-indigo-600 text-white scale-105 shadow-xl'
-                    : 'bg-white border border-slate-200 text-slate-900 hover:border-slate-300'
+                    ? 'bg-primary text-primary-foreground scale-105 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)]'
+                    : 'bg-card border border-border text-card-foreground hover:shadow-[0_15px_40px_rgba(0,0,0,0.08)]'
                 }`}
               >
                 <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                <p className={`text-sm mb-4 ${plan.highlighted ? 'text-blue-100' : 'text-slate-600'}`}>
+                <p className={`text-sm mb-4 ${plan.highlighted ? 'text-primary-foreground/90' : 'text-muted-foreground'}`}>
                   {plan.description}
                 </p>
 
                 <div className="mb-6">
                   <span className="text-4xl font-bold">{plan.price}</span>
-                  <span className={plan.highlighted ? 'text-blue-100' : 'text-slate-600'}>{plan.period}</span>
+                  <span className={plan.highlighted ? 'text-primary-foreground/90' : 'text-muted-foreground'}>{plan.period}</span>
                 </div>
 
                 {onSelectPlan ? (
                   <button
                     onClick={() => handlePlanSelect(planId)}
                     disabled={!!loadingPlan}
-                    className={`w-full flex items-center justify-center gap-2 py-3 px-6 rounded-lg font-semibold mb-8 transition ${
+                    className={`w-full flex items-center justify-center gap-2 py-3 px-6 rounded-[14px] font-semibold mb-8 transition-all duration-250 ease-out hover:scale-[1.02] ${
                       plan.highlighted
-                        ? 'bg-white text-blue-600 hover:bg-blue-50 disabled:bg-blue-50/50'
-                        : 'bg-blue-600 text-white hover:bg-blue-700 disabled:bg-blue-400'
+                        ? 'bg-white text-primary-hover hover:bg-[#F7F7F4] disabled:bg-white/50'
+                        : 'bg-primary text-primary-foreground hover:bg-primary-hover disabled:opacity-50'
                     }`}
                   >
                     {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
@@ -160,10 +160,10 @@ export function Pricing({ onSelectPlan }: PricingProps) {
                 ) : (
                   <Link
                     href="/dashboard/main"
-                    className={`block text-center py-3 px-6 rounded-lg font-semibold mb-8 transition ${
+                    className={`block text-center py-3 px-6 rounded-[14px] font-semibold mb-8 transition-all duration-250 ease-out hover:scale-[1.02] ${
                       plan.highlighted
-                        ? 'bg-white text-blue-600 hover:bg-blue-50'
-                        : 'bg-blue-600 text-white hover:bg-blue-700'
+                        ? 'bg-white text-primary-hover hover:bg-[#F7F7F4]'
+                        : 'bg-primary text-primary-foreground hover:bg-primary-hover'
                     }`}
                   >
                     {plan.cta}
@@ -173,7 +173,7 @@ export function Pricing({ onSelectPlan }: PricingProps) {
                 <div className="space-y-4">
                   {plan.features.map((feature, i) => (
                     <div key={i} className="flex items-start gap-3">
-                      <Check className={`w-5 h-5 flex-shrink-0 ${plan.highlighted ? 'text-blue-200' : 'text-green-500'}`} />
+                      <Check className={`w-5 h-5 flex-shrink-0 ${plan.highlighted ? 'text-primary-foreground/90' : 'text-[#22C55E]'}`} />
                       <span className="text-sm">{feature}</span>
                     </div>
                   ))}

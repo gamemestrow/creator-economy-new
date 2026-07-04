@@ -32,7 +32,7 @@ export function SidebarTooltip({
           role="tooltip"
           className={cn(
             'pointer-events-none absolute z-[60] whitespace-nowrap rounded-md px-2.5 py-1.5',
-            'bg-[#1E293B] text-xs font-medium text-white shadow-lg',
+            'bg-[#232323] text-xs font-medium text-white shadow-[0_10px_30px_rgba(0,0,0,0.05)]',
             'border border-white/[0.08]',
             side === 'right' && 'left-full ml-3 top-1/2 -translate-y-1/2',
             side === 'top' && 'bottom-full mb-2 left-1/2 -translate-x-1/2'

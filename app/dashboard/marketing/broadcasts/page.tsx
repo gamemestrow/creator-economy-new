@@ -108,7 +108,7 @@ export default function BroadcastsPage() {
                 className="flex items-center justify-between rounded-lg border p-4"
               >
                 <div className="flex items-center gap-4">
-                  <Send className="h-8 w-8 text-blue-500" />
+                  <Send className="h-8 w-8 text-primary" />
 
                   <div>
                     <h3 className="font-semibold">
@@ -148,7 +148,7 @@ export default function BroadcastsPage() {
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Mail className="h-5 w-5 text-blue-500" />
+                <Mail className="h-5 w-5 text-primary" />
                 <span>Email</span>
               </div>
               <span className="font-semibold">8,420 Users</span>
@@ -164,7 +164,7 @@ export default function BroadcastsPage() {
 
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Users className="h-5 w-5 text-purple-500" />
+                <Users className="h-5 w-5 text-primary" />
                 <span>Push Notifications</span>
               </div>
               <span className="font-semibold">3,210 Users</span>
@@ -184,12 +184,12 @@ export default function BroadcastsPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <Eye className="h-5 w-5 text-blue-500" />
+              <Eye className="h-5 w-5 text-primary" />
               <span>84,000 message opens this month</span>
             </div>
 
             <div className="flex items-center gap-3">
-              <Send className="h-5 w-5 text-purple-500" />
+              <Send className="h-5 w-5 text-primary" />
               <span>42 broadcasts sent this month</span>
             </div>
           </CardContent>

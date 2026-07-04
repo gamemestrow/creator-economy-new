@@ -43,13 +43,13 @@ export default function SelectRolePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="border-b border-gray-200">
+      <div className="border-b border-border">
         <div className="mx-auto max-w-6xl px-6 py-6">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#2563EB] shadow-lg shadow-blue-500/25">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#9AA59E] shadow-[0_10px_30px_rgba(0,0,0,0.05)] shadow-blue-500/25">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
-            <span className="text-lg font-semibold text-gray-900">{PRODUCT_NAME}</span>
+            <span className="text-lg font-semibold text-foreground">{PRODUCT_NAME}</span>
           </div>
         </div>
       </div>
@@ -58,10 +58,10 @@ export default function SelectRolePage() {
       <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
         {/* Title Section */}
         <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+          <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
             Choose Your Role
           </h1>
-          <p className="mx-auto max-w-2xl text-lg text-gray-600">
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Select your role to get started with {PRODUCT_NAME}. You can change this later in your settings.
           </p>
         </div>
@@ -80,42 +80,42 @@ export default function SelectRolePage() {
             onClick={() => handleRoleSelection('creator')}
             disabled={loading}
             className={`group relative overflow-hidden rounded-2xl border-2 p-8 text-left transition-all duration-300 ${selectedRole === 'creator'
-                ? 'border-[#2563EB] bg-blue-50'
-                : 'border-gray-200 bg-white hover:border-[#2563EB] hover:bg-blue-50'
+                ? 'border-[#9AA59E] bg-primary/10'
+                : 'border-border bg-white hover:border-[#9AA59E] hover:bg-primary/10'
               } ${loading ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
           >
             {/* Background accent */}
-            <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-blue-100 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
             {/* Content */}
             <div className="relative z-10">
-              <div className="mb-6 inline-flex rounded-lg bg-blue-100 p-3">
-                <Crown className="h-6 w-6 text-[#2563EB]" />
+              <div className="mb-6 inline-flex rounded-lg bg-primary/10 p-3">
+                <Crown className="h-6 w-6 text-[#9AA59E]" />
               </div>
 
-              <h2 className="mb-3 text-2xl font-bold text-gray-900">Creator</h2>
+              <h2 className="mb-3 text-2xl font-bold text-foreground">Creator</h2>
 
-              <p className="mb-6 text-gray-600">
+              <p className="mb-6 text-muted-foreground">
                 Build and monetize your audience with courses, memberships, and exclusive content.
               </p>
 
               {/* Features */}
               <ul className="mb-8 space-y-3">
                 <li className="flex items-start gap-3">
-                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#2563EB]" />
-                  <span className="text-sm text-gray-700">Create and sell courses</span>
+                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#9AA59E]" />
+                  <span className="text-sm text-foreground">Create and sell courses</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#2563EB]" />
-                  <span className="text-sm text-gray-700">Launch membership programs</span>
+                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#9AA59E]" />
+                  <span className="text-sm text-foreground">Launch membership programs</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#2563EB]" />
-                  <span className="text-sm text-gray-700">Advanced analytics & insights</span>
+                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#9AA59E]" />
+                  <span className="text-sm text-foreground">Advanced analytics & insights</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#2563EB]" />
-                  <span className="text-sm text-gray-700">Marketing automation tools</span>
+                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#9AA59E]" />
+                  <span className="text-sm text-foreground">Marketing automation tools</span>
                 </li>
               </ul>
 
@@ -123,8 +123,8 @@ export default function SelectRolePage() {
               <div className="flex items-center justify-between">
                 <span
                   className={`font-semibold transition-colors ${selectedRole === 'creator'
-                      ? 'text-[#2563EB]'
-                      : 'text-gray-900 group-hover:text-[#2563EB]'
+                      ? 'text-[#9AA59E]'
+                      : 'text-foreground group-hover:text-[#9AA59E]'
                     }`}
                 >
                   {selectedRole === 'creator' && loading ? (
@@ -138,8 +138,8 @@ export default function SelectRolePage() {
                 </span>
                 <ArrowRight
                   className={`h-5 w-5 transition-all ${selectedRole === 'creator'
-                      ? 'translate-x-1 text-[#2563EB]'
-                      : 'text-gray-400 group-hover:translate-x-1 group-hover:text-[#2563EB]'
+                      ? 'translate-x-1 text-[#9AA59E]'
+                      : 'text-muted-foreground group-hover:translate-x-1 group-hover:text-[#9AA59E]'
                     }`}
                 />
               </div>
@@ -151,42 +151,42 @@ export default function SelectRolePage() {
             onClick={() => handleRoleSelection('attendee')}
             disabled={loading}
             className={`group relative overflow-hidden rounded-2xl border-2 p-8 text-left transition-all duration-300 ${selectedRole === 'attendee'
-                ? 'border-blue-400 bg-blue-50'
-                : 'border-gray-200 bg-white hover:border-blue-400 hover:bg-blue-50'
+                ? 'border-primary/20 bg-primary/10'
+                : 'border-border bg-white hover:border-primary/20 hover:bg-primary/10'
               } ${loading ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
           >
             {/* Background accent */}
-            <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-blue-100 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
             {/* Content */}
             <div className="relative z-10">
-              <div className="mb-6 inline-flex rounded-lg bg-blue-100 p-3">
-                <Users2 className="h-6 w-6 text-blue-600" />
+              <div className="mb-6 inline-flex rounded-lg bg-primary/10 p-3">
+                <Users2 className="h-6 w-6 text-primary" />
               </div>
 
-              <h2 className="mb-3 text-2xl font-bold text-gray-900">Attendee</h2>
+              <h2 className="mb-3 text-2xl font-bold text-foreground">Attendee</h2>
 
-              <p className="mb-6 text-gray-600">
+              <p className="mb-6 text-muted-foreground">
                 Access and learn from courses, engage with creators, and join a community.
               </p>
 
               {/* Features */}
               <ul className="mb-8 space-y-3">
                 <li className="flex items-start gap-3">
-                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-600" />
-                  <span className="text-sm text-gray-700">Browse and enroll in courses</span>
+                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                  <span className="text-sm text-foreground">Browse and enroll in courses</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-600" />
-                  <span className="text-sm text-gray-700">Access member-only content</span>
+                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                  <span className="text-sm text-foreground">Access member-only content</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-600" />
-                  <span className="text-sm text-gray-700">Track learning progress</span>
+                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                  <span className="text-sm text-foreground">Track learning progress</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-600" />
-                  <span className="text-sm text-gray-700">Join communities and events</span>
+                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                  <span className="text-sm text-foreground">Join communities and events</span>
                 </li>
               </ul>
 
@@ -194,8 +194,8 @@ export default function SelectRolePage() {
               <div className="flex items-center justify-between">
                 <span
                   className={`font-semibold transition-colors ${selectedRole === 'attendee'
-                      ? 'text-blue-600'
-                      : 'text-gray-900 group-hover:text-blue-600'
+                      ? 'text-primary'
+                      : 'text-foreground group-hover:text-primary'
                     }`}
                 >
                   {selectedRole === 'attendee' && loading ? (
@@ -209,8 +209,8 @@ export default function SelectRolePage() {
                 </span>
                 <ArrowRight
                   className={`h-5 w-5 transition-all ${selectedRole === 'attendee'
-                      ? 'translate-x-1 text-blue-600'
-                      : 'text-gray-400 group-hover:translate-x-1 group-hover:text-blue-600'
+                      ? 'translate-x-1 text-primary'
+                      : 'text-muted-foreground group-hover:translate-x-1 group-hover:text-primary'
                     }`}
                 />
               </div>
@@ -219,10 +219,10 @@ export default function SelectRolePage() {
         </div>
 
         {/* Help Text */}
-        <div className="mt-12 rounded-lg bg-gray-50 p-6">
-          <p className="text-center text-sm text-gray-600">
+        <div className="mt-12 rounded-lg bg-muted p-6">
+          <p className="text-center text-sm text-muted-foreground">
             Not sure which role to choose?{' '}
-            <a href="#" className="font-semibold text-[#2563EB] hover:underline">
+            <a href="#" className="font-semibold text-[#9AA59E] hover:underline">
               Learn more about roles
             </a>
           </p>

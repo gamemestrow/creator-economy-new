@@ -50,7 +50,7 @@ export function SettingsPanel({
 
         {selectedElement ? (
           <>
-            <div className="rounded-lg border bg-slate-50 p-3">
+            <div className="rounded-lg border bg-muted p-3">
               <div className="text-xs font-medium uppercase text-muted-foreground">Selected</div>
               <div className="mt-1 font-semibold">{selectedElement.label}</div>
             </div>

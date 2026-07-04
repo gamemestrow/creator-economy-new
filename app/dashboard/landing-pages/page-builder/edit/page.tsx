@@ -24,28 +24,28 @@ const templatePresets: TemplatePreset[] = [
     id: 'course-sales',
     name: 'Course Sales Page',
     pageTitle: 'Launch your signature course',
-    accent: '#2563eb',
+    accent: '#9AA59E',
     background: '#eff6ff',
     elements: [
       createElement('heading', {
         id: 'course-heading',
         content: 'Build a profitable creator business with one focused course',
         fontSize: 42,
-        color: '#0f172a',
+        color: '#232323',
         width: 84,
       }),
       createElement('text', {
         id: 'course-copy',
         content: 'Teach your best system, sell with confidence, and guide students from first lesson to real results.',
         fontSize: 18,
-        color: '#475569',
+        color: '#666666',
         width: 72,
       }),
       createElement('button', {
         id: 'course-cta',
         content: 'Join the course',
         url: 'https://example.com/course',
-        backgroundColor: '#2563eb',
+        backgroundColor: '#9AA59E',
         width: 28,
       }),
       createElement('image', {
@@ -165,20 +165,20 @@ const templatePresets: TemplatePreset[] = [
     id: 'blank',
     name: 'Blank Page',
     pageTitle: 'Untitled landing page',
-    accent: '#0f172a',
-    background: '#f8fafc',
+    accent: '#232323',
+    background: '#F7F7F4',
     elements: [
       createElement('heading', {
         id: 'blank-heading',
         content: 'Start building your page',
         fontSize: 38,
-        color: '#0f172a',
+        color: '#232323',
       }),
       createElement('text', {
         id: 'blank-copy',
         content: 'Drag elements into the canvas and customize them from the settings panel.',
         fontSize: 17,
-        color: '#475569',
+        color: '#666666',
       }),
     ],
   },
@@ -210,7 +210,7 @@ function createElement(type: ElementType, overrides: Partial<BuilderElement> = {
       imageUrl: '',
       fontSize: 16,
       fontFamily: 'Inter',
-      color: '#475569',
+      color: '#666666',
       backgroundColor: '#ffffff',
       align: 'left',
       width: 76,
@@ -226,7 +226,7 @@ function createElement(type: ElementType, overrides: Partial<BuilderElement> = {
       fontSize: 15,
       fontFamily: 'Inter',
       color: '#ffffff',
-      backgroundColor: '#2563eb',
+      backgroundColor: '#9AA59E',
       align: 'center',
       width: 24,
       height: 48,
@@ -241,7 +241,7 @@ function createElement(type: ElementType, overrides: Partial<BuilderElement> = {
       fontSize: 16,
       fontFamily: 'Inter',
       color: '#111827',
-      backgroundColor: '#e2e8f0',
+      backgroundColor: '#ECE8DF',
       align: 'center',
       width: 64,
       height: 220,
@@ -271,7 +271,7 @@ function createElement(type: ElementType, overrides: Partial<BuilderElement> = {
       fontSize: 18,
       fontFamily: 'Inter',
       color: '#111827',
-      backgroundColor: '#f8fafc',
+      backgroundColor: '#F7F7F4',
       align: 'left',
       width: 78,
       height: 130,
@@ -333,7 +333,7 @@ function PageBuilderEditor() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 p-5">
+    <div className="min-h-screen bg-muted p-5">
       <BuilderHeader
         templateName={selectedTemplate.name}
         pageTitle={pageTitle}
@@ -353,11 +353,11 @@ function PageBuilderEditor() {
             style={{ backgroundColor: pageBackground }}
           >
             <div className="mb-8 flex items-center justify-between border-b border-black/10 pb-4">
-              <div className="h-3 w-28 rounded-full bg-slate-900" />
+              <div className="h-3 w-28 rounded-full bg-card" />
               <div className="flex gap-2">
-                <span className="h-2.5 w-12 rounded-full bg-black/20" />
-                <span className="h-2.5 w-12 rounded-full bg-black/20" />
-                <span className="h-2.5 w-12 rounded-full bg-black/20" />
+                <span className="h-2.5 w-12 rounded-full bg-foreground/20" />
+                <span className="h-2.5 w-12 rounded-full bg-foreground/20" />
+                <span className="h-2.5 w-12 rounded-full bg-foreground/20" />
               </div>
             </div>
 

@@ -36,11 +36,11 @@ export function CourseCard({
       case 'Beginner':
         return 'bg-emerald-50 text-emerald-700 border border-emerald-200'
       case 'Intermediate':
-        return 'bg-blue-50 text-blue-700 border border-blue-200'
+        return 'bg-primary/10 text-primary border border-primary/20'
       case 'Advanced':
-        return 'bg-purple-50 text-purple-700 border border-purple-200'
+        return 'bg-primary/10 text-primary border border-primary/20'
       default:
-        return 'bg-gray-50 text-gray-700 border border-gray-200'
+        return 'bg-muted text-foreground border border-border'
     }
   }
 
@@ -114,18 +114,18 @@ export function CourseCard({
       <div className="flex flex-col flex-1 p-5">
         {/* Category & Level */}
         <div className="flex items-center gap-2 mb-3">
-          <span className="inline-block px-2.5 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded">
+          <span className="inline-block px-2.5 py-1 text-xs font-medium bg-muted text-foreground rounded">
             {category}
           </span>
         </div>
 
         {/* Title */}
-        <h3 className="text-base font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-[#2563EB] transition-colors">
+        <h3 className="text-base font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-[#9AA59E] transition-colors">
           {title}
         </h3>
 
         {/* creatorName */}
-        <p className="text-sm text-gray-600 mb-3">{creatorName}</p>
+        <p className="text-sm text-muted-foreground mb-3">{creatorName}</p>
 
         {/* Rating & Reviews */}
         <div className="flex items-center gap-1 mb-3">
@@ -140,23 +140,23 @@ export function CourseCard({
               />
             ))}
           </div>
-          <span className="text-sm font-semibold text-gray-900">{rating}</span>
-          {/* <span className="text-xs text-gray-500">({reviews.toLocaleString()})</span> */}
+          <span className="text-sm font-semibold text-foreground">{rating}</span>
+          {/* <span className="text-xs text-muted-foreground">({reviews.toLocaleString()})</span> */}
         </div>
 
         {/* Students */}
-        <div className="flex items-center gap-1 mb-4 text-xs text-gray-600">
+        <div className="flex items-center gap-1 mb-4 text-xs text-muted-foreground">
           <Users className="h-3.5 w-3.5" />
           <span>{enrollmentCount.toLocaleString()} students</span>
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-100 my-3 flex-1" />
+        <div className="border-t border-border my-3 flex-1" />
 
         {/* Price & CTA */}
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-lg font-bold text-gray-900">${price.toFixed(2)}</span>
+            <span className="text-lg font-bold text-foreground">${price.toFixed(2)}</span>
           </div>
           <button
             onClick={handleEnrollClick}

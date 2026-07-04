@@ -180,8 +180,8 @@ export type LevelColorType = 'beginner' | 'intermediate' | 'advanced'
 
 export const LEVEL_COLORS: Record<LevelColorType, string> = {
   beginner: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
-  intermediate: 'bg-blue-50 text-blue-700 border border-blue-200',
-  advanced: 'bg-purple-50 text-purple-700 border border-purple-200',
+  intermediate: 'bg-primary/10 text-primary border border-primary/20',
+  advanced: 'bg-primary/10 text-primary border border-primary/20',
 }
 
 /**

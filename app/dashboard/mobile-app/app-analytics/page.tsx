@@ -81,7 +81,7 @@ export default function Page() {
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
-              <Users className="h-5 w-5 text-blue-500" />
+              <Users className="h-5 w-5 text-primary" />
               <span className="flex items-center text-green-600 text-sm">
                 <ArrowUpRight className="mr-1 h-4 w-4" />
                 12%
@@ -99,7 +99,7 @@ export default function Page() {
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
-              <Activity className="h-5 w-5 text-purple-500" />
+              <Activity className="h-5 w-5 text-primary" />
               <span className="flex items-center text-green-600 text-sm">
                 <ArrowUpRight className="mr-1 h-4 w-4" />
                 8%
@@ -162,7 +162,7 @@ export default function Page() {
           <CardContent>
             <div className="flex h-[280px] items-center justify-center rounded-lg border border-dashed">
               <div className="text-center">
-                <TrendingUp className="mx-auto mb-3 h-10 w-10 text-blue-500" />
+                <TrendingUp className="mx-auto mb-3 h-10 w-10 text-primary" />
                 <p className="font-medium">
                   User Growth Chart
                 </p>
@@ -182,7 +182,7 @@ export default function Page() {
           <CardContent>
             <div className="flex h-[280px] items-center justify-center rounded-lg border border-dashed">
               <div className="text-center">
-                <Activity className="mx-auto mb-3 h-10 w-10 text-purple-500" />
+                <Activity className="mx-auto mb-3 h-10 w-10 text-primary" />
                 <p className="font-medium">
                   Session Analytics Chart
                 </p>

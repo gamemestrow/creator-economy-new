@@ -30,18 +30,18 @@ export function CourseSearch({ searchQuery, onSearchChange }: CourseSearchProps)
   return (
     <div className="relative w-full">
       <div className="relative flex items-center">
-        <Search className="absolute left-4 h-5 w-5 text-gray-400 pointer-events-none" />
+        <Search className="absolute left-4 h-5 w-5 text-muted-foreground pointer-events-none" />
         <input
           type="text"
           placeholder="Search courses by title, creatorName, or keyword..."
           value={localQuery}
           onChange={handleInputChange}
-          className="w-full pl-12 pr-10 py-3 bg-white border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-transparent transition-all"
+          className="w-full pl-12 pr-10 py-3 bg-white border border-border rounded-lg text-foreground placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#9AA59E] focus:border-transparent transition-all"
         />
         {localQuery && (
           <button
             onClick={handleClear}
-            className="absolute right-3 p-1 text-gray-400 hover:text-gray-600 transition-colors"
+            className="absolute right-3 p-1 text-muted-foreground hover:text-muted-foreground transition-colors"
             aria-label="Clear search"
           >
             <X className="h-4 w-4" />

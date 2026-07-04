@@ -8,7 +8,7 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-gray-200 z-50">
+    <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-border shadow-[0_10px_30px_rgba(0,0,0,0.02)] z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -38,7 +38,7 @@ export function Navbar() {
             <Link href="/login" className="text-slate-700 hover:text-slate-900 font-medium">
               Log in
             </Link>
-            <Link href="/dashboard" className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition font-medium">
+            <Link href="/dashboard" className="bg-primary text-primary-foreground px-6 py-2 rounded-full hover:bg-primary-hover transition-all duration-250 ease-out shadow-[0_10px_30px_rgba(0,0,0,0.05)] font-medium hover:scale-[1.02]">
               Get Started
             </Link>
           </div>
@@ -71,7 +71,7 @@ export function Navbar() {
               <Link href="/login" className="flex-1 text-center py-2 text-slate-700 border border-slate-300 rounded-lg">
                 Log in
               </Link>
-              <Link href="/dashboard" className="flex-1 text-center py-2 bg-blue-600 text-white rounded-lg">
+              <Link href="/dashboard" className="flex-1 text-center py-2 bg-primary text-primary-foreground rounded-[14px]">
                 Get Started
               </Link>
             </div>

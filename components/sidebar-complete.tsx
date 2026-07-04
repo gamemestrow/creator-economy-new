@@ -184,8 +184,8 @@ export function SidebarComplete() {
       >
         {/* Logo */}
         <div className="p-6 border-b border-gray-200 flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-            <Cloud className="w-6 h-6 text-white" />
+          <div className="w-10 h-10 bg-primary rounded-[14px] flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
+            <Cloud className="w-6 h-6 text-primary-foreground" />
           </div>
           <span className="text-xl font-bold text-gray-900">Cloud</span>
         </div>
@@ -201,7 +201,7 @@ export function SidebarComplete() {
                 }}
                 className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all ${
                   activeSection === group.id
-                    ? 'bg-blue-50 text-blue-600'
+                    ? 'bg-primary/10 text-primary'
                     : 'text-gray-700 hover:bg-gray-50'
                 }`}
               >
@@ -237,7 +237,7 @@ export function SidebarComplete() {
                           }}
                           className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm transition-all ${
                             activeSubsection === item.id && activeSection === group.id
-                              ? 'bg-blue-100 text-blue-700 font-medium'
+                              ? 'bg-primary/20 text-primary font-medium'
                               : 'text-gray-600 hover:bg-gray-50'
                           }`}
                         >

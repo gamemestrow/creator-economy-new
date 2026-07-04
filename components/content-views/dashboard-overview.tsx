@@ -18,7 +18,7 @@ const salesData = [
   { name: 'Workshops', value: 25 },
 ]
 
-const COLORS = ['#9AA59E', '#7F8F84', '#7C3AED']
+const COLORS = ['#78866B', '#65735A', '#7C3AED']
 
 export function DashboardOverview() {
   return (
@@ -65,8 +65,8 @@ export function DashboardOverview() {
               <YAxis stroke="#9ca3af" />
               <Tooltip contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb' }} />
               <Legend />
-              <Line type="monotone" dataKey="revenue" stroke="#9AA59E" name="Revenue (₹)" strokeWidth={2} />
-              <Line type="monotone" dataKey="users" stroke="#7F8F84" name="Users" strokeWidth={2} />
+              <Line type="monotone" dataKey="revenue" stroke="#78866B" name="Revenue (₹)" strokeWidth={2} />
+              <Line type="monotone" dataKey="users" stroke="#65735A" name="Users" strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>
         </div>

@@ -59,8 +59,8 @@ export function AnalyticsView() {
           <AreaChart data={pageViewsData}>
             <defs>
               <linearGradient id="colorViews" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#9AA59E" stopOpacity={0.3} />
-                <stop offset="95%" stopColor="#9AA59E" stopOpacity={0} />
+                <stop offset="5%" stopColor="#78866B" stopOpacity={0.3} />
+                <stop offset="95%" stopColor="#78866B" stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -68,8 +68,8 @@ export function AnalyticsView() {
             <YAxis stroke="#9ca3af" />
             <Tooltip contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb' }} />
             <Legend />
-            <Area type="monotone" dataKey="views" stroke="#9AA59E" fillOpacity={1} fill="url(#colorViews)" name="Page Views" />
-            <Area type="monotone" dataKey="visitors" stroke="#7F8F84" fill="url(#colorViews)" opacity={0.5} name="Visitors" />
+            <Area type="monotone" dataKey="views" stroke="#78866B" fillOpacity={1} fill="url(#colorViews)" name="Page Views" />
+            <Area type="monotone" dataKey="visitors" stroke="#65735A" fill="url(#colorViews)" opacity={0.5} name="Visitors" />
           </AreaChart>
         </ResponsiveContainer>
       </div>

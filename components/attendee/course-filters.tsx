@@ -83,7 +83,7 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
                 rating: 0,
               })
             }
-            className="text-xs text-[#9AA59E] hover:text-primary font-medium mt-2 transition-colors"
+            className="text-xs text-[#78866B] hover:text-primary font-medium mt-2 transition-colors"
           >
             Clear all filters
           </button>
@@ -114,7 +114,7 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
                   type="checkbox"
                   checked={filters.category === category}
                   onChange={() => handleCategoryChange(category)}
-                  className="h-4 w-4 rounded border-border text-[#9AA59E] focus:ring-[#9AA59E]"
+                  className="h-4 w-4 rounded border-border text-[#78866B] focus:ring-[#78866B]"
                 />
                 <span className="text-sm text-foreground group-hover:text-foreground transition-colors">
                   {category}
@@ -149,7 +149,7 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
                   type="checkbox"
                   checked={filters.level === level}
                   onChange={() => handleLevelChange(level)}
-                  className="h-4 w-4 rounded border-border text-[#9AA59E] focus:ring-[#9AA59E]"
+                  className="h-4 w-4 rounded border-border text-[#78866B] focus:ring-[#78866B]"
                 />
                 <span className="text-sm text-foreground group-hover:text-foreground transition-colors">
                   {level}
@@ -189,7 +189,7 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
                       filters.priceRange[1]
                     )
                   }
-                  className="w-full px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9AA59E]"
+                  className="w-full px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#78866B]"
                 />
               </div>
               <div className="flex-1">
@@ -205,7 +205,7 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
                       Number(e.target.value)
                     )
                   }
-                  className="w-full px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9AA59E]"
+                  className="w-full px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#78866B]"
                 />
               </div>
             </div>
@@ -241,7 +241,7 @@ export function CourseFilters({ filters, onFiltersChange }: CourseFiltersProps) 
                   name="rating"
                   checked={filters.rating === ratingOption.value}
                   onChange={() => handleRatingChange(ratingOption.value)}
-                  className="h-4 w-4 border-border text-[#9AA59E] focus:ring-[#9AA59E]"
+                  className="h-4 w-4 border-border text-[#78866B] focus:ring-[#78866B]"
                 />
                 <span className="text-sm text-foreground group-hover:text-foreground transition-colors">
                   {ratingOption.label}

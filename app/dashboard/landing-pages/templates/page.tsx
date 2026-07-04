@@ -12,7 +12,7 @@ const templates = [
     name: 'Course Sales Page',
     category: 'Online course',
     description: 'A conversion-focused page for launching a paid course.',
-    accent: '#9AA59E',
+    accent: '#78866B',
     background: ' via-white to-cyan-50',
     sections: ['Hero', 'Outcomes', 'Curriculum', 'Pricing'],
   },

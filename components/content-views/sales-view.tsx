@@ -59,8 +59,8 @@ export function SalesView() {
             <YAxis stroke="#9ca3af" />
             <Tooltip contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb' }} />
             <Legend />
-            <Bar dataKey="sales" fill="#9AA59E" name="Sales (₹)" />
-            <Bar dataKey="orders" fill="#7F8F84" name="Orders" />
+            <Bar dataKey="sales" fill="#78866B" name="Sales (₹)" />
+            <Bar dataKey="orders" fill="#65735A" name="Orders" />
           </BarChart>
         </ResponsiveContainer>
       </div>

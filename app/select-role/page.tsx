@@ -46,7 +46,7 @@ export default function SelectRolePage() {
       <div className="border-b border-border">
         <div className="mx-auto max-w-6xl px-6 py-6">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#9AA59E] shadow-[0_10px_30px_rgba(0,0,0,0.05)] shadow-blue-500/25">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#78866B] shadow-[0_10px_30px_rgba(0,0,0,0.05)] shadow-blue-500/25">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             <span className="text-lg font-semibold text-foreground">{PRODUCT_NAME}</span>
@@ -80,8 +80,8 @@ export default function SelectRolePage() {
             onClick={() => handleRoleSelection('creator')}
             disabled={loading}
             className={`group relative overflow-hidden rounded-2xl border-2 p-8 text-left transition-all duration-300 ${selectedRole === 'creator'
-                ? 'border-[#9AA59E] bg-primary/10'
-                : 'border-border bg-white hover:border-[#9AA59E] hover:bg-primary/10'
+                ? 'border-[#78866B] bg-primary/10'
+                : 'border-border bg-white hover:border-[#78866B] hover:bg-primary/10'
               } ${loading ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
           >
             {/* Background accent */}
@@ -90,7 +90,7 @@ export default function SelectRolePage() {
             {/* Content */}
             <div className="relative z-10">
               <div className="mb-6 inline-flex rounded-lg bg-primary/10 p-3">
-                <Crown className="h-6 w-6 text-[#9AA59E]" />
+                <Crown className="h-6 w-6 text-[#78866B]" />
               </div>
 
               <h2 className="mb-3 text-2xl font-bold text-foreground">Creator</h2>
@@ -102,19 +102,19 @@ export default function SelectRolePage() {
               {/* Features */}
               <ul className="mb-8 space-y-3">
                 <li className="flex items-start gap-3">
-                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#9AA59E]" />
+                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#78866B]" />
                   <span className="text-sm text-foreground">Create and sell courses</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#9AA59E]" />
+                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#78866B]" />
                   <span className="text-sm text-foreground">Launch membership programs</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#9AA59E]" />
+                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#78866B]" />
                   <span className="text-sm text-foreground">Advanced analytics & insights</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#9AA59E]" />
+                  <Zap className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#78866B]" />
                   <span className="text-sm text-foreground">Marketing automation tools</span>
                 </li>
               </ul>
@@ -123,8 +123,8 @@ export default function SelectRolePage() {
               <div className="flex items-center justify-between">
                 <span
                   className={`font-semibold transition-colors ${selectedRole === 'creator'
-                      ? 'text-[#9AA59E]'
-                      : 'text-foreground group-hover:text-[#9AA59E]'
+                      ? 'text-[#78866B]'
+                      : 'text-foreground group-hover:text-[#78866B]'
                     }`}
                 >
                   {selectedRole === 'creator' && loading ? (
@@ -138,8 +138,8 @@ export default function SelectRolePage() {
                 </span>
                 <ArrowRight
                   className={`h-5 w-5 transition-all ${selectedRole === 'creator'
-                      ? 'translate-x-1 text-[#9AA59E]'
-                      : 'text-muted-foreground group-hover:translate-x-1 group-hover:text-[#9AA59E]'
+                      ? 'translate-x-1 text-[#78866B]'
+                      : 'text-muted-foreground group-hover:translate-x-1 group-hover:text-[#78866B]'
                     }`}
                 />
               </div>
@@ -222,7 +222,7 @@ export default function SelectRolePage() {
         <div className="mt-12 rounded-lg bg-muted p-6">
           <p className="text-center text-sm text-muted-foreground">
             Not sure which role to choose?{' '}
-            <a href="#" className="font-semibold text-[#9AA59E] hover:underline">
+            <a href="#" className="font-semibold text-[#78866B] hover:underline">
               Learn more about roles
             </a>
           </p>

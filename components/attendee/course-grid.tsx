@@ -31,7 +31,7 @@ export function CourseGrid({ courses }: CourseGridProps) {
         <div>
           <select
             defaultValue="popular"
-            className="px-3 py-2 text-sm text-foreground bg-white border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9AA59E] transition-all"
+            className="px-3 py-2 text-sm text-foreground bg-white border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#78866B] transition-all"
           >
             <option value="popular">Most Popular</option>
             <option value="rating">Highest Rated</option>

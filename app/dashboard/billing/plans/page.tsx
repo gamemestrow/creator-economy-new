@@ -72,7 +72,7 @@ export default function PlansPage() {
             </p>
             <button 
               onClick={() => setShowUpgradeModal(true)}
-              className="w-full py-2.5 bg-[#9AA59E] hover:bg-[#ff733b] text-white font-bold rounded-lg transition shadow-sm text-sm"
+              className="w-full py-2.5 bg-[#78866B] hover:bg-[#ff733b] text-white font-bold rounded-lg transition shadow-sm text-sm"
             >
               Upgrade now
             </button>

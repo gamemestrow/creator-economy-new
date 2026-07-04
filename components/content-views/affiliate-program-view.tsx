@@ -80,15 +80,15 @@ export function AffiliateProgramView() {
           <AreaChart data={commissionData}>
             <defs>
               <linearGradient id="colorCommission" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#9AA59E" stopOpacity={0.3}/>
-                <stop offset="95%" stopColor="#9AA59E" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#78866B" stopOpacity={0.3}/>
+                <stop offset="95%" stopColor="#78866B" stopOpacity={0}/>
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
             <XAxis dataKey="month" stroke="#6b7280" />
             <YAxis stroke="#6b7280" />
             <Tooltip contentStyle={{ backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }} />
-            <Area type="monotone" dataKey="commission" stroke="#9AA59E" fillOpacity={1} fill="url(#colorCommission)" />
+            <Area type="monotone" dataKey="commission" stroke="#78866B" fillOpacity={1} fill="url(#colorCommission)" />
           </AreaChart>
         </ResponsiveContainer>
       </div>

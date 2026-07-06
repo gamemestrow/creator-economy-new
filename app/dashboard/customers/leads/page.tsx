@@ -103,7 +103,7 @@ export default function LeadsPage() {
                 className="flex items-center justify-between rounded-lg border p-4"
               >
                 <div className="flex items-center gap-4">
-                  <Users className="h-8 w-8 text-blue-500" />
+                  <Users className="h-8 w-8 text-primary" />
 
                   <div>
                     <h3 className="font-semibold">{lead.name}</h3>

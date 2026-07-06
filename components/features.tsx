@@ -47,13 +47,13 @@ const features = [
 
 export function Features() {
   return (
-    <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
+    <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Everything You Need to Succeed
           </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             A complete toolkit for creators to manage, monetize, and grow their audience across all channels.
           </p>
         </div>
@@ -62,12 +62,12 @@ export function Features() {
           {features.map((feature, index) => {
             const Icon = feature.icon
             return (
-              <div key={index} className="bg-white rounded-xl p-6 hover:shadow-lg transition border border-slate-200">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <Icon className="w-6 h-6 text-blue-600" />
+              <div key={index} className="bg-card rounded-[20px] p-6 hover:shadow-[0_15px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-250 ease-out border border-border">
+                <div className="w-12 h-12 bg-[#EEF2EC] rounded-lg flex items-center justify-center mb-4">
+                  <Icon className="w-6 h-6 text-[#8FA193]" />
                 </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">{feature.title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{feature.description}</p>
+                <h3 className="text-lg font-semibold text-card-foreground mb-2">{feature.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
               </div>
             )
           })}

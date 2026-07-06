@@ -97,7 +97,7 @@ export default function Page() {
                 </p>
                 <h2 className="mt-2 text-3xl font-bold">12</h2>
               </div>
-              <Shield className="h-10 w-10 text-blue-500" />
+              <Shield className="h-10 w-10 text-primary" />
             </div>
           </CardContent>
         </Card>
@@ -125,7 +125,7 @@ export default function Page() {
                 </p>
                 <h2 className="mt-2 text-3xl font-bold">48</h2>
               </div>
-              <Key className="h-10 w-10 text-purple-500" />
+              <Key className="h-10 w-10 text-primary" />
             </div>
           </CardContent>
         </Card>
@@ -239,7 +239,7 @@ export default function Page() {
 
           <CardContent className="space-y-4">
             <div className="flex items-center gap-3 rounded-lg border p-4">
-              <UserCog className="h-8 w-8 text-blue-500" />
+              <UserCog className="h-8 w-8 text-primary" />
               <div>
                 <h3 className="font-semibold">Administrators</h3>
                 <p className="text-sm text-muted-foreground">
@@ -259,7 +259,7 @@ export default function Page() {
             </div>
 
             <div className="flex items-center gap-3 rounded-lg border p-4">
-              <Users className="h-8 w-8 text-purple-500" />
+              <Users className="h-8 w-8 text-primary" />
               <div>
                 <h3 className="font-semibold">Support Team</h3>
                 <p className="text-sm text-muted-foreground">

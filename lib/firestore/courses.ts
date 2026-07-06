@@ -190,39 +190,25 @@ export async function fetchCoursesByCategory(
 /**
  * Fetch all courses for a specific creator
  */
-export async function fetchCreatorCourses(creatorId: string): Promise<Course[]> {
+export async function fetchCreatorCourses(
+  creatorId: string
+): Promise<Course[]> {
   try {
     const q = query(
       collection(db, COLLECTIONS.COURSES),
-      where('creatorId', '==', creatorId),
-      orderBy('createdAt', 'desc')
-    )
-    const snapshot = await getDocs(q)
-    return snapshot.docs.map((doc) => ({
+      where("creatorId", "==", creatorId),
+      orderBy("createdAt", "desc")
+    );
+
+    const snapshot = await getDocs(q);
+
+    return snapshot.docs.map(doc => ({
       ...doc.data(),
       courseId: doc.id,
-    } as Course))
-  } catch (error: any) {
-    if (error.code === 'failed-precondition' || error.message?.includes('index')) {
-      console.warn('Firestore index missing for fetchCreatorCourses, falling back to in-memory sort')
-      const q = query(
-        collection(db, COLLECTIONS.COURSES),
-        where('creatorId', '==', creatorId)
-      )
-      const snapshot = await getDocs(q)
-      const courses = snapshot.docs.map((doc) => ({
-        ...doc.data(),
-        courseId: doc.id,
-      } as Course))
-
-      return courses.sort((a, b) => {
-        const dateA = a.createdAt?.seconds || 0
-        const dateB = b.createdAt?.seconds || 0
-        return dateB - dateA
-      })
-    }
-    console.error('Error fetching creator courses:', error)
-    throw error
+    } as Course));
+  } catch (error) {
+    console.error("Error fetching creator courses:", error);
+    throw error;
   }
 }
 

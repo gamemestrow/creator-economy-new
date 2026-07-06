@@ -15,10 +15,10 @@ export function CustomersView() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Customers</h1>
-          <p className="text-gray-500 mt-1">Manage your customer relationships</p>
+          <h1 className="text-3xl font-bold text-foreground">Customers</h1>
+          <p className="text-muted-foreground mt-1">Manage your customer relationships</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+        <button className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary">
           <Plus className="w-5 h-5" />
           Add Customer
         </button>
@@ -32,52 +32,52 @@ export function CustomersView() {
           { label: 'Avg Lifetime Value', value: '₹342', change: '+8.2%' },
           { label: 'Retention Rate', value: '87.5%', change: '+2.1%' },
         ].map((stat, i) => (
-          <div key={i} className="bg-white p-6 rounded-xl border border-gray-200">
-            <p className="text-gray-600 text-sm font-medium">{stat.label}</p>
-            <p className="text-2xl font-bold text-gray-900 mt-2">{stat.value}</p>
+          <div key={i} className="bg-white p-6 rounded-xl border border-border">
+            <p className="text-muted-foreground text-sm font-medium">{stat.label}</p>
+            <p className="text-2xl font-bold text-foreground mt-2">{stat.value}</p>
             <p className="text-green-600 text-sm font-medium mt-4">{stat.change}</p>
           </div>
         ))}
       </div>
 
       {/* Customers Table */}
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-border overflow-hidden">
         <table className="w-full">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-muted border-b border-border">
             <tr>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Name</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Email</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Joined</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Purchases</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Total Spent</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Status</th>
-              <th className="px-6 py-3 text-right text-sm font-semibold text-gray-900">Actions</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Name</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Email</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Joined</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Purchases</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Total Spent</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Status</th>
+              <th className="px-6 py-3 text-right text-sm font-semibold text-foreground">Actions</th>
             </tr>
           </thead>
           <tbody>
             {customers.map((customer) => (
-              <tr key={customer.id} className="border-t border-gray-200 hover:bg-gray-50">
-                <td className="px-6 py-4 text-sm font-medium text-gray-900">{customer.name}</td>
-                <td className="px-6 py-4 text-sm text-gray-600">{customer.email}</td>
-                <td className="px-6 py-4 text-sm text-gray-600">{customer.joined}</td>
-                <td className="px-6 py-4 text-sm font-medium text-gray-900">{customer.purchases}</td>
-                <td className="px-6 py-4 text-sm font-semibold text-gray-900">{customer.spent}</td>
+              <tr key={customer.id} className="border-t border-border hover:bg-muted">
+                <td className="px-6 py-4 text-sm font-medium text-foreground">{customer.name}</td>
+                <td className="px-6 py-4 text-sm text-muted-foreground">{customer.email}</td>
+                <td className="px-6 py-4 text-sm text-muted-foreground">{customer.joined}</td>
+                <td className="px-6 py-4 text-sm font-medium text-foreground">{customer.purchases}</td>
+                <td className="px-6 py-4 text-sm font-semibold text-foreground">{customer.spent}</td>
                 <td className="px-6 py-4 text-sm">
                   <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                     customer.status === 'active'
                       ? 'bg-green-100 text-green-700'
-                      : 'bg-gray-100 text-gray-700'
+                      : 'bg-muted text-foreground'
                   }`}>
                     {customer.status}
                   </span>
                 </td>
                 <td className="px-6 py-4 text-right">
                   <div className="flex justify-end gap-2">
-                    <button className="p-2 hover:bg-gray-200 rounded-lg">
-                      <Mail className="w-4 h-4 text-gray-600" />
+                    <button className="p-2 hover:bg-card rounded-lg">
+                      <Mail className="w-4 h-4 text-muted-foreground" />
                     </button>
-                    <button className="p-2 hover:bg-gray-200 rounded-lg">
-                      <MoreHorizontal className="w-4 h-4 text-gray-600" />
+                    <button className="p-2 hover:bg-card rounded-lg">
+                      <MoreHorizontal className="w-4 h-4 text-muted-foreground" />
                     </button>
                   </div>
                 </td>

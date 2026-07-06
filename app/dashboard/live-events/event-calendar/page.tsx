@@ -1,5 +1,7 @@
 'use client'
 
+import { useCreatorEvent } from '@/lib/hooks/use-creator-data'
+import { useRequireRole } from '@/lib/use-auth-redirect'
 import { Plus, Calendar, Users, Clock, MapPin, MoreHorizontal } from 'lucide-react'
 
 const mockEvents = [
@@ -46,10 +48,10 @@ const mockEvents = [
 ]
 
 function EventCard({ event }: { event: any }) {
-  const occupancy = ((event.attendees / event.capacity) * 100).toFixed(0)
+  const occupancy = ((event.currentAttendees / event.maxAttendees) * 100).toFixed(0)
   
   return (
-    <div className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow">
+    <div className="bg-card border border-border rounded-lg p-6 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-shadow">
       <div className="flex items-start justify-between mb-4">
         <h3 className="text-lg font-bold text-foreground flex-1">{event.title}</h3>
         <button className="p-2 hover:bg-input rounded transition-colors">
@@ -60,11 +62,11 @@ function EventCard({ event }: { event: any }) {
       <div className="space-y-3 mb-4">
         <div className="flex items-center gap-3 text-sm text-muted-foreground">
           <Calendar className="w-4 h-4" />
-          <span>{event.date}</span>
+          <span>{event.date.toDate().toLocaleDateString()}</span>
         </div>
         <div className="flex items-center gap-3 text-sm text-muted-foreground">
           <Clock className="w-4 h-4" />
-          <span>{event.time}</span>
+          <span>{event.date.toDate().toLocaleTimeString()}</span>
         </div>
         <div className="flex items-center gap-3 text-sm text-muted-foreground">
           <MapPin className="w-4 h-4" />
@@ -76,9 +78,9 @@ function EventCard({ event }: { event: any }) {
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             <Users className="w-4 h-4 text-muted-foreground" />
-            <span className="text-sm font-medium">{event.attendees} / {event.capacity} Attendees</span>
+            <span className="text-sm font-medium">{event.currentAttendees} / {event.maxAttendees} Attendees</span>
           </div>
-          <span className="text-sm font-semibold text-primary">{occupancy}%</span>
+          <span className="text-sm font-semibold text-primary">{occupancy == "NaN"? "Not fixed" : occupancy+"%"}</span>
         </div>
         <div className="w-full bg-input rounded-full h-2">
           <div
@@ -92,8 +94,8 @@ function EventCard({ event }: { event: any }) {
         <span
           className={`px-3 py-1 rounded-full text-xs font-medium ${
             event.status === 'Upcoming'
-              ? 'bg-blue-100 text-blue-800'
-              : 'bg-gray-100 text-gray-800'
+              ? 'bg-primary/10 text-primary-hover'
+              : 'bg-muted text-foreground'
           }`}
         >
           {event.status}
@@ -107,6 +109,9 @@ function EventCard({ event }: { event: any }) {
 }
 
 export default function EventsPage() {
+  
+  const { loading: authLoading, user, authorized } = useRequireRole(['creator', 'attendee'])
+  const { events, loadingEvent, error, refresh: fetchEvent } = useCreatorEvent(user?.uid || '')
   return (
     <div className="flex-1 overflow-auto bg-background">
       <div className="p-8 space-y-6">
@@ -126,22 +131,22 @@ export default function EventsPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-card border border-border rounded-lg p-6">
             <p className="text-sm text-muted-foreground mb-2">Total Events</p>
-            <p className="text-3xl font-bold text-foreground">{mockEvents.length}</p>
+            <p className="text-3xl font-bold text-foreground">{events.length}</p>
           </div>
           <div className="bg-card border border-border rounded-lg p-6">
             <p className="text-sm text-muted-foreground mb-2">Total Attendees</p>
-            <p className="text-3xl font-bold text-foreground">{mockEvents.reduce((sum, e) => sum + e.attendees, 0).toLocaleString()}</p>
+            <p className="text-3xl font-bold text-foreground">{events.reduce((sum, e) => sum + e.currentAttendees, 0).toLocaleString()}</p>
           </div>
           <div className="bg-card border border-border rounded-lg p-6">
             <p className="text-sm text-muted-foreground mb-2">Upcoming</p>
-            <p className="text-3xl font-bold text-foreground">{mockEvents.filter(e => e.status === 'Upcoming').length}</p>
+            <p className="text-3xl font-bold text-foreground">{events.filter(e => !e.isPublished && 'Upcoming').length}</p>
           </div>
         </div>
 
         {/* Events Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {mockEvents.map((event) => (
-            <EventCard key={event.id} event={event} />
+          {events.map((event) => (
+            <EventCard key={event?.eventId} event={event} />
           ))}
         </div>
       </div>

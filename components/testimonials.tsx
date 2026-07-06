@@ -49,25 +49,25 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
+    <section id="testimonials" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Loved by Creators Worldwide
           </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             See how creators are using Cloud to transform their businesses and reach their goals.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-white rounded-xl p-6 border border-slate-200 hover:shadow-lg transition">
+            <div key={index} className="bg-white rounded-xl p-6 border border-border hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition">
               <div className="flex items-center gap-4 mb-4">
                 <div className="text-4xl">{testimonial.avatar}</div>
                 <div>
-                  <h3 className="font-semibold text-slate-900">{testimonial.name}</h3>
-                  <p className="text-sm text-slate-600">{testimonial.role}</p>
+                  <h3 className="font-semibold text-foreground">{testimonial.name}</h3>
+                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                 </div>
               </div>
 
@@ -77,7 +77,7 @@ export function Testimonials() {
                 ))}
               </div>
 
-              <p className="text-slate-700 leading-relaxed">"{testimonial.quote}"</p>
+              <p className="text-foreground leading-relaxed">"{testimonial.quote}"</p>
             </div>
           ))}
         </div>

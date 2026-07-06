@@ -10,69 +10,69 @@ export function Hero() {
         {/* Left Content */}
         <div className="space-y-8">
           <div className="space-y-4">
-            <h1 className="text-5xl md:text-6xl font-bold text-slate-900 leading-tight text-balance">
+            <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight text-balance">
               Empower Your Creator Journey
             </h1>
-            <p className="text-xl text-slate-600 leading-relaxed">
+            <p className="text-xl text-muted-foreground leading-relaxed">
               Cloud is the all-in-one platform for creators to manage their audience, monetize content, and scale their business effortlessly.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/dashboard" className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition">
+            <Link href="/dashboard" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-3 rounded-full font-semibold hover:bg-primary-hover transition shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:scale-[1.02]">
               Start Free Trial
               <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link href="#demo" className="inline-flex items-center justify-center gap-2 border-2 border-slate-300 text-slate-900 px-8 py-3 rounded-full font-semibold hover:border-slate-400 transition">
+            <Link href="#demo" className="inline-flex items-center justify-center gap-2 border-2 border-border text-foreground px-8 py-3 rounded-full font-semibold hover:border-border transition">
               Watch Demo
             </Link>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-6 pt-8 border-t border-slate-200">
+          <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border">
             <div>
-              <p className="text-3xl font-bold text-slate-900">10K+</p>
-              <p className="text-sm text-slate-600">Active Creators</p>
+              <p className="text-3xl font-bold text-foreground">10K+</p>
+              <p className="text-sm text-muted-foreground">Active Creators</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-slate-900">₹50M+</p>
-              <p className="text-sm text-slate-600">Revenue Generated</p>
+              <p className="text-3xl font-bold text-foreground">₹50M+</p>
+              <p className="text-sm text-muted-foreground">Revenue Generated</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-slate-900">95%</p>
-              <p className="text-sm text-slate-600">Satisfaction Rate</p>
+              <p className="text-3xl font-bold text-foreground">95%</p>
+              <p className="text-sm text-muted-foreground">Satisfaction Rate</p>
             </div>
           </div>
         </div>
 
         {/* Right Image/Visual */}
         <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-indigo-600/20 rounded-2xl blur-3xl" />
-          <div className="relative bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200">
+          <div className="absolute inset-0 bg-[#F7F7F4] rounded-2xl blur-3xl shadow-[0_10px_30px_rgba(0,0,0,0.05)]" />
+          <div className="relative bg-[#FBFAF7] rounded-[20px] p-8 border border-border shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
             <div className="space-y-4">
               <div className="flex items-center justify-between bg-white rounded-lg p-4 shadow-sm">
                 <div>
-                  <p className="text-xs text-slate-500 uppercase tracking-wider">Monthly Revenue</p>
-                  <p className="text-2xl font-bold text-slate-900">₹12,450</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Monthly Revenue</p>
+                  <p className="text-2xl font-bold text-foreground">₹12,450</p>
                 </div>
                 <TrendingUp className="w-8 h-8 text-green-500" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white rounded-lg p-4 shadow-sm">
-                  <p className="text-xs text-slate-500 uppercase tracking-wider">Audience</p>
-                  <p className="text-xl font-bold text-slate-900">25,348</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Audience</p>
+                  <p className="text-xl font-bold text-foreground">25,348</p>
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow-sm">
-                  <p className="text-xs text-slate-500 uppercase tracking-wider">Engagement</p>
-                  <p className="text-xl font-bold text-slate-900">8.5%</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Engagement</p>
+                  <p className="text-xl font-bold text-foreground">8.5%</p>
                 </div>
               </div>
               <div className="bg-white rounded-lg p-4 shadow-sm">
-                <p className="text-xs text-slate-500 uppercase tracking-wider">Active Courses</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">Active Courses</p>
                 <div className="flex gap-2 mt-2">
-                  <div className="h-2 flex-1 bg-blue-600 rounded-full" />
-                  <div className="h-2 flex-1 bg-blue-300 rounded-full" />
-                  <div className="h-2 flex-1 bg-blue-100 rounded-full" />
+                  <div className="h-2 flex-1 bg-primary rounded-full" />
+                  <div className="h-2 flex-1 bg-primary/60 rounded-full" />
+                  <div className="h-2 flex-1 bg-primary/30 rounded-full" />
                 </div>
               </div>
             </div>

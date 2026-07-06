@@ -118,17 +118,17 @@ export function CreateCourseForm({ onSubmit, onCancel }: CreateCourseFormProps) 
 
   if (submitted) {
     return (
-      <div className="rounded-xl border border-gray-200 bg-white p-12 text-center">
+      <div className="rounded-xl border border-border bg-white p-12 text-center">
         <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-100">
           <CheckCircle2 className="h-7 w-7 text-green-600" />
         </div>
-        <h3 className="mb-2 text-lg font-semibold text-gray-900">Course created!</h3>
-        <p className="mb-6 text-sm text-gray-600">
+        <h3 className="mb-2 text-lg font-semibold text-foreground">Course created!</h3>
+        <p className="mb-6 text-sm text-muted-foreground">
           Your course has been submitted and is pending review.
         </p>
         <button
           onClick={handleReset}
-          className="rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-medium text-white hover:bg-blue-700"
+          className="rounded-lg bg-primary px-6 py-2.5 text-sm font-medium text-white hover:bg-primary"
         >
           Create another
         </button>
@@ -137,16 +137,16 @@ export function CreateCourseForm({ onSubmit, onCancel }: CreateCourseFormProps) 
   }
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white">
+    <div className="rounded-xl border border-border bg-white">
       {/* Form Header */}
-      <div className="border-b border-gray-200 px-6 py-5">
+      <div className="border-b border-border px-6 py-5">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600/10">
-            <BookOpen className="h-5 w-5 text-blue-600" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
+            <BookOpen className="h-5 w-5 text-primary" />
           </div>
           <div>
-            <h2 className="font-semibold text-gray-900">New Course</h2>
-            <p className="text-xs text-gray-500">Fill in the details below to publish a course.</p>
+            <h2 className="font-semibold text-foreground">New Course</h2>
+            <p className="text-xs text-muted-foreground">Fill in the details below to publish a course.</p>
           </div>
         </div>
       </div>
@@ -154,7 +154,7 @@ export function CreateCourseForm({ onSubmit, onCancel }: CreateCourseFormProps) 
       <div className="space-y-6 px-6 py-6">
         {/* Title */}
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-gray-700">
+          <label className="mb-1.5 block text-sm font-medium text-foreground">
             Course title <span className="text-red-500">*</span>
           </label>
           <input
@@ -162,8 +162,8 @@ export function CreateCourseForm({ onSubmit, onCancel }: CreateCourseFormProps) 
             placeholder="e.g. Introduction to React"
             value={formData.title}
             onChange={(e) => handleChange('title', e.target.value)}
-            className={`w-full rounded-lg border px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition-colors focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 ${
-              errors.title ? 'border-red-400 bg-red-50' : 'border-gray-200 bg-white'
+            className={`w-full rounded-lg border px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/10 ${
+              errors.title ? 'border-red-400 bg-red-50' : 'border-border bg-white'
             }`}
           />
           {errors.title && (
@@ -176,12 +176,12 @@ export function CreateCourseForm({ onSubmit, onCancel }: CreateCourseFormProps) 
 
         {/* Cover Image */}
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-gray-700">
+          <label className="mb-1.5 block text-sm font-medium text-foreground">
             Cover image
           </label>
 
           {imagePreview ? (
-            <div className="relative overflow-hidden rounded-xl border border-gray-200">
+            <div className="relative overflow-hidden rounded-xl border border-border">
               <img
                 src={imagePreview}
                 alt="Cover preview"
@@ -189,7 +189,7 @@ export function CreateCourseForm({ onSubmit, onCancel }: CreateCourseFormProps) 
               />
               <button
                 onClick={handleRemoveImage}
-                className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-gray-900/70 text-white hover:bg-gray-900"
+                className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-card/70 text-white hover:bg-card"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -197,18 +197,18 @@ export function CreateCourseForm({ onSubmit, onCancel }: CreateCourseFormProps) 
           ) : (
             <div
               onClick={() => fileInputRef.current?.click()}
-              className={`flex h-40 cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed transition-colors hover:border-blue-400 hover:bg-blue-50/50 ${
-                errors.image ? 'border-red-400 bg-red-50' : 'border-gray-300 bg-gray-50'
+              className={`flex h-40 cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed transition-colors hover:border-primary/20 hover:bg-primary/10/50 ${
+                errors.image ? 'border-red-400 bg-red-50' : 'border-border bg-muted'
               }`}
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100">
-                <ImageIcon className="h-5 w-5 text-gray-400" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted">
+                <ImageIcon className="h-5 w-5 text-muted-foreground" />
               </div>
               <div className="text-center">
-                <p className="text-sm font-medium text-gray-700">
+                <p className="text-sm font-medium text-foreground">
                   Click to upload image
                 </p>
-                <p className="text-xs text-gray-400">PNG, JPG, WEBP — max 5 MB</p>
+                <p className="text-xs text-muted-foreground">PNG, JPG, WEBP — max 5 MB</p>
               </div>
             </div>
           )}
@@ -231,7 +231,7 @@ export function CreateCourseForm({ onSubmit, onCancel }: CreateCourseFormProps) 
 
         {/* Description */}
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-gray-700">
+          <label className="mb-1.5 block text-sm font-medium text-foreground">
             Description <span className="text-red-500">*</span>
           </label>
           <textarea
@@ -239,8 +239,8 @@ export function CreateCourseForm({ onSubmit, onCancel }: CreateCourseFormProps) 
             placeholder="What will students learn in this course?"
             value={formData.description}
             onChange={(e) => handleChange('description', e.target.value)}
-            className={`w-full resize-none rounded-lg border px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition-colors focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 ${
-              errors.description ? 'border-red-400 bg-red-50' : 'border-gray-200 bg-white'
+            className={`w-full resize-none rounded-lg border px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/10 ${
+              errors.description ? 'border-red-400 bg-red-50' : 'border-border bg-white'
             }`}
           />
           <div className="mt-1 flex items-start justify-between">
@@ -252,18 +252,18 @@ export function CreateCourseForm({ onSubmit, onCancel }: CreateCourseFormProps) 
             ) : (
               <span />
             )}
-            <span className="text-xs text-gray-400">{formData.description.length} chars</span>
+            <span className="text-xs text-muted-foreground">{formData.description.length} chars</span>
           </div>
         </div>
 
         {/* Price */}
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-gray-700">
+          <label className="mb-1.5 block text-sm font-medium text-foreground">
             Price <span className="text-red-500">*</span>
           </label>
           <div className="relative">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
-              <DollarSign className="h-4 w-4 text-gray-400" />
+              <DollarSign className="h-4 w-4 text-muted-foreground" />
             </div>
             <input
               type="number"
@@ -272,8 +272,8 @@ export function CreateCourseForm({ onSubmit, onCancel }: CreateCourseFormProps) 
               placeholder="0.00"
               value={formData.price}
               onChange={(e) => handleChange('price', e.target.value)}
-              className={`w-full rounded-lg border py-2.5 pl-9 pr-4 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition-colors focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 ${
-                errors.price ? 'border-red-400 bg-red-50' : 'border-gray-200 bg-white'
+              className={`w-full rounded-lg border py-2.5 pl-9 pr-4 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/10 ${
+                errors.price ? 'border-red-400 bg-red-50' : 'border-border bg-white'
               }`}
             />
           </div>
@@ -283,18 +283,18 @@ export function CreateCourseForm({ onSubmit, onCancel }: CreateCourseFormProps) 
               {errors.price}
             </p>
           ) : (
-            <p className="mt-1.5 text-xs text-gray-400">Set to 0 to make this course free.</p>
+            <p className="mt-1.5 text-xs text-muted-foreground">Set to 0 to make this course free.</p>
           )}
         </div>
       </div>
 
       {/* Footer Actions */}
-      <div className="flex items-center justify-end gap-3 border-t border-gray-200 px-6 py-4">
+      <div className="flex items-center justify-end gap-3 border-t border-border px-6 py-4">
         {onCancel && (
           <button
             onClick={onCancel}
             disabled={submitting}
-            className="rounded-lg px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-100 disabled:opacity-50"
+            className="rounded-lg px-4 py-2.5 text-sm font-medium text-foreground hover:bg-muted disabled:opacity-50"
           >
             Cancel
           </button>
@@ -302,7 +302,7 @@ export function CreateCourseForm({ onSubmit, onCancel }: CreateCourseFormProps) 
         <button
           onClick={handleSubmit}
           disabled={submitting}
-          className="flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex items-center gap-2 rounded-lg bg-primary px-6 py-2.5 text-sm font-medium text-white hover:bg-primary disabled:cursor-not-allowed disabled:opacity-60"
         >
           {submitting ? (
             <>

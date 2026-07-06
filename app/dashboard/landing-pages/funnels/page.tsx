@@ -108,7 +108,7 @@ export default function FunnelsPage() {
                 className="flex items-center justify-between rounded-lg border p-4"
               >
                 <div className="flex items-center gap-4">
-                  <Funnel className="h-8 w-8 text-blue-500" />
+                  <Funnel className="h-8 w-8 text-primary" />
 
                   <div>
                     <h3 className="font-semibold">
@@ -209,12 +209,12 @@ export default function FunnelsPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <Users className="h-5 w-5 text-blue-500" />
+              <Users className="h-5 w-5 text-primary" />
               <span>84,000 funnel visitors</span>
             </div>
 
             <div className="flex items-center gap-3">
-              <DollarSign className="h-5 w-5 text-purple-500" />
+              <DollarSign className="h-5 w-5 text-primary" />
               <span>₹12.4L generated this month</span>
             </div>
 

@@ -134,7 +134,7 @@ export default function Page() {
                 </p>
                 <h2 className="mt-2 text-3xl font-bold">{downloads.length}</h2>
               </div>
-              <FileText className="h-10 w-10 text-blue-500" />
+              <FileText className="h-10 w-10 text-primary" />
             </div>
           </CardContent>
         </Card>
@@ -162,7 +162,7 @@ export default function Page() {
                 </p>
                 <h2 className="mt-2 text-3xl font-bold">2,154</h2>
               </div>
-              <Users className="h-10 w-10 text-purple-500" />
+              <Users className="h-10 w-10 text-primary" />
             </div>
           </CardContent>
         </Card>
@@ -244,7 +244,7 @@ export default function Page() {
             </div>
 
             <div className="flex items-center gap-3">
-              <Eye className="h-5 w-5 text-blue-500" />
+              <Eye className="h-5 w-5 text-primary" />
               <div>
                 <p className="font-medium">Product Views</p>
                 <p className="text-sm text-muted-foreground">
@@ -254,7 +254,7 @@ export default function Page() {
             </div>
 
             <div className="flex items-center gap-3">
-              <HardDrive className="h-5 w-5 text-purple-500" />
+              <HardDrive className="h-5 w-5 text-primary" />
               <div>
                 <p className="font-medium">Storage Used</p>
                 <p className="text-sm text-muted-foreground">
@@ -270,7 +270,7 @@ export default function Page() {
       <div className="grid gap-4 md:grid-cols-4">
         <Card>
           <CardContent className="flex items-center gap-3 p-6">
-            <FileText className="h-8 w-8 text-blue-500" />
+            <FileText className="h-8 w-8 text-primary" />
             <div>
               <p className="font-semibold">PDFs</p>
               <p className="text-sm text-muted-foreground">18 Files</p>

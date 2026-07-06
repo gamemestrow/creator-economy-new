@@ -105,7 +105,7 @@ export default function FormsPage() {
                 className="flex items-center justify-between rounded-lg border p-4"
               >
                 <div className="flex items-center gap-4">
-                  <FileText className="h-8 w-8 text-blue-500" />
+                  <FileText className="h-8 w-8 text-primary" />
 
                   <div>
                     <h3 className="font-semibold">{form.name}</h3>
@@ -137,7 +137,7 @@ export default function FormsPage() {
 
           <CardContent className="space-y-4">
             <div className="flex items-center gap-3">
-              <Users className="h-5 w-5 text-blue-500" />
+              <Users className="h-5 w-5 text-primary" />
               <span>4,920 leads captured</span>
             </div>
 
@@ -147,7 +147,7 @@ export default function FormsPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <Eye className="h-5 w-5 text-purple-500" />
+              <Eye className="h-5 w-5 text-primary" />
               <span>32,000 form views</span>
             </div>
 
@@ -170,12 +170,12 @@ export default function FormsPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <CheckCircle className="h-5 w-5 text-blue-500" />
+              <CheckCircle className="h-5 w-5 text-primary" />
               <span>Top form converts at 42%</span>
             </div>
 
             <div className="flex items-center gap-3">
-              <FileText className="h-5 w-5 text-purple-500" />
+              <FileText className="h-5 w-5 text-primary" />
               <span>18 active forms running</span>
             </div>
 

@@ -14,34 +14,34 @@ export function ProductsView() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Products</h1>
-          <p className="text-gray-500 mt-1">Manage all your digital products and courses</p>
+          <h1 className="text-3xl font-bold text-foreground">Products</h1>
+          <p className="text-muted-foreground mt-1">Manage all your digital products and courses</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+        <button className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary">
           <Plus className="w-5 h-5" />
           New Product
         </button>
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-border overflow-hidden">
         <table className="w-full">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-muted border-b border-border">
             <tr>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Product Name</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Price</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Students</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Rating</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Status</th>
-              <th className="px-6 py-3 text-right text-sm font-semibold text-gray-900">Actions</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Product Name</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Price</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Students</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Rating</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Status</th>
+              <th className="px-6 py-3 text-right text-sm font-semibold text-foreground">Actions</th>
             </tr>
           </thead>
           <tbody>
             {products.map((product, i) => (
-              <tr key={product.id} className={`border-t border-gray-200 hover:bg-gray-50 ${i === products.length - 1 ? '' : ''}`}>
-                <td className="px-6 py-4 text-sm font-medium text-gray-900">{product.name}</td>
-                <td className="px-6 py-4 text-sm text-gray-600">{product.price}</td>
-                <td className="px-6 py-4 text-sm text-gray-600">{product.students.toLocaleString()}</td>
-                <td className="px-6 py-4 text-sm text-gray-600">⭐ {product.rating}</td>
+              <tr key={product.id} className={`border-t border-border hover:bg-muted ${i === products.length - 1 ? '' : ''}`}>
+                <td className="px-6 py-4 text-sm font-medium text-foreground">{product.name}</td>
+                <td className="px-6 py-4 text-sm text-muted-foreground">{product.price}</td>
+                <td className="px-6 py-4 text-sm text-muted-foreground">{product.students.toLocaleString()}</td>
+                <td className="px-6 py-4 text-sm text-muted-foreground">⭐ {product.rating}</td>
                 <td className="px-6 py-4 text-sm">
                   <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                     product.status === 'active'
@@ -53,13 +53,13 @@ export function ProductsView() {
                 </td>
                 <td className="px-6 py-4 text-right">
                   <div className="flex justify-end gap-2">
-                    <button className="p-2 hover:bg-gray-200 rounded-lg">
-                      <Eye className="w-4 h-4 text-gray-600" />
+                    <button className="p-2 hover:bg-card rounded-lg">
+                      <Eye className="w-4 h-4 text-muted-foreground" />
                     </button>
-                    <button className="p-2 hover:bg-gray-200 rounded-lg">
-                      <Edit className="w-4 h-4 text-gray-600" />
+                    <button className="p-2 hover:bg-card rounded-lg">
+                      <Edit className="w-4 h-4 text-muted-foreground" />
                     </button>
-                    <button className="p-2 hover:bg-gray-200 rounded-lg">
+                    <button className="p-2 hover:bg-card rounded-lg">
                       <Trash2 className="w-4 h-4 text-red-600" />
                     </button>
                   </div>

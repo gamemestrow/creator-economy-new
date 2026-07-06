@@ -1,34 +1,73 @@
 // contexts/AuthContext.tsx
-'use client'
+"use client";
 
-import { createContext, useContext, useEffect, useState } from 'react'
-import { onAuthStateChanged, User } from 'firebase/auth'
-import { auth } from '@/lib/firebase'
+import { createContext, useContext, useEffect, useState } from "react";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { auth, db } from "@/lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
-const AuthContext = createContext<{ user: User | null; loading: boolean }>({
-  user: null,
-  loading: true,
-})
+interface AuthContextType {
+    user: User | null;
+    userData: UserData | null;
+    loading: boolean;
+}
+
+const AuthContext = createContext<AuthContextType>({
+    user: null,
+    userData: null,
+    loading: true,
+});
+
+interface UserData {
+    name: string;
+    email: string;
+}
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null)
-  const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser)
-      setLoading(false)
-    })
-    return () => unsubscribe() // cleanup on unmount
-  }, [])
+    const [userData, setUserData] = useState<UserData | null>(null);
 
-  return (
-    <AuthContext.Provider value={{ user, loading }}>
-      {children}
-    </AuthContext.Provider>
-  )
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            setLoading(true);
+
+            try {
+                if (!currentUser) {
+                    setUser(null);
+                    setUserData(null);
+                    return;
+                }
+
+                setUser(currentUser);
+                const userDocRef = doc(db, "users", currentUser.uid);
+                const userDocSnap = await getDoc(userDocRef);
+
+                if (userDocSnap.exists()) {
+                    const data = userDocSnap.data() as UserData;
+                    setUserData({
+                        name: data.name || currentUser.displayName || "Creator",
+                        email: currentUser.email || "",
+                    });
+                }
+            } catch (error) {
+                console.error(error);
+                setUserData(null);
+            } finally {
+                setLoading(false);
+            }
+        });
+        return () => unsubscribe(); // cleanup on unmount
+    }, []);
+
+    return (
+        <AuthContext.Provider value={{ user, userData, loading }}>
+            {children}
+        </AuthContext.Provider>
+    );
 }
 
 export function useAuth() {
-  return useContext(AuthContext)
+    return useContext(AuthContext);
 }

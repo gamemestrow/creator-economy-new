@@ -27,7 +27,7 @@ export function ComponentPalette({ onAddElement }: ComponentPaletteProps) {
     <aside className="group/stencil sticky top-5 z-20 h-fit w-[64px] overflow-hidden rounded-lg border bg-white shadow-sm transition-all duration-200 hover:w-[240px]">
       <div className="border-b px-3 py-4">
         <div className="flex items-center gap-3 whitespace-nowrap">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-primary">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
             <Plus className="h-4 w-4" />
           </div>
           <div className="opacity-0 transition-opacity duration-150 group-hover/stencil:opacity-100">
@@ -47,9 +47,9 @@ export function ComponentPalette({ onAddElement }: ComponentPaletteProps) {
               title={item.label}
               onClick={() => onAddElement(item.type)}
               onDragStart={(event) => handleDragStart(event, item.type)}
-              className="flex h-11 w-full items-center gap-3 rounded-lg border bg-white px-2 text-left text-sm font-medium transition hover:border-primary hover:bg-blue-50"
+              className="flex h-11 w-full items-center gap-3 rounded-lg border bg-white px-2 text-left text-sm font-medium transition hover:border-primary hover:bg-primary/10"
             >
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-slate-100 text-primary">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-muted text-primary">
                 <Icon className="h-4 w-4" />
               </span>
               <span className="min-w-0 flex-1 whitespace-nowrap opacity-0 transition-opacity duration-150 group-hover/stencil:opacity-100">

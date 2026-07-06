@@ -82,7 +82,7 @@ export default function Page() {
                 </p>
                 <h2 className="mt-2 text-3xl font-bold">18</h2>
               </div>
-              <Package className="h-10 w-10 text-blue-500" />
+              <Package className="h-10 w-10 text-primary" />
             </div>
           </CardContent>
         </Card>
@@ -110,7 +110,7 @@ export default function Page() {
                 </p>
                 <h2 className="mt-2 text-3xl font-bold">1,254</h2>
               </div>
-              <Users className="h-10 w-10 text-purple-500" />
+              <Users className="h-10 w-10 text-primary" />
             </div>
           </CardContent>
         </Card>
@@ -193,7 +193,7 @@ export default function Page() {
             </div>
 
             <div className="flex items-center gap-3">
-              <ShoppingBag className="h-5 w-5 text-blue-500" />
+              <ShoppingBag className="h-5 w-5 text-primary" />
               <div>
                 <p className="font-medium">Best Seller</p>
                 <p className="text-sm text-muted-foreground">
@@ -203,7 +203,7 @@ export default function Page() {
             </div>
 
             <div className="flex items-center gap-3">
-              <Eye className="h-5 w-5 text-purple-500" />
+              <Eye className="h-5 w-5 text-primary" />
               <div>
                 <p className="font-medium">Views</p>
                 <p className="text-sm text-muted-foreground">

@@ -19,7 +19,7 @@ const AttendeeSidebar = ({ sidebarOpen }: { sidebarOpen: boolean }) => {
     return (
         <aside
             className={cn(
-                "fixed inset-y-0 top-[73px] left-0 w-64 border-r border-gray-200 bg-white p-6 transition-transform duration-300 z-20 md:relative md:top-0 md:translate-x-0",
+                "fixed inset-y-0 top-[73px] left-0 w-64 border-r border-border bg-white p-6 transition-transform duration-300 z-20 md:relative md:top-0 md:translate-x-0",
                 sidebarOpen ? "translate-x-0" : "-translate-x-full"
             )}
         >
@@ -40,8 +40,8 @@ const AttendeeSidebar = ({ sidebarOpen }: { sidebarOpen: boolean }) => {
                         className={cn(
                             "flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left font-medium transition-colors",
                             active
-                                ? "bg-[#2563EB]/10 text-[#2563EB]"
-                                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                                ? "bg-[#9AA59E]/10 text-[#9AA59E]"
+                                : "text-muted-foreground hover:bg-muted hover:text-foreground"
                         )}
                     >
                         <item.icon className="h-5 w-5" />
@@ -51,7 +51,7 @@ const AttendeeSidebar = ({ sidebarOpen }: { sidebarOpen: boolean }) => {
                 })}
             </nav>
 
-            <div className="mt-auto border-t border-gray-100 pt-4 md:hidden">
+            <div className="mt-auto border-t border-border pt-4 md:hidden">
                 <button
                     onClick={handleLogout}
                     className="flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left text-red-600 font-medium hover:bg-red-50 transition-colors"

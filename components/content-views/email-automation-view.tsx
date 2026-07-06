@@ -15,10 +15,10 @@ export function EmailAutomationView() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Email Automation</h1>
-          <p className="text-gray-500 mt-1">Set up automated email sequences based on user actions</p>
+          <h1 className="text-3xl font-bold text-foreground">Email Automation</h1>
+          <p className="text-muted-foreground mt-1">Set up automated email sequences based on user actions</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+        <button className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary">
           <Plus className="w-5 h-5" />
           New Automation
         </button>
@@ -32,10 +32,10 @@ export function EmailAutomationView() {
           { label: 'Emails Sent', value: '24.5K', change: '+8.2% vs last week' },
           { label: 'Avg Open Rate', value: '42.3%', change: '+3.1%' },
         ].map((stat, i) => (
-          <div key={i} className="bg-white p-6 rounded-xl border border-gray-200">
-            <p className="text-gray-600 text-sm font-medium">{stat.label}</p>
-            <p className="text-2xl font-bold text-gray-900 mt-2">{stat.value}</p>
-            <p className="text-gray-600 text-sm mt-4">{stat.change}</p>
+          <div key={i} className="bg-white p-6 rounded-xl border border-border">
+            <p className="text-muted-foreground text-sm font-medium">{stat.label}</p>
+            <p className="text-2xl font-bold text-foreground mt-2">{stat.value}</p>
+            <p className="text-muted-foreground text-sm mt-4">{stat.change}</p>
           </div>
         ))}
       </div>
@@ -43,27 +43,27 @@ export function EmailAutomationView() {
       {/* Automations List */}
       <div className="space-y-4">
         {automations.map((auto) => (
-          <div key={auto.id} className="bg-white p-6 rounded-xl border border-gray-200 hover:shadow-md transition-shadow">
+          <div key={auto.id} className="bg-white p-6 rounded-xl border border-border hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-shadow">
             <div className="flex items-center justify-between">
               <div className="flex-1">
-                <h3 className="text-lg font-semibold text-gray-900">{auto.name}</h3>
+                <h3 className="text-lg font-semibold text-foreground">{auto.name}</h3>
                 <div className="flex gap-4 mt-2">
                   <div>
-                    <p className="text-xs text-gray-500 uppercase">Trigger</p>
-                    <p className="text-sm font-medium text-gray-700">{auto.trigger}</p>
+                    <p className="text-xs text-muted-foreground uppercase">Trigger</p>
+                    <p className="text-sm font-medium text-foreground">{auto.trigger}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500 uppercase">Emails</p>
-                    <p className="text-sm font-medium text-gray-700">{auto.emails} emails in sequence</p>
+                    <p className="text-xs text-muted-foreground uppercase">Emails</p>
+                    <p className="text-sm font-medium text-foreground">{auto.emails} emails in sequence</p>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500 uppercase">Status</p>
+                    <p className="text-xs text-muted-foreground uppercase">Status</p>
                     <span className={`inline-block px-2 py-1 rounded text-xs font-medium mt-1 ${
                       auto.status === 'active'
                         ? 'bg-green-100 text-green-700'
                         : auto.status === 'paused'
                         ? 'bg-yellow-100 text-yellow-700'
-                        : 'bg-gray-100 text-gray-700'
+                        : 'bg-muted text-foreground'
                     }`}>
                       {auto.status}
                     </span>

@@ -54,33 +54,33 @@ function AttendeeHeader({
   const [showUpgradeModal, setShowUpgradeModal] = useState(false)
 
   return (
-    <header className="border-b border-gray-200 bg-white sticky top-0 z-30 shadow-sm">
+    <header className="border-b border-border bg-white sticky top-0 z-30 shadow-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#2563EB] shadow-lg shadow-blue-500/20">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#9AA59E] shadow-[0_10px_30px_rgba(0,0,0,0.05)] shadow-blue-500/20">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
-            <span className="text-lg font-bold text-gray-900 hidden sm:inline-block">{PRODUCT_NAME}</span>
+            <span className="text-lg font-bold text-foreground hidden sm:inline-block">{PRODUCT_NAME}</span>
           </div>
 
           <div className="flex items-center gap-2 sm:gap-4">
             <button
               onClick={() => setShowUpgradeModal(true)}
-              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-lg text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all hover:scale-105 active:scale-95"
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary   text-white rounded-lg text-xs sm:text-sm font-bold shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all hover:scale-105 active:scale-95"
             >
               <Crown className="w-4 h-4" />
               <span className="hidden xs:inline">Upgrade</span>
               <span className="hidden sm:inline">to Pro</span>
             </button>
 
-            <div className="h-6 w-px bg-gray-200 mx-1 hidden sm:block" />
+            <div className="h-6 w-px bg-card mx-1 hidden sm:block" />
 
             <div className="hidden md:flex items-center gap-3">
-              <span className="text-sm text-gray-600 font-medium">{userData?.name}</span>
+              <span className="text-sm text-muted-foreground font-medium">{userData?.name}</span>
               <button
                 onClick={handleLogout}
-                className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                className="p-2 text-muted-foreground hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                 title="Logout"
               >
                 <LogOut className="h-4 w-4" />
@@ -89,7 +89,7 @@ function AttendeeHeader({
 
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+              className="md:hidden p-2 text-muted-foreground hover:bg-muted rounded-lg transition-colors"
               aria-label="Toggle Menu"
             >
               {sidebarOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}

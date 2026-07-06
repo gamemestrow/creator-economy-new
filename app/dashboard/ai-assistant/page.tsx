@@ -186,7 +186,7 @@ export default function AIAssistantPage() {
                       <p className="font-medium text-foreground">{model.name}</p>
                       <span className={`text-xs px-2 py-1 rounded ${
                         model.status === 'Complete' ? 'bg-green-100 text-green-800' :
-                        'bg-blue-100 text-blue-800'
+                        'bg-primary/10 text-primary-hover'
                       }`}>
                         {model.status}
                       </span>

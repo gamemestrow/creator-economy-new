@@ -65,8 +65,8 @@ export default function RevenuePage() {
           <div className="bg-card border border-border rounded-xl p-6">
             <div className="flex items-center justify-between mb-2">
               <p className="text-sm text-muted-foreground">Avg. Order Value</p>
-              <div className="p-2 bg-blue-500/10 rounded-lg">
-                <ShoppingCart className="w-4 h-4 text-blue-600" />
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <ShoppingCart className="w-4 h-4 text-primary" />
               </div>
             </div>
             <p className="text-2xl font-bold text-foreground">₹{averageOrderValue.toFixed(2)}</p>
@@ -79,8 +79,8 @@ export default function RevenuePage() {
           <div className="bg-card border border-border rounded-xl p-6">
             <div className="flex items-center justify-between mb-2">
               <p className="text-sm text-muted-foreground">Total Sales</p>
-              <div className="p-2 bg-purple-500/10 rounded-lg">
-                <TrendingUp className="w-4 h-4 text-purple-600" />
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <TrendingUp className="w-4 h-4 text-primary" />
               </div>
             </div>
             <p className="text-2xl font-bold text-foreground">{orders.length}</p>
@@ -113,28 +113,28 @@ export default function RevenuePage() {
               <AreaChart data={chartData}>
                 <defs>
                   <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#2563EB" stopOpacity={0.1}/>
-                    <stop offset="95%" stopColor="#2563EB" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="#9AA59E" stopOpacity={0.1}/>
+                    <stop offset="95%" stopColor="#9AA59E" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ECE8DF" />
                 <XAxis 
                   dataKey="name" 
                   axisLine={false} 
                   tickLine={false} 
-                  tick={{ fill: '#64748B', fontSize: 12 }}
+                  tick={{ fill: '#666666', fontSize: 12 }}
                   dy={10}
                 />
                 <YAxis 
                   axisLine={false} 
                   tickLine={false} 
-                  tick={{ fill: '#64748B', fontSize: 12 }}
+                  tick={{ fill: '#666666', fontSize: 12 }}
                   tickFormatter={(value) => `$${value}`}
                 />
                 <Tooltip 
                   contentStyle={{ 
                     backgroundColor: '#FFF', 
-                    border: '1px solid #E2E8F0',
+                    border: '1px solid #ECE8DF',
                     borderRadius: '8px',
                     boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
                   }}
@@ -142,7 +142,7 @@ export default function RevenuePage() {
                 <Area 
                   type="monotone" 
                   dataKey="revenue" 
-                  stroke="#2563EB" 
+                  stroke="#9AA59E" 
                   strokeWidth={2}
                   fillOpacity={1} 
                   fill="url(#colorRevenue)" 
@@ -164,11 +164,11 @@ export default function RevenuePage() {
                   { category: 'Community', sales: 800 },
                   { category: 'Other', sales: 300 },
                 ]}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
-                  <XAxis dataKey="category" axisLine={false} tickLine={false} tick={{ fill: '#64748B', fontSize: 12 }} />
-                  <YAxis axisLine={false} tickLine={false} tick={{ fill: '#64748B', fontSize: 12 }} />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ECE8DF" />
+                  <XAxis dataKey="category" axisLine={false} tickLine={false} tick={{ fill: '#666666', fontSize: 12 }} />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fill: '#666666', fontSize: 12 }} />
                   <Tooltip />
-                  <Bar dataKey="sales" fill="#4F46E5" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="sales" fill="#7F8F84" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -178,9 +178,9 @@ export default function RevenuePage() {
             <h2 className="text-lg font-bold text-foreground mb-6">Payment Methods</h2>
             <div className="space-y-4">
               {[
-                { method: 'Razorpay', percentage: 65, color: 'bg-blue-600' },
-                { method: 'Stripe', percentage: 25, color: 'bg-purple-600' },
-                { method: 'PayPal', percentage: 10, color: 'bg-indigo-600' },
+                { method: 'Razorpay', percentage: 65, color: 'bg-primary' },
+                { method: 'Stripe', percentage: 25, color: 'bg-primary' },
+                { method: 'PayPal', percentage: 10, color: 'bg-primary' },
               ].map((item) => (
                 <div key={item.method} className="space-y-2">
                   <div className="flex justify-between text-sm">

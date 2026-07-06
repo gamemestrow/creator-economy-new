@@ -156,20 +156,18 @@ export function useCreatorCourses(creatorId: string) {
 /**
  * Hook to fetch event created by a specific user
  */
-export function useCreatorEvent(creatorId: string) {
+export function useCreatorEvent(creatorId: string,) {
   const [events, setEvents] = useState<Event[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loadingEvent, setLoadingEvent] = useState(true)
   const [error, setError] = useState<string | null>(null)
-
-
 
   const fetchEvent = async () => {
     if (!creatorId) {
-      setLoading(false)
+      setLoadingEvent(false)
       return
     }
     try {
-      setLoading(true)
+      setLoadingEvent(true)
       const data = await eventService.fetchCreatorEvents(creatorId)
       setEvents(data)
       setError(null)
@@ -177,7 +175,7 @@ export function useCreatorEvent(creatorId: string) {
       setError(err instanceof Error ? err.message : 'Failed to fetch events')
       setEvents([])
     } finally {
-      setLoading(false)
+      setLoadingEvent(false)
     }
   }
 
@@ -185,7 +183,7 @@ export function useCreatorEvent(creatorId: string) {
     fetchEvent()
   }, [creatorId])
 
-  return { events, loading, error, refresh: fetchEvent }
+  return { events, loadingEvent, error, refresh: fetchEvent }
 }
 
 

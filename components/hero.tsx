@@ -47,8 +47,8 @@ export function Hero() {
 
         {/* Right Image/Visual */}
         <div className="relative">
-          <div className="absolute inset-0 bg-[#F7F7F4] rounded-2xl blur-3xl shadow-[0_10px_30px_rgba(0,0,0,0.05)]" />
-          <div className="relative bg-[#FBFAF7] rounded-[20px] p-8 border border-border shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
+          <div className="absolute inset-0 bg-[#F8F8F5] rounded-2xl blur-3xl shadow-[0_10px_30px_rgba(0,0,0,0.05)]" />
+          <div className="relative bg-[#F3F4EF] rounded-[20px] p-8 border border-border shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
             <div className="space-y-4">
               <div className="flex items-center justify-between bg-white rounded-lg p-4 shadow-sm">
                 <div>

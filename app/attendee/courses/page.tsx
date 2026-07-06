@@ -172,7 +172,7 @@ export default function CoursesPage() {
     return (
       <div className="flex min-h-screen items-center justify-center bg-white p-4 text-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="h-12 w-12 animate-spin rounded-full border-4 border-border border-t-[#9AA59E]" />
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-border border-t-[#78866B]" />
           <p className="text-muted-foreground font-medium">Loading courses...</p>
         </div>
       </div>
@@ -180,7 +180,7 @@ export default function CoursesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F7F7F4]">
+    <div className="min-h-screen bg-[#F8F8F5]">
 
 
       <div className="flex min-h-[calc(100vh-73px)]">

@@ -58,7 +58,7 @@ function AttendeeHeader({
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#9AA59E] shadow-[0_10px_30px_rgba(0,0,0,0.05)] shadow-blue-500/20">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#78866B] shadow-[0_10px_30px_rgba(0,0,0,0.05)] shadow-blue-500/20">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             <span className="text-lg font-bold text-foreground hidden sm:inline-block">{PRODUCT_NAME}</span>

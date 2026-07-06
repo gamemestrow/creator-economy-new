@@ -136,15 +136,15 @@ export default function WebinarsPage() {
                     <CardTitle>Upcoming & Recent Webinars</CardTitle>
                 </CardHeader>
 
-                <CardContent>
-                    <div className="space-y-4">
-                        {events.map((webinar) => (
-                            <div
-                                key={webinar.eventId}
-                                className="flex items-center justify-between rounded-lg border p-4"
-                            >
-                                <div className="flex items-center gap-4">
-                                    <Video className="h-8 w-8 text-primary" />
+        <CardContent>
+          <div className="space-y-4">
+            {events.map((webinar) => (
+              <div
+                key={webinar.eventId}
+                className="flex items-center justify-between rounded-lg border p-4"
+              >
+                <div className="flex items-center gap-4">
+                  <Video className="h-8 w-8 text-blue-500" />
 
                                     <div>
                                         <h3 className="font-semibold">
@@ -155,7 +155,6 @@ export default function WebinarsPage() {
                                             <span className="flex items-center gap-1">
                                                 <Calendar className="h-4 w-4" />
                                                 {webinar.date
-                                                    .toDate()
                                                     .toLocaleString()}
                                             </span>
 
@@ -189,21 +188,21 @@ export default function WebinarsPage() {
                         <CardTitle>Webinar Analytics</CardTitle>
                     </CardHeader>
 
-                    <CardContent className="space-y-4">
-                        <div className="flex items-center gap-3">
-                            <Users className="h-5 w-5 text-primary" />
-                            <span>{events.reduce((sum, e) => sum + e.currentAttendees, 0).toLocaleString()} total registrations</span>
-                        </div>
+          <CardContent className="space-y-4">
+            <div className="flex items-center gap-3">
+              <Users className="h-5 w-5 text-blue-500" />
+              <span>18,400 total registrations</span>
+            </div>
 
                         <div className="flex items-center gap-3">
                             <PlayCircle className="h-5 w-5 text-green-500" />
                             <span>14,900 attendees joined live</span>
                         </div>
 
-                        <div className="flex items-center gap-3">
-                            <TrendingUp className="h-5 w-5 text-primary" />
-                            <span>32% increase in registrations</span>
-                        </div>
+            <div className="flex items-center gap-3">
+              <TrendingUp className="h-5 w-5 text-purple-500" />
+              <span>32% increase in registrations</span>
+            </div>
 
                         <div className="flex items-center gap-3">
                             <Download className="h-5 w-5 text-orange-500" />

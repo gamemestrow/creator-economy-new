@@ -40,7 +40,7 @@ const AttendeeSidebar = ({ sidebarOpen }: { sidebarOpen: boolean }) => {
                         className={cn(
                             "flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left font-medium transition-colors",
                             active
-                                ? "bg-[#9AA59E]/10 text-[#9AA59E]"
+                                ? "bg-[#78866B]/10 text-[#78866B]"
                                 : "text-muted-foreground hover:bg-muted hover:text-foreground"
                         )}
                     >

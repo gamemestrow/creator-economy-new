@@ -85,7 +85,7 @@ export default function GetStartedPage() {
 
               {/* Center Play Button */}
               {!isPlaying && (
-                <div className="self-center w-14 h-14 bg-white/90 hover:bg-white text-[#9AA59E] rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition transform hover:scale-105">
+                <div className="self-center w-14 h-14 bg-white/90 hover:bg-white text-[#78866B] rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition transform hover:scale-105">
                   <Play className="w-6 h-6 fill-current translate-x-0.5" />
                 </div>
               )}
@@ -127,13 +127,13 @@ export default function GetStartedPage() {
         <h3 className="text-lg font-bold text-foreground">Create a Mango Page</h3>
         
         <div className="bg-white border border-border hover:border-orange-200 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] rounded-xl p-6 transition cursor-pointer group flex items-start gap-4 max-w-xl">
-          <div className="p-3 bg-muted text-foreground rounded-lg group-hover:bg-orange-50 group-hover:text-[#9AA59E] transition">
+          <div className="p-3 bg-muted text-foreground rounded-lg group-hover:bg-orange-50 group-hover:text-[#78866B] transition">
             <Laptop className="w-6 h-6" />
           </div>
           <div className="flex-1">
             <div className="flex items-center justify-between">
-              <h4 className="font-bold text-foreground group-hover:text-[#9AA59E] transition">Build a Landing Page</h4>
-              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-[#9AA59E] group-hover:translate-x-1 transition" />
+              <h4 className="font-bold text-foreground group-hover:text-[#78866B] transition">Build a Landing Page</h4>
+              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-[#78866B] group-hover:translate-x-1 transition" />
             </div>
             <p className="text-muted-foreground text-sm mt-1 leading-relaxed">
               Choose pre-defined templates or create a landing page from scratch to promote your mangoes to 

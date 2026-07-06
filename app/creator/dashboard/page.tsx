@@ -71,7 +71,7 @@ export default function CreatorDashboardPage() {
     return (
       <div className="flex min-h-screen items-center justify-center bg-white p-4 text-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="h-12 w-12 animate-spin rounded-full border-4 border-border border-t-[#9AA59E]" />
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-border border-t-[#78866B]" />
           <p className="text-muted-foreground font-medium">Loading your dashboard...</p>
         </div>
       </div>
@@ -79,12 +79,12 @@ export default function CreatorDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F7F7F4]">
+    <div className="min-h-screen bg-[#F8F8F5]">
       <header className="border-b border-border bg-white sticky top-0 z-30 shadow-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#9AA59E] shadow-[0_10px_30px_rgba(0,0,0,0.05)] shadow-blue-500/20">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#78866B] shadow-[0_10px_30px_rgba(0,0,0,0.05)] shadow-blue-500/20">
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
               <span className="text-lg font-bold text-foreground hidden sm:inline-block">{PRODUCT_NAME}</span>
@@ -145,7 +145,7 @@ export default function CreatorDashboardPage() {
                 className={cn(
                   "flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left font-medium transition-colors",
                   item.active 
-                    ? "bg-[#9AA59E]/10 text-[#9AA59E]" 
+                    ? "bg-[#78866B]/10 text-[#78866B]" 
                     : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 )}
               >
@@ -186,8 +186,8 @@ export default function CreatorDashboardPage() {
 
             <div className="mb-8 grid gap-4 sm:gap-6 grid-cols-1 xs:grid-cols-2 lg:grid-cols-4">
               {[
-                { icon: DollarSign, label: 'Total Revenue', value: '₹0.00', sub: 'No transactions yet', color: 'bg-primary/10', text: 'text-[#9AA59E]' },
-                { icon: Users, label: 'Total Students', value: '0', sub: 'No students yet', color: 'bg-primary/10', text: 'text-[#9AA59E]' },
+                { icon: DollarSign, label: 'Total Revenue', value: '₹0.00', sub: 'No transactions yet', color: 'bg-primary/10', text: 'text-[#78866B]' },
+                { icon: Users, label: 'Total Students', value: '0', sub: 'No students yet', color: 'bg-primary/10', text: 'text-[#78866B]' },
                 { icon: BookOpen, label: 'Active Courses', value: '0', sub: 'Create your first course', color: 'bg-green-100', text: 'text-green-600' },
                 { icon: Eye, label: 'Profile Views', value: '0', sub: 'No views yet', color: 'bg-primary/10', text: 'text-primary' },
               ].map((stat) => (
@@ -207,21 +207,21 @@ export default function CreatorDashboardPage() {
               <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <button
                   onClick={() => setShowCreateForm(true)}
-                  className="group rounded-lg border-2 border-dashed border-[#9AA59E]/30 bg-primary/10/50 px-6 py-8 text-center transition-all hover:bg-primary/10/50 hover:border-[#9AA59E]/50"
+                  className="group rounded-lg border-2 border-dashed border-[#78866B]/30 bg-primary/10/50 px-6 py-8 text-center transition-all hover:bg-primary/10/50 hover:border-[#78866B]/50"
                 >
-                  <BookOpen className="mx-auto mb-2 h-8 w-8 text-[#9AA59E] group-hover:scale-110 transition-transform" />
+                  <BookOpen className="mx-auto mb-2 h-8 w-8 text-[#78866B] group-hover:scale-110 transition-transform" />
                   <p className="font-bold text-foreground">Create Course</p>
                   <p className="text-xs text-muted-foreground mt-1">Build and publish a new course</p>
                 </button>
 
                 <button className="group rounded-lg border-2 border-dashed border-border bg-muted/30 px-6 py-8 text-center transition-all hover:bg-muted/50">
-                  <TrendingUp className="mx-auto mb-2 h-8 w-8 text-muted-foreground group-hover:text-[#9AA59E] transition-colors" />
+                  <TrendingUp className="mx-auto mb-2 h-8 w-8 text-muted-foreground group-hover:text-[#78866B] transition-colors" />
                   <p className="font-bold text-foreground">View Analytics</p>
                   <p className="text-xs text-muted-foreground mt-1">Track your performance</p>
                 </button>
 
                 <button className="group rounded-lg border-2 border-dashed border-border bg-muted/30 px-6 py-8 text-center transition-all hover:bg-muted/50">
-                  <Users className="mx-auto mb-2 h-8 w-8 text-muted-foreground group-hover:text-[#9AA59E] transition-colors" />
+                  <Users className="mx-auto mb-2 h-8 w-8 text-muted-foreground group-hover:text-[#78866B] transition-colors" />
                   <p className="font-bold text-foreground">Manage Students</p>
                   <p className="text-xs text-muted-foreground mt-1">View and interact with students</p>
                 </button>

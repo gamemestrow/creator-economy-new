@@ -281,7 +281,7 @@ export default function CourseDetailPage() {
                 onClick={() => enroll(uid, courseId)}
                 disabled={enrolling || isEnrolled}
                 className={`w-full px-4 py-3 ${
-                  isEnrolled ? 'bg-green-500' : 'bg-[#9AA59E] hover:bg-primary'
+                  isEnrolled ? 'bg-green-500' : 'bg-[#78866B] hover:bg-primary'
                 } text-white text-sm font-semibold rounded-lg transition-colors active:scale-95 disabled:opacity-70 flex items-center justify-center gap-2`}
               >
                 {isEnrolled ? (

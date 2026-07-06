@@ -150,7 +150,7 @@ export function Pricing({ onSelectPlan }: PricingProps) {
                     disabled={!!loadingPlan}
                     className={`w-full flex items-center justify-center gap-2 py-3 px-6 rounded-[14px] font-semibold mb-8 transition-all duration-250 ease-out hover:scale-[1.02] ${
                       plan.highlighted
-                        ? 'bg-white text-primary-hover hover:bg-[#F7F7F4] disabled:bg-white/50'
+                        ? 'bg-white text-primary-hover hover:bg-[#F8F8F5] disabled:bg-white/50'
                         : 'bg-primary text-primary-foreground hover:bg-primary-hover disabled:opacity-50'
                     }`}
                   >
@@ -162,7 +162,7 @@ export function Pricing({ onSelectPlan }: PricingProps) {
                     href="/dashboard/main"
                     className={`block text-center py-3 px-6 rounded-[14px] font-semibold mb-8 transition-all duration-250 ease-out hover:scale-[1.02] ${
                       plan.highlighted
-                        ? 'bg-white text-primary-hover hover:bg-[#F7F7F4]'
+                        ? 'bg-white text-primary-hover hover:bg-[#F8F8F5]'
                         : 'bg-primary text-primary-foreground hover:bg-primary-hover'
                     }`}
                   >

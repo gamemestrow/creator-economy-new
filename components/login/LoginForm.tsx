@@ -59,41 +59,41 @@ const LoginForm = () => {
     }
     return (
         <div className="w-full max-w-md">
-            <div className="rounded-2xl border border-[#ECE8DF] bg-white p-8 shadow-sm">
-                <h2 className="text-2xl font-bold text-[#FBFAF7]">Sign in</h2>
-                <p className="mt-1 text-sm text-[#666666]">Enter your credentials to access your workspace.</p>
+            <div className="rounded-2xl border border-[#E4E6DE] bg-white p-8 shadow-sm">
+                <h2 className="text-2xl font-bold text-[#F3F4EF]">Sign in</h2>
+                <p className="mt-1 text-sm text-[#6B7280]">Enter your credentials to access your workspace.</p>
 
                 <form onSubmit={handleLogin} className="mt-8 space-y-4">
                     <div>
-                        <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-[#232323]">
+                        <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-[#1F2933]">
                             Email address
                         </label>
                         <div className="relative">
-                            <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#666666]" />
+                            <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#6B7280]" />
                             <input
                                 id="email"
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="you@company.com"
-                                className="w-full rounded-lg border border-[#ECE8DF] bg-white py-2.5 pl-10 pr-4 text-sm text-[#FBFAF7] outline-none transition-all placeholder:text-[#666666] focus:border-[#9AA59E] focus:ring-2 focus:ring-[#9AA59E]/20"
+                                className="w-full rounded-lg border border-[#E4E6DE] bg-white py-2.5 pl-10 pr-4 text-sm text-[#F3F4EF] outline-none transition-all placeholder:text-[#6B7280] focus:border-[#78866B] focus:ring-2 focus:ring-[#78866B]/20"
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-[#232323]">
+                        <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-[#1F2933]">
                             Password
                         </label>
                         <div className="relative">
-                            <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#666666]" />
+                            <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#6B7280]" />
                             <input
                                 id="password"
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Your password"
-                                className="w-full rounded-lg border border-[#ECE8DF] bg-white py-2.5 pl-10 pr-4 text-sm text-[#FBFAF7] outline-none transition-all placeholder:text-[#666666] focus:border-[#9AA59E] focus:ring-2 focus:ring-[#9AA59E]/20"
+                                className="w-full rounded-lg border border-[#E4E6DE] bg-white py-2.5 pl-10 pr-4 text-sm text-[#F3F4EF] outline-none transition-all placeholder:text-[#6B7280] focus:border-[#78866B] focus:ring-2 focus:ring-[#78866B]/20"
                             />
                         </div>
                     </div>
@@ -105,7 +105,7 @@ const LoginForm = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#9AA59E] py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#7F8F84] disabled:cursor-not-allowed disabled:opacity-60"
+                        className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#78866B] py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#65735A] disabled:cursor-not-allowed disabled:opacity-60"
                     >
                         {loading ? (
                             <>
@@ -121,9 +121,9 @@ const LoginForm = () => {
                     </button>
                 </form>
 
-                <p className="mt-6 text-center text-sm text-[#666666]">
+                <p className="mt-6 text-center text-sm text-[#6B7280]">
                     Don&apos;t have an account?{' '}
-                    <Link href="/signup" className="font-semibold text-[#9AA59E] hover:text-[#7F8F84]">
+                    <Link href="/signup" className="font-semibold text-[#78866B] hover:text-[#65735A]">
                         Create one
                     </Link>
                 </p>

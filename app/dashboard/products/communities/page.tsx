@@ -217,15 +217,15 @@ export default function CommunitiesPage() {
                     <CardTitle>Community List</CardTitle>
                 </CardHeader>
 
-                <CardContent>
-                    <div className="space-y-4">
-                        {communities.map((community) => (
-                            <div
-                                key={community.communityId}
-                                className="flex items-center justify-between rounded-lg border p-4"
-                            >
-                                <div className="flex items-center gap-4">
-                                    <Users className="h-8 w-8 text-primary" />
+        <CardContent>
+          <div className="space-y-4">
+            {communities.map((community) => (
+              <div
+                key={community.communityId}
+                className="flex items-center justify-between rounded-lg border p-4"
+              >
+                <div className="flex items-center gap-4">
+                  <Users className="h-8 w-8 text-primary" />
 
                                     <div>
                                         <h3 className="font-semibold">
@@ -258,23 +258,21 @@ export default function CommunitiesPage() {
                         <CardTitle>Community Analytics</CardTitle>
                     </CardHeader>
 
-                    <CardContent className="space-y-4">
-                        <div className="flex items-center gap-3">
-                            <Users className="h-5 w-5 text-primary" />
-                            <span>
-                                {totalMembers.toLocaleString()} active members
-                            </span>
-                        </div>
+          <CardContent className="space-y-4">
+            <div className="flex items-center gap-3">
+              <Users className="h-5 w-5 text-primary" />
+              <span>{totalMembers.toLocaleString()} active members</span>
+            </div>
 
                         <div className="flex items-center gap-3">
                             <MessageSquare className="h-5 w-5 text-green-500" />
                             <span>2,180 posts this month</span>
                         </div>
 
-                        <div className="flex items-center gap-3">
-                            <UserPlus className="h-5 w-5 text-primary" />
-                            <span>840 new members joined</span>
-                        </div>
+            <div className="flex items-center gap-3">
+              <UserPlus className="h-5 w-5 text-primary" />
+              <span>840 new members joined</span>
+            </div>
 
                         <div className="flex items-center gap-3">
                             <Activity className="h-5 w-5 text-orange-500" />
@@ -299,38 +297,32 @@ export default function CommunitiesPage() {
                             <span>Top Community: Creator Growth Club</span>
                         </div>
 
-                        <div className="flex items-center gap-3">
-                            <Globe className="h-5 w-5 text-primary" />
-                            <span>Members from 24 countries</span>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                            <MessageSquare className="h-5 w-5 text-primary" />
-                            <span>12,400 total discussions</span>
-                        </div>
-                    </CardContent>
-                </Card>
+            <div className="flex items-center gap-3">
+              <Globe className="h-5 w-5 text-primary" />
+              <span>Members from 24 countries</span>
             </div>
 
-            {showCreateCommunityModal && (
-                <div className="fixed inset-0 bg-foreground/50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-card border border-border rounded-xl w-full max-w-lg shadow-[0_10px_30px_rgba(0,0,0,0.05)] overflow-hidden">
-                        <div className="flex items-center justify-between p-6 border-b border-border">
-                            <div className="flex items-center gap-2">
-                                <Users className="w-5 h-5 text-muted-foreground" />
-                                <h2 className="text-xl font-bold text-foreground">
-                                    Create new community
-                                </h2>
-                            </div>
-                            <button
-                                onClick={() =>
-                                    setShowCreateCommunityModal(false)
-                                }
-                                className="text-muted-foreground hover:text-foreground"
-                            >
-                                <X className="w-6 h-6" />
-                            </button>
-                        </div>
+            <div className="flex items-center gap-3">
+              <MessageSquare className="h-5 w-5 text-primary" />
+              <span>12,400 total discussions</span>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {showCreateCommunityModal && (
+        <div className="fixed inset-0 bg-foreground/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-card border border-border rounded-xl w-full max-w-lg shadow-[0_10px_30px_rgba(0,0,0,0.05)] overflow-hidden">
+
+            <div className="flex items-center justify-between p-6 border-b border-border">
+              <div className="flex items-center gap-2">
+                <Users className="w-5 h-5 text-muted-foreground" />
+                <h2 className="text-xl font-bold text-foreground">Create new community</h2>
+              </div>
+              <button onClick={() => setShowCreateCommunityModal(false)} className="text-muted-foreground hover:text-foreground">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
 
                         <form
                             onSubmit={handleCreateCommunity}

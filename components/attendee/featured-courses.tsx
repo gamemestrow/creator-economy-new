@@ -128,7 +128,7 @@ export function FeaturedCourses({ userId }: FeaturedCoursesProps) {
               className="overflow-hidden rounded-xl border border-border bg-white transition-all hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
             >
               {/* Thumbnail */}
-              <div className="h-40 bg-primary from-[#9AA59E]/10  flex items-center justify-center">
+              <div className="h-40 bg-primary from-[#78866B]/10  flex items-center justify-center">
                 {course.thumbnail ? (
                   <img
                     src={course.thumbnail}
@@ -142,7 +142,7 @@ export function FeaturedCourses({ userId }: FeaturedCoursesProps) {
 
               {/* Content */}
               <div className="p-4">
-                <div className="mb-2 inline-block rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-[#9AA59E]">
+                <div className="mb-2 inline-block rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-[#78866B]">
                   {course.difficulty}
                 </div>
 
@@ -188,7 +188,7 @@ export function FeaturedCourses({ userId }: FeaturedCoursesProps) {
                   className={`w-full rounded-lg px-4 py-2 font-medium transition-all disabled:cursor-not-allowed disabled:opacity-60 ${
                     isEnrolled
                       ? 'bg-muted text-foreground hover:bg-card'
-                      : 'bg-[#9AA59E] text-white hover:bg-primary'
+                      : 'bg-[#78866B] text-white hover:bg-primary'
                   }`}
                 >
                   {isEnrolling ? (

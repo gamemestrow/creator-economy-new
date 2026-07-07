@@ -9,9 +9,26 @@ import {
   getDocs,
   orderBy,
   limit,
+  doc,
+  serverTimestamp,
+  setDoc,
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { Order, COLLECTIONS } from './types'
+
+
+interface PlaceOrderParams {
+  userId: string;
+  creatorId: string;
+  courseId: string;
+  courseName?: string;
+  userName?: string;
+  userEmail?: string;
+  amount: number;
+  currency: string;
+  paymentProvider: "razorpay" | "stripe" | "paypal";
+  status?: "completed" | "pending" | "failed" | "refunded";
+}
 
 /**
  * Fetch all orders for a creator's courses
@@ -56,3 +73,35 @@ export async function fetchCreatorOrders(creatorId: string, limit_: number = 50)
     throw error
   }
 }
+
+export const placeOrder = async (
+  data: PlaceOrderParams
+): Promise<Order> => {
+  try {
+    // Generate a new document reference
+
+    const orderRef = doc(collection(db, "orders"));
+
+    const order: Order = {
+      orderId: orderRef.id,
+      userId: data.userId,
+      creatorId: data.creatorId,
+      userName: data.userName,
+      userEmail: data.userEmail,
+      courseId: data.courseId,
+      courseName: data.courseName,
+      amount: data.amount,
+      currency: data.currency,
+      paymentProvider: data.paymentProvider,
+      status: data.status ?? "pending",
+      createdAt: serverTimestamp(),
+    };
+
+    await setDoc(orderRef, order);
+
+    return order;
+  } catch (error) {
+    console.error("Failed to place order:", error);
+    throw error;
+  }
+};

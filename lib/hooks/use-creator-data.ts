@@ -5,6 +5,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Course, Event, Community } from '@/lib/firestore'
 import * as courseService from '@/lib/firestore/courses'
+import * as eventService from '@/lib/firestore/events'
 import { db } from '@/lib/firebase'
 import { collection, query, where, getDocs, orderBy } from 'firebase/firestore'
 import { COLLECTIONS } from '@/lib/firestore/types'
@@ -150,6 +151,41 @@ export function useCreatorCourses(creatorId: string) {
 
   return { courses, loading, error, refresh: fetchCourses }
 }
+
+
+/**
+ * Hook to fetch event created by a specific user
+ */
+export function useCreatorEvent(creatorId: string,) {
+  const [events, setEvents] = useState<Event[]>([])
+  const [loadingEvent, setLoadingEvent] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  const fetchEvent = async () => {
+    if (!creatorId) {
+      setLoadingEvent(false)
+      return
+    }
+    try {
+      setLoadingEvent(true)
+      const data = await eventService.fetchCreatorEvents(creatorId)
+      setEvents(data)
+      setError(null)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch events')
+      setEvents([])
+    } finally {
+      setLoadingEvent(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchEvent()
+  }, [creatorId])
+
+  return { events, loadingEvent, error, refresh: fetchEvent }
+}
+
 
 /**
  * Hook to fetch creator dashboard statistics

@@ -329,6 +329,8 @@ export async function createCommunity(input: CommunityInput): Promise<string> {
       isPublic: input.isPublic,
       rules: input.rules || '',
       memberCount: 0,
+      postsCount: 0,
+      posts: [],
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     })

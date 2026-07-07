@@ -141,7 +141,7 @@ export default function RevenuePage() {
                 />
                 <Area 
                   type="monotone" 
-                  dataKey="revenue" 
+                  dataKey="revenue"
                   stroke="#78866B" 
                   strokeWidth={2}
                   fillOpacity={1} 

@@ -13,7 +13,7 @@ interface FeaturedCoursesProps {
 
 export function FeaturedCourses({ userId }: FeaturedCoursesProps) {
   const { courses, loading, error } = usePublishedCourses()
-  const { enroll } = useEnrollInCourse()
+  const { enrollUser } = useEnrollInCourse()
   const { unenroll } = useUnenrollFromCourse()
   const [enrolledCourses, setEnrolledCourses] = useState<Set<string>>(new Set())
   const [enrollingCourseId, setEnrollingCourseId] = useState<string | null>(null)
@@ -38,7 +38,7 @@ export function FeaturedCourses({ userId }: FeaturedCoursesProps) {
   const handleEnroll = async (courseId: string) => {
     try {
       setEnrollingCourseId(courseId)
-      await enroll(userId, courseId)
+      await enrollUser(userId, courseId)
       setEnrolledCourses((prev) => new Set([...prev, courseId]))
     } catch (err) {
       console.error('Enrollment failed:', err)

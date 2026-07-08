@@ -42,13 +42,27 @@ export interface CreateEventInput {
 /**
  * Fetch all Events for a specific creator
  */
-export async function fetchCreatorEvents(creatorId: string): Promise<Event[]> {
+export async function fetchCreatorEvents(creatorId: string, type: string): Promise<Event[]> {
   try {
-    const q = query(
-      collection(db, COLLECTIONS.EVENTS),
-      where('creatorId', '==', creatorId),
-      orderBy('createdAt', 'desc')
-    )
+    let q = query(
+      collection(db, COLLECTIONS.EVENTS))
+
+
+
+    if (type === "all") {
+      q = query(
+        collection(db, COLLECTIONS.EVENTS),
+        where('creatorId', '==', creatorId),
+        orderBy('createdAt', 'desc'))
+    } else {
+      q = query(
+        collection(db, COLLECTIONS.EVENTS),
+        where('creatorId', '==', creatorId),
+        where('eventType', '==', type),
+        orderBy('createdAt', 'desc')
+      )
+    }
+
     const snapshot = await getDocs(q)
     return snapshot.docs.map((doc) => ({
       ...doc.data(),
@@ -398,6 +412,8 @@ export async function getUserEventRegistrationsCount(
 
 export async function createAnEvent(input: CreateEventInput): Promise<string> {
   try {
+
+    console.log(input)
     const eventRef = doc(collection(db, COLLECTIONS.EVENTS))
     await setDoc(eventRef, {
       eventId: eventRef.id, // Document ID
@@ -410,7 +426,7 @@ export async function createAnEvent(input: CreateEventInput): Promise<string> {
       duration: input.duration,
       maxAttendees: 0,
       currentAttendees: 0, // Denormalized count
-      eventType: 'live',
+      eventType: input.eventType,
       registrationDeadline: input.registrationDeadline, // Firestore Timestamp
       isPublished: input.isPublished,
       createdAt: serverTimestamp(),

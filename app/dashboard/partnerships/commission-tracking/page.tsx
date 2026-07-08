@@ -18,6 +18,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import DownloadCsvButton from '@/components/downloadCSVbutton'
 
 export default function CommissionTrackingPage() {
   const commissions = [
@@ -71,10 +72,7 @@ export default function CommissionTrackingPage() {
           </p>
         </div>
 
-        <Button>
-          <Download className="mr-2 h-4 w-4" />
-          Export Report
-        </Button>
+        <DownloadCsvButton data={commissions} fileName='commissions' />
       </div>
 
       {/* KPI Cards */}

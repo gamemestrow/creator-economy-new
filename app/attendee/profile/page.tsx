@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { MapPin, Calendar, Globe, Edit2, Award, BookOpen, Clock, Star, TrendingUp, Twitter, Linkedin } from 'lucide-react'
+import { MapPin, Calendar, Globe, Edit2, Award, BookOpen, Clock, Star, TrendingUp, XIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const INTERESTS = ['TypeScript', 'React', 'System Design', 'CSS', 'Career Growth', 'Open Source', 'UI/UX', 'Node.js']
@@ -70,11 +70,11 @@ export default function ProfilePage() {
           )}
           <div className="mt-4 flex items-center gap-3">
             <a href="#" className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E4E6DE] text-[#6B7280] hover:border-[#78866B]/30 hover:text-[#78866B] transition-colors">
-              <Twitter className="h-4 w-4" />
+              <XIcon className="h-4 w-4" />
             </a>
-            <a href="#" className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E4E6DE] text-[#6B7280] hover:border-[#78866B]/30 hover:text-[#78866B] transition-colors">
+            {/* <a href="#" className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E4E6DE] text-[#6B7280] hover:border-[#78866B]/30 hover:text-[#78866B] transition-colors">
               <Linkedin className="h-4 w-4" />
-            </a>
+            </a> */}
             <a href="#" className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E4E6DE] text-[#6B7280] hover:border-[#78866B]/30 hover:text-[#78866B] transition-colors">
               <Globe className="h-4 w-4" />
             </a>

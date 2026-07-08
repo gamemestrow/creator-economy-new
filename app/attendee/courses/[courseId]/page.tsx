@@ -63,7 +63,7 @@ export default function CourseDetailPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const { enroll, loading: enrolling } = useEnrollInCourse()
+  const { enrollUser, loading: enrolling } = useEnrollInCourse()
   const [uid, setUid] = useState('')
   const [isEnrolled, setIsEnrolled] = useState(false)
 
@@ -278,7 +278,7 @@ export default function CourseDetailPage() {
               </div>
 
               <button
-                onClick={() => enroll(uid, courseId)}
+                onClick={() => enrollUser(uid, courseId)}
                 disabled={enrolling || isEnrolled}
                 className={`w-full px-4 py-3 ${
                   isEnrolled ? 'bg-green-500' : 'bg-[#78866B] hover:bg-primary'

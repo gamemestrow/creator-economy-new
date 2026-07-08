@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { useRequireRole } from '@/lib/use-auth-redirect'

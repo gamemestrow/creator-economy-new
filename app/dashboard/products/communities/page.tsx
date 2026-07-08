@@ -57,12 +57,15 @@ export default function CommunitiesPage() {
 
         try {
             setIsCreating(true);
-            await createCommunity({
-                ...formData,
+            await fetch("/api/creator/communities", {
+                method: "POST",
+                body: JSON.stringify({
+                    ...formData,
                 creatorId: user.uid,
                 creatorName: userData?.name || "Unknown Creator",
-                // remove the hardcoded thumbnail: 'thumbnail' — formData.thumbnail is already spread in above
+                }),
             });
+
             setShowCreateCommunityModal(false);
             setFormData({
                 name: "",

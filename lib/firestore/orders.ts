@@ -36,6 +36,8 @@ interface PlaceOrderParams {
 export async function fetchCreatorOrders(creatorId: string, limit_: number = 50): Promise<Order[]> {
   try {
     // For this implementation, we assume Orders have a creatorId field for easy fetching
+
+    console.log(creatorId)
     const q = query(
       collection(db, COLLECTIONS.ORDERS),
       where('creatorId', '==', creatorId),
@@ -43,6 +45,10 @@ export async function fetchCreatorOrders(creatorId: string, limit_: number = 50)
       limit(limit_)
     )
     const snapshot = await getDocs(q)
+    console.log(snapshot.docs.map((doc) => ({
+      ...doc.data(),
+      orderId: doc.id,
+    } as Order)))
     return snapshot.docs.map((doc) => ({
       ...doc.data(),
       orderId: doc.id,
@@ -73,6 +79,10 @@ export async function fetchCreatorOrders(creatorId: string, limit_: number = 50)
     throw error
   }
 }
+
+/**
+ * place an order by attendee
+ */
 
 export const placeOrder = async (
   data: PlaceOrderParams
@@ -105,3 +115,26 @@ export const placeOrder = async (
     throw error;
   }
 };
+
+
+/**
+ * Check if user has preordered a course
+ */
+export async function isUserPlaceOrder(
+  userId: string,
+  courseId: string
+): Promise<boolean> {
+  try {
+    const q = query(
+      collection(db, COLLECTIONS.ORDERS),
+      where('userId', '==', userId),
+      where('courseId', '==', courseId),
+    )
+
+    const snapshot = await getDocs(q)
+    return !snapshot.empty
+  } catch (error) {
+    console.error('Error checking enrollment:', error)
+    throw error
+  }
+}

@@ -45,7 +45,9 @@ export default function CoursesPage() {
         loading: coursesLoading,
         refresh,
     } = useCreatorCourses(user?.uid || "");
+
     const [showCreateModal, setShowCreateModal] = useState(false);
+
     const [isCreating, setIsCreating] = useState(false);
 
     const { setpageState } = usePageState();
@@ -70,6 +72,7 @@ export default function CoursesPage() {
         (sum, c) => sum + (c.enrollmentCount || 0),
         0,
     );
+
     const totalRevenue = courses.reduce(
         (sum, c) => sum + (c.enrollmentCount || 0) * (c.price || 0),
         0,
@@ -80,16 +83,18 @@ export default function CoursesPage() {
         if (!user) return;
 
         try {
-            setIsCreating(true);
-            await createCourse({
-                ...formData,
-                creatorId: user.uid,
-                creatorName: userData?.name || "Unknown Creator",
-                totalLessons: 1, // Default
-                duration: 60, // Default
-                tags: [formData.category],
+            await fetch("/api/creator/course", {
+                method: "POST",
+                body: JSON.stringify({
+                    ...formData,
+                    creatorId: user.uid,
+                    creatorName: userData?.name || "Unknown Creator",
+                    totalLessons: 1, // Default
+                    duration: 60, // Default
+                    tags: [formData.category],
+                }),
             });
-            setShowCreateModal(false);
+
             setFormData({
                 title: "",
                 description: "",
@@ -109,7 +114,10 @@ export default function CoursesPage() {
 
     const handleDelete = async (id: string) => {
         try {
-            await deleteCourse(id);
+
+            await fetch(`/api/creator/course/${id}`, {
+                method: "DELETE",
+            });
             await refresh();
         } catch (error) {
             console.error("Failed to delete course:", error);
@@ -208,16 +216,16 @@ export default function CoursesPage() {
                 )}
             </div>
 
-      {/* Create Modal */}
-      {showCreateModal && (
-        <div className="fixed inset-0 bg-foreground/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-card border border-border rounded-xl w-full max-w-lg shadow-[0_10px_30px_rgba(0,0,0,0.05)] overflow-hidden">
-            <div className="flex items-center justify-between p-6 border-b border-border">
-              <h2 className="text-xl font-bold text-foreground">Create New Course</h2>
-              <button onClick={() => setShowCreateModal(false)} className="text-muted-foreground hover:text-foreground">
-                <X className="w-6 h-6" />
-              </button>
-            </div>
+            {/* Create Modal */}
+            {showCreateModal && (
+                <div className="fixed inset-0 bg-foreground/50 flex items-center justify-center z-50 p-4">
+                    <div className="bg-card border border-border rounded-xl w-full max-w-lg shadow-[0_10px_30px_rgba(0,0,0,0.05)] overflow-hidden">
+                        <div className="flex items-center justify-between p-6 border-b border-border">
+                            <h2 className="text-xl font-bold text-foreground">Create New Course</h2>
+                            <button onClick={() => setShowCreateModal(false)} className="text-muted-foreground hover:text-foreground">
+                                <X className="w-6 h-6" />
+                            </button>
+                        </div>
 
                         <form
                             onSubmit={handleCreate}

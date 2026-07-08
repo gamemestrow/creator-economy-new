@@ -3,23 +3,12 @@ import { useEnrollInCourse } from '@/lib/hooks/use-attendee-mutations'
 import { useRequireRole } from '@/lib/use-auth-redirect'
 import { useEffect, useState } from 'react'
 import { isUserEnrolled } from '@/lib/firestore/enrollments'
-import { useRouter } from 'next/navigation'
 import { Course } from '@/lib/firestore/types'
-import { placeOrder } from '@/lib/firestore/orders'
+import { placeOrder, isUserPlaceOrder } from '@/lib/firestore/orders'
 import Link from 'next/link'
+import { useAuth } from '@/contexts/AuthContext'
 
-// interface CourseCardProps {
-//   id: string
-//   title: string
-//   creatorName: string
-//   category: string
-//   level: string
-//   rating: number
-//   reviews: number
-//   price: number
-//   image: string
-//   enrollmentCount: number
-// }
+
 
 export function CourseCard({
   courseId,
@@ -30,6 +19,7 @@ export function CourseCard({
   price,
   enrollmentCount,
   isPublished,
+  creatorId
 }: Course) {
   const getLevelColor = (level: string) => {
     switch (level) {
@@ -45,10 +35,11 @@ export function CourseCard({
   }
 
 
-  const { enroll, loading, error, success } = useEnrollInCourse()
+  const { enrollUser, loading, error, success } = useEnrollInCourse()
   const [uid, setuid] = useState('')
   const [isEnrolled, setisEnrolled] = useState(false)
-  const router = useRouter();
+  const [isOrderPlaced, setisOrderPlaced] = useState(false)
+  const {userData} = useAuth()
 
 
   const { loading: authLoading, user, authorized } = useRequireRole(['attendee'])
@@ -70,17 +61,28 @@ export function CourseCard({
       }
     }
     checkEnrollment();
-  }, [isEnrolled, uid, courseId]);
+
+    async function checkPreorder() {
+      const isOrderPlaced = await isUserPlaceOrder(uid, courseId);
+
+      if (isOrderPlaced) {
+        setisOrderPlaced(true)
+      } else {
+        setisOrderPlaced(false)
+      }
+    }
+    checkPreorder();
+  }, [isEnrolled, isOrderPlaced, uid, courseId]);
 
   const data = {
     userId: uid,
-    creatorId: courseId,
-    userName: user?.displayName || 'Unknown User',
+    creatorId: creatorId,
+    userName: userData?.name || 'Unknown User',
     userEmail: user?.email || 'Unknown Email',
     courseId: courseId,
     courseName: title,
     amount: price,
-    currency: 'USD',
+    currency: 'INR',
     paymentProvider: 'stripe' as const,
     status: 'pending' as const,
   }
@@ -95,7 +97,7 @@ export function CourseCard({
     e.stopPropagation()
 
     if (isPublished) {
-      enroll(uid, courseId)
+      enrollUser(uid, courseId)
     } else {
       createPreorder()
     }
@@ -163,7 +165,7 @@ export function CourseCard({
             onClick={handleEnrollClick}
             className={`px-4 py-2 ${isEnrolled ? "bg-green-500" : "bg-[#2563EB]"} text-white text-xs font-semibold rounded-lg hover:bg-blue-700 transition-colors active:scale-95`}
           >
-            {isPublished ? (isEnrolled ? 'Enrolled' : 'Enroll') : 'Pre Order'}
+            {isPublished ? (isEnrolled ? 'Enrolled' : 'Enroll') : (isOrderPlaced ? "Order Already Placed" : 'Pre Order')}
           </button>
         </div>
       </div>

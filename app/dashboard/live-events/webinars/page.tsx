@@ -61,7 +61,7 @@ export default function WebinarsPage() {
         loadingEvent,
         error,
         refresh: fetchEvent,
-    } = useCreatorEvent(user?.uid || "");
+    } = useCreatorEvent(user?.uid || "", "webinars");
 
     if (authLoading) {
         return <div>Loading...</div>;
@@ -154,8 +154,8 @@ export default function WebinarsPage() {
                                         <div className="mt-1 flex flex-wrap gap-4 text-sm text-muted-foreground">
                                             <span className="flex items-center gap-1">
                                                 <Calendar className="h-4 w-4" />
-                                                {webinar.date
-                                                    .toLocaleString()}
+                                                {webinar.date.toDate()
+                                                    .toLocaleDateString()}
                                             </span>
 
                                             <span className="flex items-center gap-1">

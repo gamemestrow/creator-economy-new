@@ -37,8 +37,11 @@ export function useCreatorMemberships(creatorId: string) {
     }
     try {
       setLoading(true)
-      const data = await membershipService.fetchCreatorMemberships(creatorId)
-      setMemberships(data)
+      const response = await fetch(`/api/creator/memberships/${creatorId}`, {
+        method: "GET",
+      });
+      const data = await response.json()
+      setMemberships(data.data)
       setError(null)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch memberships')
@@ -90,6 +93,11 @@ export function useCreatorOrders(creatorId: string) {
 }
 
 
+/**
+ * function to show customers of a specific creator
+ */
+
+
 export function useCustomers() {
   const [customers, setCustomers] = useState<User[]>([])
   const [loading, setLoading] = useState(true)
@@ -134,8 +142,11 @@ export function useCreatorCourses(creatorId: string) {
     }
     try {
       setLoading(true)
-      const data = await courseService.fetchCreatorCourses(creatorId)
-      setCourses(data)
+      const response = await fetch(`/api/creator/course/${creatorId}`, {
+        method: "GET",
+      });
+      const data = await response.json()
+      setCourses(data.data)
       setError(null)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch courses')
@@ -156,7 +167,7 @@ export function useCreatorCourses(creatorId: string) {
 /**
  * Hook to fetch event created by a specific user
  */
-export function useCreatorEvent(creatorId: string,) {
+export function useCreatorEvent(creatorId: string,type:string) {
   const [events, setEvents] = useState<Event[]>([])
   const [loadingEvent, setLoadingEvent] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -168,7 +179,7 @@ export function useCreatorEvent(creatorId: string,) {
     }
     try {
       setLoadingEvent(true)
-      const data = await eventService.fetchCreatorEvents(creatorId)
+      const data = await eventService.fetchCreatorEvents(creatorId, type)
       setEvents(data)
       setError(null)
     } catch (err) {
@@ -181,7 +192,7 @@ export function useCreatorEvent(creatorId: string,) {
 
   useEffect(() => {
     fetchEvent()
-  }, [creatorId])
+  }, [creatorId, type])
 
   return { events, loadingEvent, error, refresh: fetchEvent }
 }
@@ -261,8 +272,11 @@ export function useCreatorcommunities(creatorId: string) {
     }
     try {
       setLoading(true)
-      const data = await communityService.fetchCreatorCommunities(creatorId)
-      setCommunities(data)
+      const response = await fetch(`/api/creator/communities/${creatorId}`, {
+        method: "GET",
+      });
+      const data = await response.json()
+      setCommunities(data.data)
       setError(null)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch communities')

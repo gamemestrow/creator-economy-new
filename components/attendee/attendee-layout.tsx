@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { UpgradePlanModal } from '@/components/upgrade-plan-modal'
 import AttendeeSidebar from './attendee-sidebar'
 import AttendeeHeader from './attendee-header'
+import { MobileBottomNav } from './mobile-bottom-nav'
 
 function Breadcrumbs() {
   const pathname = usePathname()
@@ -81,6 +82,7 @@ export function AttendeeAppLayout({ children }: { children: React.ReactNode }) {
         <AttendeeSidebar sidebarOpen={sidebarOpen} />
         <AttendeeMain>{children}</AttendeeMain>
       </div>
+      <MobileBottomNav />
       <FloatingChat />
     </div>
   )

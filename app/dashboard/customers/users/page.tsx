@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Search, Mail, Calendar, User, MoreHorizontal, Loader2, Filter } from 'lucide-react'
 import { useCustomers } from '@/lib/hooks/use-creator-data'
+import DownloadCsvButton from '@/components/downloadCSVbutton'
 
 export default function CustomersPage() {
   const { customers, loading, search } = useCustomers()
@@ -27,9 +28,7 @@ export default function CustomersPage() {
               <Filter className="w-4 h-4" />
               Filter
             </button>
-            <button className="bg-primary text-primary-foreground px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors">
-              Export CSV
-            </button>
+            <DownloadCsvButton data={customers} fileName='customers'/>
           </div>
         </div>
 

@@ -60,7 +60,7 @@ export default function WorkshopsPage() {
         loadingEvent,
         error,
         refresh: fetchEvent,
-    } = useCreatorEvent(user?.uid || "");
+    } = useCreatorEvent(user?.uid || "", "workshops");
 
 
     

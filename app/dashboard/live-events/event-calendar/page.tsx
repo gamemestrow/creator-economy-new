@@ -111,7 +111,7 @@ function EventCard({ event }: { event: any }) {
 export default function EventsPage() {
   
   const { loading: authLoading, user, authorized } = useRequireRole(['creator', 'attendee'])
-  const { events, loadingEvent, error, refresh: fetchEvent } = useCreatorEvent(user?.uid || '')
+  const { events, loadingEvent, error, refresh: fetchEvent } = useCreatorEvent(user?.uid || "","all")
   return (
     <div className="flex-1 overflow-auto bg-background">
       <div className="p-8 space-y-6">

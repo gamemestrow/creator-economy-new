@@ -67,6 +67,8 @@ export default function CreateEventForm({
   const [form, setForm] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [submitting, setSubmitting] = useState(false);
+  const thumbnailInputRef = useRef<HTMLInputElement>(null)
+  const [isUploadingThumbnail, setIsUploadingThumbnail] = useState(false)
 
   function updateField<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -134,54 +136,50 @@ export default function CreateEventForm({
     }
   }
 
+  const handleThumbnailChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
 
-    const thumbnailInputRef = useRef<HTMLInputElement>(null)
-    const [isUploadingThumbnail, setIsUploadingThumbnail] = useState(false)
-  
-    const handleThumbnailChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0]
-      if (!file) return
-  
-      if (!file.type.startsWith('image/')) {
-        alert('Please upload a valid image file')
-        return
-      }
-      if (file.size > 2 * 1024 * 1024) {
-        alert('Image must be under 2MB')
-        return
-      }
-  
-      setIsUploadingThumbnail(true)
-  
-      try {
-        const uploadData = new FormData()
-  
-        uploadData.append('file', file)
-        uploadData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!)
-  
-        const res = await fetch(
-          `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
-          {
-            method: 'POST',
-            body: uploadData,
-          }
-        )
-  
-        if (!res.ok) throw new Error('Upload failed')
-  
-        const data = await res.json()
-  
-        // Store the secure URL for display, and you may also want public_id
-        setForm((prev) => ({ ...prev, thumbnail: data.secure_url }))
-      } catch (error) {
-        console.error('Thumbnail upload error:', error)
-        alert('Failed to upload thumbnail')
-      } finally {
-        setIsUploadingThumbnail(false)
-        // allow re-selecting the same file later
-        e.target.value = ''
-      }
+    if (!file.type.startsWith('image/')) {
+      alert('Please upload a valid image file')
+      return
     }
+    if (file.size > 2 * 1024 * 1024) {
+      alert('Image must be under 2MB')
+      return
+    }
+
+    setIsUploadingThumbnail(true)
+
+    try {
+      const uploadData = new FormData()
+
+      uploadData.append('file', file)
+      uploadData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!)
+
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: 'POST',
+          body: uploadData,
+        }
+      )
+
+      if (!res.ok) throw new Error('Upload failed')
+
+      const data = await res.json()
+
+      // Store the secure URL for display, and you may also want public_id
+      setForm((prev) => ({ ...prev, thumbnail: data.secure_url }))
+    } catch (error) {
+      console.error('Thumbnail upload error:', error)
+      alert('Failed to upload thumbnail')
+    } finally {
+      setIsUploadingThumbnail(false)
+      // allow re-selecting the same file later
+      e.target.value = ''
+    }
+  }
 
 
   return (
@@ -221,35 +219,35 @@ export default function CreateEventForm({
 
       {/* Thumbnail */}
       {/* Thumbnail upload */}
-              <div
-                onClick={() => !isUploadingThumbnail && thumbnailInputRef.current?.click()}
-                className="flex items-center gap-3 p-3 border border-dashed border-border rounded-lg cursor-pointer hover:bg-muted/50 transition-colors"
-              >
-                {isUploadingThumbnail ? (
-                  <div className="w-14 h-14 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
-                    <Loader2 className="w-5 h-5 text-muted-foreground animate-spin" />
-                  </div>
-                ) : form.thumbnail ? (
-                  <img src={form.thumbnail} className="w-14 h-14 rounded-lg object-cover" />
-                ) : (
-                  <div className="w-14 h-14 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
-                    <ImagePlus className="w-6 h-6 text-muted-foreground" />
-                  </div>
-                )}
-                <div>
-                  <p className="text-sm font-medium text-foreground">
-                    {isUploadingThumbnail ? 'Uploading...' : 'Upload thumbnail'}
-                  </p>
-                  <p className="text-xs text-muted-foreground">PNG, JPG up to 2MB</p>
-                </div>
-                <input
-                  ref={thumbnailInputRef}
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={handleThumbnailChange}
-                />
-              </div>
+      <div
+        onClick={() => !isUploadingThumbnail && thumbnailInputRef.current?.click()}
+        className="flex items-center gap-3 p-3 border border-dashed border-border rounded-lg cursor-pointer hover:bg-muted/50 transition-colors"
+      >
+        {isUploadingThumbnail ? (
+          <div className="w-14 h-14 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
+            <Loader2 className="w-5 h-5 text-muted-foreground animate-spin" />
+          </div>
+        ) : form.thumbnail ? (
+          <img src={form.thumbnail} className="w-14 h-14 rounded-lg object-cover" />
+        ) : (
+          <div className="w-14 h-14 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
+            <ImagePlus className="w-6 h-6 text-muted-foreground" />
+          </div>
+        )}
+        <div>
+          <p className="text-sm font-medium text-foreground">
+            {isUploadingThumbnail ? 'Uploading...' : 'Upload thumbnail'}
+          </p>
+          <p className="text-xs text-muted-foreground">PNG, JPG up to 2MB</p>
+        </div>
+        <input
+          ref={thumbnailInputRef}
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={handleThumbnailChange}
+        />
+      </div>
 
       {/* Date & duration */}
       <div className="grid grid-cols-2 gap-4">

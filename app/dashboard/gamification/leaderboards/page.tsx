@@ -3,6 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Trophy, Crown, Medal, Users, TrendingUp, Download } from 'lucide-react'
+import DownloadCsvButton from '@/components/downloadCSVbutton'
 
 const leaderboard = [
   {
@@ -48,10 +49,7 @@ export default function LeaderboardsPage() {
           </p>
         </div>
 
-        <Button>
-          <Download className="mr-2 h-4 w-4" />
-          Export Rankings
-        </Button>
+        <DownloadCsvButton data={leaderboard} fileName='leadboard' />
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">

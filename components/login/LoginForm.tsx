@@ -76,7 +76,7 @@ const LoginForm = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="you@company.com"
-                                className="w-full rounded-lg border border-[#E4E6DE] bg-white py-2.5 pl-10 pr-4 text-sm text-[#F3F4EF] outline-none transition-all placeholder:text-[#6B7280] focus:border-[#78866B] focus:ring-2 focus:ring-[#78866B]/20"
+                                className="w-full rounded-lg border border-[#E4E6DE] bg-white py-2.5 pl-10 pr-4 text-sm text-[#232323] caret-[#7F8F84] outline-none transition-all placeholder:text-[#999999] focus:border-[#78866B] focus:ring-2 focus:ring-[#78866B]/20 [&:-webkit-autofill]:text-[#232323] [&:-webkit-autofill]:[background-color:white!important] [&:-webkit-autofill]:[color:#232323!important]"
                             />
                         </div>
                     </div>
@@ -93,7 +93,7 @@ const LoginForm = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Your password"
-                                className="w-full rounded-lg border border-[#E4E6DE] bg-white py-2.5 pl-10 pr-4 text-sm text-[#F3F4EF] outline-none transition-all placeholder:text-[#6B7280] focus:border-[#78866B] focus:ring-2 focus:ring-[#78866B]/20"
+                                className="w-full rounded-lg border border-[#E4E6DE] bg-white py-2.5 pl-10 pr-4 text-sm text-[#232323] caret-[#7F8F84] outline-none transition-all placeholder:text-[#999999] focus:border-[#78866B] focus:ring-2 focus:ring-[#78866B]/20 [&:-webkit-autofill]:text-[#232323] [&:-webkit-autofill]:[background-color:white!important] [&:-webkit-autofill]:[color:#232323!important]"
                             />
                         </div>
                     </div>

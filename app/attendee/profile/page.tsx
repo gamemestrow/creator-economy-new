@@ -54,7 +54,7 @@ export default function ProfilePage() {
             <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-[#6B7280]">
               <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5" /> Mumbai, India</span>
               <span className="flex items-center gap-1"><Calendar className="h-3.5 w-3.5" /> Joined January 2026</span>
-              <span className="flex items-center gap-1"><Globe className="h-3.5 w-3.5" /> anamika.dev</span>
+              <span className="flex items-center gap-1"><Globe className="h-3.5 w-3.5" /> Web: anamika.dev</span>
             </div>
           </div>
           {editing ? (

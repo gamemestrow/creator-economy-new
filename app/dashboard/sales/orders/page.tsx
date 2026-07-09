@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { ShoppingBag, Search, Filter, MoreHorizontal, Loader2, CreditCard } from 'lucide-react'
 import { useRequireRole } from '@/lib/use-auth-redirect'
 import { useCreatorOrders } from '@/lib/hooks/use-creator-data'
+import DownloadCsvButton from '@/components/downloadCSVbutton'
 
 export default function OrdersPage() {
   const { user } = useRequireRole(['creator', 'attendee'])
@@ -17,6 +18,7 @@ export default function OrdersPage() {
       order.orderId.toLowerCase().includes(search.toLowerCase())
   )
 
+
   return (
     <div className="flex-1 overflow-auto bg-background">
       <div className="p-8 space-y-6">
@@ -26,9 +28,7 @@ export default function OrdersPage() {
             <h1 className="text-4xl font-bold text-foreground">Orders</h1>
             <p className="text-muted-foreground mt-2">Track and manage your sales and transactions</p>
           </div>
-          <button className="bg-primary text-primary-foreground px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors">
-            Export Report
-          </button>
+          <DownloadCsvButton data={orders} fileName='orders'/>
         </div>
 
         {/* Stats */}

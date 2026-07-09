@@ -15,6 +15,9 @@ export * from './enrollments'
 // Progress
 export * from './progress'
 
+// Memberships
+export * from './memberships'
+
 // Certificates
 export * from './certificates'
 

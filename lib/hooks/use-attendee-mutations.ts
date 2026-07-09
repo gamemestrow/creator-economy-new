@@ -16,7 +16,7 @@ export function useEnrollInCourse() {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
 
-  const enroll = async (userId: string, courseId: string) => {
+  const enrollUser = async (userId: string, courseId: string) => {
     try {
       setLoading(true)
       setError(null)
@@ -39,7 +39,7 @@ export function useEnrollInCourse() {
     }
   }
 
-  return { enroll, loading, error, success }
+  return { enrollUser, loading, error, success }
 }
 
 /**

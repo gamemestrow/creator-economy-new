@@ -125,7 +125,6 @@ const MOCK_COURSES = [
 
 export default function CoursesPage() {
   const { loading: authLoading, user, authorized } = useRequireRole(['attendee'])
-  const [userData, setUserData] = useState<UserData | null>(null)
   const [showUpgradeModal, setShowUpgradeModal] = useState(false)
 
   const { courses, loading, error, refetch: fetchCourses, filteredCourses } = usePublishedCourses({ autoFetch: true, limit: 20 })
@@ -136,37 +135,6 @@ export default function CoursesPage() {
     priceRange: [0, 10000],
     rating: 0,
   })
-
-  useEffect(() => {
-    if (user && authorized) {
-      const fetchUserData = async () => {
-        const userDocRef = doc(db, 'users', user.uid)
-        const userDocSnap = await getDoc(userDocRef)
-
-        if (userDocSnap.exists()) {
-          const data = userDocSnap.data()
-          setUserData({
-            name: data.name || user.displayName || 'Attendee',
-            email: user.email || '',
-          })
-        }
-      }
-      fetchUserData()
-    }
-  }, [user, authorized])
-
-  // const filteredCourses = MOCK_COURSES.filter((course) => {
-  //   const matchesSearch =
-  //     course.title.toLowerCase().includes(filters.search.toLowerCase()) ||
-  //     course.creatorName.toLowerCase().includes(filters.search.toLowerCase())
-
-  //   const matchesCategory = !filters.category || course.category === filters.category
-  //   const matchesLevel = !filters.level || course.level === filters.level
-  //   const matchesPrice = course.price >= filters.priceRange[0] && course.price <= filters.priceRange[1]
-  //   const matchesRating = course.rating >= filters.rating
-
-  //   return matchesSearch && matchesCategory && matchesLevel && matchesPrice && matchesRating
-  // })
 
   if (authLoading) {
     return (

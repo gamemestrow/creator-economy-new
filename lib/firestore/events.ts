@@ -413,7 +413,6 @@ export async function getUserEventRegistrationsCount(
 export async function createAnEvent(input: CreateEventInput): Promise<string> {
   try {
 
-    console.log(input)
     const eventRef = doc(collection(db, COLLECTIONS.EVENTS))
     await setDoc(eventRef, {
       eventId: eventRef.id, // Document ID

@@ -8,19 +8,17 @@ import * as courseService from '@/lib/firestore/courses'
 import * as eventService from '@/lib/firestore/events'
 import { db } from '@/lib/firebase'
 import { collection, query, where, getDocs, orderBy } from 'firebase/firestore'
-import { COLLECTIONS } from '@/lib/firestore/types'
+import { COLLECTIONS, Membership, Order, User, DigitalDownload } from '@/lib/firestore/types'
 
 import * as orderService from '@/lib/firestore/orders'
-import { Order, User } from '@/lib/firestore/types'
 
 import * as membershipService from '@/lib/firestore/memberships'
-import { Membership } from '@/lib/firestore/types'
 
 import * as communityService from '@/lib/firestore/communities'
 
 import * as userService from '@/lib/firestore/users'
 
-import { getCreatorDigitalDownloads, DigitalDownload } from '@/lib/firestore/digitalDownloads'
+import * as digitalDownloadService from '@/lib/firestore/digitalDownloads'
 
 /**
  * Hook to fetch memberships for a creator
@@ -75,8 +73,11 @@ export function useCreatorOrders(creatorId: string) {
     const fetchOrders = async () => {
       try {
         setLoading(true)
-        const data = await orderService.fetchCreatorOrders(creatorId)
-        setOrders(data)
+        const response = await fetch(`/api/creator/orders/${creatorId}`,{
+          method: "GET",
+        })
+        const data = await response.json();
+        setOrders(data.data)
         setError(null)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch orders')
@@ -310,8 +311,11 @@ export function useCreatorDigitalDownloads(creatorId: string) {
     try {
       setLoading(true)
       setError(null)
-      const data = await getCreatorDigitalDownloads(creatorId)
-      setDownloads(data)
+      const response = await fetch(`/api/creator/digitaldownloads/${creatorId}`,{
+        method: "GET",
+      })
+      const data = await response.json()
+      setDownloads(data.data)
     } catch (err) {
       console.error('Failed to fetch digital downloads:', err)
       setError('Failed to load digital downloads')

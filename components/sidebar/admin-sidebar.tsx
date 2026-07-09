@@ -113,10 +113,10 @@ function AccordionGroup({
   const hasActiveChild = group.items.some((item) => isRouteActive(pathname, item.href))
   const filteredItems = searchQuery
     ? group.items.filter(
-        (item) =>
-          item.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          group.label.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+      (item) =>
+        item.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        group.label.toLowerCase().includes(searchQuery.toLowerCase())
+    )
     : group.items
 
   if (filteredItems.length === 0) return null
@@ -416,7 +416,7 @@ function MobileDrawer({
                 <SidebarTooltip label="Logout" side="top">
                   <button
                     type="button"
-                    onClick={() => { onClose(); router.push('/login') }}
+                    onClick={() => { router.push('/login') }}
                     className="flex h-8 w-8 items-center justify-center rounded-lg text-[#D8DDD6] transition-colors hover:bg-red-500/10 hover:text-red-400"
                   >
                     <LogOut className="h-4 w-4" />
@@ -516,6 +516,28 @@ export function AdminSidebar() {
 
   const DashboardIcon = dashboardLink.icon
   const dashboardActive = isRouteActive(pathname, dashboardLink.href)
+
+
+  const handleLogout = async () => {
+
+    try {
+      const respose = await fetch("/api/session/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    const data = await respose.json()
+
+    if (!data.success) {
+      return;
+    }
+    router.push("/login")
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }
 
   return (
     <>
@@ -719,7 +741,7 @@ export function AdminSidebar() {
                 <SidebarTooltip label="Logout" side="top">
                   <button
                     type="button"
-                    onClick={() => router.push('/login')}
+                    onClick={() => handleLogout()}
                     className="flex h-8 w-8 items-center justify-center rounded-lg text-[#D8DDD6] transition-colors hover:bg-red-500/10 hover:text-red-400"
                   >
                     <LogOut className="h-4 w-4" />
@@ -744,7 +766,7 @@ export function AdminSidebar() {
                 <SidebarTooltip label="Logout">
                   <button
                     type="button"
-                    onClick={() => router.push('/login')}
+                    onClick={() => handleLogout()}
                     className="flex h-8 w-8 items-center justify-center rounded-lg text-[#D8DDD6] hover:bg-red-500/10 hover:text-red-400"
                   >
                     <LogOut className="h-4 w-4" />

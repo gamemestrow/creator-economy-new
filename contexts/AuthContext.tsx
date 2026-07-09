@@ -40,6 +40,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                     return;
                 }
 
+                const token = await currentUser?.getIdToken();
+                await fetch("/api/session",{
+                    method: "POST",
+                    headers: {
+                        "Content-Type":"application/json",
+                    },
+                    body: JSON.stringify({
+                        idToken: token,
+                    }),
+                })
+
                 setUser(currentUser);
                 const userDocRef = doc(db, "users", currentUser.uid);
                 const userDocSnap = await getDoc(userDocRef);

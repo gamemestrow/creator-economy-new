@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { doc, updateDoc } from 'firebase/firestore'
-import { db } from '@/lib/firebase'
+import { auth, db } from '@/lib/firebase'
 import { Sparkles, Zap, ArrowRight, Loader2, Crown, Users2 } from 'lucide-react'
 import { PRODUCT_NAME } from '@/components/sidebar/sidebar-config'
 import { useEffect } from 'react'
@@ -14,10 +14,9 @@ export default function SelectRolePage() {
   const { user, loading: authLoading } = useAuth()
   const [selectedRole, setSelectedRole] = useState<'creator' | 'attendee' | null>(null)
   const [loading, setLoading] = useState(false)
-  const [userId, setUserId] = useState<string | null>(null)
   const [error, setError] = useState('')
 
-   useEffect(() => {
+  useEffect(() => {
     if (!authLoading && !user) {
       router.push('/login')
     }
@@ -29,6 +28,21 @@ export default function SelectRolePage() {
       setLoading(true)
       setError('')
       setSelectedRole(role)
+
+
+
+      const token = await auth.currentUser?.getIdToken();
+      await fetch("/api/user/select-role", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          idToken: token,
+          role,
+        }),
+      })
+
       const userDocRef = doc(db, 'users', user.uid)
       await updateDoc(userDocRef, { role })
       router.push(role === 'creator' ? '/dashboard' : '/attendee/dashboard')
@@ -80,8 +94,8 @@ export default function SelectRolePage() {
             onClick={() => handleRoleSelection('creator')}
             disabled={loading}
             className={`group relative overflow-hidden rounded-2xl border-2 p-8 text-left transition-all duration-300 ${selectedRole === 'creator'
-                ? 'border-[#78866B] bg-primary/10'
-                : 'border-border bg-white hover:border-[#78866B] hover:bg-primary/10'
+              ? 'border-[#78866B] bg-primary/10'
+              : 'border-border bg-white hover:border-[#78866B] hover:bg-primary/10'
               } ${loading ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
           >
             {/* Background accent */}
@@ -123,8 +137,8 @@ export default function SelectRolePage() {
               <div className="flex items-center justify-between">
                 <span
                   className={`font-semibold transition-colors ${selectedRole === 'creator'
-                      ? 'text-[#78866B]'
-                      : 'text-foreground group-hover:text-[#78866B]'
+                    ? 'text-[#78866B]'
+                    : 'text-foreground group-hover:text-[#78866B]'
                     }`}
                 >
                   {selectedRole === 'creator' && loading ? (
@@ -138,8 +152,8 @@ export default function SelectRolePage() {
                 </span>
                 <ArrowRight
                   className={`h-5 w-5 transition-all ${selectedRole === 'creator'
-                      ? 'translate-x-1 text-[#78866B]'
-                      : 'text-muted-foreground group-hover:translate-x-1 group-hover:text-[#78866B]'
+                    ? 'translate-x-1 text-[#78866B]'
+                    : 'text-muted-foreground group-hover:translate-x-1 group-hover:text-[#78866B]'
                     }`}
                 />
               </div>
@@ -151,8 +165,8 @@ export default function SelectRolePage() {
             onClick={() => handleRoleSelection('attendee')}
             disabled={loading}
             className={`group relative overflow-hidden rounded-2xl border-2 p-8 text-left transition-all duration-300 ${selectedRole === 'attendee'
-                ? 'border-primary/20 bg-primary/10'
-                : 'border-border bg-white hover:border-primary/20 hover:bg-primary/10'
+              ? 'border-primary/20 bg-primary/10'
+              : 'border-border bg-white hover:border-primary/20 hover:bg-primary/10'
               } ${loading ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
           >
             {/* Background accent */}
@@ -194,8 +208,8 @@ export default function SelectRolePage() {
               <div className="flex items-center justify-between">
                 <span
                   className={`font-semibold transition-colors ${selectedRole === 'attendee'
-                      ? 'text-primary'
-                      : 'text-foreground group-hover:text-primary'
+                    ? 'text-primary'
+                    : 'text-foreground group-hover:text-primary'
                     }`}
                 >
                   {selectedRole === 'attendee' && loading ? (
@@ -209,8 +223,8 @@ export default function SelectRolePage() {
                 </span>
                 <ArrowRight
                   className={`h-5 w-5 transition-all ${selectedRole === 'attendee'
-                      ? 'translate-x-1 text-primary'
-                      : 'text-muted-foreground group-hover:translate-x-1 group-hover:text-primary'
+                    ? 'translate-x-1 text-primary'
+                    : 'text-muted-foreground group-hover:translate-x-1 group-hover:text-primary'
                     }`}
                 />
               </div>

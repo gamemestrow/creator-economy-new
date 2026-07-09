@@ -1,25 +1,8 @@
 import { collection, doc, serverTimestamp, setDoc } from "firebase/firestore"
 import { db } from "../firebase"
-import { COLLECTIONS } from "./types"
+import { COLLECTIONS, DigitalDownload } from "./types"
 import { query, where, getDocs, orderBy } from 'firebase/firestore'
 
-export interface DigitalDownload {
-  downloadId: string
-  name: string
-  price: number
-  description: string
-  isPublic: boolean
-  fileUrl: string
-  filePublicId: string
-  fileName: string       
-  fileType: string        
-  fileSize: number
-  creatorId: string
-  creatorName: string
-  downloadCount: number
-  createdAt: any
-  updatedAt: any
-}
 
 interface DigitalDownloadInput {
   name: string

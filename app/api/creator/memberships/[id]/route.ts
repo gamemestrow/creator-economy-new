@@ -10,7 +10,7 @@ export async function GET(
 
     const data = await fetchCreatorCourses(id);
 
-    return NextResponse.json({ success: true, data });
+    return Response.json({ success: true, data });
 }
 
 export async function DELETE(
@@ -21,5 +21,5 @@ export async function DELETE(
 
     await deleteCourse(id);
 
-    return NextResponse.json({ success: true });
+    return Response.json({ success: true });
 }
